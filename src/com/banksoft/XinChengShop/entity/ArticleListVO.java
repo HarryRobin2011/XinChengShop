@@ -28,6 +28,7 @@ public class ArticleListVO extends BaseEntity{
     private String url;
     private long createTime;
 
+
     public long getCreateTime() {
         return createTime;
     }
