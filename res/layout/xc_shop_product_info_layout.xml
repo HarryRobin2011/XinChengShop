@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg"
+              tools:context=".ShopProductInfoActivity"
+              android:layerType="software">
+    <include layout="@layout/title"/>
+    <include layout="@layout/background_layout"/>
+    <include layout="@layout/null_pager"/>
+    <!--<com.banksoft.XinChengShop.widget.slidebottompanel.SlideBottomPanel android:id="@id/side_buttom_panel"-->
+                                                                        <!--android:layout_width="match_parent"-->
+                                                                        <!--android:layout_height="match_parent"-->
+                                                                        <!--app:sbp_hide_panel_title="true"-->
+                                                                        <!--app:sbp_title_height_no_display="0.0dp"-->
+                                                                        <!--app:sbp_panel_height="380dp"-->
+                                                                        <!--app:sbp_background_layout="@layout/background_layout">-->
+        <!--<FrameLayout android:id="@id/content"-->
+                     <!--android:layout_width="match_parent"-->
+                     <!--android:layout_height="380.0dp"-->
+                     <!--android:background="@color/text_white"/>-->
+
+    <!--</com.banksoft.XinChengShop.widget.slidebottompanel.SlideBottomPanel>-->
+
+
+
+
+</LinearLayout>

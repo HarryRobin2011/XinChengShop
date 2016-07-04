@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+
+    <include layout="@layout/title"/>
+    <FrameLayout android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <LinearLayout android:id="@id/content"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/transparent"
+                      android:orientation="vertical"
+                      android:visibility="gone"
+                      android:layout_margin="10.0dp">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@color/white"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="100.0dp"
+                          android:layout_height="@dimen/height_50"
+                          android:gravity="center"
+                          android:text="@string/pay_method"/>
+                <View android:layout_width="0.1dp"
+                      android:layout_height="match_parent"
+                      android:background="@color/line_dark2"/>
+                <TextView android:id="@id/pay_method"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:layout_weight="1"
+                          android:gravity="center"/>
+
+            </LinearLayout>
+            <View style="@style/line2"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@color/white"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="100.0dp"
+                          android:layout_height="@dimen/height_50"
+                          android:gravity="center"
+                          android:text="@string/pay_order_no"/>
+                <View android:layout_width="0.1dp"
+                      android:layout_height="match_parent"
+                      android:background="@color/line_dark2"/>
+                <TextView android:id="@id/order_no"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:layout_weight="1"
+                          android:gravity="center"/>
+
+            </LinearLayout>
+            <View style="@style/line2"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@color/white"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="100.0dp"
+                          android:layout_height="@dimen/height_50"
+                          android:gravity="center"
+                          android:text="@string/money"/>
+                <View android:layout_width="0.1dp"
+                      android:layout_height="match_parent"
+                      android:background="@color/line_dark2"/>
+                <TextView android:id="@id/order_money"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:layout_weight="1"
+                          android:gravity="center"/>
+
+            </LinearLayout>
+
+            <Button  android:id="@id/pay"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/height_40"
+                     android:background="@drawable/click_red_button"
+                     android:text="@string/pay"
+                     android:textColor="@color/white"
+                     android:layout_margin="10.0dp"/>
+
+        </LinearLayout>
+        <ProgressBar android:id="@id/progressBar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:indeterminateDrawable="@drawable/my_progress_bg"
+                     android:layout_gravity="center"/>
+    </FrameLayout>
+
+
+
+</LinearLayout>

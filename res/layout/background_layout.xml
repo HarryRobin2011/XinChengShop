@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@id/tool_layout"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/webview_layout"/>
+    <View style="@style/line2"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal"
+                  android:background="@color/white">
+        <LinearLayout android:id="@id/shop"
+                      android:layout_width="50.0dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:orientation="vertical">
+            <ImageView android:layout_width="25.0dp"
+                       android:layout_height="25.0dp"
+                       android:layout_marginTop="5.0dp"
+                       android:src="@drawable/ic_product_detail_shop_into"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/text_style_4"
+                      android:layout_marginTop="5.0dp"
+                      android:text="@string/shop"/>
+        </LinearLayout>
+        <LinearLayout android:id="@id/my_collect_product"
+                      android:layout_width="50.0dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:orientation="vertical">
+            <ImageView android:id="@id/collect_btn"
+                          android:layout_width="25.0dp"
+                          android:layout_height="25.0dp"
+                          android:layout_marginTop="5.0dp"
+                          android:src="@drawable/c_shop_level0"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/text_style_4"
+                      android:layout_marginTop="5.0dp"
+                      android:text="@string/collect"/>
+        </LinearLayout>
+        <RelativeLayout android:id="@id/shopping_car_layout"
+                      android:layout_width="50.0dp"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:orientation="vertical">
+            <ImageView android:id="@id/shopping_car_btn"
+                       android:layout_width="25.0dp"
+                       android:layout_height="25.0dp"
+                       android:layout_marginTop="5.0dp"
+                       android:src="@drawable/guide_cart_nm"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/text_style_4"
+                      android:layout_below="@id/shopping_car_btn"
+                      android:layout_marginTop="5.0dp"
+                      android:text="@string/shop_cart"/>
+            <TextView android:id="@id/num"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/text_style_4"
+                      android:textColor="@color/red_normal"
+                      android:textStyle="bold"
+                      android:layout_toRightOf="@id/shopping_car_btn"/>
+        </RelativeLayout>
+        <TextView android:id="@id/buy"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/color_orange"
+                  style="@style/text_style_3"
+                  android:textColor="@color/white"
+                  android:gravity="center"
+                  android:text="@string/buy_now"
+                  android:layout_weight="1"/>
+        <TextView android:id="@id/add_shop_cart"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/red_normal"
+                  style="@style/text_style_3"
+                  android:textColor="@color/white"
+                  android:gravity="center"
+                  android:text="@string/add_shop_cart"
+                  android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

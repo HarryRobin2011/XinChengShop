@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@id/address_layout"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:gravity="center_vertical"
+              android:background="@drawable/button_white_bg"
+              android:layout_height="wrap_content">
+    <LinearLayout android:id="@id/address_detail_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="100.0dp"
+                  android:visibility="gone"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+        <ImageView android:id="@id/imageView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/nearby_normal"
+                   android:layout_marginLeft="10.0dp"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:layout_weight="1">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+                <TextView android:id="@id/shipping_name"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:layout_marginLeft="10.0dp"
+                          android:singleLine="true"
+                          style="@style/text_style_3"/>
+                <TextView android:id="@id/telPhone"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:singleLine="true"
+                          style="@style/text_style_3"/>
+            </LinearLayout>
+            <TextView android:id="@id/address"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:singleLine="true"
+                      style="@style/text_style_3"
+                      android:layout_marginLeft="10.0dp"
+                      android:layout_weight="1"/>
+        </LinearLayout>
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="10.0dp"
+                   android:src="@drawable/to_right"
+                   android:layout_marginRight="10.0dp"/>
+    </LinearLayout>
+
+        <TextView android:id="@id/add_address"
+                  android:layout_width="match_parent"
+                  android:layout_height="100.0dp"
+                  style="@style/text_style_3"
+                  android:background="@drawable/button_white_bg"/>
+
+</LinearLayout>

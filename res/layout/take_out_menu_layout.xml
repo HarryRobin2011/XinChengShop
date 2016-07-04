@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <View style="@style/line2"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:orientation="horizontal">
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3">
+            <ListView android:id="@id/list_view"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:cacheColorHint="@color/transparent"
+                      android:dividerHeight="0.1dp"
+                      android:divider="@color/line_dark2"
+                      android:scrollbars="none"
+                      android:choiceMode="singleChoice"
+                      android:layout_weight="3"/>
+        </FrameLayout>
+        <FrameLayout android:id="@id/content"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:padding="10.0dp"
+                     android:background="@color/text_white"
+                     android:layout_weight="1"/>
+    </LinearLayout>
+    <View style="@style/line1"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:background="@color/white">
+        <RelativeLayout android:layout_width="@dimen/height_50"
+                        android:layout_height="@dimen/height_50">
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/guide_cart_on"
+                       android:scaleType="centerInside"/>
+            <TextView android:id="@id/cart_num"
+                      android:layout_width="20.0dp"
+                      android:layout_height="20.0dp"
+                      android:textColor="@color/white"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignParentRight="true"
+                      android:visibility="gone"
+                      android:gravity="center"
+                      android:background="@drawable/bill_activate_red"/>
+        </RelativeLayout>
+        <View android:layout_width="0.1dp"
+              android:layout_height="match_parent"
+              android:layout_marginBottom="5.0dp"
+              android:layout_marginTop="5.0dp"
+              android:background="@color/text_black"/>
+        <TextView android:id="@id/cart_price"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingLeft="10.0dp"
+                  android:layout_weight="1"
+                  style="@style/text_style_2"
+                  android:gravity="left|center_vertical"
+                  android:textStyle="bold"
+                  android:textColor="@color/red_normal"/>
+        <Button android:id="@id/submit_order"
+                android:layout_width="@dimen/height_100"
+                android:layout_height="@dimen/height_50"
+                android:text="@string/settlement"
+                style="@style/text_style_3"
+                android:textColor="@color/text_white"
+                android:gravity="center"
+                android:background="@drawable/click_red_button"/>
+    </LinearLayout>
+
+</LinearLayout>

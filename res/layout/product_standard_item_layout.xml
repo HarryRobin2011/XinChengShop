@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView android:id="@id/standard_name"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              style="@style/text_style_3"
+              android:paddingLeft="10.0dp"/>
+    <com.banksoft.XinChengShop.widget.MyGridView android:id="@id/gridView"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content"
+                                                 android:cacheColorHint="@color/transparent"
+                                                 android:numColumns="3"
+                                                 android:verticalSpacing="10.0dp"
+                                                 android:horizontalSpacing="10.0dp"
+                                                 android:listSelector="@null"/>
+</LinearLayout>

@@ -1,0 +1,9 @@
+package com.banksoft.XinChengShop.config;
+
+/**
+ * Created by harry_robin on 16/1/22.
+ */
+public class PayConfig {
+    public static String ali_wap_rsa = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKFcUserJtO3Nmu+vE/xgY8gyF4ae6/gOdu1BGIsUWluebMBFKXIVtZU3yPOFP1LnIZC3MJgRqIeBerW2PEwBAPTO6vhzi4Ax5y9Xdym3yCjDnpsq+qOal4Fjd58Ws8AeMii/bzba/BYhuARY6NNVU/OS2t9x9W2JhC26JqGUfJXAgMBAAECgYB63iEOdw2+osCmtHsR6JS91rmbplDOcE++M40d8B8hyASVQFpnjjBJTiEHU5H5+cw7E8ijncnLAk+BLY3NwcEbrrNN3dgChpLBbsyLaxqV3KnkqrqBQae5axr2ZHIAm8xPYI5/M0mKdTdkLlADeDZ++EVwKEwBWTswvAMqNwwA2QJBANSW+qF9sPJdKl/90YDvnmMVO8UzCv6oRVKA7OZLL8FsGnL0oNdNeqfd2Uoxr6iQqfmk86PMYa/tBu++iA4j6QUCQQDCT1480lDARRHjVW8GaCkJ66oAGKk+q0xw5Iry+lJ84uqlEipAuG5xVO8r7QWNFqYs8eWT0F0KeQeGX6H/0dyrAkBt+0HkpDMT3/EZQiXNz6mgVw7aAYMxpfpfKYXlyoYFShkQ2dAQMuw+xj4w7S2URms5VQYa+pSbQEPzah3XOurFAkBGezuXnEImO+eNKoQnMskQDCeR+WAKl2AW4w9zq1EYc8bhMYGaEEwfV8uZh1QoJTsJuoSn5UCad+Q+3ZmJjboZAkEAqq3KkLYZGnX5XBP52zpQ9oYIovudU/djwAFA1uatQ1VJs/IqcIh4W4BzxLEkr+NinJTltmVcq5J41R0KKrPDKQ==";
+    public static String wei_xin_app_id = "wxe4d53f58f26cd989";
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+        <WebView android:id="@id/mWebView"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:scrollbars="none"
+                 android:layout_weight="1"/>
+        <ProgressBar android:id="@id/progressBar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:indeterminateDrawable="@drawable/my_progress_bg"
+                     android:layout_gravity="center"/>
+    </FrameLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal"
+                  android:visibility="gone">
+        <TextView android:id="@id/category"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:text="@string/shop_category"/>
+        <View android:layout_width="0.1dp"
+              android:layout_height="match_parent"
+              android:background="@color/line_dark2"/>
+        <TextView android:id="@id/introduction"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:text="@string/shop_introduction"/>
+        <View android:layout_width="0.1dp"
+              android:layout_height="match_parent"
+              android:background="@color/line_dark2"/>
+        <TextView android:id="@id/contact"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:text="@string/shop_contact"/>
+    </LinearLayout>
+
+</LinearLayout>

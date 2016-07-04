@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <View style="@style/line2"/>
+
+    <FrameLayout android:id="@id/content"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"/>
+
+    <fragment android:id="@id/take_tab_fragment"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              android:layout_alignParentBottom="true"
+              android:name="com.banksoft.XinChengShop.ui.fragment.takeout.TakeOutTabbarFragment"/>
+</LinearLayout>

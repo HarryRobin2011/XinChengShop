@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:id="@id/standard_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+        <TextView android:id="@id/standard_name"
+                  android:layout_width="match_parent"
+                  style="@style/text_style_2"
+                  android:gravity="center_vertical"
+                  android:textStyle="bold"
+                  android:layout_height="@dimen/height_50"/>
+        <com.banksoft.XinChengShop.widget.MyGridView android:id="@id/standard_gridview"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="wrap_content"
+                                                     android:cacheColorHint="@color/transparent"
+                                                     android:listSelector="@null"
+                                                     android:choiceMode="singleChoice"/>
+    </LinearLayout>
+    <View style="@style/line2"/>
+</LinearLayout>

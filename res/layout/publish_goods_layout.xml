@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_80"
+                          android:background="@color/white"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="@dimen/height_80"
+                          android:layout_height="match_parent"
+                          style="@style/text_style_3"
+                          android:gravity="center"
+                          android:text="@string/good_image"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_80"
+                              android:orientation="horizontal">
+                    <FrameLayout android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="1"
+                                 android:orientation="vertical">
+                        <ImageView android:id="@id/one"
+                                   android:layout_width="@dimen/height_50"
+                                   android:layout_height="@dimen/height_50"
+                                   android:src="@drawable/add_photo_bg"
+                                   android:layout_gravity="center"
+                                   android:scaleType="centerInside"/>
+
+                    </FrameLayout>
+
+                    <FrameLayout android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="1"
+                                 android:gravity="center"
+                                 android:orientation="vertical">
+                        <ImageView android:id="@id/two"
+                                   android:layout_width="@dimen/height_50"
+                                   android:layout_height="@dimen/height_50"
+                                   android:src="@drawable/add_photo_bg"
+                                   android:layout_gravity="center"
+                                   android:scaleType="centerInside"/>
+                    </FrameLayout>
+                    <FrameLayout android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="1"
+                                 android:gravity="center"
+                                 android:orientation="vertical">
+                        <ImageView android:id="@id/three"
+                                   android:layout_width="@dimen/height_50"
+                                   android:layout_height="@dimen/height_50"
+                                   android:src="@drawable/add_photo_bg"
+                                   android:layout_gravity="center"
+                                   android:scaleType="centerInside"/>
+                    </FrameLayout>
+                    <FrameLayout android:layout_width="match_parent"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="1"
+                                 android:gravity="center"
+                                 android:orientation="vertical">
+                        <ImageView android:id="@id/four"
+                                   android:layout_width="@dimen/height_50"
+                                   android:layout_height="@dimen/height_50"
+                                   android:src="@drawable/add_photo_bg"
+                                   android:layout_gravity="center"
+                                   android:scaleType="centerInside"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@color/white"
+                          android:layout_marginTop="10.0dp"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_name"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <EditText android:id="@id/good_name"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="@color/white"
+                              android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_cagetory"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <Button android:id="@id/good_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:text="@string/please_select_good_category"
+                            android:gravity="right|center_vertical"
+                            style="@style/text_style_3"
+                            android:drawableRight="@drawable/arrow_expend_right"
+                            android:layout_marginRight="10.0dp"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10.0dp"
+                          android:background="@color/white"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_price"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <EditText android:id="@id/good_price"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="@color/white"
+                              android:hint="@string/please_input_goods_price"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_mark_price"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <EditText android:id="@id/good_mark_price"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="@color/white"
+                              android:hint="@string/please_input_goods_mark_price"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_stock_price"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <EditText android:id="@id/goods_stock"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="@color/white"
+                              android:hint="@string/please_input_goods_stock"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="10.0dp"
+                          android:background="@color/white"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_freight"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="@dimen/height_50"
+                                  android:orientation="horizontal">
+                        <RadioGroup android:id="@id/good_freight_group"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:paddingLeft="10.0dp"
+                                    android:gravity="center">
+                            <RadioButton android:id="@id/shop_freight"
+                                         android:layout_width="@dimen/height_20"
+                                         android:layout_height="@dimen/height_20"
+                                         android:background="@drawable/cart_product_checkbox_bg"
+                                         android:button="@null"/>
+                            <TextView android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:text="@string/shop_freight"
+                                      android:layout_weight="1"
+                                      android:layout_marginLeft="10.0dp"
+                                      style="@style/text_style_3"/>
+                            <RadioButton android:id="@id/member_freight"
+                                         android:layout_width="@dimen/height_20"
+                                         android:layout_height="@dimen/height_20"
+                                         android:background="@drawable/cart_product_checkbox_bg"
+                                         android:button="@null"/>
+                            <TextView android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:text="@string/member_freight"
+                                      android:layout_weight="1"
+                                      android:layout_marginLeft="10.0dp"
+                                      style="@style/text_style_3"/>
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/freight_mould"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <Button android:id="@id/select_freight_mould"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:text="@string/please_select_freight_mould"
+                            android:gravity="right|center_vertical"
+                            style="@style/text_style_3"
+                            android:drawableRight="@drawable/arrow_expend_right"
+                            android:layout_marginRight="10.0dp"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/site"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <Button android:id="@id/select_site"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:text="@string/please_select_area_site"
+                            android:gravity="right|center_vertical"
+                            style="@style/text_style_3"
+                            android:drawableRight="@drawable/arrow_expend_right"
+                            android:layout_marginRight="10.0dp"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/specialty_goods"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <RadioGroup android:id="@id/specialty_goods_radiogroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:paddingLeft="10.0dp"
+                                android:gravity="center">
+                        <RadioButton android:id="@id/specialty_yes"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/yes"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                        <RadioButton android:id="@id/specialty_no"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/no"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/recommend_goods"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <RadioGroup android:id="@id/recommend_goods_radiogroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:paddingLeft="10.0dp"
+                                android:gravity="center">
+                        <RadioButton android:id="@id/recommend_yes"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/yes"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                        <RadioButton android:id="@id/recommend_no"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/no"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/Inventory_change_method"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <RadioGroup android:id="@id/Inventory_goods_radiogroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:paddingLeft="10.0dp"
+                                android:gravity="center">
+                        <RadioButton android:id="@id/Inventory_yes"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/Inventory_create_order"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                        <RadioButton android:id="@id/Inventory_no"
+                                     android:layout_width="@dimen/height_20"
+                                     android:layout_height="@dimen/height_20"
+                                     android:background="@drawable/cart_product_checkbox_bg"
+                                     android:button="@null"/>
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:text="@string/Inventory_pay_order"
+                                  android:layout_weight="1"
+                                  android:layout_marginLeft="10.0dp"
+                                  style="@style/text_style_3"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <View style="@style/line1"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_80"
+                              android:layout_height="match_parent"
+                              android:text="@string/good_type"
+                              android:gravity="center"
+                              style="@style/text_style_3"/>
+                    <Button android:id="@id/good_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:text="@string/please_select_good_type"
+                            android:gravity="right|center_vertical"
+                            style="@style/text_style_3"
+                            android:drawableRight="@drawable/arrow_expend_right"
+                            android:layout_marginRight="10.0dp"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

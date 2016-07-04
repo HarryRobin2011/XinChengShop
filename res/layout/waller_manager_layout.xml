@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+               android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <LinearLayout android:id="@id/my_balance"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:gravity="center_vertical"
+                          android:background="@drawable/button_white_bg"
+                          android:layout_marginTop="10.0dp"
+                          android:orientation="horizontal">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/personal_icon_order"
+                           android:paddingLeft="10.0dp"/>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="@string/account_balance"
+                          style="@style/text_style_3"
+                          android:layout_weight="1"
+                          android:paddingLeft="10.0dp"/>
+                <TextView android:id="@id/money_balance"
+                        android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/text_style_3"
+                          android:layout_marginRight="10.0dp"/>
+                <TextView android:layout_width="15.0dp"
+                          android:layout_height="15.0dp"
+                          android:background="@drawable/settings_arrow"
+                          android:layout_marginRight="10.0dp"/>
+            </LinearLayout>
+            <View style="@style/line2"/>
+            <LinearLayout android:id="@id/user_score"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@drawable/button_white_bg"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal">
+                <ImageView android:layout_width="35.0dp"
+                           android:layout_height="35.0dp"
+                           android:src="@drawable/android_my_jd_account_safe"
+                           android:paddingLeft="10.0dp"/>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="@string/user_score"
+                          style="@style/text_style_3"
+                          android:layout_weight="1"
+                          android:paddingLeft="10.0dp"/>
+                <TextView android:id="@id/score_balance"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/text_style_3"
+                          android:layout_marginRight="10.0dp"/>
+                <TextView android:layout_width="15.0dp"
+                          android:layout_height="15.0dp"
+                          android:background="@drawable/settings_arrow"
+                          android:layout_marginRight="10.0dp"/>
+            </LinearLayout>
+            <View style="@style/line2"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

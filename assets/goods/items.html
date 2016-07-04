@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css"
+          href="css/shop.css">
+</head>
+
+<body>
+<div class="mui-content">
+    <!--排序-->
+    <div class="J_orderWrapper posfix">
+        <section id="J_order" class="list_m_mdv order">
+            <div class="o_item o_cur" data-param="sort=d" data-index="1">销量
+            </div>
+            <div class="o_item" data-param="sort=oldstarts" data-index="2">最新</div>
+            <div class="o_item order-pirce-item" data-index="3">
+                价格
+                <div id="J_price_icon" class="price-icon-wrapper sort-default" data-sort="">
+                    <i class="J_price_up_icon list_m_font oi_icon"></i>
+                    <i class="J_price_down_icon list_m_font oi_icon"></i></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="pullrefresh" class="row base c-product-value bg-eee mui-scroll-wrapper">
+        <div class="small-12 mui-scroll">
+            <ul class="small-block-grid-2">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/lazyloading/echo.min.js"></script>
+
+<script>
+    var getItemsData = function (d, pj) {
+        function setInnerHtml(elmid, str) {
+            document.getElementById(elmid).innerHTML = str;
+            return false;
+        }
+
+        var localurl = "http://www.xinchengguangchang.com";
+        if (d) {
+            var imghtml = '';
+            var imgstr = d.icon.split("|");
+            var imgstrLen = imgstr.length;
+            var imgtaghtml = document.getElementById("imgtag").innerHTML;
+            for (var i = 0; i < imgstr.length; i++) {
+                if (imgstr[i] == "") {
+                    imgstrLen = imgstrLen - 1;
+                    continue;
+                }
+                if (!!i) {
+                    imgtaghtml += '<div class="mui-indicator" style="display:none"></div>';
+                }
+                imghtml += '<div class="mui-slider-item"><a><img src="' + localurl + imgstr[i] + '"></a></div>';
+            }
+            setInnerHtml("imgSliderGroup", imghtml);
+            setInnerHtml("imgtag", imgtaghtml);
+            setInnerHtml("imgSum", imgstrLen);
+            setInnerHtml("title_text", d.name);
+            setInnerHtml("tabview1", d.description);
+            setInnerHtml("price", "￥" + d.price);
+            setInnerHtml("price1", "￥" + d.price);
+            setInnerHtml("shopName", d.shopName);
+        }
+
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                up: {
+                    contentrefresh: '正在加载...',
+                    callback: pullupRefresh
+                }
+            }
+        });
+        var count = 0;
+        /**
+         * 上拉加载具体业务实现
+         */
+
+        function pullupRefresh() {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+
+            var table = document.body.querySelector('.small-block-grid-2');
+            var cells = document.body.querySelectorAll('.mui-table-view-celll');
+            for (var i = cells.length, len = i + 10; i < len; i++) {
+                var li = document.createElement('li');
+                li.className = 'mui-table-view-celll';
+                li.innerHTML = '<a href="javascript:void(0)"><div class=p-img><img name="imgitem" data-echo="http://img10.360buyimg.com/n1/jfs/t1360/239/777846951/137885/cb16d24d/55ab755aN7ed9593a.jpg" src="js/lazyloading/blank.gif"></div><div class=p-info>奇点尚品 卡通磨毛学生三件套床上用品单人被套床单 真爱永恒 被套150*200三件套</div><div class=flag><span class=price>￥67.00</span></div></a>';
+                table.appendChild(li);
+            }
+//            jQuery('img[name=imgitem]').lazyload();
+            echo.init({
+                offset: 0,
+                throttle: 500
+            });
+        }
+        if (mui.os.plus) {
+            mui.plusReady(function () {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().pullupLoading();
+                }, 1000);
+            });
+        } else {
+            mui.ready(function () {
+                mui('#pullrefresh').pullRefresh().pullupLoading();
+            });
+        }
+
+        mui.ready(function () {
+            jQuery(".o_item").each(function (e) {
+                this.addEventListener("tap", function (e, i) {
+                    var _this = jQuery(this);
+                    var iconbtn = jQuery("#J_price_icon");
+                    _this.siblings().removeClass("o_cur");
+                    _this.removeClass("o_cur");
+                    _this.addClass("o_cur");
+                    iconbtn.removeClass("sort-pd sort-p")
+                    if (_this.attr("data-index") == "3") {
+                        if (iconbtn.attr("data-sort") == "p") {
+                            iconbtn.addClass("sort-pd");
+                            iconbtn.attr("data-sort", "pd");
+
+                        } else if (iconbtn.attr("data-sort") == "pd") {
+                            iconbtn.addClass("sort-p");
+                            iconbtn.attr("data-sort", "p");
+                        } else {
+                            iconbtn.addClass("sort-pd");
+                            iconbtn.attr("data-sort", "pd");
+
+                        }
+                    }
+                });
+            })
+
+        });
+        return false;
+    }
+    getItemsData();
+
+</script>
+</body>
+</html>

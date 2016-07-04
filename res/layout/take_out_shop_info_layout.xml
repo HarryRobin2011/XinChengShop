@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <LinearLayout android:id="@id/content"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_120"
+                          android:gravity="center_vertical"
+                          android:background="@color/white"
+                          android:orientation="horizontal">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_100"
+                              android:layout_weight="1"
+                              android:orientation="vertical">
+                    <TextView android:id="@id/shop_name"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:layout_weight="1"/>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:layout_weight="1"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal">
+                        <RatingBar android:id="@id/ratingBar"
+                                   style="?android:attr/ratingBarStyleSmall"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center_vertical"
+                                   android:layout_marginLeft="10.0dp"
+                                   android:numStars="5"
+                                   android:stepSize="0.5" />
+                        <TextView android:id="@id/shop_point"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:layout_weight="1"
+                                  style="@style/text_style_3"
+                                  android:paddingLeft="10.0dp"/>
+                    </LinearLayout>
+
+                    <TextView android:id="@id/tag"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:text="配送服务：提供高品质配送服务"
+                              android:layout_weight="1"/>
+                </LinearLayout>
+                <ImageView android:id="@id/image"
+                           android:layout_width="@dimen/height_100"
+                           android:layout_height="@dimen/height_100"
+                           android:layout_margin="10.0dp"
+                           android:scaleType="fitXY"/>
+
+            </LinearLayout>
+            <View style="@style/line1"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:gravity="center_vertical"
+                          android:background="@color/white">
+                <ImageView android:layout_width="20.0dp"
+                           android:layout_height="20.0dp"
+                           android:layout_marginLeft="10.0dp"
+                           android:scaleType="fitXY"
+                           android:src="@drawable/guide_nearby_on"/>
+                <TextView android:id="@id/address"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          style="@style/text_style_3"
+                          android:paddingLeft="10.0dp"
+                          android:lines="2"/>
+                <View android:layout_width="0.1dp"
+                      android:layout_height="match_parent"
+                      android:layout_margin="10.0dp"
+                      android:background="@color/line_dark2"/>
+                <ImageView android:id="@id/call_phone"
+                           android:layout_width="@dimen/height_20"
+                           android:layout_height="@dimen/height_20"
+                           android:scaleType="centerInside"
+                           android:layout_marginLeft="@dimen/height_30"
+                           android:layout_marginRight="@dimen/height_30"
+                           android:src="@drawable/xc_telphone"/>
+            </LinearLayout>
+
+            <TextView android:id="@id/shoping_license"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:background="@color/white"
+                      style="@style/text_style_3"
+                      android:text="@string/shoping_license"
+                      android:paddingLeft="10.0dp"
+                      android:layout_marginTop="10.0dp"/>
+
+            <TextView android:id="@id/shoping_time"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:background="@color/white"
+                      style="@style/text_style_3"
+                      android:paddingLeft="10.0dp"
+                      android:layout_marginTop="10.0dp"/>
+        </LinearLayout>
+        <ProgressBar android:id="@id/progressBar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:visibility="gone"
+                     android:indeterminateDrawable="@drawable/my_progress_bg"
+                     android:layout_gravity="center"/>
+    </FrameLayout>
+
+</LinearLayout>

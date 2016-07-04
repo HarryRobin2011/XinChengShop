@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+        <LinearLayout
+                android:id="@id/detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <include layout="@layout/shipping_address_layout"/>
+
+            <View style="@style/line1"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10.0dp"
+                          android:background="@color/white"
+                          android:orientation="vertical">
+
+                <View style="@style/line1"/>
+                <LinearLayout android:id="@id/delivery_time_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:text="@string/delivery_time"/>
+
+                    <TextView
+                            android:id="@id/time"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            style="@style/text_style_3"
+                            android:paddingLeft="10.0dp"
+                            android:textColor="@color/red_normal"
+                            android:gravity="right|center_vertical"
+                            android:text="@string/please_select_delivery_time"/>
+
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:background="@drawable/settings_arrow"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:id="@id/remark_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:text="@string/order_remark"/>
+                    <com.banksoft.XinChengShop.widget.ClearEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:layout_margin="5.0dp"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <LinearLayout android:id="@id/remark_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              style="@style/text_style_3"
+                              android:paddingLeft="10.0dp"
+                              android:text="@string/is_receipt"/>
+                    <ToggleButton
+                            android:id="@id/is_receipt"
+                            android:layout_width="@dimen/height_50"
+                            android:layout_height="@dimen/height_30"
+                            android:textOff=""
+                            android:textOn=""
+                            android:layout_marginRight="10.0dp"
+                            android:background="@drawable/switch_bg"/>
+                </LinearLayout>
+                <View style="@style/line1"/>
+                <RadioGroup android:id="@id/remark_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_50"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                    <RadioButton
+                            android:id="@id/to_door_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           android:paddingLeft="10.0dp"
+                            android:textColor="@color/text_black"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10.0dp"
+                            android:checked="true"
+                            android:text="@string/to_door_delivery"/>
+                    <RadioButton
+                            android:id="@id/to_he_shop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10.0dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10.0dp"
+                            android:textColor="@color/text_black"
+                            android:text="@string/to_he_shop"/>
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10.0dp"
+                          android:background="@color/white"
+                          android:orientation="vertical">
+                <LinearLayout android:id="@id/reservation_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                    <TextView android:id="@id/shop_name"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:layout_weight="1"
+                              android:textStyle="bold"
+                              style="@style/text_style_3"
+                              android:textColor="@color/text_black"
+                              android:paddingLeft="10.0dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/line1"/>
+            <com.banksoft.XinChengShop.widget.MyGridView
+                    android:id="@id/gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:numColumns="1"
+                    android:cacheColorHint="@color/transparent"/>
+        </LinearLayout>
+        <ProgressBar android:id="@id/progressBar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:visibility="gone"
+                     android:indeterminateDrawable="@drawable/my_progress_bg"
+                     android:layout_gravity="center"/>
+    </FrameLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:background="@color/white"
+                  android:orientation="horizontal">
+        <TextView android:id="@id/order_money"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  style="@style/text_style_3"
+                  android:textColor="@color/red_normal"
+                  android:paddingLeft="10.0dp"/>
+        <Button android:id="@id/pay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/click_red_button"
+                style="@style/text_style_3"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/ok"/>
+    </LinearLayout>
+
+</LinearLayout>

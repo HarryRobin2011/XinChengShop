@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                    android:orientation="vertical">
+            <LinearLayout android:id="@id/content"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@color/transparent"
+                          android:orientation="vertical"
+                          android:layout_margin="10.0dp">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/account"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/account"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/telPhone_contact"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/telPhone_contact"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/email"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/member_email"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/real_name"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/member_name"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/sex"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/sex"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/area"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/area"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/birthday"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/birthday"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_50"
+                              android:gravity="center"
+                              android:text="@string/QQ"/>
+                    <View android:layout_width="0.1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/line_dark2"/>
+                    <EditText android:id="@id/member_qq"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:layout_weight="1"
+                              android:editable="false"
+                              android:background="@drawable/edit_text_white_bg"
+                              android:gravity="center"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+
+                <Button android:id="@id/cancellation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_40"
+                        android:background="@drawable/click_red_button"
+                        android:text="@string/cancellation"
+                        android:layout_marginTop="40.0dp"
+                        android:textColor="@color/white"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

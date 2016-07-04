@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>店铺简介</title>
+
+    <script>;
+    (function (win) {
+        var doc = win.document;
+        var docEl = doc.documentElement;
+        var metaEl = doc.querySelector('meta[name="viewport"]');
+        var flexibleEl = doc.querySelector('meta[name="flexible"]');
+        var dpr;
+        var scale;
+        var tid;
+
+        if (metaEl) {
+            console.warn('将根据已有的meta标签来设置缩放比例');
+            var match = metaEl.getAttribute('content').match(/initial\-scale=(["']?)([\d\.]+)\1?/);
+            if (match) {
+                scale = parseFloat(match[2]);
+                dpr = parseInt(1 / scale);
+            }
+        } else if (flexibleEl) {
+            dpr = parseInt(flexibleEl.getAttribute('data-dpr'));
+            scale = parseFloat((1 / dpr).toFixed(2));
+        }
+
+        if (!dpr && !scale) {
+            var isAndroid = win.navigator.appVersion.match(/android/gi);
+            var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+            var dpr = win.devicePixelRatio;
+            if (isAndroid) {
+                // 安卓下，仍旧使用1倍的方案
+                dpr = 1;
+            } else if (isIPhone) {
+                // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                if (dpr >= 2) {
+                    dpr = 2;
+                } else {
+                    dpr = 1;
+                }
+            }
+            scale = 1 / dpr;
+        }
+
+        docEl.setAttribute('data-dpr', dpr);
+        if (!metaEl) {
+            metaEl = doc.createElement('meta');
+            metaEl.setAttribute('name', 'viewport');
+            metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+            if (docEl.firstElementChild) {
+                docEl.firstElementChild.appendChild(metaEl);
+            } else {
+                var wrap = doc.createElement('div');
+                wrap.appendChild(metaEl);
+                doc.write(wrap.innerHTML);
+            }
+        }
+
+        function setUnitA() {
+            var width = docEl.getBoundingClientRect().width;
+            if (width / dpr > 540) {
+                width = 540 * dpr;
+            }
+            win.rem = width / 16;
+            docEl.style.fontSize = win.rem + 'px';
+        }
+
+        win.dpr = dpr;
+        win.addEventListener('resize', function () {
+            clearTimeout(tid);
+            tid = setTimeout(setUnitA, 300);
+        }, false);
+        win.addEventListener('pageshow', function (e) {
+            if (e.persisted) {
+                clearTimeout(tid);
+                tid = setTimeout(setUnitA, 300);
+            }
+        }, false);
+
+        if (doc.readyState === 'complete') {
+            doc.body.style.fontSize = 12 * dpr + 'px';
+        } else {
+            doc.addEventListener('DOMContentLoaded', function (e) {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            }, false);
+        }
+
+        setUnitA();
+    })(window);</script>
+    <link href="css/shopinfo.css" rel="stylesheet"/>
+
+</head>
+<body style="font-size: 18px;">
+<div weapp-host="">
+    <div data-type="container" container="" w-height="-1" w-scroll="1" w-width="-1" w-layout="linearLayout"
+         w-orientation="vertical" w-id="w-1" weapp-root="" style="background-color: rgb(238, 238, 238);">
+        <div scroller="" style="overflow-y: scroll; overflow-x: hidden; transform: translateZ(0px);">
+            <div content="" style="margin-top: 0px; margin-bottom: 0px;">
+                <div data-type="container" container="" w-height="-2" w-width="-1" w-layout="absoluteLayout"
+                     w-orientation="vertical" w-id="0.1.1"
+                     style="padding-top: 0.4rem; padding-left: 0.4rem; padding-bottom: 0.6rem; height: 3.375rem; width: 100%; background-color: rgb(255, 255, 255);">
+                    <div scroller="">
+                        <div content="">
+                            <div data-type="container" container="" w-layout="absoluteLayout" w-align="1"
+                                 w-orientation="vertical" w-id="w-2"
+                                 style="height: 2.4rem; border-width: 0.025rem; width: 2.4rem; background-color: rgb(255, 255, 255);">
+                                <div scroller="">
+                                    <div content="">
+                                        <div data-type="image" atom="" w-align="5" w-id="w-3"
+                                             style="height: 2.2rem; width: 2.2rem;"><span>
+                                            <img id="shopLogo" src="./images/default_store_logo.gif"
+                                                 class="" data-size="342x342" data-src-checked="true"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-type="container" container="" w-width="-1" w-layout="absoluteLayout" w-align="1"
+                                 w-orientation="vertical" w-id="w-4"
+                                 style="height: 2.375rem; margin-left: 2.975rem;">
+                                <div scroller="">
+                                    <div content="">
+                                        <div data-type="container" container="" w-height="-1" w-width="-1"
+                                             w-layout="absoluteLayout" w-orientation="vertical" w-id="w-5"
+                                             style="width: 15.6rem; height: 2.375rem;">
+                                            <div scroller="">
+                                                <div content="">
+                                                    <div data-type="label" atom="" w-height="-2" w-align="1"
+                                                         w-gravity="1" w-id="w-6"
+                                                         style="color: rgb(61, 66, 69); width: 8.8rem; font-size: 0.8rem;">
+                                                        <span id="shopName"></span></div>
+                                                    <div data-type="label" atom="" w-height="-2" w-width="-1"
+                                                         w-align="1" w-gravity="1" w-id="w-7"
+                                                         style="color: rgb(154, 154, 154); margin-top: 1rem; font-size: 0.5rem;">
+                                                        <span id="shopSc"></span></div>
+                                                    <div data-type="container" container="" w-orientation="horizontal"
+                                                         w-layout="linearLayout" w-align="7" w-id="w-8"
+                                                         style="height: 0.6rem;">
+                                                        <div scroller="">
+                                                            <!--<div content="">-->
+                                                            <!--<div data-type="image" atom="" w-invisible="false"-->
+                                                            <!--w-id="w-9" style="height: 0.6rem; width: 0.6rem;">-->
+                                                            <!--<span><img-->
+                                                            <!--src="./images//TB1wA25HpXXXXcwXVXXCBGNFFXX-24-24.png_100x100.jpg"-->
+                                                            <!--class="" data-size="93x93"-->
+                                                            <!--data-src-checked="true"></span></div>-->
+                                                            <!--&lt;!&ndash;<div data-type="image" atom="" w-invisible="false"&ndash;&gt;-->
+                                                            <!--w-id="w-10"-->
+                                                            <!--style="height: 0.6rem; width: 0.6rem; margin-left: 0.4rem;">-->
+                                                            <!--<span><img-->
+                                                            <!--src="http://gw.alicdn.com/tps/i3/TB18Lr8HpXXXXblaXXXCBGNFFXX-24-24.png_600x600.jpg"-->
+                                                            <!--class="" data-size="600x600"-->
+                                                            <!--data-src-checked="true"></span></div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div id="sc_btn" data-type="button" atom="" w-align="3" w-gravity="5"-->
+                                    <!--w-id="w-11"-->
+                                    <!--style="height: 1.2rem; width: 3rem; margin-right: 3.2rem; color: rgb(255, 255, 255); font-size: 0.65rem; background-image: url(http://gtms01.alicdn.com/tps/i1/T1DD6nFH0XXXa_.pc8-120-48.png);">-->
+                                    <!--<span>收藏</span></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-12"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; border-style: solid; border-top-width: 0.025rem;"></div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-13"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; margin-top: 0.6rem; border-style: solid; border-top-width: 0.025rem;"></div>
+            <div data-type="container" container="" w-orientation="vertical" w-height="-2" w-width="-1"
+                 w-layout="linearLayout" w-id="w-19"
+                 style="padding-bottom: 0.6rem; padding-right: 0.6rem; background-color: rgb(255, 255, 255);">
+                <div scroller="">
+                    <div content="">
+                        <div data-type="container" container="" w-orientation="horizontal" w-invisible="true"
+                             w-width="-1" w-layout="linearLayout" w-id="w-20"
+                             style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-21"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>简介</span></div>
+                                    <div data-type="label" atom="" w-width="-1" w-gravity="4" w-id="w-22"
+                                         style="color: rgb(61, 66, 69); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="container" container="" w-orientation="horizontal" w-width="-1"
+                             w-layout="linearLayout" w-id="w-23" style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-24"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>好评率</span></div>
+                                    <div data-type="label" atom="" w-width="-1" w-gravity="4" w-id="w-25"
+                                         style="color: rgb(61, 66, 69); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="hpl">100%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="container" container="" w-orientation="horizontal" w-invisible="false"
+                             w-width="-1" w-layout="linearLayout" w-id="w-26"
+                             style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-27"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>所在地</span></div>
+                                    <div data-type="label" atom="" w-width="-1" w-gravity="4" w-id="w-28"
+                                         style="color: rgb(61, 66, 69); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="addrs">山东  潍坊</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="container" container="" w-orientation="horizontal" w-invisible="false"
+                             w-width="-1" w-layout="linearLayout" w-id="w-29"
+                             style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-30"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>开店时间</span></div>
+                                    <div data-type="label" atom="" w-width="-1" w-gravity="4" w-id="w-31"
+                                         style="color: rgb(61, 66, 69); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="openTime"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-32"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; border-style: solid; border-top-width: 0.025rem;"></div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-33"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; margin-top: 0.6rem; border-style: solid; border-top-width: 0.025rem;"
+                 w-invisible="false"></div>
+            <div data-type="container" container="" w-orientation="vertical" w-height="-2" w-invisible="false"
+                 w-width="-1" w-layout="linearLayout" w-id="w-34"
+                 style="padding-bottom: 0.6rem; background-color: rgb(255, 255, 255);">
+                <div scroller="">
+                    <div content="">
+                        <div data-type="container" container="" w-orientation="horizontal" w-width="-1"
+                             w-layout="linearLayout" w-id="w-35" style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-36"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>描述相符</span></div>
+                                    <div data-type="label" atom="" w-width="-2" w-gravity="4" w-id="w-37"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="matchScore"></span></div>
+                                    <div data-type="label" atom="" w-weight="1" w-gravity="4" w-id="w-38"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.6rem; width: 0rem; font-size: 0.65rem;">
+                                        <span>--</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="container" container="" w-orientation="horizontal" w-width="-1"
+                             w-layout="linearLayout" w-id="w-39" style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-40"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>服务态度</span></div>
+                                    <div data-type="label" atom="" w-width="-2" w-gravity="4" w-id="w-41"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="serviceScore"></span></div>
+                                    <div data-type="label" atom="" w-weight="1" w-gravity="4" w-id="w-42"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.6rem; width: 0rem; font-size: 0.65rem;">
+                                        <span>--</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="container" container="" w-orientation="horizontal" w-width="-1"
+                             w-layout="linearLayout" w-id="w-43" style="padding-top: 0.6rem; height: 1.5rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-44"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>物流服务</span></div>
+                                    <div data-type="label" atom="" w-width="-2" w-gravity="4" w-id="w-45"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.8rem; font-size: 0.65rem;">
+                                        <span id="dispatchScore"></span></div>
+                                    <div data-type="label" atom="" w-weight="1" w-gravity="4" w-id="w-46"
+                                         style="color: rgb(255, 80, 0); height: 0.85rem; margin-left: 0.6rem; width: 0rem; font-size: 0.65rem;">
+                                        <span>--</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-47"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; border-style: solid; border-top-width: 0.025rem;"
+                 w-invisible="false"></div>
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-48"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; margin-top: 0.6rem; border-style: solid; border-top-width: 0.025rem;"></div>
+            <div data-type="container" container="" w-orientation="vertical" w-height="-2" w-width="-1"
+                 w-layout="linearLayout" w-id="w-49" style="background-color: rgb(255, 255, 255);">
+                <div scroller="">
+                    <div content="">
+                        <div data-type="container" container="" w-orientation="horizontal" w-width="-1"
+                             w-layout="linearLayout" w-id="w-50"
+                             style="padding-top: 0.575rem; height: 2rem; padding-bottom: 0.575rem;">
+                            <div scroller="">
+                                <div content="">
+                                    <div data-type="label" atom="" w-gravity="4" w-id="w-51"
+                                         style="color: rgb(154, 154, 154); height: 0.85rem; margin-left: 0.8rem; width: 2.8rem; font-size: 0.65rem;">
+                                        <span>掌柜名</span></div>
+                                    <div data-type="label" atom="" w-weight="1" w-gravity="4" w-id="w-52"
+                                         style="color: rgb(61, 66, 69); height: 0.85rem; margin-left: 0.8rem; width: 0rem; font-size: 0.65rem;">
+                                        <span id="shopAccount"></span></div>
+                                    <div data-type="image" atom="" w-align="6" w-gravity="6" w-id="w-53"
+                                         style="height: 0.85rem; width: 0.85rem; margin-right: 0.6rem;"><span><img
+                                            src="http://gw.alicdn.com/tps/i1/TB1c4EWFFXXXXb.XFXXWA_BHXXX-48-48.png_145x145.jpg"
+                                            class="" data-size="132x132" data-src-checked="true"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-type="dashedLine" rich="" w-invisible="true" w-width="-1" w-id="w-54"
+                             style="border-color: rgb(221, 221, 221); height: 0.025rem; border-style: solid; border-top-width: 0.025rem;"></div>
+                    </div>
+                </div>
+            </div>
+            <!--<div data-type="dashedLine" rich="" w-width="-1" w-id="w-59"-->
+            <!--style="border-color: rgb(221, 221, 221); height: 0.025rem; margin-top: 0.6rem; border-style: solid; border-top-width: 0.025rem;"></div>-->
+            <!--<div id="shopcard" data-type="container" container="" w-orientation="vertical" w-width="-1"-->
+            <!--w-layout="linearLayout"-->
+            <!--w-align="4" w-id="w-60"-->
+            <!--style="height: 2.2rem; padding-right: 0.6rem; background-color: rgb(255, 255, 255);">-->
+            <!--<div scroller="">-->
+            <!--<div content="">-->
+            <!--<div data-type="container" container="" w-orientation="horizontal" w-width="-1"-->
+            <!--w-layout="linearLayout" w-id="w-61" style="height: 2.2rem;">-->
+            <!--<div scroller="">-->
+            <!--<div content="">-->
+            <!--<div data-type="label" atom="" w-gravity="4" w-id="w-62"-->
+            <!--style="width: 0.1rem; font-size: 0.65rem; background-color: rgb(255, 80, 0);">-->
+            <!--<span></span></div>-->
+            <!--<div data-type="label" atom="" w-align="4" w-gravity="4" w-id="w-63"-->
+            <!--style="color: rgb(255, 80, 0); margin-left: 0.7rem; width: 2.8rem; font-size: 0.65rem;">-->
+            <!--<span>店铺名片</span></div>-->
+            <!--<div data-type="label" atom="" w-weight="1" w-gravity="4" w-id="w-64"-->
+            <!--style="height: 0.85rem; margin-left: 0.8rem; width: 0rem; font-size: 0.65rem;">-->
+            <!--<span></span></div>-->
+            <!--<div data-type="image" atom="" w-align="6" w-id="w-65"-->
+            <!--style="margin-bottom: 0.675rem; height: 0.8rem; margin-top: 0.675rem; width: 0.8rem;">-->
+            <!--<span><img-->
+            <!--src="./images//TB1F17dHpXXXXbfXpXXEDhGGXXX-32-32.png_125x125.jpg"-->
+            <!--class="" data-size="124x124" data-src-checked="true"></span></div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div data-type="dashedLine" rich="" w-width="-1" w-id="w-66"
+                 style="border-color: rgb(221, 221, 221); height: 0.025rem; border-style: solid; border-top-width: 0.025rem;"></div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script>
+    function getDataJson(d) {
+        setInfoData(d);
+    }
+
+    function setInnerHtml(elmid, str) {
+        document.getElementById(elmid).innerHTML = str;
+        return false;
+    }
+
+    function elmentEvent(id, event, callback) {
+        var elo = document.getElementById(id);
+        elo.addEventListener(event, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            callback(e);
+        });
+    }
+    function isd(v, str) {
+        if (!v) {
+            return str;
+        }
+        return v;
+    }
+    function dateForment(d) {
+        var d = new Date(d);
+        var y = d.getFullYear();
+
+            setInnerHtml("shopAccount", isd(d.account, "0"));
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

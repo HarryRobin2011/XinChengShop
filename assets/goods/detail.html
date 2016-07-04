@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/app.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="mui-content">
+    <!--图片-->
+    <div id="slider" class="mui-slider">
+        <div class="mui-slider-group" id="imgSliderGroup">
+            <div class="mui-slider-item"><a><img src="images/default.png"></a></div>
+        </div>
+        <div class="mui-slider-indicator" id="imgtag">
+            <div class="Absolute-Center"><span id="pageTag" style="font-size: 18px !important;">1</span>/<i id="imgSum">1</i>
+            </div>
+            <div class="mui-indicator mui-active" style="display:none"></div>
+        </div>
+    </div>
+    <ul class="sec-table-view goods-bkbg">
+        <li class="sec-table-view-cell mui-indexed-list-item no_padding_b">
+            <div class='goods_title'>
+                <span id="title_text" class='title_text'></span>
+            </div>
+            <div class='goods_buy'>
+                <div class='goods_fan'>
+                    <span class="goods_fann" id="price">￥0.00</span>
+                </div>
+            </div>
+            <div class="goods_addr">
+                <span style="float: left;">原价：<span id="price1" class='price_yuanjia'>￥0</span></span>
+                <span style="float: left; margin-left: 30px;">所在地区：<span id="addrs"></span></span>
+            </div>
+            <p class="sjxqsst">
+                <span><i class="iconfont icon-tr"></i>卖家承担运费</span>
+                <span><i class="iconfont icon-tr"></i>三天退货</span>
+                <span><i class="iconfont icon-tr"></i>无理由退款</span></p>
+        </li>
+    </ul>
+    <!--<section class="p2p_info mar_top_10">-->
+    <!--商品评价(<span id="pjsum">0</span>)-->
+    <!--&lt;!&ndash;<div class="comment">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="avatar">&ndash;&gt;-->
+    <!--&lt;!&ndash;<img src="images/default.gif"></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="comment-info">&ndash;&gt;-->
+    <!--&lt;!&ndash;<span class="poster">b******i</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;<span class="comment-time">2015-11-11 17:41</span>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<div class="comment-content">好评！</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<center>&ndash;&gt;-->
+    <!--&lt;!&ndash;<h4>暂无商品评价！</h4></center>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="bt_bor">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class="" style="padding-top: 16px; height: 30px;">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a id="pj-btn" class="mui-navigate-right" href="javascript:void(0)">&ndash;&gt;-->
+    <!--&lt;!&ndash;<span class="move_pj">查看更多评价</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--</section>-->
+
+    <section CLASS="mar_top_10" id="s-shop">
+        <div class="main mui-flex">
+
+            <div class="shop-logo cell">
+                <div class="img-box">
+
+                    <img id="shopLogo" src="./images/default_store_logo.gif"/>
+
+                </div>
+            </div>
+            <div class="shop-ct cell cell-8">
+                <div class="shop-t" id="shopName">苏泊尔炊具旗舰店</div>
+                <img src="images/telphone.png" width="25" height="25" style="margin-top: 10px">
+                <img src="images/qq.png" width="25" height="25" style="margin-top: 10px;margin-left: 35px" onclick="">
+                <div class="down-t">
+                </div>
+            </div>
+            <div class="shop-adds cell">
+                <div class="img-box">
+                </div>
+            </div>
+
+        </div>
+
+        <ul class="score">
+
+            <li>描述相符<b class="Up" id="matchScore">5.0</b></li>
+
+
+            <li>服务态度<b class="Up" id="serviceScore">5.0</b></li>
+
+
+            <li>发货速度<b class="Up" id="dispatchScore">5.0</b></li>
+
+        </ul>
+
+        <div class="action mui-flex align-center">
+
+            <a class="all-product cell"
+               href="javascript:void(0)" id="shop_all_btn">全部商品</a>
+            <a class="go-shop cell" href="javascript:void(0)" id="shop_btn">进入店铺</a>
+        </div>
+    </section>
+    <section CLASS="mar_top_10 p2p_info" style="padding-top: 0px !important;">
+
+        <div class="productinfo-tab-head productinfo-border">
+            <div><span class="productinfo-tab-selected">图文详情</span></div>
+            <div><span id="pjbtn" class="">商品评价(<a id="pjsum">0</a>)</span></div>
+        </div>
+        <div class="productinfo-tab-body">
+            <div class="" id="tabview1" style="width: 100%;">
+            </div>
+        </div>
+    </section>
+
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/mui.min.js"></script>
+
+<script>
+    function getDetailData(d) {
+        setDetailData(d);
+        var slider = document.getElementById('slider');
+        var sliderApi = mui(slider).slider();
+        sliderApi.refresh();
+
+        document.getElementById("shop_btn").addEventListener("tap", function (e) {
+
+        });
+    }
+    function isd(v,str){
+        if(!v) {
+            return str;
+        }
+        return v;
+    }
+    function setDetailData(d) {
+        function setInnerHtml(elmid, str) {
+            document.getElementById(elmid).innerHTML = str;
+            return false;
+        }
+
+        var localurl = "http://www.xinchengguangchang.com";
+        if (d) {
+            var imghtml = '';
+            var imgstr = d.icon.split("|");
+            var imgstrLen = imgstr.length;
+            var imgtaghtml = document.getElementById("imgtag").innerHTML;
+            for (var i = 0; i < imgstr.length; i++) {
+                if (imgstr[i] == "") {
+                    imgstrLen = imgstrLen - 1;
+                    continue;
+                }
+                if (!!i) {
+                    imgtaghtml += '<div class="mui-indicator" style="display:none"></div>';
+                }
+                imghtml += '<div class="mui-slider-item"><a><img class="imgbtn" src="' + localurl + imgstr[i] + '"></a></div>';
+            }
+            setInnerHtml("imgSliderGroup", imghtml);
+            setInnerHtml("imgtag", imgtaghtml);
+            setInnerHtml("imgSum", imgstrLen);
+            setInnerHtml("title_text", d.name);
+            setInnerHtml("tabview1", d.description);
+            setInnerHtml("price", "￥" + d.price);
+            setInnerHtml("price1", "￥" + d.salePrice);
+            setInnerHtml("addrs", d.county ? (d.province + "&bnsp;&bnsp;" + d.city + "&bnsp;&bnsp;" + d.county) : "");
+            setInnerHtml("shopName", d.shopName);
+
+            if (d.shopImg!=""&&d.shopImg!=undefined) {
+                document.getElementById("shopLogo").src = localurl + d.shopImg;
+            }
+            setInnerHtml("matchScore", isd(d.matchScore, "5.0"));
+            setInnerHtml("dispatchScore", isd(d.dispatchScore, "5.0"));
+            setInnerHtml("serviceScore", isd(d.serviceScore, "5.0"));
+            setInnerHtml("pjsum", d.assesses ? d.assesses : "0");//评价总数
+            function elmentId(id) {
+                return document.getElementById(id);
+            }
+
+            function elmentEvent(id, event, callback) {
+                var elo = document.getElementById(id);
+                elo.addEventListener(event, function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    callback(e);
+                });
+            }
+
+            mui.ready(function () {
+                var wAndroid = window.android;
+                jQuery(".imgbtn").each(function (e) {
+                    this.addEventListener("tap", function (e, i) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        wAndroid.startImageActivity(jQuery(this).index());
+                    });
+                });
+                var shopbtn = elmentId("shop_btn");
+                shopbtn.addEventListener("tap", function (e) {
+                    wAndroid.startShopInfoActivity();
+                });
+                var shopbtn = elmentId("shop_all_btn");
+                shopbtn.addEventListener("tap", function (e) {
+//                    TODO:跳转全部商品页面
+                    wAndroid.startAllShopsActivity();
+
+                });
+
+                elmentEvent("pjbtn", "tap", function (e) {
+                    wAndroid.startCommentActivity();
+                });
+            });
+
+        }
+        return false;
+    }
+
+</script>
+</body>
+</html>

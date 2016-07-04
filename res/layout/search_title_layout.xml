@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              android:gravity="center_vertical">
+    <ImageView android:id="@id/title_back_button"
+               android:layout_width="@dimen/height_20"
+               android:layout_height="@dimen/height_20"
+               android:layout_marginLeft="5.0dp"
+               android:src="@drawable/wopc_arrow"/>
+    <com.banksoft.XinChengShop.widget.ClearEditText
+            android:id="@id/search_edit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_30"
+            android:layout_marginLeft="10.0dp"
+            android:textSize="@dimen/text_size_5"
+            android:layout_weight="1"
+            android:paddingLeft="10.0dp"
+            android:cursorVisible="false"
+            android:background="@drawable/edit_gray_bg"
+            android:hint="@string/please_input_product_name"
+            android:completionThreshold="1"/>
+    <Button android:id="@id/search"
+            android:layout_width="@dimen/height_50"
+            android:layout_marginLeft="10.0dp"
+            android:background="@drawable/click_red_button"
+            style="@style/text_style_3"
+            android:text="@string/search"
+            android:textColor="@color/text_white"
+            android:gravity="center"
+            android:layout_marginRight="5.0dp"
+            android:layout_height="@dimen/height_30"/>
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_60"
+                  android:gravity="center"
+                  android:orientation="horizontal">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_40"
+                      android:background="@drawable/white_radus_bg"
+                      android:layout_margin="10.0dp"
+                      android:gravity="center"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/search_icon"/>
+            <EditText android:id="@id/search_edit"
+                      android:layout_height="match_parent"
+                      android:background="@color/white"
+                      android:hint="@string/search_product_name"
+                      android:gravity="center"
+                      android:singleLine="true"
+                      android:imeOptions="actionSearch"
+                      android:layout_width="200.0dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <com.banksoft.XinChengShop.widget.viewpagerindicator.TabPageIndicator android:id="@id/tab_page_indicator"
+                                                                          android:layout_width="match_parent"
+                                                                          android:layout_height="wrap_content"
+                                                                          android:background="@color/white"/>
+    <View style="@style/line1"/>
+    <android.support.v4.view.ViewPager android:id="@id/viewPager"
+                                       android:layout_width="match_parent"
+                                       android:background="@color/white"
+                                       android:layout_height="match_parent"/>
+
+</LinearLayout>

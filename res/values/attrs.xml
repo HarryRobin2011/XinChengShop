@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="direction">
+        <enum name="rightToLeft" value="0" />
+        <enum name="bottomToTop" value="1" />
+        <enum name="leftToRight" value="2" />
+        <enum name="topToBottom" value="3" />
+    </attr>
+    
+    <declare-styleable name="MultiDirectionSlidingDrawer">
+        <attr name="handle" format="reference" />
+        <attr name="content" format="reference" />
+        <attr name="direction" />
+        <attr name="bottomOffset" format="dimension"  />
+        <attr name="topOffset" format="dimension"  />
+        <attr name="allowSingleTap" format="boolean" />
+        <attr name="animateOnClick" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomShapeImageView">
+        <attr name="shape" format="integer">
+            <enum name="circle" value="1" />
+            <enum name="rectangle" value="2" />
+            <enum name="svg" value="3" />
+        </attr>
+
+        <attr name="svg_raw_resource" format="reference" />
+
+    </declare-styleable>
+
+    <!-- Reference to a style for the menu drawer. -->
+    <attr name="menuDrawerStyle" format="reference" />
+
+    <!-- Styleables used for styling the menu drawer. -->
+    <declare-styleable name="MenuDrawer">
+
+        <!-- Drawable to use for the background of the content. -->
+        <attr name="mdContentBackground" format="reference" />
+
+        <!-- Drawable to use for the background of the menu. -->
+        <attr name="mdMenuBackground" format="reference" />
+
+        <!-- The size of the menu. -->
+        <attr name="mdMenuSize" format="dimension" />
+
+        <!-- Drawable used as indicator for the active view. -->
+        <attr name="mdActiveIndicator" format="reference" />
+
+        <!-- Defines whether the content will have a dropshadow onto the menu. Default is true. -->
+        <attr name="mdDropShadowEnabled" format="boolean" />
+
+        <!-- The size of the drop shadow. Default is 6dp -->
+        <attr name="mdDropShadowSize" format="dimension" />
+
+        <!-- The color of the drop shadow. Default is #FF000000. -->
+        <attr name="mdDropShadowColor" format="color" />
+
+        <!-- Drawable used for the drop shadow. -->
+        <attr name="mdDropShadow" format="reference" />
+
+        <!-- The touch bezel size. -->
+        <attr name="mdTouchBezelSize" format="dimension" />
+
+        <!-- Whether the indicator should be animated between active views. -->
+        <attr name="mdAllowIndicatorAnimation" format="boolean" />
+
+        <!-- The maximum animation duration -->
+        <attr name="mdMaxAnimationDuration" format="integer" />
+
+        <!-- Drawable that replaces the up indicator -->
+        <attr name="mdSlideDrawable" format="reference" />
+
+        <!-- String to use as the up indicators content description when the drawer is open -->
+        <attr name="mdDrawerOpenUpContentDescription" format="string" />
+
+        <!-- String to use as the up indicators content description when the drawer is closed -->
+        <attr name="mdDrawerClosedUpContentDescription" format="string" />
+
+        <!-- Whether an overlay should be drawn as the drawer is opened and closed -->
+        <attr name="mdDrawOverlay" format="boolean" />
+
+        <!-- The position of the drawer -->
+        <attr name="mdPosition" format="enum">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="start" value="4" />
+            <enum name="end" value="5" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SlideBottomPanel">
+        <attr name="sbp_background_layout" format="reference"/>
+        <attr name="sbp_title_height_no_display" format="dimension"/>
+        <attr name="sbp_panel_height" format="dimension"/>
+        <attr name="sbp_boundary" format="boolean"/>
+        <attr name="sbp_move_distance_trigger" format="dimension"/>
+        <attr name="sbp_animation_duration" format="integer"/>
+        <attr name="sbp_fade" format="boolean"/>
+        <attr name="sbp_hide_panel_title" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="RecyclerView">
+        <!-- Class name of the Layout Manager to be used.
+        <p/>
+        The class must extend android.support.v7.widget.RecyclerView$LayoutManager
+        and have either a default constructor or constructor with the signature
+        (android.content.Context, android.util.AttributeSet, int, int).
+         <p/>
+         If the name starts with a '.', application package is prefixed.
+         Else, if the name contains a '.', the classname is assumed to be a full class name.
+         Else, the recycler view package name (android.support.v7.widget) is prefixed. -->
+        <attr name="layoutManager" format="string" />
+
+        <!-- ============================= -->
+        <!-- Attributes for Layout Manager -->
+        <!-- ============================= -->
+        <eat-comment />
+
+        <attr name="android:orientation" />
+        <attr name="spanCount" format="integer"/>
+        <attr name="reverseLayout" format="boolean" />
+        <attr name="stackFromEnd" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RollViewPager">
+        <attr name="rollviewpager_hint_mode">
+            <enum name="point" value="0" />
+            <enum name="number" value="1" />
+        </attr>
+        <attr name="rollviewpager_hint_gravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="rollviewpager_hint_paddingRight" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingLeft" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingTop" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingBottom" format="dimension"/>
+
+        <attr name="rollviewpager_play_delay" format="integer" />
+        <attr name="rollviewpager_hint_color" format="color" />
+        <attr name="rollviewpager_hint_alpha" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialSpinner" tools:ignore="ResourceName">
+        <attr name="ms_arrow_tint" format="color"/>
+        <attr name="ms_hide_arrow" format="boolean"/>
+        <attr name="ms_background_color" format="color"/>
+        <attr name="ms_text_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="DropdownView">
+        <attr name="drop_down_list_count" format="integer"/>
+        <attr name="drop_down_title_text" format="reference"/>
+        <attr name="drop_down_title_text_size" format="dimension"/>
+        <attr name="drop_down_title_text_color" format="color"/>
+        <attr name="drop_down_title_background" format="reference|color"/>
+        <attr name="drop_down_arrow_up" format="reference"/>
+        <attr name="drop_down_arrow_down" format="reference"/>
+        <attr name="drop_down_duration" format="integer"/>
+        <attr name="drop_down_list_height" format="dimension"/>
+        <attr name="drop_down_title_padding_left" format="dimension"/>
+        <attr name="drop_down_title_padding_top" format="dimension"/>
+        <attr name="drop_down_title_padding_right" format="dimension"/>
+        <attr name="drop_down_title_padding_bottom" format="dimension"/>
+        <attr name="drop_down_title_padding" format="dimension"/>
+        <attr name="drop_down_title_drawable_padding" format="dimension"/>
+        <attr name="drop_down_enable_dim" format="boolean" />
+    </declare-styleable>
+    <string-array name="arryshoptype">
+        <item>商城类</item>
+        <item>美食外卖类</item>
+        <item>本地服务类</item>
+    </string-array>
+    <string-array name="arryshopcategroy">
+        <item>汽车美容</item>
+        <item>洗车店</item>
+        <item>宾馆</item>
+    </string-array>
+    <string-array name="arryhouse">
+        <item>A1</item>
+        <item>A2</item>
+        <item>A3</item>
+        <item>A4</item>
+        <item>A51</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>B3</item>
+        <item>B4</item>
+        <item>B5</item>
+        <item>C1</item>
+        <item>C2</item>
+        <item>C3</item>
+        <item>C4</item>
+        <item>C5</item>
+        <item>D1</item>
+        <item>D2</item>
+        <item>D3</item>
+        <item>D4</item>
+        <item>D5</item>
+    </string-array>
+
+</resources>

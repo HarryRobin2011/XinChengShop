@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css"
+          href="css/shop.css">
+</head>
+
+<body>
+<div class="mui-content">
+    <div class="row c-logo-opts">
+        <div class="small-12 back-logo"
+             style="background-image: url('./images/shop_bg.png')">
+            <div class="small-12 bottom">
+                <a class="store-block">
+                    <img id="shopLogo" src="./images/default_store_logo.gif" alt=""/>
+
+                    <div class="store-text">
+                        <div class="store-name" id="shopName"></div>
+                        <div class="store-info "><i class="store-type"></i><span id="shopSc">0</span>人关注</div>
+                    </div>
+                </a>
+                <!--关注加active-->
+                <!--<div id="sc_btn" class="store-follow j-m-follow"></div>-->
+            </div>
+        </div>
+        <!--<div class="store-tab">-->
+        <!--<a class="small-3 left tab">-->
+        <!--<div class="num">75</div>-->
+        <!--<div class="text">全部新品</div>-->
+        <!--</a>-->
+        <!--<a class="small-3 left tab">-->
+        <!--<div class="num">4</div>-->
+        <!--<div class="text">上新</div>-->
+        <!--</a>-->
+        <!--<a class="small-3 left tab">-->
+        <!--<div class="num">0</div>-->
+        <!--<div class="text"> 促销-->
+        <!--</div>-->
+        <!--</a>-->
+        <!--<a class="small-3 left j-m-share tab">-->
+        <!--<div class="share">-->
+        <!--<div class="i-share"></div>-->
+        <!--</div>-->
+        <!--<div class="text">分享</div>-->
+        <!--</a>-->
+
+        <!--<div class="line line-1"></div>-->
+        <!--<div class="line line-2"></div>-->
+        <!--<div class="line line-3"></div>-->
+        <!--</div>-->
+        <!--<section class="nav-bar-wrapper J_tabNavBar">-->
+
+        <!--<div class="nav J_navBar ui-tab-slider-wrapper">-->
+        <!--<a class="item selected-tab J_tabItem" data-index="0" data-page="index">-->
+        <!--<span class="count tm-shop-m-iconfont">&#xe60a;</span>-->
+        <!--<span class="text">首页</span>-->
+        <!--</a>-->
+        <!--<a class="item J_tabItem" data-index="1" data-page="allItems">-->
+        <!--<span class="count tm-shop-m-iconfont">&#xe607;</span>-->
+        <!--<span class="text">全部商品</span>-->
+        <!--</a>-->
+        <!--<a class="item J_tabItem" data-index="2" data-page="newItems">-->
+        <!--<span class="count tm-shop-m-iconfont">&#xe609;</span>-->
+        <!--<span class="text">新品</span>-->
+        <!--</a>-->
+        <!--<a class="item J_tabItem" data-index="3" data-page="">-->
+        <!--<span class="count tm-shop-m-iconfont">&#xe608;</span>-->
+        <!--<span class="text">店铺活动</span>-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--</section>-->
+    </div>
+    <div class="row base c-product-value">
+        <div class="small-12">
+            <div class="header clearfix">
+                <span>热卖商品</span>
+            </div>
+            <ul class="small-block-grid-2" id="shoplist">
+
+            </ul>
+            <!--<a class="more">更多<span class="icon-more"></span></a>-->
+        </div>
+    </div>
+    <!--全部商品-->
+    <div class="row base c-product-all">
+        <div class="small-12">
+            <a id="shop_all">
+                <i class="icon-all"></i>
+                <span>查看全部商品</span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+
+<script src="js/mui.min.js"></script>
+
+<script>
+    var getShopData = function (d) {
+        setShopData(d);
+    }
+    function setInnerHtml(elmid, str) {
+        document.getElementById(elmid).innerHTML = str;
+        return false;
+    }
+
+    function elmentEvent(id, event, callback) {
+        var elo = document.getElementById(id);
+        elo.addEventListener(event, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            callback(e);
+        });
+    }
+    function isd(v,str){
+        if(!v) {
+            return str;
+        }
+        return v;
+    }
+    function setShopData(d) {
+        var localurl = "http://www.xinchengguangchang.com";
+        if (d) {
+            var shopdata= d["DATA_0"].data;
+
+            if (!shopdata.logo) {
+                document.getElementById("shopLogo").src = localurl + shopdata.imageFile;
+            }
+
+            setInnerHtml("shopName", isd(shopdata.name,""));
+            setInnerHtml("shopSc", isd(shopdata.collectionCount,"0"));
+
+            var shophtml = '';
+            var shoplist = d["DATA_1"].data.list;
+            for (var i = 0; i < shoplist.length; i++) {
+                shophtml+='<li class="shop_li" data-shopid="'+shoplist[i].shopid+'">'+
+                        '                <a>'+
+                        '                <div class="p-img">'+
+                        '                        <img src="'+localurl+shoplist[i].icon.split("|")[0]+'">'+
+                        '                        </div>'+
+                        '                        <div class="p-info">'+shoplist[i].shopName+'</div>'+
+                        '                <div class="flag">'+
+                        '                        <span class="price">￥'+shoplist[i].price+'</span>'+
+                        '                <!--<span class="tii_sold" >月销0件</span>-->'+
+                        '                </div>'+
+                        '                </a>'+
+                        '                </li>';
+
+            }
+            setInnerHtml("shoplist", shophtml);
+
+            var wAndroid = window.android;
+
+            elmentEvent("shop_all","tap",function(e) {
+                //todo 跳转全部商品
+                wAndroid.startAllShopsActivity();
+            })
+            elmentEvent("sc_btn","tap",function(e) {
+                //todo 点击关注
+            })
+
+            jQuery("#shoplist > li").each(function (e) {
+                this.addEventListener("tap", function (e) {
+                    //todo 跳转商品详情页
+                    wAndroid.startShopDetailActivity();
+                })
+            });
+        }
+    }
+</script>
+</body>
+</html>

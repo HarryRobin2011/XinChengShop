@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <View  style="@style/line2"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+        <ListView android:id="@id/list_view"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:cacheColorHint="@color/transparent"
+                  android:divider="@color/line_dark2"
+                  android:descendantFocusability="beforeDescendants"
+                  android:dividerHeight="10.0dp"/>
+        <ProgressBar android:id="@id/progressBar"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:visibility="gone"
+                     android:indeterminateDrawable="@drawable/my_progress_bg"
+                     android:layout_gravity="center"/>
+        <include layout="@layout/null_pager"/>
+    </FrameLayout>
+
+    <View style="@style/line2"/>
+    <LinearLayout android:id="@id/operation_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:background="@color/white"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/text_style_3"
+                  android:textStyle="bold"
+                  android:gravity="right"
+                  android:layout_weight="1"
+                  android:text="@string/combined"/>
+        <TextView android:id="@id/price"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/text_style_3"
+                  android:textColor="@color/red_normal"/>
+        <Button android:id="@id/confirm"
+                android:layout_width="100.0dp"
+                android:layout_height="match_parent"
+                android:text="@string/confirm"
+                android:textColor="@color/text_white"
+                android:layout_marginLeft="10.0dp"
+                android:background="@drawable/click_red_button"/>
+    </LinearLayout>
+</LinearLayout>

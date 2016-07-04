@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@id/loading_error_layout"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+    <ImageView
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/app_network_off_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/home_no_network_reload_button_margin_top"/>
+    <TextView
+            android:id="@id/web_slow"
+            android:textSize="@dimen/home_no_network_hint_comment_size"
+            android:textColor="@color/home_no_network_hint"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5.0dip"
+            android:text="@string/net_is_weak"/>
+    <TextView
+            android:id="@id/web_error"
+            android:textSize="@dimen/home_no_network_hint_comment_size"
+            android:textColor="@color/home_no_network_hint"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="5.0dip"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/home_no_network_reload_button_margin_top"
+            android:text="@string/net_error"
+            android:lineSpacingExtra="5.0dip"/>
+    <Button
+            android:id="@id/loading_error_btn"
+            android:textSize="@dimen/home_no_network_reload_button_size"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:text="@string/loading_error_again"
+            style="@style/common_button1"/>
+</LinearLayout>
