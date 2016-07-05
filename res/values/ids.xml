@@ -510,4 +510,7 @@
     <item name="shop_linker" type="id">shop_linker</item>
     <item name="detail_layout" type="id">detail_layout</item>
     <item name="time_pickker" type="id">time_pickker</item>
+    <item name="radio_group" type="id">radioGroup</item>
+    <item name="logo" type="id">logo</item>
+    <item name="share" type="id">share</item>
 </resources>

@@ -1,18 +1,26 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.ShopDetailAdapter;
+import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.config.MapFlag;
 import com.banksoft.XinChengShop.dao.ShopInfoDao;
+import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
+import com.banksoft.XinChengShop.entity.ShopVO;
 import com.banksoft.XinChengShop.model.ShopInfoData;
 import com.banksoft.XinChengShop.model.ShopProductListData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.ShareUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -31,6 +39,20 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
 
     private String shopId;
 
+    private GridView gridView;
+
+    private ImageView headImage;
+    private ImageView logoImage;
+    private TextView headShopName;
+    private Button collect;
+
+    private ImageView share;
+
+
+    private ImageLoader mImageLoadrer;
+
+    private ShopVO shopVO;
+
     @Override
     protected void initContentView() {
         setContentView(R.layout.shop_detail_layout);
@@ -44,14 +66,32 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         shopIntroduction = (TextView) findViewById(R.id.shop_introduction);
         shopLinker = (TextView) findViewById(R.id.shop_linker);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        gridView = (GridView) findViewById(R.id.gridView);
+        share = (ImageView) findViewById(R.id.share);
+
+        headImage = (ImageView) findViewById(R.id.image);
+        logoImage = (ImageView) findViewById(R.id.logo);
+        headShopName = (TextView) findViewById(R.id.name);
+        collect = (Button) findViewById(R.id.collect_btn);
+        shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
     }
 
     @Override
     protected void initData() {
+        share.setVisibility(View.VISIBLE);
+        mImageLoadrer = ImageLoader.getInstance();
+        mImageLoadrer.init(ImageLoaderConfiguration.createDefault(mContext));
+
+
         shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         title.setText(R.string.shop_info_title);
+        shopLinker.setOnClickListener(this);
+        shopIntroduction.setOnClickListener(this);
+        shopCategory.setOnClickListener(this);
+        share.setOnClickListener(this);
+
     }
 
     @Override
@@ -59,6 +99,7 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         if(shopInfoDao == null){
             shopInfoDao = new ShopInfoDao(mContext);
         }
+        new MyTask().execute(shopInfoDao);
     }
 
     @Override
@@ -66,6 +107,18 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.title_back_button:
                 finish();
+                break;
+            case R.id.shop_category:
+                Intent categoryIntent = new Intent(mContext,ShopCategoryActivity.class);
+                startActivity(categoryIntent);
+                break;
+            case R.id.shop_linker:
+                break;
+            case R.id.shop_introduction:
+
+                break;
+            case R.id.share:
+                ShareUtil.shareMsg(this,getText(R.string.app_name).toString(),shopVO.getName(),shopVO.getDescription(),0);
                 break;
         }
     }
@@ -76,6 +129,7 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            mProgressBar.setVisibility(View.VISIBLE);
             if(dataMap == null){
                 dataMap = new LinkedHashMap();
             }
@@ -97,7 +151,9 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
             ShopInfoData shopInfoData = (ShopInfoData) dataMap.get(MapFlag.DATA_1);
             if(dataMap != null){
                 if(shopProductListData.isSuccess() && shopInfoData.isSuccess()){
-
+                    shopVO = shopInfoData.getData();
+                    showHeadView(shopVO);
+                    showProductView(shopProductListData);
                 }else{
                     alert(R.string.net_is_weak);
                 }
@@ -105,6 +161,20 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
                 alert(R.string.net_error);
             }
         }
+    }
+
+    private void showProductView(ShopProductListData shopProductListData){
+        if(shopDetailAdapter == null){
+            shopDetailAdapter = new ShopDetailAdapter(mContext,shopProductListData.getData().getList());
+        }
+        gridView.setAdapter(shopDetailAdapter);
+    }
+
+    private void showHeadView(ShopVO shopVO){
+        mImageLoadrer.displayImage(ControlUrl.BASE_URL+shopVO.getBanner(),headImage,XCApplication.options);
+        mImageLoadrer.displayImage(ControlUrl.BASE_URL+shopVO.getLogo(),logoImage, XCApplication.options);
+        headShopName.setText(shopVO.getName());
+        collect.setOnClickListener(this);
     }
 
 }

@@ -63,6 +63,7 @@
                               android:paddingLeft="10.0dp"
                               android:text="@string/order_remark"/>
                     <com.banksoft.XinChengShop.widget.ClearEditText
+                            android:id="@id/remark"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -73,6 +74,7 @@
                 <LinearLayout android:id="@id/remark_layout"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
+                              android:visibility="gone"
                               android:gravity="center_vertical"
                               android:orientation="horizontal">
                     <TextView android:layout_width="match_parent"
@@ -91,7 +93,7 @@
                             android:background="@drawable/switch_bg"/>
                 </LinearLayout>
                 <View style="@style/line1"/>
-                <RadioGroup android:id="@id/remark_layout"
+                <RadioGroup android:id="@id/radio_group"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_50"
                             android:gravity="center_vertical"

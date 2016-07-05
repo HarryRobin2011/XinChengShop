@@ -106,7 +106,9 @@
         <activity android:name=".ui.OrderInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.SelectGoodsCategoryActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.ShopListActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.takeout.TakeMenuSubmitOrderAcvitity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.takeout.TakeMenuSubmitOrderAcvitity" android:screenOrientation="portrait" android:noHistory="true"/>
+        <activity android:name=".ui.ShopCategoryActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ShopDetailActivity" android:screenOrientation="portrait"/>
         <!--   <activity
                 android:name="com.tencent.open.yyb.AppbarActivity"
                 android:configChanges="orientation|keyboardHidden"

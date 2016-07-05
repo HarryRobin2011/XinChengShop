@@ -72,7 +72,7 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
     private LinearLayout detailLayout;
     private ProgressBar mProgressBar;
 
-    private long takeOutTime;
+    private long takeOutTime = 0;
 
     private HashMap<String, HashMap<String, Object>> cartMap;
     private String shopName;
@@ -82,6 +82,11 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
     private String shopId;
 
     private MyProgressDialog myProgressDialog;
+
+    private RadioGroup radioGroup;
+
+    private boolean isDirver = true;
+    private Button pay;
 
 
     @Override
@@ -107,7 +112,12 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         detailLayout = (LinearLayout) findViewById(R.id.detail_layout);
         detailAddressLayout = (LinearLayout) findViewById(R.id.address_detail_layout);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        pay = (Button) findViewById(R.id.pay);
     }
+
+
 
     @Override
     protected void initData() {
@@ -161,12 +171,27 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
         addAddress.setOnClickListener(this);
         time.setOnClickListener(this);
         myGridView.setAdapter(takeOutSubmitProductAdapter);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.to_door_delivery){
+                    isDirver = true;//送货上门
+                }else if(checkedId == R.id.to_he_shop){
+                    isDirver = false;//到店消费
+                }
+            }
+        });
+        pay.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
        switch (v.getId()){
-           case R.id.submit_order:
+           case R.id.pay:
+               if(takeMenuSubmitOrderDao == null){
+                   takeMenuSubmitOrderDao = new TakeMenuSubmitOrderDao(mContext);
+               }
+               new MyTask().execute(takeMenuSubmitOrderDao);
 
                break;
            case R.id.title_back_button:
@@ -203,7 +228,7 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
 
         @Override
         protected MemberAddressVOData doInBackground(TakeMenuSubmitOrderDao... params) {
-            return params[0].getMemberAddressData(member.getMember().getId(), false);
+            return params[0].getMemberAddressData(member.getMember().getId(), true);
         }
 
         @Override
@@ -325,24 +350,33 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
              int num = (int) cartMap.get(cartMap.keySet().toArray()[position]).get(MapFlag.NUM);
                 ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
                 shoppingCartVO.setShopNo(shopProductListVO.getShopNO());
-                shoppingCartVO.setShopId(shoppingCartVO.getShopId());
-                shoppingCartVO.setActive(shoppingCartVO.getActive());
-                shoppingCartVO.setProductId(shoppingCartVO.getId());
+                shoppingCartVO.setShopId(shopProductListVO.getShopId());
+                shoppingCartVO.setActive(shopProductListVO.getActive());
+                shoppingCartVO.setProductId(shopProductListVO.getId());
                 shoppingCartVO.setProductName(shopProductListVO.getName());
                 shoppingCartVO.setImageFile(shopProductListVO.getIcon());
                 shoppingCartVO.setPrice(Float.valueOf(shopProductListVO.getPrice()));
-            shoppingCartVO.setGoodsNum(num);
+                shoppingCartVO.setGoodsNum(num);
                 BigDecimal totalDecimal = new BigDecimal(shopProductListVO.getPrice());
                 Float totalFloat = totalDecimal.multiply(new BigDecimal(num)).floatValue();
                 shoppingCartVO.setTotal(totalFloat);
                 shoppingCartVOLinkedList.add(shoppingCartVO);
         }
-        submitOrder.setRemark(remark.toString());
+        if(isDirver){
+            submitOrder.setExpress("1");
+        }else{
+            submitOrder.setExpress("0");
+        }
+
+        submitOrder.setRemark(remark.getText().toString());
         submitOrder.setList(shoppingCartVOLinkedList);
         submitOrder.setShopType(ShopType.SHOP_SERVER.name());
         submitOrder.setOrderType(OrderType.SERVER.name());
         submitOrder.setMemberId(member.getMember().getId());
         submitOrder.setShopId(shopId);
+        submitOrder.setOrderTable("");
+        submitOrder.setOrderTime(String.valueOf(takeOutTime));
+        submitOrder.setTelephone(defaultMemberAddressVo.getTelephone());
 
         return submitOrder;
     }

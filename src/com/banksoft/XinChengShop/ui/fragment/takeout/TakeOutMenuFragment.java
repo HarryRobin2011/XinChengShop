@@ -159,9 +159,14 @@ public class TakeOutMenuFragment extends XCBaseFragment implements AdapterView.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submit_order:
-                Intent intent = new Intent(mContext, TakeMenuSubmitOrderAcvitity.class);
-                intent.putExtra(IntentFlag.DATA_MAP,cartMap);
-                startActivity(intent);
+                if(cartMap.keySet().size() > 0){
+                    Intent intent = new Intent(mContext, TakeMenuSubmitOrderAcvitity.class);
+                    intent.putExtra(IntentFlag.DATA_MAP,cartMap);
+                    startActivity(intent);
+                }else{
+                    alert(R.string.cart_no_empty);
+                }
+
                 break;
         }
     }

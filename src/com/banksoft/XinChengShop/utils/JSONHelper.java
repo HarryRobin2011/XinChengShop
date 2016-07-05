@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.utils;
 
 
 import com.banksoft.XinChengShop.entity.ShopLocalType;
+import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -61,6 +62,7 @@ public class JSONHelper {
     public static final Type WEI_XIN_RESPONSE = new TypeToken<PayReqData>(){}.getType();
     public static final Type EXPRESS_SHOP_MODEL_DATA = new TypeToken<ExpressModelBOData>(){}.getType();
     public static final Type INFO_HASH_MAP = new TypeToken<InfoHashMap>(){}.getType();
+    public static final Type SHOP_PRODUCT_TYPE_DATA = new TypeToken<ShopProductTypeBO>(){}.getType();
 
 
     public static String toJSONString(Object o){

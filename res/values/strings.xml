@@ -587,5 +587,6 @@
     <string name="shop_linker">联系卖家</string>
     <string name="shop_info_title">店铺详情</string>
     <string name="please_select_take_time">请选择收货时间</string>
+    <string name="cart_no_empty">购物车不能为空</string>
 
 </resources>

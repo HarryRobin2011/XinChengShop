@@ -228,8 +228,8 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
 
                 break;
             case R.id.shop:
-                Intent shopIntent = new Intent(mContext, ShopInfoActivity.class);
-                shopIntent.putExtra(IntentFlag.SHOP_ID, productVO.getShopId());
+                Intent shopIntent = new Intent(mContext, ShopDetailActivity.class);
+                shopIntent.putExtra(IntentFlag.SHOP_ID,shopID);
                 startActivity(shopIntent);
                 break;
             case R.id.shopping_car_layout:

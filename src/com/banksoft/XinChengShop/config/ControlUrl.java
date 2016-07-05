@@ -61,6 +61,7 @@ public class ControlUrl {
 
     public static final String  XC_SCORE_LIST_URL = "/app/memberScore";// 会员积分
     public static final String XC_SHOP_GOODS_LIST_URL = "/app/_shopProduct";//店铺商品列表
+    public static final String XC_SHOP_GOODS_TYPE_URL = "/app/shopProductType_list";//店铺商品分类
     public static final String XC_SHOP_CHECK_CODE_URL = "/app/shopOrder_checkCode";//到店消费验证
     public static final String SHOP_SUBMIT_GOODS = "/app/shopProduct_save";//商品发布
     public static final String XC_ARTICLE_LIST_URL = "/app/_article";//通知公告
