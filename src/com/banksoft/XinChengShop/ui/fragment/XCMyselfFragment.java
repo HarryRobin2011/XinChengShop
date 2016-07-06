@@ -339,6 +339,9 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     Intent loginIntennt = new Intent(mContext, LoginActivity.class);
                     startActivityForResult(loginIntennt, Activity.RESULT_FIRST_USER);
                 }
+                break;
+            case R.id.setting:
+                Intent settingIntent = new Intent(mContext,SettingActivity.class);
 
 
                 break;

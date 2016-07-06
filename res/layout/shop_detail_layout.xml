@@ -4,70 +4,74 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <include layout="@layout/title"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
-        <include layout="@layout/shop_detail_head_layout"/>
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:layout_weight="1">
-            <GridView
-                    android:id="@id/gridView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:numColumns="2"
-                    android:cacheColorHint="@color/transparent"/>
-            <ProgressBar
-                    android:id="@id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:indeterminateDrawable="@drawable/my_progress_bg"/>
-
-        </FrameLayout>
-
-        <View style="@style/line1"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                  android:layout_weight="1">
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="@dimen/height_50"
-                      android:orientation="horizontal"
-                      android:background="@color/white">
-            <TextView
-                    android:id="@id/shop_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50"
-                    style="@style/text_style_3"
-                    android:background="@drawable/button_white_bg"
-                    android:gravity="center"
-                    android:text="@string/shop_product_category"
-                    android:layout_weight="1"/>
-            <View android:layout_width="0.1dp"
-                  android:layout_height="match_parent"
-                  android:background="@color/line_dark"/>
-            <TextView
-                    android:id="@id/shop_introduction"
-                    android:layout_width="match_parent"
-                    style="@style/text_style_3"
-                    android:layout_height="@dimen/height_50"
-                    android:gravity="center"
-                    android:text="@string/shop_introduction"
-                    android:visibility="gone"
-                    android:background="@drawable/button_white_bg"
-                    android:layout_weight="1"/>
-            <View android:layout_width="0.1dp"
-                  android:layout_height="match_parent"
-                  android:background="@color/line_dark"/>
-            <TextView
-                    android:id="@id/shop_linker"
-                    android:layout_width="match_parent"
-                    style="@style/text_style_3"
-                    android:text="@string/shop_linker"
-                    android:layout_height="@dimen/height_50"
-                    android:gravity="center"
-                    android:background="@drawable/button_white_bg"
-                    android:layout_weight="1"/>
-        </LinearLayout>
-    </LinearLayout>
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <include layout="@layout/shop_detail_head_layout"/>
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1">
+                <com.banksoft.XinChengShop.widget.MyGridView
+                        android:id="@id/gridView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="2"
+                        android:cacheColorHint="@color/transparent"/>
+                <ProgressBar
+                        android:id="@id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:indeterminateDrawable="@drawable/my_progress_bg"/>
 
+            </FrameLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View style="@style/line1"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal"
+                  android:background="@color/white">
+        <TextView
+                android:id="@id/shop_category"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                style="@style/text_style_3"
+                android:background="@drawable/button_white_bg"
+                android:gravity="center"
+                android:text="@string/shop_product_category"
+                android:layout_weight="1"/>
+        <View android:layout_width="0.1dp"
+              android:layout_height="match_parent"
+              android:background="@color/line_dark"/>
+        <TextView
+                android:id="@id/shop_introduction"
+                android:layout_width="match_parent"
+                style="@style/text_style_3"
+                android:layout_height="@dimen/height_50"
+                android:gravity="center"
+                android:text="@string/shop_introduction"
+                android:visibility="gone"
+                android:background="@drawable/button_white_bg"
+                android:layout_weight="1"/>
+        <View android:layout_width="0.1dp"
+              android:layout_height="match_parent"
+              android:background="@color/line_dark"/>
+        <TextView
+                android:id="@id/shop_linker"
+                android:layout_width="match_parent"
+                style="@style/text_style_3"
+                android:text="@string/shop_linker"
+                android:layout_height="@dimen/height_50"
+                android:gravity="center"
+                android:background="@drawable/button_white_bg"
+                android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>

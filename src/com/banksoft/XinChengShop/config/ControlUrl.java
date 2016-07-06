@@ -91,5 +91,13 @@ public class ControlUrl {
 
     public static final String SHOP_EXPRESS_MODEL_URL = "/app/_shopExpress";//店铺运费模板
 
+    public static final String UPDATE_MEMBER_PASSWORD_URL = "/app/memberInfo_updatePassword";// 修改登录密码
+
+    public static final String UPDATE_MEMBER_PAY_PASSWORD_URL = "/app/memberInfo_updatePayPassword";//更新支付密码
+
+    public static final String UPDATE_MEMBER_TELEPHONE_URL = "/app/memberInfo_step1";//修改手机号
+
+    public static final String BIND_MEMBER_TELEPHONE_URL = "/app/memberInfo_step2";//绑定手机号
+
 
 }

@@ -513,4 +513,15 @@
     <item name="radio_group" type="id">radioGroup</item>
     <item name="logo" type="id">logo</item>
     <item name="share" type="id">share</item>
+    <item name="setting" type="id">setting</item>
+    <item name="check_login_password" type="id">check_login_password</item>
+    <item name="check_pay_password" type="id">check_pay_password</item>
+    <item name="check_telphone" type="id">check_telphone</item>
+    <item name="check_email" type="id">check_email</item>
+    <item name="member_account" type="id">member_account</item>
+    <item name="new_password" type="id">new_password</item>
+    <item name="old_password" type="id">old_password</item>
+    <item name="next" type="id">next</item>
+    <item name="email_new" type="id">email_new</item>
+    <item name="email_old" type="id">email_old</item>
 </resources>

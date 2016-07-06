@@ -14,10 +14,7 @@ import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.ProductStandardGridAdapter;
-import com.banksoft.XinChengShop.config.ControlUrl;
-import com.banksoft.XinChengShop.config.IntentFlag;
-import com.banksoft.XinChengShop.config.MapFlag;
-import com.banksoft.XinChengShop.config.SharedPreTag;
+import com.banksoft.XinChengShop.config.*;
 import com.banksoft.XinChengShop.dao.ShopProductInfoDao;
 import com.banksoft.XinChengShop.entity.*;
 import com.banksoft.XinChengShop.http.HttpUtils;
@@ -27,6 +24,7 @@ import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.utils.PopupWindowUtil;
+import com.banksoft.XinChengShop.utils.ShareUtil;
 import com.banksoft.XinChengShop.widget.MyGridView;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.banksoft.XinChengShop.widget.MyWebView;
@@ -80,6 +78,8 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
 
     private ShopInfoEntity shopInfoEntity;
 
+    private ImageView share;
+
 
     @Override
     protected void initContentView() {
@@ -105,6 +105,7 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         nullPagerLayout = (FrameLayout) findViewById(R.id.null_pager);
         toolLayout = (LinearLayout) findViewById(R.id.tool_layout);
         back = (ImageView) findViewById(R.id.title_back_button);
+        share = (ImageView) findViewById(R.id.share);
     }
 
     @SuppressLint("JavascriptInterface")
@@ -136,6 +137,12 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 mProgressLoadingBar.setProgress(newProgress);
                 if (newProgress == 100) {
                     mProgressLoadingBar.setVisibility(View.GONE);
+                    if(shopProductInfoData != null){
+
+                        String describe = Config.DEFAULT_HTML_FORMAT.replace("<HarryRobin>",shopProductInfoData.getData().getDescription());
+                        String iamgeDescribe = describe.replace("/upload/",ControlUrl.BASE_URL+"/upload/");
+                        shopProductInfoData.getData().setDescription(iamgeDescribe);
+                    }
                     myWebView.loadUrl("javascript:getDetailData(" + JSONHelper.toJSONString(shopProductInfoData.getData()) + ")");
                 }
                 super.onProgressChanged(view, newProgress);
@@ -146,6 +153,8 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         collectImage.setOnClickListener(this);
         shopCart.setOnClickListener(this);
         addShopCart.setOnClickListener(this);
+        share.setVisibility(View.VISIBLE);
+        share.setOnClickListener(this);
     }
 
     private class ShopInfoEntity {
@@ -229,7 +238,7 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 break;
             case R.id.shop:
                 Intent shopIntent = new Intent(mContext, ShopDetailActivity.class);
-                shopIntent.putExtra(IntentFlag.SHOP_ID,shopID);
+                shopIntent.putExtra(IntentFlag.SHOP_ID,productVO.getShopId());
                 startActivity(shopIntent);
                 break;
             case R.id.shopping_car_layout:
@@ -238,6 +247,9 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 break;
             case R.id.title_back_button:
                 finish();
+                break;
+            case R.id.share:
+                ShareUtil.shareMsg(this,getText(R.string.share).toString(),productVO.getName(),productVO.getDescription(),0);
                 break;
         }
     }

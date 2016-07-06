@@ -18,7 +18,9 @@ import com.banksoft.XinChengShop.entity.ShopVO;
 import com.banksoft.XinChengShop.model.ShopInfoData;
 import com.banksoft.XinChengShop.model.ShopProductListData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.ShareUtil;
+import com.banksoft.XinChengShop.widget.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -39,7 +41,7 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
 
     private String shopId;
 
-    private GridView gridView;
+    private MyGridView gridView;
 
     private ImageView headImage;
     private ImageView logoImage;
@@ -66,14 +68,13 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         shopIntroduction = (TextView) findViewById(R.id.shop_introduction);
         shopLinker = (TextView) findViewById(R.id.shop_linker);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        gridView = (GridView) findViewById(R.id.gridView);
+        gridView = (MyGridView) findViewById(R.id.gridView);
         share = (ImageView) findViewById(R.id.share);
 
         headImage = (ImageView) findViewById(R.id.image);
         logoImage = (ImageView) findViewById(R.id.logo);
         headShopName = (TextView) findViewById(R.id.name);
         collect = (Button) findViewById(R.id.collect_btn);
-        shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
     }
 
     @Override
@@ -81,7 +82,6 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         share.setVisibility(View.VISIBLE);
         mImageLoadrer = ImageLoader.getInstance();
         mImageLoadrer.init(ImageLoaderConfiguration.createDefault(mContext));
-
 
         shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
         back.setVisibility(View.VISIBLE);
@@ -110,9 +110,13 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
                 break;
             case R.id.shop_category:
                 Intent categoryIntent = new Intent(mContext,ShopCategoryActivity.class);
+                categoryIntent.putExtra(IntentFlag.SHOP_ID,shopId);
                 startActivity(categoryIntent);
                 break;
             case R.id.shop_linker:
+                if(shopVO != null){
+                    CommonUtil.openQQ(mContext, shopVO.getQq());
+                }
                 break;
             case R.id.shop_introduction:
 
@@ -147,6 +151,7 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(HashMap dataMap) {
             super.onPostExecute(dataMap);
+            mProgressBar.setVisibility(View.GONE);
             ShopProductListData shopProductListData = (ShopProductListData) dataMap.get(MapFlag.DATA_0);
             ShopInfoData shopInfoData = (ShopInfoData) dataMap.get(MapFlag.DATA_1);
             if(dataMap != null){

@@ -588,5 +588,27 @@
     <string name="shop_info_title">店铺详情</string>
     <string name="please_select_take_time">请选择收货时间</string>
     <string name="cart_no_empty">购物车不能为空</string>
+    <string name="setting">设置</string>
+    <string name="check_password">修改登录密码</string>
+    <string name="check_pay_password">修改支付密码</string>
+    <string name="check_telphone">修改手机号</string>
+    <string name="check_email">修改邮箱</string>
+    <string name="quit_login">退出登录</string>
+    <string name="member_accout">会员账号：</string>
+    <string name="old_password">旧密码：</string>
+    <string name="new_password">新密码：</string>
+    <string name="update_login_password">修改登录密码</string>
+    <string name="new_password_no_empty">新密码不能为空</string>
+    <string name="old_password_no_empty">请输入原密码</string>
+    <string name="old_telephone_number">原手机号：</string>
+    <string name="achieve_check_code">获取验证码</string>
+    <string name="next">下一步</string>
+    <string name="update_pay_password">修改支付密码</string>
+    <string name="telephone_number">手机号</string>
+    <string name="bind_telephone_title">绑定手机号</string>
+    <string name="un_bind_success">解绑成功，请绑定新的手机号</string>
+    <string name="old_email">原邮箱</string>
+    <string name="member_new_email">新邮箱</string>
+    <string name="update_email_title">修改邮箱</string>
 
 </resources>

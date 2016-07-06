@@ -32,6 +32,8 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
 
     private TextView title;
     private LinearLayout searchLayout;
+
+    private String shopId;
     @Override
     protected void initContentView() {
         setContentView(R.layout.category_layout);
@@ -52,7 +54,7 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
 
     @Override
     protected void initData() {
-
+      shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
 
         @Override
         protected ShopProductTypeBOData doInBackground(XCShopCategoryDao... params) {
-            return params[0].getProductTypeData(1,"",true);
+            return params[0].getProductTypeData(shopId,1,true);
         }
 
         @Override
@@ -134,7 +136,7 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
 
         @Override
         protected ShopProductTypeBOData doInBackground(XCShopCategoryDao... params) {
-            return params[0].getProductTypeData(2,productTypeVO.getNo(),true);
+            return params[0].getProductTypeData(shopId,2,true);
         }
 
         @Override

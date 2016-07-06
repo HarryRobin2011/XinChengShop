@@ -12,6 +12,7 @@
                android:layout_height="@dimen/height_80"
                android:layout_alignParentBottom="true"
                android:layout_alignParentLeft="true"
+               android:src="@drawable/weixin"
                android:layout_marginLeft="10.0dp"/>
     <TextView android:id="@id/name"
               android:layout_width="@dimen/height_200"
@@ -19,6 +20,7 @@
               android:layout_marginBottom="10.0dp"
               android:paddingLeft="10.0dp"
               style="@style/text_style_3"
+              android:textColor="@color/text_white"
               android:layout_toRightOf="@+id/logo"
               android:layout_alignParentBottom="true"/>
     <Button android:id="@id/collect_btn"

@@ -15,9 +15,9 @@ public class XCShopCategoryDao extends BaseDao{
     public XCShopCategoryDao(Context mContext) {
         super(mContext);
     }
-    public ShopProductTypeBOData getProductTypeData(int grade, String no, boolean cacheFlag){
-        String url = ControlUrl.XC_PRODUCT_TYPE_URL;
-        String params = "no="+no+"&grade="+grade;
+    public ShopProductTypeBOData getProductTypeData(String shopId, int level, boolean cacheFlag){
+        String url = ControlUrl.XC_SHOP_GOODS_TYPE_URL;
+        String params = "shopId="+shopId+"&level="+level;
         ShopProductTypeBOData data = (ShopProductTypeBOData) postHttpRequest(mContext,url,params, JSONHelper.SHOP_PRODUCT_TYPE_DATA,cacheFlag);
         return data;
     }

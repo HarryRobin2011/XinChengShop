@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:layout_marginTop="10.0dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="3"
+                  android:text="@string/old_telephone_number"
+                  android:singleLine="true"
+                  android:layout_marginLeft="10.0dp"
+                  android:gravity="center"
+                  style="@style/text_style_3"/>
+        <com.banksoft.XinChengShop.widget.ClearEditText android:id="@id/telPhone"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_weight="2"
+                                                        android:layout_height="@dimen/height_50"
+                                                        android:layout_marginRight="10.0dp"
+                                                        style="@style/text_style_3"
+                                                        android:inputType="phone"
+                                                        android:background="@drawable/edit_gray_bg"/>
+
+        <Button android:id="@id/send_check_code"
+                android:layout_width="@dimen/height_100"
+                android:layout_height="@dimen/height_50"
+                android:layout_marginRight="10.0dp"
+                android:textColor="@color/text_white"
+                android:gravity="center"
+                android:text="@string/achieve_check_code"
+                android:background="@drawable/click_red_button"/>
+    </LinearLayout>
+
+    <Button android:id="@id/next"
+            android:layout_width="@dimen/height_200"
+            android:layout_height="@dimen/height_50"
+            android:background="@drawable/click_red_button"
+            android:layout_marginTop="@dimen/height_30"
+            android:layout_gravity="right"
+            android:layout_marginRight="10.0dp"
+            android:textColor="@color/text_white"
+            android:text="@string/next"
+            android:layout_marginLeft="10.0dp"/>
+</LinearLayout>

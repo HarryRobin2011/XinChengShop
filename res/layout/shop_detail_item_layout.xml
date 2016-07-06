@@ -3,7 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <ImageView android:layout_width="@dimen/height_120"
+    <ImageView
+            android:id="@id/image"
+            android:layout_width="@dimen/height_120"
                android:layout_height="@dimen/height_120"
                android:layout_gravity="center_horizontal"
                android:scaleType="fitXY"/>

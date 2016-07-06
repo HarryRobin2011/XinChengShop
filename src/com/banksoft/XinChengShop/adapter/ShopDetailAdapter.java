@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
+import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.ShopProductListVO;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -39,7 +40,7 @@ public class ShopDetailAdapter extends BaseMyAdapter {
     @Override
     public BusinessHolder createCellHolder(View cellView) {
         ShopDetailHolder holder = new ShopDetailHolder();
-        holder.imageView = (ImageView) cellView.findViewById(R.id.imageView);
+        holder.imageView = (ImageView) cellView.findViewById(R.id.image);
         holder.name = (TextView) cellView.findViewById(R.id.name);
         holder.price = (TextView) cellView.findViewById(R.id.price);
         holder.num = (TextView) cellView.findViewById(R.id.num);
@@ -50,7 +51,13 @@ public class ShopDetailAdapter extends BaseMyAdapter {
     protected View buildData(int position, View cellView, BusinessHolder cellHolder) {
         ShopProductListVO shopProductListVO = (ShopProductListVO) dataList.get(position);
         ShopDetailHolder holder = (ShopDetailHolder) cellHolder;
-        imageLoader.displayImage(shopProductListVO.getIcon(),holder.imageView, XCApplication.options);
+        String icon = shopProductListVO.getIcon();
+        if("".equals(icon)||icon == null){
+            icon = "";
+        }else{
+            icon = shopProductListVO.getIcon().split("\\|")[0];
+        }
+        imageLoader.displayImage(ControlUrl.BASE_URL+icon,holder.imageView, XCApplication.options);
         holder.name.setText(shopProductListVO.getName());
         holder.price.setText("￥"+shopProductListVO.getPrice());
         holder.num.setText("已售："+shopProductListVO.getSales());
