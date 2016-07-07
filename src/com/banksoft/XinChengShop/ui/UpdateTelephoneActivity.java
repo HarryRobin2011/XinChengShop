@@ -1,5 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -37,6 +38,8 @@ public class UpdateTelephoneActivity extends XCBaseActivity implements View.OnCl
                 sendCheckCode.setText(String.valueOf(seconds));
                 mHandler.sendEmptyMessageDelayed(0,1000);
             }else{
+                mHandler.removeMessages(0);
+                sendCheckCode.setClickable(true);
                 seconds = 60;
                 sendCheckCode.setText(R.string.achieve_check_code);
             }
@@ -51,7 +54,7 @@ public class UpdateTelephoneActivity extends XCBaseActivity implements View.OnCl
     @Override
     protected void initView() {
         title = (TextView) findViewById(R.id.titleText);
-        next = (Button) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.titleRightButton);
         sendCheckCode = (Button) findViewById(R.id.send_check_code);
         telephoneEditText = (ClearEditText) findViewById(R.id.telPhone);
         back = (ImageView) findViewById(R.id.title_back_button);
@@ -73,15 +76,31 @@ public class UpdateTelephoneActivity extends XCBaseActivity implements View.OnCl
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.title_back_button:
                 finish();
                 break;
             case R.id.send_check_code:
+                sendCheckCode.setClickable(false);
                 mHandler.sendEmptyMessageDelayed(0,1000);
                 break;
-            case R.id.next:
+            case R.id.titleRightButton:
+                 if(telephoneEditText.getText().toString() == null || telephoneEditText.getText().toString().isEmpty()){
+                     alert(R.string.telephone_no_empty);
+                     return;
+                 }
                  if(settingDao == null){
                      settingDao = new SettingDao(mContext);
                  }
@@ -111,9 +130,9 @@ public class UpdateTelephoneActivity extends XCBaseActivity implements View.OnCl
             if(isFlagData == null){
                 if(isFlagData.isSuccess()){
                     Intent intent = new Intent(mContext,BindingTelephoneActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                 }else{
-                    alert(R.string.un_bind_success);
+                    alert(isFlagData.getMsg().toString());
                 }
             }else{
                 alert(R.string.net_error);

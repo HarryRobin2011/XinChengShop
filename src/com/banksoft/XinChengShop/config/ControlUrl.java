@@ -68,6 +68,7 @@ public class ControlUrl {
     public static final String DISPATCH_MEMBER_URL = "/app/dispatchMemberApply_find";//获取派单员信息
     public static final String APPLY_DISPATCH_URL = "/app/_dispatchMemberApply";//申请派单员
     public static final String XC_PAY_TO_WEIXIN_URL = "/app/_payToWeixin";//微信流水号
+    public static final String UPDATE_MEMBER_INFO_URL = "/app/memberInfo_updateEmail";//修改电子邮箱
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 
@@ -98,6 +99,10 @@ public class ControlUrl {
     public static final String UPDATE_MEMBER_TELEPHONE_URL = "/app/memberInfo_step1";//修改手机号
 
     public static final String BIND_MEMBER_TELEPHONE_URL = "/app/memberInfo_step2";//绑定手机号
+
+    public static final String XC_PRODUCT_TAKE_OFF_URL = "/app/shopProduct_outStock";//产品下架
+
+    public static final String XC_PRODUCT_TAKE_ON_URL = "/app/shopProduct_inStock";//产品上架
 
 
 }

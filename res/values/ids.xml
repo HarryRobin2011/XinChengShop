@@ -524,4 +524,6 @@
     <item name="next" type="id">next</item>
     <item name="email_new" type="id">email_new</item>
     <item name="email_old" type="id">email_old</item>
+    <item name="take_off" type="id">take_off</item>
+    <item name="take_operation" type="id">take_operation</item>
 </resources>

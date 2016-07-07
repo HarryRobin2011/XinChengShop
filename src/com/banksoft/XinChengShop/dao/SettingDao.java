@@ -6,9 +6,12 @@ import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.entity.Member;
 import com.banksoft.XinChengShop.entity.MemberVO;
 import com.banksoft.XinChengShop.model.IsFlagData;
+import com.banksoft.XinChengShop.model.MemberInfoData;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.utils.MD5Factory;
+
+import static android.R.attr.id;
 
 /**
  * Created by admin on 2016/7/6.
@@ -29,7 +32,7 @@ public class SettingDao extends BaseDao{
      */
     public MemberVOData updateMemberLoginPassword(String memberID,String account,String oldPassword,String newPassword){
         String url = ControlUrl.UPDATE_MEMBER_PASSWORD_URL;
-        String params = "memberId="+memberID+"&account="+account+"&password="+ MD5Factory.encoding(newPassword)+"&oldPassword="+oldPassword;
+        String params = "memberId="+memberID+"&account="+account+"&password="+ MD5Factory.encoding(newPassword)+"&oldPassword="+MD5Factory.encoding(oldPassword);
         MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params, JSONHelper.XC_MEMBER_VO_DATA,false);
         return data;
     }
@@ -44,7 +47,7 @@ public class SettingDao extends BaseDao{
      */
     public MemberVOData updateMemberPayPassword(String memberID,String account,String oldPassword,String newPassword){
         String url = ControlUrl.UPDATE_MEMBER_PAY_PASSWORD_URL;
-        String params = "memberId="+memberID+"&account="+account+"&password="+ MD5Factory.encoding(newPassword)+"&oldPassword="+oldPassword;
+        String params = "memberId="+memberID+"&account="+account+"&password="+ MD5Factory.encoding(newPassword)+"&oldPassword="+MD5Factory.encoding(oldPassword);
         MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params, JSONHelper.XC_MEMBER_VO_DATA,false);
         return data;
     }
@@ -75,5 +78,12 @@ public class SettingDao extends BaseDao{
         IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params, JSONHelper.IS_FLAG_DATA,false);
         return data;
 
+    }
+
+    public MemberInfoData updateMemberInfoEmail(String id,String checkCode,String email){
+        String url = ControlUrl.UPDATE_MEMBER_INFO_URL;
+        String params = "memberId="+id+"&code="+checkCode+"&email="+ email;
+        MemberInfoData data = (MemberInfoData) postHttpRequest(mContext,url,params, JSONHelper.XC_MEMBER_INFO_DATA,false);
+        return data;
     }
 }

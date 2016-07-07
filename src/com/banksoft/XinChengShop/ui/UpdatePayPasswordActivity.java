@@ -1,5 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.SettingDao;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
@@ -38,15 +40,16 @@ public class UpdatePayPasswordActivity extends XCBaseActivity implements View.On
         newPassword = (ClearEditText) findViewById(R.id.new_password);
         back = (ImageView) findViewById(R.id.title_back_button);
         title = (TextView) findViewById(R.id.titleText);
-        update = (Button) findViewById(R.id.update);
+        update = (Button) findViewById(R.id.titleRightButton);
     }
 
     @Override
     protected void initData() {
-        title.setText(R.string.update_login_password);
+        title.setText(R.string.update_pay_password);
         back.setVisibility(View.VISIBLE);
+        update.setVisibility(View.VISIBLE);
+        update.setText(R.string.update);
         memberAccount.setText(member.getMember().getAccount());
-        memberAccount.setEnabled(true);
     }
 
     @Override
@@ -61,15 +64,14 @@ public class UpdatePayPasswordActivity extends XCBaseActivity implements View.On
             case R.id.title_back_button:
                 finish();
                 break;
-            case R.id.update:
+            case R.id.titleRightButton:
                 passwordStr = newPassword.getText().toString();
                 oldPasswordStr = oldPassword.getText().toString();
 
-                if(passwordStr == null && passwordStr.isEmpty()){
+                if(passwordStr == null || passwordStr.isEmpty()){
                     alert(R.string.new_password_no_empty);
                     return;
-                };
-                if(oldPasswordStr == null && oldPasswordStr.isEmpty()){
+                }else if(oldPasswordStr == null || oldPasswordStr.isEmpty()){
                     alert(R.string.old_password_no_empty);
                     return;
                 }
@@ -102,8 +104,14 @@ public class UpdatePayPasswordActivity extends XCBaseActivity implements View.On
             super.onPostExecute(memberVOData);
             progressDialog.dismiss();
             if(memberVOData != null){
-               alert(R.string.update_success);
-                finish();
+                if(memberVOData.isSuccess()){
+                    clearLogin();
+                    setResult(Activity.RESULT_OK);
+                    alert(R.string.update_success_resert_login);
+                    finish();
+                }else{
+                    alert(memberVOData.getMsg().toString());
+                }
             }else{
                 alert(R.string.net_error);
             }

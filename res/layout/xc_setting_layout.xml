@@ -109,15 +109,17 @@
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/height_50"
                   android:gravity="center"
+                  android:layout_marginTop="10.0dp"
                   android:orientation="horizontal">
         <TextView  android:layout_width="match_parent"
                   android:layout_height="@dimen/height_50"
                   android:text="@string/quit_login"
                   android:paddingLeft="10.0dp"
+                   android:textColor="@color/red_normal"
+                   android:gravity="center"
                   android:background="@drawable/button_white_bg"
                   android:layout_weight="1"
                   style="@style/text_style_3"/>
     </LinearLayout>
 
-    <View style="@style/line1"/>
 </LinearLayout>

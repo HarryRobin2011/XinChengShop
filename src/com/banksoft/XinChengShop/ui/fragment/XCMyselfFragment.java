@@ -28,7 +28,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class XCMyselfFragment extends XCBaseFragment implements View.OnClickListener {
     public CustomShapeImageView login;
     private TextView account, myCollectProduct, myCollectShop,myWallet,blance,integral;
-    private LinearLayout myOrder, myComment, myShop, mySendOrder, myIntegralMall,myScoreOrder,checkUpdata,about,sellerOrder,saleCheck,myProductManager,dispatch_manager;
+    private LinearLayout myOrder, myComment, myShop, mySendOrder, myIntegralMall,myScoreOrder,checkUpdata,settings,sellerOrder,saleCheck,myProductManager,dispatch_manager;
     private LinearLayout shop_layout;
     private Button rigjtBtn;
     private ImageLoader mImageLoader;
@@ -113,7 +113,7 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
         searchLayout = (LinearLayout) getActivity().findViewById(R.id.search_layout);
         rigjtBtn = (Button) getActivity().findViewById(R.id.titleRightButton);
         checkUpdata = (LinearLayout) view.findViewById(R.id.check_update);
-        about = (LinearLayout) view.findViewById(R.id.about);
+        settings = (LinearLayout) view.findViewById(R.id.setting);
         shop_layout = (LinearLayout) view.findViewById(R.id.shop_layout);
         sellerOrder = (LinearLayout) view.findViewById(R.id.seller_order_layout);
         saleCheck = (LinearLayout) view.findViewById(R.id.consumption_layout);
@@ -153,7 +153,7 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
         integral.setOnClickListener(this);
         myScoreOrder.setOnClickListener(this);
         checkUpdata.setOnClickListener(this);
-        about.setOnClickListener(this);
+        settings.setOnClickListener(this);
         sellerOrder.setOnClickListener(this);
         saleCheck.setOnClickListener(this);
         myProductManager.setOnClickListener(this);
@@ -322,14 +322,13 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                 break;
             case R.id.my_product_manager://产品管理
                 if(activity.isLogin()){
-                    Intent dispatchIntent = new Intent(mContext,DispatchOrderManagerActivity.class);
-                    startActivity(dispatchIntent);
+                    Intent productIntent = new Intent(mContext,ProductManagerListActivity.class);
+                    startActivity(productIntent);
                 }else{
                     Intent loginIntennt = new Intent(mContext, LoginActivity.class);
                     startActivityForResult(loginIntennt, Activity.RESULT_FIRST_USER);
                 }
-                 Intent productIntent = new Intent(mContext,ProductManagerListActivity.class);
-                 startActivity(productIntent);
+
                 break;
             case R.id.dispatch_manager://抢单管理
                 if(activity.isLogin()){
@@ -341,9 +340,13 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                 }
                 break;
             case R.id.setting:
-                Intent settingIntent = new Intent(mContext,SettingActivity.class);
-
-
+                if(!activity.isLogin()){
+                    Intent loginIntent = new Intent(mContext,LoginActivity.class);
+                    startActivityForResult(loginIntent,Activity.RESULT_FIRST_USER);
+                }else{
+                    Intent settingIntent = new Intent(mContext,SettingActivity.class);
+                    startActivityForResult(settingIntent,Activity.RESULT_FIRST_USER);
+                }
                 break;
 
 

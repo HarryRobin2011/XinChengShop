@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.SettingDao;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
@@ -36,12 +39,26 @@ public class BindingTelephoneActivity extends XCBaseActivity implements View.OnC
         telephone = (ClearEditText) findViewById(R.id.telPhone);
         checkCode = (ClearEditText) findViewById(R.id.check_code);
         sendCheckCode = (Button) findViewById(R.id.send_check_code);
-        update = (Button) findViewById(R.id.update);
+        update = (Button) findViewById(R.id.titleRightButton);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }
     }
 
     @Override
     protected void initData() {
         title.setText(R.string.bind_telephone_title);
+        update.setVisibility(View.VISIBLE);
+        update.setText(R.string.ok);
+        update.setOnClickListener(this);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
     }
@@ -58,9 +75,17 @@ public class BindingTelephoneActivity extends XCBaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.send_check_code:
-
+                telephoneStr = telephone.getText().toString();
+                if(telephoneStr == null || !telephoneStr.isEmpty()){
+                    alert(R.string.telephone_no_empty);
+                    return;
+                }
+                if(settingDao == null){
+                    settingDao = new SettingDao(mContext);
+                }
+                new MyTask().execute(settingDao);
                 break;
-            case R.id.update:
+            case R.id.titleRightButton:
 
                 break;
         }
@@ -85,8 +110,11 @@ public class BindingTelephoneActivity extends XCBaseActivity implements View.OnC
             myProgressDialog.dismiss();
             if(isFlagData == null){
                 if(isFlagData.isSuccess()){
+                    setResult(Activity.RESULT_OK);
+                    clearLogin();
+                    CommonUtil.operationKeyboard(mContext);
                     finish();
-                    alert(R.string.update_success);
+                    alert(R.string.update_success_resert);
                 }else{
                     alert(isFlagData.getMsg().toString());
                 }

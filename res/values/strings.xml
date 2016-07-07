@@ -610,5 +610,10 @@
     <string name="old_email">原邮箱</string>
     <string name="member_new_email">新邮箱</string>
     <string name="update_email_title">修改邮箱</string>
+    <string name="update_success_resert_login">密码修改成功，请重新登录~</string>
+    <string name="update_success_resert">修改成功，请重新登录~</string>
+    <string name="take_off">下架</string>
+    <string name="operation_success">操作成功</string>
+    <string name="take_on">上架</string>
 
 </resources>
