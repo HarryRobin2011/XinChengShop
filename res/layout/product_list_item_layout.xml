@@ -47,6 +47,7 @@
                           android:layout_height="match_parent"
                           android:gravity="center"
                           style="@style/text_style_3"
+                          android:visibility="gone"
                           android:layout_marginLeft="10.0dp"
                           android:background="@drawable/edit_text_bg"/>
             </LinearLayout>

@@ -62,6 +62,7 @@ public class ProductManagerListAdapter extends BaseMyAdapter {
         holder.name.setText(shopProductListVO.getName());
         holder.saleNum.setText("已销售："+String.valueOf(shopProductListVO.getSales()));
         holder.discountPrice.setText(shopProductListVO.getPrice() + "元");
+        holder.takeOperation.setVisibility(View.VISIBLE);
         if(ProductManagerListFragment.Type.PUTAWAY.equals(type)){
             holder.takeOperation.setText(R.string.take_off);
         }else{

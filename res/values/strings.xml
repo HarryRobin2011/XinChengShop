@@ -382,7 +382,7 @@
     <string name="refund">申请退款</string>
     <string name="return_the_goods">申请退货</string>
     <string name="delivery">发货</string>
-    <string name="comments">评论</string>
+    <string name="comments">评价</string>
     <string name="my_collect_product">收藏的商品</string>
     <string name="collect">收藏</string>
     <string name="all_comment">全部评论</string>
@@ -615,5 +615,8 @@
     <string name="take_off">下架</string>
     <string name="operation_success">操作成功</string>
     <string name="take_on">上架</string>
+    <string name="order_cancel">取消订单</string>
+    <string name="payment">付款</string>
+    <string name="order_cancel_success">订单取消成功</string>
 
 </resources>

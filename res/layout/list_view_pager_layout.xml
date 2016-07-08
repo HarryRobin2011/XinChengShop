@@ -6,13 +6,15 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/body_bg">
-    <include layout="@layout/view_pager_title_layout"/>
+    <include layout="@layout/title"/>
+    <View style="@style/line1"/>
     <com.banksoft.XinChengShop.widget.viewpagerindicator.TabPageIndicator
             android:id="@id/tab_page_indicator"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/title_back_button"
+            android:background="@color/white"
             android:layout_alignParentBottom="true"/>
 
     <android.support.v4.view.ViewPager android:id="@id/viewPager"

@@ -37,10 +37,11 @@ public class OrderLisAdapter extends BaseMyAdapter {
 
         TextView delivery; // 同意退货后发货
         TextView confirm;//确认收货
-        TextView refund;//申请退款
-        TextView return_the_goods;//申请退货
         TextView cancel;//取消订单
         TextView comments;//评论 如果已评论 就是追加评论
+        TextView pay;// 订单创建未付款
+        TextView returnGoods;//申请退货
+        TextView refund;// 申请退款
         private LinearLayout productContent;
         private LinearLayout toolLayout;
 
@@ -60,12 +61,11 @@ public class OrderLisAdapter extends BaseMyAdapter {
         orderSaleHolder.toolLayout = (LinearLayout) cellView.findViewById(R.id.layout_tool);
         orderSaleHolder.delivery = (TextView) cellView.findViewById(R.id.delivery);
         orderSaleHolder.confirm = (TextView) cellView.findViewById(R.id.confirm);
-        orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
         orderSaleHolder.cancel = (TextView) cellView.findViewById(R.id.cancel);
         orderSaleHolder.comments = (TextView) cellView.findViewById(R.id.comments);
-        orderSaleHolder.return_the_goods = (TextView) cellView.findViewById(R.id.return_the_goods);
-
-
+        orderSaleHolder.pay = (TextView) cellView.findViewById(R.id.pay);
+        orderSaleHolder.returnGoods = (TextView) cellView.findViewById(R.id.return_the_goods);
+        orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
         return orderSaleHolder;
     }
 
@@ -115,37 +115,41 @@ public class OrderLisAdapter extends BaseMyAdapter {
      * @return
      */
     private OrderStatus filterOrder(String orderStatus,OrderSaleHolder orderSaleHolder) {
-        if (OrderStatus.CREATE.name().equals(orderStatus)) {
+        if (OrderStatus.CREATE.name().equals(orderStatus)) {// 待付款
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.VISIBLE);
             orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.return_the_goods.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.VISIBLE);
+            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             return OrderStatus.CREATE;
-        } else if (OrderStatus.PAY.name().equals(orderStatus)) {
+        } else if (OrderStatus.PAY.name().equals(orderStatus)) {//待发货
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.VISIBLE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.return_the_goods.setVisibility(View.GONE);
+            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
             return OrderStatus.PAY;
-        } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {
+        } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {//待确认收货
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.VISIBLE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.returnGoods.setVisibility(View.VISIBLE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.return_the_goods.setVisibility(View.VISIBLE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
             return OrderStatus.DISPATCH;
-        } else if (OrderStatus.SUCCESS.name().equals(orderStatus)) {
+        } else if (OrderStatus.SUCCESS.name().equals(orderStatus)) {//待评价
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
-            orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.return_the_goods.setVisibility(View.VISIBLE);
+            orderSaleHolder.comments.setVisibility(View.VISIBLE);
+            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
             return OrderStatus.SUCCESS;
         } else if (OrderStatus.OVER.name().equals(orderStatus)) {
             return OrderStatus.OVER;

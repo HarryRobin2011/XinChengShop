@@ -105,4 +105,19 @@ public class ControlUrl {
     public static final String XC_PRODUCT_TAKE_ON_URL = "/app/shopProduct_inStock";//产品上架
 
 
+    public static final String XC_ORDER_CANCEL_URL = "/app/memberOrder_cancelOrder";//取消订单
+
+    public static final String XC_ORDER_CONFIRM_GOODS_URL = "/app/memberOrder_overOrder";//确认收货
+
+    public static final String XC_ORDER_COMMENT_URL = "/app/memberOrder_assess";//订单评论
+
+    public static final String XC_ORDER_UN_DISPATCH_RETURN_MONEY_URL = "/app/returnMoney_save";//已付款未发货退款
+
+    public static final String XC_ORDER_DISPATCH_RETURN_MONEY_URL = "/app/returnProduct_saveMoney";//已发货退款
+
+    public static final String XC_ORDER_RETURN_GOODS_URL = "/app/returnProduct_saveProduct";//已发货未收货申请退货
+
+    public static final String XC_ORDER_BUYER_DISPATCH_URL = "/app/memberOrder_returnDispatch";//买家退货发货
+
+    public static final String XC_EXPRESS_COMPANY_LIST_URL = "/app/_expressCompany";// 获取物流公司列表
 }

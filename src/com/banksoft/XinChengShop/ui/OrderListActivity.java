@@ -22,9 +22,10 @@ public class OrderListActivity extends XCBaseActivity implements View.OnClickLis
     private OrderStatus[] statuses = new OrderStatus[]{OrderStatus.CREATE,OrderStatus.PAY,OrderStatus.DISPATCH,OrderStatus.SUCCESS};
     private ViewPager mViewPager;
     private TabPageIndicator indicator;
-    private ImageView back;
+    private ImageView back,bgImage;
     private OrderViewAdapter orderViewAdapter;
     private String orderMaster;
+    private TextView title;
 
 
     @Override
@@ -38,11 +39,18 @@ public class OrderListActivity extends XCBaseActivity implements View.OnClickLis
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         indicator = (TabPageIndicator) findViewById(R.id.tab_page_indicator);
         back = (ImageView) findViewById(R.id.title_back_button);
+        title = (TextView) findViewById(R.id.titleText);
+        bgImage = (ImageView) findViewById(R.id.titleBg);
     }
 
     @Override
     protected void initData() {
         isLogin();
+        back.setImageResource(R.drawable.tb_icon_actionbar_back);
+        back.setVisibility(View.VISIBLE);
+        bgImage.setImageResource(R.color.white);
+        title.setTextColor(getResources().getColor(R.color.text_black_light));
+        title.setText(R.string.my_order);
     }
 
     @Override

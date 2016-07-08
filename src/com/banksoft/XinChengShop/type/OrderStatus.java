@@ -11,7 +11,7 @@ public enum OrderStatus {
     CREATE("待付款"),//订单已创建
     PAY("待发货"),//订单已支付
     DISPATCH("待收获"),//订单已发货
-    SUCCESS("已完成"),//订单已完成
+    SUCCESS("待评价"),//订单已完成
 	OVER("订单取消或关闭"),//订单已关闭
 	REPEALING("订单退货中"),//订单退货中
     REPEAL_OVER("订单退货结束"); //退货结束

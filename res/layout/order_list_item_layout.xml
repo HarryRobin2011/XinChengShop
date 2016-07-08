@@ -51,15 +51,15 @@
                   android:gravity="center"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
-                  android:text="@string/cancel"/>
-        <TextView android:id="@id/return_the_goods"
+                  android:text="@string/order_cancel"/>
+        <TextView android:id="@id/pay"
                   android:layout_width="80.0dp"
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
-                  android:text="@string/return_the_goods"/>
+                  android:text="@string/payment"/>
         <TextView android:id="@id/refund"
                   android:layout_width="80.0dp"
                   android:layout_height="@dimen/height_30"
@@ -68,6 +68,15 @@
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/refund"/>
+
+        <TextView android:id="@id/return_the_goods"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/return_the_goods"/>
         <TextView android:id="@id/confirm"
                   android:layout_width="80.0dp"
                   android:layout_height="@dimen/height_30"
@@ -75,7 +84,7 @@
                   android:gravity="center"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
-                  android:text="@string/confirm"/>
+                  android:text="@string/confirm_goods"/>
         <TextView android:id="@id/delivery"
                   android:layout_width="80.0dp"
                   android:layout_height="@dimen/height_30"
