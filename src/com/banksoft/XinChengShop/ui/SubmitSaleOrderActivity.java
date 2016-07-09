@@ -229,6 +229,7 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                     Intent intent = new Intent(mContext,PayActivity.class);
                     intent.putExtra(IntentFlag.ORDER_VO_LIST, orderVOListData.getData().getOrderList());
                     startActivity(intent);
+                    finish();
                 } else {
                     showWarning(R.string.netWork_warning);
                 }

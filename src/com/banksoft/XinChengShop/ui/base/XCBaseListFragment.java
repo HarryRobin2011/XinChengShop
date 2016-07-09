@@ -28,7 +28,7 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
     public ProgressBar mProgressbar;
     public SearchView mSearchView;
     public TextView mSearchTextView;
-    public boolean cacheFlag = true;
+    public boolean cacheFlag = false;
     public View nullPager;
     public String url;
     public String params;
@@ -146,8 +146,6 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
                         nullPager.setVisibility(View.VISIBLE);
                         xListView.mFooterView.mHintView.setText(R.string.no_data);
                         xListView.mFooterView.setClickable(false);
-                        xListView.setPullRefreshEnable(false);
-                        xListView.setPullLoadEnable(false);
                         return;
                     } else if (baseListData.getData().getList().size() < Config.DEFAULT_SIZE) {
                         noMore();

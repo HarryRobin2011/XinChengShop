@@ -68,7 +68,7 @@
         <activity android:name=".ui.CommentActivity" android:screenOrientation="portrait" android:theme="@style/StyledIndicators" />
         <activity android:name=".ui.ProductListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustNothing|stateHidden"/>
         <activity android:name=".ui.IntegralMallActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.SubmitSaleOrderActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan" android:noHistory="true"/>
+        <activity android:name=".ui.SubmitSaleOrderActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.AddMemberAddressListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.AddMemberAddressActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.GuideActivity" android:screenOrientation="portrait" android:noHistory="true"/>

@@ -8,15 +8,23 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="50.0dp"
                   android:padding="10.0dp"
+                  android:gravity="center_vertical"
                   android:orientation="horizontal">
+        <ImageView android:layout_width="@dimen/height_20"
+                   android:layout_height="@dimen/height_20"
+                   android:src="@drawable/ic_product_detail_shop_into"/>
         <TextView android:id="@id/shop_name"
-                  android:layout_width="match_parent"
+                  android:layout_width="wrap_content"
                   android:layout_height="match_parent"
-                  android:layout_weight="1"
                   android:gravity="center_vertical"
                   android:textSize="@dimen/text_size_3"
+                  android:layout_marginLeft="10.0dp"
                   android:textColor="@color/red"
-                  android:singleLine="true"/>>
+                  android:singleLine="true"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/arrow_expend_right"
+                   android:layout_marginLeft="20.0dp"/>
     </LinearLayout>
     <View style="@style/line2"/>
     <LinearLayout android:id="@id/content"
