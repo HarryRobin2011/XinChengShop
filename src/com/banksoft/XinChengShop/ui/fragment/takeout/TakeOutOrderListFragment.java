@@ -98,4 +98,8 @@ public class TakeOutOrderListFragment extends XCBaseListFragment {
     }
 
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

@@ -94,6 +94,11 @@ public class ProductManagerListFragment extends XCBaseListFragment {
 
     }
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
+
     public static enum Type {
         PUTAWAY,//出售中
         TAKEOFF;//仓库中

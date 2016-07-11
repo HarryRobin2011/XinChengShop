@@ -526,4 +526,10 @@
     <item name="email_old" type="id">email_old</item>
     <item name="take_off" type="id">take_off</item>
     <item name="take_operation" type="id">take_operation</item>
+    <item name="comment_good" type="id">comment_good</item>
+    <item name="comment_middle" type="id">中评</item>
+    <item name="comment_bad" type="id">comment_bad</item>
+    <item name="describe_ratingBar" type="id">describe_ratingBar</item>
+    <item name="express_service" type="id">express_service</item>
+    <item name="service_attitude" type="id">service_attitude</item>
 </resources>

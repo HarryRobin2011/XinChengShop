@@ -34,7 +34,7 @@ public class ExpressBillListFragment extends XCBaseListFragment{
     @Override
     public void request() {
         currentType = (ExpressBillListActivity.OperaType) getArguments().get(IntentFlag.TYPE);
-        if(ExpressBillListActivity.OperaType.MY_DISPATH_ORDER.equals(currentType)){//ÎÒµÄÅÉËÍ¶©µ¥
+        if(ExpressBillListActivity.OperaType.MY_DISPATH_ORDER.equals(currentType)){//ï¿½Òµï¿½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½ï¿½
             url = ControlUrl.DISPATCH_ORDER_LIST;
             params = "memberId="+activity.member.getMember().getId();
         }else{
@@ -76,6 +76,11 @@ public class ExpressBillListFragment extends XCBaseListFragment{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
 
     }
 }

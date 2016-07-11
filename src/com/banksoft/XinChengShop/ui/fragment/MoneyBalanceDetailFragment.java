@@ -89,6 +89,11 @@ public class MoneyBalanceDetailFragment extends XCBaseListFragment {
 
     }
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
+
     public static enum Type{
         RECHARGE,//充值明细
         CASHOUT;//提现明细

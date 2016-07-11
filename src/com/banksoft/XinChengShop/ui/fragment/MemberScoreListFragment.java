@@ -69,4 +69,8 @@ public class MemberScoreListFragment extends XCBaseListFragment{
 
     }
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

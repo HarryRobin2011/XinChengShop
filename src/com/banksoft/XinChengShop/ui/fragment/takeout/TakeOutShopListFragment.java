@@ -123,6 +123,11 @@ public class TakeOutShopListFragment extends XCBaseListFragment  {
 
     }
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
+
     public interface LocationListener {
         public void location(BDLocation location);
     }

@@ -69,4 +69,9 @@ public class IntegralMallListFragment extends XCBaseListFragment{
 //        intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position - 1)).getId());
 //        startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

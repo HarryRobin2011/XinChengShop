@@ -66,12 +66,17 @@ public class ShopProductAssessListFragment extends XCBaseListFragment{
 
     @Override
     public CharSequence getTitle() {
-        return "µêÆÌ";
+        return "ï¿½ï¿½ï¿½ï¿½";
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
 
     }
 }

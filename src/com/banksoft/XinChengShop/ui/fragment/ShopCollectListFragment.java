@@ -73,4 +73,9 @@ public class ShopCollectListFragment extends XCBaseListFragment{
         intent.putExtra(IntentFlag.SHOP_ID,((ShopCollectionVO)bailaAdapter.getItem(position - 1)).getShopId());
         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

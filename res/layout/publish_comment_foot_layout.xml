@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              style="@style/text_style_3"
+              android:text="@string/shop_score"
+              android:paddingLeft="10.0dp"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="@dimen/height_100"
+                  android:layout_height="match_parent"
+                  style="@style/text_style_3"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="10.0dp"
+                  android:text="@string/describe_match"/>
+        <RatingBar android:id="@id/describe_ratingBar"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginRight="10.0dp"
+                   android:numStars="5"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="@dimen/height_100"
+                  android:layout_height="match_parent"
+                  style="@style/text_style_3"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="10.0dp"
+                  android:text="@string/express_service"/>
+        <RatingBar android:id="@id/express_service"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginRight="10.0dp"
+                   android:numStars="5"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="@dimen/height_100"
+                  android:layout_height="match_parent"
+                  style="@style/text_style_3"
+                  android:gravity="center_vertical"
+                  android:paddingLeft="10.0dp"
+                  android:text="@string/service_attitude"/>
+        <RatingBar android:id="@id/service_attitude"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginRight="10.0dp"
+                   android:numStars="5"/>
+
+    </LinearLayout>
+</LinearLayout>

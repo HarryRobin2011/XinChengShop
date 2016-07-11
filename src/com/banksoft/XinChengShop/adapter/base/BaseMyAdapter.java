@@ -12,11 +12,12 @@ import java.util.List;
 /**
  * Created by Robin on 2015/1/28.
  */
-public abstract class BaseMyAdapter extends BaseAdapter {
+public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickListener{
     public List dataList;
     public Context mContext;
     public LayoutInflater mInflater;
     public HashMap<Integer,View> dataMap;
+    private OnAdapterClickListener onAdapterClickListener;
 
 
     public BaseMyAdapter(Context context, List dataList){
@@ -75,5 +76,20 @@ public abstract class BaseMyAdapter extends BaseAdapter {
         holder.position = position;
         buildData(position,cellView,holder);
         return cellView;
+    }
+
+    public void setOnAdapterClickListener(OnAdapterClickListener onAdapterClickListener) {
+        this.onAdapterClickListener = onAdapterClickListener;
+    }
+
+    public interface OnAdapterClickListener{
+        public void onAdapterCLick(View view, int position);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        int position = (int) v.getTag();
+        onAdapterClickListener.onAdapterCLick(v,position);
     }
 }

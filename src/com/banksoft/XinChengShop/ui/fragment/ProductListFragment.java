@@ -113,4 +113,9 @@ public class ProductListFragment extends XCBaseListFragment {
         intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position - 1)).getId());
         startActivity(intent);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

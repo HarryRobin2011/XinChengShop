@@ -69,4 +69,9 @@ public class CommonListFragment extends XCBaseListFragment{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

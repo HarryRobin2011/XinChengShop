@@ -74,4 +74,9 @@ public class MessageistFragment extends XCBaseListFragment {
         intent.putExtra("title",getTitle());
         startActivity(intent);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

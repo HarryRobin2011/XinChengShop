@@ -23,7 +23,7 @@ import java.lang.reflect.Type;
  * Created by Robin on 2015/1/11.
  */
 public abstract class XCBaseListFragment extends XCBaseFragment implements XListView.IXListViewListener, AdapterView.OnItemClickListener,
-        SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener,BaseMyAdapter.OnAdapterClickListener {
     public XListView xListView;
     public ProgressBar mProgressbar;
     public SearchView mSearchView;
@@ -54,7 +54,7 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
         listDao.url = url;
         listDao.params = params;
         listDao.type = jsonType;
-
+        bailaAdapter.setOnAdapterClickListener(this);
         new MyThread().execute(listDao);
     }
 

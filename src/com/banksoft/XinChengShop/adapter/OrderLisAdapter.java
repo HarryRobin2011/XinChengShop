@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by Robin on 2015/2/2.
  */
-public class OrderLisAdapter extends BaseMyAdapter {
+public class OrderLisAdapter extends BaseMyAdapter{
     public ImageLoader mImageViewLoader;
 
     public OrderLisAdapter(Context context, List dataList) {
@@ -100,8 +100,17 @@ public class OrderLisAdapter extends BaseMyAdapter {
             holder.productContent.addView(view);
         }
         holder.total.setText("合计：" + orderVO.getTotalMoney() + "元");
+
+        holder.cancel.setOnClickListener(this);
+        holder.cancel.setTag(position);
+        holder.pay.setOnClickListener(this);
+        holder.pay.setTag(position);
+        holder.comments.setOnClickListener(this);
+        holder.comments.setTag(position);
         return cellView;
     }
+
+
 
     /**
      * ALL("所有订单"),
@@ -154,7 +163,6 @@ public class OrderLisAdapter extends BaseMyAdapter {
         } else if (OrderStatus.OVER.name().equals(orderStatus)) {
             return OrderStatus.OVER;
         }
-
 
         return null;
     }

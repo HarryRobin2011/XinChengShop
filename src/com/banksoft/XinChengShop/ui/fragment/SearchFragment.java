@@ -28,4 +28,9 @@ public class SearchFragment extends XCBaseListFragment {
     public CharSequence getTitle() {
         return null;
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

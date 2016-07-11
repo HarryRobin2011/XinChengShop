@@ -116,6 +116,7 @@
         <activity android:name=".ui.UpdateTelephoneActivity" android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PublishCommentActivity" android:screenOrientation="portrait"/>
         <!--   <activity
                 android:name="com.tencent.open.yyb.AppbarActivity"
                 android:configChanges="orientation|keyboardHidden"

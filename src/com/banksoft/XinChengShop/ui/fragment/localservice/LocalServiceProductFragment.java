@@ -142,6 +142,11 @@ public class LocalServiceProductFragment extends XCBaseListFragment{
                 startActivity(intent);
     }
 
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
+
     private class MyTask extends AsyncTask<LocalServiceDao, String, ShopLocalTypeData> {
 
         @Override

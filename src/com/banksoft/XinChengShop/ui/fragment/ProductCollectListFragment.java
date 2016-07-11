@@ -72,4 +72,9 @@ public class ProductCollectListFragment extends XCBaseListFragment{
         intent.putExtra(IntentFlag.PRODUCT_ID,((ProductCollectionVO)bailaAdapter.getItem(position - 1)).getProductId());
         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }

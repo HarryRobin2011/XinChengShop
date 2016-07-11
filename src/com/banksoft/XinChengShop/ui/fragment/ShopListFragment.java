@@ -80,4 +80,9 @@ public class ShopListFragment extends XCBaseListFragment{
         intent.putExtra(IntentFlag.SHOP_ID,((ShopVO)bailaAdapter.getItem(position - 1)).getId());
         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+
+    }
 }
