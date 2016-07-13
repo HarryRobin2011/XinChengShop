@@ -17,6 +17,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.LoginDao;
 import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.model.MemberInfoData;
+import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
@@ -59,30 +60,11 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     private ImageView sinaLoginTextView;
     private LoginDao loginDao;
 
-    public final int QQ_LOGIN = 0;
-    public final int WX_LOGIN = 1;
-    public final int SINA_LOGIN = 2;
+    private MergeType currentType;
 
 
     private UMShareAPI umShareAPI;
 
-    public Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case QQ_LOGIN:
-
-                    break;
-                case WX_LOGIN:
-
-                    break;
-                case SINA_LOGIN:
-
-                    break;
-            }
-        }
-    };
 
     @Override
     protected void initContentView() {
@@ -117,8 +99,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            Toast.makeText(getApplicationContext(), "Authorize succeed"+data.toString(), Toast.LENGTH_SHORT).show();
-            umShareAPI.getPlatformInfo(LoginActivity.this, platform, umInfoListener);
+
         }
 
         @Override
@@ -247,14 +228,17 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
                 break;
             case R.id.qq_login_view://QQ登陆
                 platform = SHARE_MEDIA.QQ;
+                this.currentType = MergeType.QQ;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
             case R.id.weixin_login_view://微信登陆
                 platform = SHARE_MEDIA.WEIXIN;
+                this.currentType = MergeType.WEIXIN;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
             case R.id.sina_login_view:// 新浪登陆
                 platform = SHARE_MEDIA.SINA;
+                this.currentType = MergeType.WEIBO;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
         }
@@ -277,6 +261,15 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     }
 
     private class MyThread extends AsyncTask<LoginDao, String, MemberData> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(myProgressDialog == null){
+                myProgressDialog = new MyProgressDialog(mContext);
+            }
+            myProgressDialog.showDialog(R.string.please_wait);
+        }
 
         @Override
         protected MemberData doInBackground(LoginDao... params) {
@@ -316,7 +309,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
         @Override
         protected MemberData doInBackground(LoginDao... params) {
-            return params[0].thirdLogin(openID);
+            return params[0].thirdLogin(currentType,openID);
         }
 
         @Override
@@ -341,4 +334,6 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             }
         }
     }
+
+
 }

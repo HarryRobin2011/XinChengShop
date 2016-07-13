@@ -6,10 +6,10 @@
               android:layout_height="match_parent"
               android:background="@drawable/body_bg">、
     <include layout="@layout/title"/>
-    <View  style="@style/line2"/>
+    <View style="@style/line2"/>
     <LinearLayout android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal">
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:layout_weight="3">
@@ -42,9 +42,15 @@
                          android:layout_height="wrap_content"
                          android:indeterminateDrawable="@drawable/my_progress_bg"
                          android:layout_gravity="center"/>
+            <TextView android:id="@id/alertText"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      style="@style/text_style_3"
+                      android:text="@string/no_data"
+                      android:visibility="gone"
+                      android:gravity="center"/>
         </FrameLayout>
     </LinearLayout>
-
 
 
 </LinearLayout>

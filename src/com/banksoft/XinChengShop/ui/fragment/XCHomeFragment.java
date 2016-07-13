@@ -95,7 +95,6 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
     private HomeDataListAdapter homeDataListAdapter;
 
-    private UpdateUtil updateUtil;
 
 
     final Handler mHandler = new Handler() {
@@ -155,7 +154,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         mesageLayout = (LinearLayout) view.findViewById(R.id.message_layout);
      //   leftBtn = (Button) view.findViewById(R.id.titleLeftButton);
 
-      //  updateUtil.isUpdate();
+       new UpdateUtil(getActivity(),false).isUpdate();
     }
 
 

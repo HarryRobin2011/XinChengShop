@@ -138,7 +138,7 @@ public class LocalServiceProductFragment extends XCBaseListFragment{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext,ShopProductInfoActivity.class);
-                intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position - 1)).getId());
+                intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position)).getId());
                 startActivity(intent);
     }
 

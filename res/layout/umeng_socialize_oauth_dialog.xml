@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-        android:background="@drawable/umeng_socialize_window_shadow_pad"
-    android:padding="5dp" >
+    android:layout_height="fill_parent" >
 
     <include
         android:id="@+id/umeng_socialize_titlebar"
@@ -12,17 +10,17 @@
     <RelativeLayout
         android:id="@+id/umeng_socialize_follow"
         android:layout_width="fill_parent"
-        android:layout_height="38dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/umeng_socialize_light_bar_bg"
+        android:background="#AAAAAA"
         android:visibility="visible" >
 
         <CheckBox
             android:id="@+id/umeng_socialize_follow_check"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="20dp"
             android:button="@drawable/umeng_socialize_oauth_check"
             android:checked="true" />
 
@@ -30,11 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/umeng_socialize_follow_check"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:text="关注官方微博"
-            android:textColor="#949BA4" />
+            android:textColor="#f8f8f8" />
     </RelativeLayout>
 
     <WebView
@@ -48,7 +46,6 @@
         android:id="@+id/progress_bar_parent"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/umeng_socialize_follow"
         android:layout_below="@id/umeng_socialize_titlebar"
         android:background="#66000000" >
 

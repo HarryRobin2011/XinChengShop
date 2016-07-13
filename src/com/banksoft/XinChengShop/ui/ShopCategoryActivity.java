@@ -34,6 +34,7 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
     private LinearLayout searchLayout;
 
     private String shopId;
+    private TextView alertText;
     @Override
     protected void initContentView() {
         setContentView(R.layout.category_layout);
@@ -50,6 +51,7 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
         listView = (ListView) findViewById(R.id.list_view);
         gridView = (GridView) findViewById(R.id.gridView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        alertText = (TextView) findViewById(R.id.alertText);
     }
 
     @Override
@@ -105,13 +107,20 @@ public class ShopCategoryActivity extends XCBaseActivity implements AdapterView.
         @Override
         protected void onPostExecute(ShopProductTypeBOData productTypeData) {
             super.onPostExecute(productTypeData);
+            progressBar.setVisibility(View.GONE);
             if (productTypeData != null) {
                 if (productTypeData.isSuccess()) {
-                    if (categoryListAdapter == null) {
-                        categoryListAdapter = new CategoryShopListAdapter(mContext, productTypeData.getData());
+                    if(productTypeData.getData().size() > 0){
+                        if (categoryListAdapter == null) {
+                            categoryListAdapter = new CategoryShopListAdapter(mContext, productTypeData.getData());
+                        }
+                        listView.setAdapter(categoryListAdapter);
+                        setChildView((ShopProductTypeBO) categoryListAdapter.getItem(0));
+                        alertText.setVisibility(View.GONE);
+                    }else{
+                        alertText.setVisibility(View.VISIBLE);
                     }
-                    listView.setAdapter(categoryListAdapter);
-                    setChildView((ShopProductTypeBO) categoryListAdapter.getItem(0));
+
                 }
             } else {
                 alert(R.string.net_error);

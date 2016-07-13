@@ -4,6 +4,7 @@ import android.content.Context;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.model.MemberData;
+import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.utils.MD5Factory;
 
@@ -29,9 +30,15 @@ public class LoginDao extends BaseDao {
         return null;
     }
 
-    public MemberData thirdLogin(String openid) {
+    /**
+     * 第三方登录
+     * @param mergeType
+     * @param openid
+     * @return
+     */
+    public MemberData thirdLogin(MergeType mergeType, String openid) {
         String url = ControlUrl.THIRD_LOGIN;
-        String params = "openid="+openid;
+        String params = "type="+mergeType+"&openid="+openid;
         MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
 
