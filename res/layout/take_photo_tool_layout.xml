@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView android:id="@id/take_photo_num"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_30"
+              style="@style/text_style_4"
+              android:text="亲，还可以上传5张图片"
+              android:gravity="center"/>
+    <View style="@style/line1"/>
+    <TextView android:id="@id/take_photo"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              android:textColor="@color/red_normal"
+              android:text="@string/take_photo"
+              android:gravity="center"/>
+    <View style="@style/line1"/>
+    <TextView android:id="@id/take_photo"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              android:text="@string/from_photo_select"
+              style="@style/text_style_3"
+              android:gravity="center"/>
+    <View style="@style/line1"/>
+    <TextView android:id="@id/take_photo"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              style="@style/text_style_3"
+              android:text="@string/cancel"
+              android:gravity="center"/>
+    <View style="@style/line1"/>
+</LinearLayout>

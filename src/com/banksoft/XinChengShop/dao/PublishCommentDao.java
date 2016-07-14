@@ -5,6 +5,7 @@ import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.entity.OrderAssessBO;
+import com.banksoft.XinChengShop.entity.ProductAssessBO;
 import com.banksoft.XinChengShop.entity.ReturnProduct;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.utils.JSONHelper;
@@ -23,13 +24,13 @@ public class PublishCommentDao extends BaseDao{
     /**
      * 提交订单评论
      * @param id
-     * @param returnProducts
+     * @param productAssessBOs
      * @param orderAssessBO
      * @return
      */
-    public IsFlagData submitComment(String id, List<ReturnProduct> returnProducts, OrderAssessBO orderAssessBO) {
+    public IsFlagData submitComment(String id, List<ProductAssessBO> productAssessBOs, OrderAssessBO orderAssessBO) {
         String url = ControlUrl.XC_ORDER_COMMENT_URL;
-        String params = "memberId="+id+"&productData="+getListParams(returnProducts,"list")+"&productAssessBO="+getParams(orderAssessBO,"data");
+        String params = "memberId="+id+"&productData="+getListParams(productAssessBOs,"productData")+"&orderData="+getParams(orderAssessBO,"orderData");
         IsFlagData isFlagData = (IsFlagData) postHttpRequest(mContext,url,params, JSONHelper.IS_FLAG_DATA,false);
         return isFlagData;
     }

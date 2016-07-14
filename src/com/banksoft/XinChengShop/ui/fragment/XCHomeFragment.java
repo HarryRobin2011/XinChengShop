@@ -250,7 +250,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         protected HashMap<String, BaseData> doInBackground(HomeDao... params) {
             AdvertisementData advertisementData = params[0].getAdvertisementData(true);
             ProductTypeData productTypeData = params[0].getProductTypeListData(Integer.MAX_VALUE, 0, cacheFlag);
-            ShopProductListData shopListData = params[0].getShopProductListData(cacheFlag, 0, 10, 1);
+            ShopProductListData shopListData = params[0].getShopProductListData(cacheFlag, 0, 20, 1);
             HashMap<String, BaseData> dataHashMap = new HashMap<>();
             dataHashMap.put(MapFlag.DATA_0, advertisementData);
             dataHashMap.put(MapFlag.DATA_1, productTypeData);

@@ -532,4 +532,6 @@
     <item name="describe_ratingBar" type="id">describe_ratingBar</item>
     <item name="express_service" type="id">express_service</item>
     <item name="service_attitude" type="id">service_attitude</item>
+    <item name="anonymous" type="id">anonymous</item>
+    <item name="take_photo_num" type="id">take_photo_num</item>
 </resources>

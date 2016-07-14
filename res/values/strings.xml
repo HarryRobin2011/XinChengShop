@@ -619,7 +619,7 @@
     <string name="payment">付款</string>
     <string name="order_cancel_success">订单取消成功</string>
     <string name="publish_comment_title">发布评价</string>
-    <string name="comment_edit_hint">亲！我到底怎么样~</string>
+    <string name="comment_edit_hint">请写下对宝贝的感受吧，对其他人帮助很大哦~</string>
     <string name="comment_good">好评</string>
     <string name="comment_middle">中评</string>
     <string name="comment_bad">差评</string>
@@ -628,5 +628,9 @@
     <string name="describe_match">描述相符</string>
     <string name="express_service">物流服务</string>
     <string name="service_attitude">服务态度</string>
+    <string name="publish_photo">发照片</string>
+    <string name="anonymous_comment">匿名评论</string>
+    <string name="publish_comment">发表评论</string>
+    <string name="pleaset_shop_scode">店铺还没有打分~</string>
 
 </resources>

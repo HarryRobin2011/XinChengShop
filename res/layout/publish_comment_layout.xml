@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <LinearLayout android:id="@id/content"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:background="@color/white"
+                          android:layout_marginTop="10.0dp"
+                          android:orientation="vertical">
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          style="@style/text_style_3"
+                          android:text="@string/shop_score"
+                          android:paddingLeft="10.0dp"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:gravity="center_vertical"
+                              android:layout_weight="1"
+                              android:paddingLeft="10.0dp"
+                              android:text="@string/describe_match"/>
+                    <RatingBar
+                            android:id="@+id/describe_ratingBar"
+                            android:layout_marginLeft="12dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:numStars="5"
+                            android:rating="0"
+                            android:stepSize="1"
+                            android:paddingTop="14.0dp"
+                            android:layout_marginRight="10.0dp"
+                            style="@style/commentRatingBar"/>
+
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_100"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:gravity="center_vertical"
+                              android:layout_weight="1"
+                              android:paddingLeft="10.0dp"
+                              android:text="@string/express_service"/>
+                    <RatingBar
+                            android:id="@+id/express_service"
+                            android:layout_marginLeft="12dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:numStars="5"
+                            android:rating="0"
+                            android:paddingTop="14.0dp"
+                            android:layout_marginRight="10.0dp"
+                            android:stepSize="1"
+                            style="@style/commentRatingBar"/>
+
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_50"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="@dimen/height_100"
+                              android:layout_height="match_parent"
+                              style="@style/text_style_3"
+                              android:gravity="center_vertical"
+                              android:paddingLeft="10.0dp"
+                              android:layout_weight="1"
+                              android:text="@string/service_attitude"/>
+
+                    <RatingBar
+                            android:id="@+id/service_attitude"
+                            android:layout_marginLeft="12dp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="14.0dp"
+                            android:layout_marginRight="10.0dp"
+                            android:numStars="5"
+                            android:rating="0"
+                            android:stepSize="1"
+                            style="@style/commentRatingBar"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:background="@color/white"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+        <CheckBox android:id="@id/anonymous"
+                  android:layout_width="21.0dp"
+                  android:layout_height="21.0dp"
+                  android:background="@drawable/cart_product_checkbox_bg"
+                  android:layout_marginLeft="10.0dp"
+                  android:button="@null"
+                  android:paddingLeft="10.0dp"/>
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10.0dp"
+                  android:text="@string/anonymous_comment"
+                  style="@style/text_style_3"
+                  android:layout_weight="1"/>
+
+        <Button android:id="@id/publish"
+                android:layout_width="@dimen/height_100"
+                android:layout_height="@dimen/height_50"
+                android:background="@drawable/click_red_button"
+                android:textColor="@color/text_white"
+                android:text="@string/publish_comment"
+                android:gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

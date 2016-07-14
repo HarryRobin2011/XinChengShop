@@ -13,6 +13,7 @@ import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.config.MapFlag;
 import com.banksoft.XinChengShop.dao.ShopInfoDao;
+import com.banksoft.XinChengShop.entity.ShopProductListVO;
 import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.entity.ShopVO;
 import com.banksoft.XinChengShop.model.ShopInfoData;
@@ -30,7 +31,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by admin on 2016/7/2.
  */
-public class ShopDetailActivity extends XCBaseActivity implements View.OnClickListener {
+public class ShopDetailActivity extends XCBaseActivity implements View.OnClickListener,AdapterView.OnItemClickListener{
     private TextView title;
     private ImageView back;
     private TextView shopCategory, shopIntroduction, shopLinker;
@@ -99,6 +100,7 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         if(shopInfoDao == null){
             shopInfoDao = new ShopInfoDao(mContext);
         }
+        gridView.setOnItemClickListener(this);
         new MyTask().execute(shopInfoDao);
     }
 
@@ -125,6 +127,14 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
                 ShareUtil.shareMsg(this,getText(R.string.app_name).toString(),shopVO.getName(),shopVO.getDescription(),0);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(mContext,ShopProductInfoActivity.class);
+        intent.putExtra(IntentFlag.SHOP_ID,((ShopProductListVO)shopDetailAdapter.getItem(position)).getShopId());
+        intent.putExtra(IntentFlag.PRODUCT_ID,((ShopProductListVO)shopDetailAdapter.getItem(position)).getId());
+        startActivity(intent);
     }
 
 
