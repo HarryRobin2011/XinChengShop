@@ -5,12 +5,18 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:background="@color/white">
+    <com.banksoft.XinChengShop.widget.SquareLayout android:layout_width="match_parent"
+                                                   android:background="@drawable/edit_gray_bg"
+                                                   android:layout_height="wrap_content">
+        <ImageView android:id="@id/image"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:minHeight="@dimen/height_180"
+                   android:layout_weight="1"
+                   android:adjustViewBounds="true"
+                   android:scaleType="fitXY"/>
 
-    <ImageView android:id="@id/image"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/height_150"
-               android:layout_weight="1"
-               android:scaleType="fitXY"/>
+    </com.banksoft.XinChengShop.widget.SquareLayout>
     <TextView android:id="@id/describe"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
