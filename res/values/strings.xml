@@ -57,7 +57,7 @@
     <string name="brand_s">品牌：</string>
     <string name="min_num">最小数量：</string>
     <string name="max_num">最大数量：</string>
-    <string name="area">所在地区：</string>
+    <string name="area">所在地区</string>
     <string name="time_s">有效期至：</string>
     <string name="goods_describe">问题描述</string>
     <string name="details">详情</string>
@@ -194,7 +194,7 @@
     <string name="express_name_not_empty">物流名称不能为空</string>
     <string name="notification_order_create">您有一条新的订单~</string>
     <string name="notification_order_pay">您有一条订单买家已付款~</string>
-    <string name="telPhone_contact">联系电话：</string>
+    <string name="telPhone_contact">联系电话</string>
     <string name="goods_title">产品列表</string>
     <string name="add">新增</string>
     <string name="product_no">产品编号</string>
@@ -315,8 +315,8 @@
     <string name="qq_no_empty">QQ账号不能为空</string>
     <string name="detail_address">详细地址</string>
     <string name="address_no_empty">地址不能为空</string>
-    <string name="account">用户名：</string>
-    <string name="email">邮箱：</string>
+    <string name="account">用户名</string>
+    <string name="email">邮箱</string>
     <string name="mobile">手机号</string>
     <string name="member_info">会员详情</string>
     <string name="edit">编辑</string>
@@ -440,10 +440,10 @@
     <string name="pay_method">支付方式：</string>
     <string name="pay_order_no">流水号：</string>
     <string name="money">金额：</string>
-    <string name="real_name">真实姓名：</string>
-    <string name="sex">性别：</string>
-    <string name="birthday">生日：</string>
-    <string name="QQ">QQ：</string>
+    <string name="real_name">真实姓名</string>
+    <string name="sex">性别</string>
+    <string name="birthday">生日</string>
+    <string name="QQ">QQ</string>
     <string name="cancellation">注销登录</string>
     <string name="confirm_goods">确认收货</string>
     <string name="my_score_order">积分订单</string>
@@ -632,5 +632,9 @@
     <string name="anonymous_comment">匿名评论</string>
     <string name="publish_comment">发表评论</string>
     <string name="pleaset_shop_scode">店铺还没有打分~</string>
+    <string name="account_photo">鑫城头像</string>
+    <string name="birthday_no_empty">生日不能为空</string>
+    <string name="area_no_empty">所在区域不能为空</string>
+    <string name="member_name_no_empty">会员昵称不能为空</string>
 
 </resources>

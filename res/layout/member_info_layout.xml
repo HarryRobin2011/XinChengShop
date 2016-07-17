@@ -6,34 +6,59 @@
               android:layout_height="match_parent">
     <include layout="@layout/title"/>
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent">
-        <LinearLayout android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent">
             <LinearLayout android:id="@id/content"
                           android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
+                          android:layout_height="match_parent"
                           android:background="@color/transparent"
                           android:orientation="vertical"
                           android:layout_margin="10.0dp">
                 <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_80"
+                              android:background="@color/white"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="100.0dp"
+                              android:layout_height="@dimen/height_80"
+                              android:gravity="left|center_vertical"
+                              android:text="@string/account_photo"/>
+                    <View android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"/>
+
+                    <com.banksoft.XinChengShop.widget.imageView.CustomShapeImageView android:id="@id/head_image"
+                                                                                     android:layout_width="60.0dp"
+                                                                                     android:layout_height="60.0dp"
+                                                                                     android:layout_gravity="center_vertical"
+                                                                                     android:layout_marginRight="10.0dp"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
+
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:background="@color/white"
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/account"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
+
                     <EditText android:id="@id/account"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
-                              android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -43,18 +68,19 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/telPhone_contact"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/telPhone_contact"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
-                              android:editable="false"
+                             
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -64,18 +90,19 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/email"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/member_email"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -85,18 +112,19 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/real_name"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/member_name"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -106,18 +134,19 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/sex"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/sex"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -127,18 +156,19 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/area"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/area"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
@@ -148,53 +178,48 @@
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/birthday"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/birthday"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
-                <View style="@style/line2"/>
+                <View style="@style/line1"/>
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:background="@color/white"
                               android:orientation="horizontal">
                     <TextView android:layout_width="100.0dp"
                               android:layout_height="@dimen/height_50"
-                              android:gravity="center"
+                              android:gravity="left|center_vertical"
                               android:text="@string/QQ"/>
-                    <View android:layout_width="0.1dp"
-                          android:layout_height="match_parent"
-                          android:background="@color/line_dark2"/>
                     <EditText android:id="@id/member_qq"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:layout_weight="1"
                               android:editable="false"
                               android:background="@drawable/edit_text_white_bg"
-                              android:gravity="center"/>
+                              android:gravity="center_vertical|right"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center_vertical"
+                               android:src="@drawable/arrow_expend_right"/>
 
                 </LinearLayout>
                 <View style="@style/line2"/>
 
-                <Button android:id="@id/cancellation"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_40"
-                        android:background="@drawable/click_red_button"
-                        android:text="@string/cancellation"
-                        android:layout_marginTop="40.0dp"
-                        android:textColor="@color/white"/>
             </LinearLayout>
+        </FrameLayout>
 
-        </LinearLayout>
 
     </ScrollView>
 

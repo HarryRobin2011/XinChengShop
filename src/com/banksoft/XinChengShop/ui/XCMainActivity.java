@@ -2,27 +2,26 @@ package com.banksoft.XinChengShop.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.ConfigPush;
 import com.banksoft.XinChengShop.dao.UpdateDao;
 import com.banksoft.XinChengShop.entity.InfoValue;
-import com.banksoft.XinChengShop.model.InfoData;
-import com.banksoft.XinChengShop.model.InfoDataMap;
-import com.banksoft.XinChengShop.model.InfoHashMap;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseFragment;
 import com.banksoft.XinChengShop.ui.fragment.*;
-import com.banksoft.XinChengShop.utils.JSONHelper;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.update.UpdateUtil;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Created by harry_robin on 15/11/4.
@@ -60,6 +59,7 @@ public class XCMainActivity extends XCBaseActivity {
         pushSp = getSharedPreferences(ConfigPush.PUSH_SP, Context.MODE_PRIVATE);
         setContentView(R.layout.main);
         new UpdateUtil(this, false).isUpdate();
+        JPushInterface.setAliasAndTags(getApplicationContext(),null, null, mTagsCallback);
     }
 
     public static InfoValue getDataList(HashMap<String,HashMap<String,String>> poorMap,String name){
@@ -139,6 +139,30 @@ public class XCMainActivity extends XCBaseActivity {
         }
         return false;
     }
+
+    private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+
+                    break;
+
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+
+                    break;
+
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e(CommonUtil.TAG, logs);
+            }
+        }
+
+    };
 
 //    private void showExitDialog(){
 //        niftyDialogBuilder = NiftyDialogBuilder.getInstance(this);

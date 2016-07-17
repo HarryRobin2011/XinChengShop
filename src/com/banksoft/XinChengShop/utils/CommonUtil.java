@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class CommonUtil {
+    public static final String TAG = "HarryRobin";
+
     /**
      * 检测sdcard是否可用
      *
@@ -162,5 +165,16 @@ public class CommonUtil {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(params));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    /**
+     * 不好使
+     * @param editText
+     * @param isEdit
+     */
+    public static void setEditTextEditStatus(EditText editText, boolean isEdit) {
+        editText.setFocusableInTouchMode(isEdit);
+        editText.setFocusable(isEdit);
+        editText.requestFocus();
     }
 }

@@ -72,7 +72,7 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
             if(imageUrl == null || imageUrl.equals("")){
                 login.setImageResource(R.drawable.default_head_image);
             }else{
-                mImageLoader.displayImage(ControlUrl.BASE_URL+activity.member.getMember().getImageFile(),login, XCApplication.options);
+                mImageLoader.displayImage(ControlUrl.BASE_URL+activity.member.getMember().getImageFile().split("\\|")[0],login, XCApplication.options);
             }
             if(activity.member.getShop() != null && activity.member.getShop().isAuditStatus() && activity.member.getShop().isStatus()){// 开店了
                 myShop.setVisibility(View.GONE);
