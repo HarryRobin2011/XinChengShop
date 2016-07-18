@@ -13,6 +13,7 @@ import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.CommonAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.entity.ExpressPriceVO;
+import com.banksoft.XinChengShop.entity.Shop;
 import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.model.ViewHolde;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -49,6 +50,7 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
     private Button selectadress =null;
     private Button selecthouse =null;
     private Button selectstore =null;
+    private Button titleRight=null;
     private ImageView one =null;
     private LinearLayout selectshop =null;
 
@@ -101,6 +103,7 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
         flagship =(RadioGroup)findViewById(R.id.rg_flagship);
         linearLayout =(LinearLayout)getLayoutInflater().inflate(R.layout.dialog_list,null);
         listView =(ListView)linearLayout.findViewById(R.id.dialog_list);
+        titleRight = (Button) findViewById(R.id.titleRightButton);
         diglog =new AlertDialog.Builder(ApplyOpenShopActivity.this).create();
         mAlertView = new AlertView(null, null, "取消", null, new String[]{"拍照", "从相册中选择"}, this, AlertView.Style.ActionSheet, this);
     }
@@ -123,6 +126,9 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
         selectshopcategroy.setOnClickListener(onClickListener);
         selecthouse.setOnClickListener(onClickListener);
         selectstore.setOnClickListener(onClickListener);
+        titleRight.setVisibility(View.VISIBLE);
+        titleRight.setText(R.string.ok);
+        titleRight.setOnClickListener(this);
         //选择框
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -135,7 +141,7 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
                 }else  if(btn == selecthouse){
                     btn.setText(arryhouse[i]);
                 }else if(btn == selectstore){
-                    btn.setText(arrystore.get(i));
+                    btn.setText(String.valueOf(arrystore.get(i)));
                 }
                 diglog.dismiss();
             }
@@ -182,11 +188,18 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
                 case R.id.one://选择商店照片
                     mAlertView.show();
                     break;
+                case R.id.titleRightButton:// 确定
+
+                    break;
             }
             diglog.show();
             diglog.setContentView(linearLayout);
         }
     };
+
+    private Shop getSubmitShop(){
+      String
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -236,15 +249,6 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
             case 0:
                 mImageLoader.displayImage("file://" + cameraImage.get(currentPosition), one, XCApplication.options);
                 break;
-//            case 1:
-//                mImageLoader.displayImage("file://" + cameraImage.get(currentPosition), imageTwo, XCApplication.options);
-//                break;
-//            case 2:
-//                mImageLoader.displayImage("file://" + cameraImage.get(currentPosition), imageThree, XCApplication.options);
-//                break;
-//            case 3:
-//                mImageLoader.displayImage("file://" + cameraImage.get(currentPosition), imageFour, XCApplication.options);
-//                break;
         }
     }
     @Override
