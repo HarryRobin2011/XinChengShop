@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,6 +93,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
 	
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
+         String result = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 
 	}
 }

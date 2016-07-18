@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import com.baidu.location.BDLocation;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
@@ -40,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by harry_robin on 15/11/4.
@@ -167,9 +170,18 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
         mListView.addHeaderView(bannerView);
         mListView.setAdapter(null);
+        JPushInterface.setAliasAndTags(mContext,"",null,new JPushCallback());
 
      ///  leftBtn.setVisibility(View.VISIBLE);
       // leftBtn.setOnClickListener(this);
+    }
+
+    private class JPushCallback implements TagAliasCallback{
+
+        @Override
+        public void gotResult(int i, String s, Set<String> set) {
+
+        }
     }
 
     @Override

@@ -198,7 +198,7 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
     };
 
     private Shop getSubmitShop(){
-      String
+      return null;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
