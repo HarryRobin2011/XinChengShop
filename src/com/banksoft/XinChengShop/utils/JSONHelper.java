@@ -64,6 +64,7 @@ public class JSONHelper {
     public static final Type INFO_HASH_MAP = new TypeToken<InfoHashMap>(){}.getType();
     public static final Type SHOP_PRODUCT_TYPE_DATA = new TypeToken<ShopProductTypeBOData>(){}.getType();
     public static final Type EXPRESS_COMPANY_CELL_LIST_DATA = new TypeToken<ExpressCompanyCellListData>(){}.getType();
+    public static final Type PUSH_DATA = new TypeToken<PushData>(){}.getType();
 
 
     public static String toJSONString(Object o){

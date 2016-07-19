@@ -1,12 +1,24 @@
 package com.banksoft.XinChengShop.widget;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
+import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.model.PushData;
+import com.banksoft.XinChengShop.model.PushMessageData;
+import com.banksoft.XinChengShop.model.PushOrderData;
+import com.banksoft.XinChengShop.type.OrderType;
+import com.banksoft.XinChengShop.type.PushType;
+import com.banksoft.XinChengShop.ui.OrderListActivity;
+import com.banksoft.XinChengShop.utils.JSONHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,9 +33,11 @@ import java.util.Iterator;
  */
 public class MyJPushReceiver extends BroadcastReceiver {
 	private static final String TAG = "JPush";
+	private Context mContext;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		this.mContext = context;
         Bundle bundle = intent.getExtras();
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 		
@@ -93,7 +107,56 @@ public class MyJPushReceiver extends BroadcastReceiver {
 	
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
-         String result = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		String result = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		PushData pushData = JSONHelper.fromJSONObject(result,JSONHelper.PUSH_DATA);
+		if(PushType.order.equals(pushData.getMessageType())){//订单
+			PushOrderData pushOrderData = (PushOrderData) pushData;
+			if(PushType.member.equals(((PushOrderData) pushData).getData().getType())){//买家订单
 
+			}else if(PushType.shop.equals(((PushOrderData) pushData).getData().getType())){//卖家订单
+
+			}else if(PushType.dispatch.equals(((PushOrderData) pushData).getData().getType())){//派送订单
+
+
+			}
+		}else{//活动
+			PushMessageData pushMessageData = (PushMessageData) pushData;
+			if(PushType.SHOP.equals(pushMessageData.getData().getPushType())){//推送店铺
+
+		    }else if (PushType.PRODUCT.equals(pushMessageData.getData().getPushType())){//推送产品
+
+			}
+		}
+	}
+
+	//显示通知栏
+	private void showNotification(){
+		NotificationCompat.Builder mBuilder =
+				new NotificationCompat.Builder(mContext)
+						.setSmallIcon(R.drawable.icon)
+						.setContentTitle("My notification")
+						.setContentText("Hello World!");
+// Creates an explicit intent for an Activity in your app
+		Intent resultIntent = new Intent(this, ResultActivity.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
+// Adds the back stack for the Intent (but not the Intent itself)
+		stackBuilder.addParentStack(ResultActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+		stackBuilder.addNextIntent(resultIntent);
+		PendingIntent resultPendingIntent =
+				stackBuilder.getPendingIntent(
+						0,
+						PendingIntent.FLAG_UPDATE_CURRENT
+				);
+		mBuilder.setContentIntent(resultPendingIntent);
+		NotificationManager mNotificationManager =
+				(NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+		mNotificationManager.notify(mId, mBuilder.build());
 	}
 }
