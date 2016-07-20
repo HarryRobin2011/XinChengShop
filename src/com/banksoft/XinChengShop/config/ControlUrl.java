@@ -43,7 +43,7 @@ public class ControlUrl {
     public static final String XC_SHOP_LIST_URL = "/app/shop_searchList";// 店铺列表
     public static final String XC_POINT_SHOP_LIST_URL = "/app/shop_list";//根据坐标获取店铺信息
 
-    public static final String XC_SHOP_LOCAL_TYPE_URL = "/app/shopLocalType_list ";//本地服务外卖
+    public static final String XC_SHOP_LOCAL_TYPE_URL = "/app/shopLocalType_list ";//本地服务分类
     public static final String XC_SHOP_TYPE_LIST = "/app/shopType_list/";// 本地商城类店铺
     public static final String XC_SHOP_SERVER_TYPE_LIST = "/app/shopServerType_list";// 美食外卖服务
 

@@ -20,15 +20,12 @@ import com.banksoft.XinChengShop.model.PushData;
 import com.banksoft.XinChengShop.model.PushMessageData;
 import com.banksoft.XinChengShop.model.PushOrderData;
 import com.banksoft.XinChengShop.type.OrderStatus;
-import com.banksoft.XinChengShop.type.OrderType;
-import com.banksoft.XinChengShop.type.PushOrderType;
 import com.banksoft.XinChengShop.type.PushType;
 import com.banksoft.XinChengShop.ui.*;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.Iterator;
 
 /**
