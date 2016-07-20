@@ -15,7 +15,9 @@ import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.entity.ExpressPriceVO;
 import com.banksoft.XinChengShop.entity.Shop;
 import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
+import com.banksoft.XinChengShop.entity.ShopServerType;
 import com.banksoft.XinChengShop.model.ViewHolde;
+import com.banksoft.XinChengShop.type.ShopType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.widget.alertview.AlertView;
 import com.banksoft.XinChengShop.widget.alertview.OnItemClickListener;
@@ -69,7 +71,12 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
     private ImageLoader mImageLoader;
     private ShopProductTypeBO currentShopProductTypeBo;
     private String currentCode;// 选择的地理位置区域
-    private ExpressPriceVO currentExpressPriceVO;
+
+    private ShopType currentType;//店铺类型
+
+    private String areaNo;//所在地区
+
+    private String shopType; // 店铺分类
 
     private TextView title;
     private ImageView back;
@@ -157,10 +164,19 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
                         @Override
                         public void convert(ViewHolde viewHolde, String item) {
                             viewHolde.setText(R.id.tv_str,item);
+                            if(item.equals(ShopType.SHOP_LOCAL.getName())){
+                               currentType = ShopType.SHOP_LOCAL;
+                            }else if(item.equals(ShopType.SHOP_SERVER.getName())){
+                                currentType = ShopType.SHOP_SERVER;
+                            }else if(item.equals(ShopType.SHOP_SALE.getName())){
+                                currentType = ShopType.SHOP_SALE;
+                            }
                         }
                     });
                     break;
                 case R.id.btn_selectshopcategroy://选择商品分类
+                    Intent intent = new Intent(mContext,SelectShopCategoryActivity.class);
+                    startActivity(intent);
                     //查询
                     break;
                 case R.id.btn_selectadress://选择地址
@@ -189,7 +205,9 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
                     mAlertView.show();
                     break;
                 case R.id.titleRightButton:// 确定
+                   if(){
 
+                   }
                     break;
             }
             diglog.show();
@@ -197,8 +215,76 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
         }
     };
 
+    /**
+     * 订单提交
+     * @return
+     */
     private Shop getSubmitShop(){
-      return null;
+        String shopNameStr = shopname.getText().toString();
+        String identityStr = identity.getText().toString();
+        String telPhoneStr = phone.getText().toString();
+        String addressStr = adress.getText().toString();
+        String mainWork = mainwork.getText().toString();
+        String shopInfo = shopinfo.getText().toString();
+        String houseStr = selecthouse.getText().toString();
+        String storeStr = selectstore.getText().toString();
+        if(shopNameStr.isEmpty()){
+            alert(R.string.shop_name_no_empty);
+            return null;
+        }else if(identityStr.isEmpty()){
+            alert(R.string.identity_card_no_empty);
+            return null;
+        }else if(telPhoneStr.isEmpty()){
+             alert(R.string.telephone_no_empty);
+            return null;
+        }else if(addressStr.isEmpty()){
+             alert(R.string.address_no_empty);
+            return null;
+        }else if(mainWork.isEmpty()){
+             alert(R.string.main_work_no_empty);
+            return null;
+        }else if(shopInfo.isEmpty()){
+             alert(R.string.shop_info_no_empty);
+            return null;
+        }else if(houseStr.isEmpty()){
+             alert(R.string.house_no_empty);
+            return null;
+        }else if(storeStr.isEmpty()){
+             alert(R.string.store_no_empty);
+            return null;
+        }
+        Shop shopaa = new Shop();
+        shopaa.setName(shopNameStr);
+        shopaa.setAddress(addressStr);
+        shopaa.setIdCard(identityStr);
+        shopaa.setXinchengPoint(houseStr+"|"+storeStr);
+        shopaa.setTelephone(telPhoneStr);
+        shopaa.setDescription(shopInfo);
+        shopaa.setBusiness(mainWork);
+        shop.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.rb_shopyes){//是
+                    shopaa.setXincheng(true);
+                }else{//否
+                    shopaa.setXincheng(false);
+                }
+            }
+        });
+        /**
+         * 是否
+         */
+        flagship.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.rb_flagshipyes){//是
+                    shopaa.setShip(true);
+                }else{//否
+                    shopaa.setShip(false);
+                }
+            }
+        });
+      return shopaa;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

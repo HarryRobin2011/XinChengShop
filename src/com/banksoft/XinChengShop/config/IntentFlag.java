@@ -69,4 +69,6 @@ public class IntentFlag {
     public static final String MERGE_TYPE = "MERGE_TYPE";
     public static final String INDEX = "INDEX";
     public static final String TYPE = "TYPE";
+    public static final String ORDER_ID = "ORDER_ID";
+    public static final String ORDER_STATUS = "ORDER_STATUS";
 }

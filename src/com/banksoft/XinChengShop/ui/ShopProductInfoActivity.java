@@ -44,7 +44,6 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
     private String cachePath;
     //  private ShopProductListVO shopProductListVO;
     private String productID;
-    private String shopID;
     private ShopProductInfoDao shopProductInfoDao;
     private ShopProductInfoData shopProductInfoData;
     private LinearLayout shop;
@@ -114,7 +113,6 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         // shopProductListVO = (ShopProductListVO) getIntent().getSerializableExtra(IntentFlag.DATA);
         title.setText(R.string.product_info_title);
         productID = getIntent().getStringExtra(IntentFlag.PRODUCT_ID);
-        shopID = getIntent().getStringExtra(IntentFlag.SHOP_ID);
         cachePath = getFilesDir().getAbsolutePath() + CACHE_DIRFILE;
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);

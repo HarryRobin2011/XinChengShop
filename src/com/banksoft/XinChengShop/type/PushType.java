@@ -6,6 +6,8 @@ package com.banksoft.XinChengShop.type;
 public enum  PushType {
     PRODUCT,// 推送优惠产品消息
     SHOP,//推送活动店铺消息
+    MESSAGE,// 消息通知
+
 
     message,//推送消息
     order,// 推送订单

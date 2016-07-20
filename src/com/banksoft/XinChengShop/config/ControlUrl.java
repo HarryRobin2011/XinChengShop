@@ -121,4 +121,6 @@ public class ControlUrl {
     public static final String XC_ORDER_BUYER_DISPATCH_URL = "/app/memberOrder_returnDispatch";//买家退货发货
 
     public static final String XC_EXPRESS_COMPANY_LIST_URL = "/app/_expressCompany";// 获取物流公司列表
+
+    public static final String XC_ORDER_INFO_URL = "/app/memberOrder_find";//订单详情
 }

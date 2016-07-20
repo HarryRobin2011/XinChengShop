@@ -534,4 +534,8 @@
     <item name="service_attitude" type="id">service_attitude</item>
     <item name="anonymous" type="id">anonymous</item>
     <item name="take_photo_num" type="id">take_photo_num</item>
+    <item name="express_money" type="id">express_money</item>
+    <item name="product_total_money" type="id">product_total_money</item>
+    <item name="disbursements" type="id">disbursements</item>
+    <item name="contact_shop" type="id">contact_shop</item>
 </resources>

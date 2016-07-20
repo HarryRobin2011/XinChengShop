@@ -636,5 +636,15 @@
     <string name="birthday_no_empty">生日不能为空</string>
     <string name="area_no_empty">所在区域不能为空</string>
     <string name="member_name_no_empty">会员昵称不能为空</string>
+    <string name="contact_shop">联系卖家</string>
+    <string name="pay_method_1">支付方式</string>
+    <string name="product_total_money">商品总额</string>
+    <string name="express_money">+运费</string>
+    <string name="disbursements">实付款：</string>
+    <string name="shop_name_no_empty">店铺名称不能为空</string>
+    <string name="main_work_no_empty">主营业务不能为空</string>
+    <string name="shop_info_no_empty">店铺详情不能为空</string>
+    <string name="store_no_empty">店铺号不能为空</string>
+    <string name="house_no_empty">门牌号不能为空</string>
 
 </resources>
