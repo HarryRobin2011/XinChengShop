@@ -27,14 +27,14 @@ public class SelectShopCategoryDao extends BaseDao{
     public ShopVoTypeData getShopTypeVOData(String no){
         String url = ControlUrl.XC_SHOP_TYPE_LIST;
         String params = "no="+no;
-        ShopVoTypeData data = (ShopVoTypeData) postHttpRequest(mContext,url,params, JSONHelper.XC_SHOP_SERVER_TYPE_DATA,true);
+        ShopVoTypeData data = (ShopVoTypeData) postHttpRequest(mContext,url,params, JSONHelper.XC_SHOP_TYPE_DATA,true);
         return data;
     }
 
     public ShopLocalTypeData getShopLocalTypeData(String no){
         String url = ControlUrl.XC_SHOP_LOCAL_TYPE_URL;
         String params = "no="+no;
-        ShopLocalTypeData data = (ShopLocalTypeData) postHttpRequest(mContext,url,params, JSONHelper.XC_SHOP_SERVER_TYPE_DATA,true);
+        ShopLocalTypeData data = (ShopLocalTypeData) postHttpRequest(mContext,url,params, JSONHelper.XC_SHOP_LOCAL_TYPE_DATA,true);
         return data;
     }
 }

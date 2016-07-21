@@ -44,7 +44,7 @@ public class ControlUrl {
     public static final String XC_POINT_SHOP_LIST_URL = "/app/shop_list";//根据坐标获取店铺信息
 
     public static final String XC_SHOP_LOCAL_TYPE_URL = "/app/shopLocalType_list ";//本地服务分类
-    public static final String XC_SHOP_TYPE_LIST = "/app/shopType_list/";// 本地商城类店铺
+    public static final String XC_SHOP_TYPE_LIST = "/app/shopType_list";// 本地商城类店铺
     public static final String XC_SHOP_SERVER_TYPE_LIST = "/app/shopServerType_list";// 美食外卖服务
 
 
@@ -82,6 +82,11 @@ public class ControlUrl {
     public static final String THIRD_LOGIN_LOGIN = "/app/thirdLogin_login";//第三方账号关联
 
     public static final String SHOP_INFO_MESSAGE_FIND = "/app/shopApply_find";// 申请开店时 查询店铺信息
+
+
+    public static final String SHOP_INFO_MESSAGE_OPEN_SHOP = "/app/_shopApply";// 会员申请开店
+
+
 
     public static final String APPLY_LEAFLET_URL = "/app/_dispatchMemberApply";//申请派单员
 

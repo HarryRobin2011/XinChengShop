@@ -646,5 +646,7 @@
     <string name="shop_info_no_empty">店铺详情不能为空</string>
     <string name="store_no_empty">店铺号不能为空</string>
     <string name="house_no_empty">门牌号不能为空</string>
+    <string name="please_select_shop_type">请选择店铺类型</string>
+    <string name="apple_open_shop_success">申请成功，等待管理员审核~</string>
 
 </resources>

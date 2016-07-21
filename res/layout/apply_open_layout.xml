@@ -54,6 +54,8 @@
                               android:hint="@string/please_input_apply_shopname"
                               style="@style/text_style_3"
                               android:paddingLeft="10.0dp"
+                              android:singleLine="true"
+                              android:imeOptions="actionNext"
                               android:layout_weight="1"/>
                 </LinearLayout>
                 <View style="@style/line1"/>
@@ -72,6 +74,9 @@
                               android:hint="@string/please_input_apply_identity"
                               style="@style/text_style_3"
                               android:paddingLeft="10.0dp"
+                              android:singleLine="true"
+                              android:inputType="number"
+                              android:imeOptions="actionNext"
                               android:layout_weight="1"/>
                 </LinearLayout>
                 <View style="@style/line1"/>
@@ -90,6 +95,9 @@
                               android:hint="@string/please_select_apply_phone"
                               style="@style/text_style_3"
                               android:paddingLeft="10.0dp"
+                              android:imeOptions="actionNext"
+                              android:inputType="phone"
+                              android:singleLine="true"
                               android:layout_weight="1"/>
                 </LinearLayout>
                 <View style="@style/line1"/>
@@ -177,6 +185,8 @@
                               android:background="@color/white"
                               android:hint="@string/please_select_apply_adress"
                               style="@style/text_style_3"
+                              android:imeOptions="actionNext"
+                              android:singleLine="true"
                               android:paddingLeft="20.0dp"
                               android:layout_weight="1"/>
                 </LinearLayout>
@@ -212,6 +222,8 @@
                               android:hint="@string/please_select_apply_work"
                               style="@style/text_style_3"
                               android:paddingLeft="20.0dp"
+                              android:imeOptions="actionNext"
+                              android:singleLine="true"
                               android:layout_weight="1"/>
                 </LinearLayout>
                 <View style="@style/line1"/>
@@ -348,6 +360,7 @@
                             android:scrollbars="vertical"
                             android:minLines="7"
                             android:gravity="top|left"
+                            android:imeOptions="actionDone"
                             android:background="@android:drawable/edit_text"
                             style="@style/text_style_3" android:id="@+id/et_shopinfo"/>
                 </RelativeLayout>
