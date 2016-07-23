@@ -648,5 +648,21 @@
     <string name="house_no_empty">门牌号不能为空</string>
     <string name="please_select_shop_type">请选择店铺类型</string>
     <string name="apple_open_shop_success">申请成功，等待管理员审核~</string>
+    <string name="retuen_type">退款类型</string>
+    <string name="my_return_money">我要退款</string>
+    <string name="return_my_goods">我要退货</string>
+    <string name="retuen_reason">退款原因</string>
+    <string name="please_select_return_type">请选择退款类型</string>
+    <string name="return_money_amount">退款金额</string>
+    <string name="please_input_return_money_amount">请输入退款金额</string>
+    <string name="return_description">退款说明</string>
+    <string name="please_input_return_describe">请输入退款说明</string>
+    <string name="submit_photo_max_three">上传凭证最多3张</string>
+    <string name="submit_apply">提交申请</string>
+    <string name="please_select_return_money_reason">请输入退款原因</string>
+    <string name="return_goods_title">退款申请</string>
+    <string name="return_money_no_empty">退款金额不能为空</string>
+    <string name="return_reason_no_empty">退款原因不能为空</string>
+    <string name="please_select_return_good_reason">请输入退货原因</string>
 
 </resources>

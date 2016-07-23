@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+        <LinearLayout
+                android:id="@id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10.0dp"
+                android:paddingRight="10.0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:paddingLeft="10.0dp"
+                      android:textColor="@color/text_black"
+                      android:gravity="center_vertical"
+                      android:text="@string/retuen_type"/>
+            <RadioGroup android:id="@id/return_group_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                <RadioButton
+                        android:id="@id/return_money"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:button="@null"
+                        android:background="@drawable/button_white_bg"
+                        android:drawableRight="@android:drawable/btn_radio"
+                        android:text="@string/my_return_money"
+                        android:checked="true"
+                        style="@style/text_style_3"
+                        android:paddingLeft="10.0dp"/>
+                <View style="@style/line2"/>
+                <RadioButton
+                        android:id="@+id/return_the_goods"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:button="@null"
+                        android:background="@drawable/button_white_bg"
+                        android:drawableRight="@android:drawable/btn_radio"
+                        android:text="@string/return_my_goods"
+                        style="@style/text_style_3"
+                        android:paddingLeft="10.0dp"/>
+            </RadioGroup>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:paddingLeft="10.0dp"
+                      android:textColor="@color/text_black"
+                      android:gravity="center_vertical"
+                      android:text="@string/retuen_reason"/>
+            <LinearLayout
+                    android:id="@id/please_select_return_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/button_white_bg">
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_100"
+                          style="@style/text_style_3"
+                          android:paddingLeft="10.0dp"
+                          android:gravity="top"
+                          android:paddingTop="10.0dp"
+                          android:layout_weight="1"
+                          android:background="@drawable/edit_text_white_bg"
+                          android:hint="@string/please_select_return_money_reason"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="@dimen/height_50"
+                          android:paddingLeft="10.0dp"
+                          android:textColor="@color/text_black"
+                          android:gravity="center_vertical"
+                          android:text="@string/return_money_amount"/>
+                <TextView android:id="@id/order_money"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          style="@style/text_style_3"
+                          android:textColor="@color/bg_gray_dark"
+                          android:layout_marginLeft="10.0dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@id/please_select_return_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/button_white_bg">
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          style="@style/text_style_3"
+                          android:paddingLeft="10.0dp"
+                          android:layout_weight="1"
+                          android:background="@drawable/edit_text_white_bg"
+                          android:hint="@string/please_input_return_money_amount"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:paddingLeft="10.0dp"
+                      android:textColor="@color/text_black"
+                      android:gravity="center_vertical"
+                      android:visibility="gone"
+                      android:text="@string/return_description"/>
+            <LinearLayout
+                    android:id="@id/please_select_return_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:background="@drawable/button_white_bg">
+                <EditText
+                          android:id="@id/return_describe"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          style="@style/text_style_3"
+                          android:paddingLeft="10.0dp"
+                          android:layout_weight="1"
+                          android:background="@drawable/edit_text_white_bg"
+                          android:hint="@string/please_input_return_describe"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@id/submit_photo_max_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:background="@drawable/edit_gray_transparent_bg"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10.0dp"
+                    android:orientation="horizontal">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:paddingLeft="10.0dp"
+                           android:src="@drawable/camera"/>
+                <LinearLayout android:id="@id/image_layout"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:orientation="horizontal"
+                              android:gravity="right"
+                              android:visibility="gone"
+                              android:layout_weight="1"/>
+                <TextView
+                        android:id="@id/submit_photo_max_alert"
+                         android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          style="@style/text_style_3"
+                          android:gravity="right|center_vertical"
+                          android:paddingRight="10.0dp"
+                          android:text="@string/submit_photo_max_three"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <Button android:id="@id/submit_apply"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:gravity="center"
+            android:text="@string/submit_apply"
+            android:layout_alignParentBottom="true"
+            style="@style/text_style_2"
+            android:textColor="@color/text_white"
+            android:background="@drawable/click_red_button"/>
+</LinearLayout>

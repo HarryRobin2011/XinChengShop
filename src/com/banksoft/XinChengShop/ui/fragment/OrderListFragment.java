@@ -136,6 +136,13 @@ public class OrderListFragment extends XCBaseListFragment{
                 break;
             case R.id.refund://退款
                 break;
+            case R.id.order_list_item:// 订单详情
+                Intent orderIntent = new Intent(mContext,OrderInfoActivity.class);
+                OrderVO orderVO = (OrderVO) bailaAdapter.dataList.get(position);
+                orderIntent.putExtra(IntentFlag.ORDER_ID,orderVO.getId());
+                orderIntent.putExtra(IntentFlag.ORDER_STATUS,orderVO.getStatus());
+                startActivityForResult(orderIntent,Activity.RESULT_FIRST_USER);
+                break;
         }
     }
 

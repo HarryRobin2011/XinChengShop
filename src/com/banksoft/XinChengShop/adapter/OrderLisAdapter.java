@@ -44,6 +44,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         TextView refund;// 申请退款
         private LinearLayout productContent;
         private LinearLayout toolLayout;
+        private LinearLayout orderItemLayout;
 
     }
 
@@ -66,6 +67,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         orderSaleHolder.pay = (TextView) cellView.findViewById(R.id.pay);
         orderSaleHolder.returnGoods = (TextView) cellView.findViewById(R.id.return_the_goods);
         orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
+        orderSaleHolder.orderItemLayout = (LinearLayout) cellView.findViewById(R.id.order_list_item);
         return orderSaleHolder;
     }
 
@@ -107,6 +109,8 @@ public class OrderLisAdapter extends BaseMyAdapter{
         holder.pay.setTag(position);
         holder.comments.setOnClickListener(this);
         holder.comments.setTag(position);
+        holder.orderItemLayout.setOnClickListener(this);
+        holder.orderItemLayout.setTag(position);
         return cellView;
     }
 
