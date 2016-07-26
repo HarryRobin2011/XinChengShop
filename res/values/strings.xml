@@ -664,5 +664,20 @@
     <string name="return_money_no_empty">退款金额不能为空</string>
     <string name="return_reason_no_empty">退款原因不能为空</string>
     <string name="please_select_return_good_reason">请输入退货原因</string>
+    <string name="my_bank_card">我的银行卡</string>
+    <string name="card_holder">持卡人</string>
+    <string name="bank_name">所属银行</string>
+    <string name="card_no">银行卡号</string>
+    <string name="open_card_address">开户地址</string>
+    <string name="card_holder_no_empty">持卡人不能为空</string>
+    <string name="bank_name_no_empty">所属银行不能为空</string>
+    <string name="card_no_no_empty">银行卡号不能为空</string>
+    <string name="open_card_address_no_empty">开户地址不能为空</string>
+    <string name="my_bank_add_title">添加银行卡</string>
+    <string name="bank_save_success">保存银行卡成功</string>
+    <string name="bank_update_success">修改成功</string>
+    <string name="manager">管理</string>
+    <string name="bank_delete_success">删除成功</string>
+    <string name="apply_with_draw">申请提现</string>
 
 </resources>

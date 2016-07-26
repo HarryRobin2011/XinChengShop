@@ -12,7 +12,7 @@ import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
  * Created by Robin on 2016/4/8.
  */
 public class WalletManagerActivity extends XCBaseActivity implements View.OnClickListener{
-    private LinearLayout memberBalanceLayout, memberScoreLayout;
+    private LinearLayout memberBalanceLayout, memberScoreLayout,myBank,applyWithDraw;
     private TextView title, moneyBalance, scoreBalance;
     private ImageView back;
 
@@ -29,6 +29,7 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
         moneyBalance = (TextView) findViewById(R.id.money_balance);
         scoreBalance = (TextView) findViewById(R.id.score_balance);
         back = (ImageView) findViewById(R.id.title_back_button);
+        myBank = (LinearLayout) findViewById(R.id.my_bank);
     }
 
     @Override
@@ -60,6 +61,14 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
             case R.id.user_score:
                 Intent scoreIntent = new Intent(mContext,ScoreListActivity.class);
                 startActivity(scoreIntent);
+                break;
+            case R.id.my_bank:
+                Intent intent = new Intent(mContext,MyBankListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.apply_with_draw:
+                Intent withDraw = new Intent(mContext,ApplyWithDrawActivity.class);
+                startActivity(withDraw);
                 break;
         }
     }

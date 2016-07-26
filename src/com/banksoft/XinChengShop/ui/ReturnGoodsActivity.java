@@ -197,7 +197,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
 
         @Override
         protected IsFlagData doInBackground(ReturnGoodsDao... params) {
-            return params[0].;
+            return null;
         }
     }
 }

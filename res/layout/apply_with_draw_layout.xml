@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <LinearLayout android:id="@id/select_bank_card"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_80"
+                  android:orientation="horizontal"
+                  android:background="@drawable/button_white_bg">
+
+    </LinearLayout>
+</LinearLayout>

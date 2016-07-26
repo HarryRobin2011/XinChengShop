@@ -54,6 +54,7 @@ public class ProductManagerListFragment extends XCBaseListFragment {
         }
 
         xListView.setDividerHeight(1);
+        setListDao();
     }
 
     @Override

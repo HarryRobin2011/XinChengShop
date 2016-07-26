@@ -199,7 +199,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
         mListView.setPullLoadEnable(false);
         mListView.setXListViewListener(this);
-        mListView.setPullRefreshEnable(false);
+        mListView.setPullRefreshEnable(true);
 
         searchText.setOnClickListener(this);
         mesageLayout.setOnClickListener(this);

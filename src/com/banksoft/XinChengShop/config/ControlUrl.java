@@ -70,6 +70,11 @@ public class ControlUrl {
     public static final String XC_PAY_TO_WEIXIN_URL = "/app/_payToWeixin";//微信流水号
     public static final String UPDATE_MEMBER_INFO_URL = "/app/memberInfo_updateEmail";//修改电子邮箱
     public static final String XC_UPDATA_MEMBER_INFO_URL = "/app/memberInfo_edit";//修改会员资料
+    public static final String XC_MY_BANK_LIST_URL = "/app/memberBank_list";//我的银行卡
+    public static final String XC_BANK_SAVE_URL = "/app/memberBank_save";// 保存银行卡
+    public static final String XC_BANK_DELETE_URL = "/app/memberBank_delete";//删除银行卡
+    public static final String XC_BANNER_FIND_URL = "/app/memberBank_edit";// 查询银行卡
+    public static final String XC_BANK_UPDATE_URL = "/app/memberBank_edit";//修改银行卡
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 

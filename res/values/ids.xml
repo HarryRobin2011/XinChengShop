@@ -547,4 +547,12 @@
     <item name="submit_photo_max_alert" type="id">submit_photo_max_three</item>
     <item name="return_group_type" type="id">return_group_type</item>
     <item name="return_describe" type="id">return_describe</item>
+    <item name="my_bank" type="id">my_bank</item>
+    <item name="type" type="id">type</item>
+    <item name="my_bank_card_number" type="id">my_bank_card_number</item>
+    <item name="bank_name" type="id">bank_name</item>
+    <item name="card_no" type="id">card_no</item>
+    <item name="open_card_address" type="id">open_card_address</item>
+    <item name="apply_with_draw" type="id">apply_with_draw</item>
+    <item name="select_bank_card" type="id">apply_with_draw_layout</item>
 </resources>
