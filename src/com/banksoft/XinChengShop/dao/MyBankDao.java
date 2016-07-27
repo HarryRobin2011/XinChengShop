@@ -7,6 +7,7 @@ import com.banksoft.XinChengShop.entity.Bank;
 import com.banksoft.XinChengShop.model.BankData;
 import com.banksoft.XinChengShop.model.BankListData;
 import com.banksoft.XinChengShop.model.IsFlagData;
+import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 
 /**
@@ -78,6 +79,13 @@ public class MyBankDao extends BaseDao {
         String url = ControlUrl.XC_BANK_UPDATE_URL;
         String params = getParams(bank,"data");
         IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params,JSONHelper.IS_FLAG_DATA,true);
+        return data;
+    }
+
+    public MemberVOData withDraw(){
+         String url = ControlUrl.XC_APPLY_WITH_DRAW;
+         String params = "";
+        MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_VO_DATA,false);
         return data;
     }
 }

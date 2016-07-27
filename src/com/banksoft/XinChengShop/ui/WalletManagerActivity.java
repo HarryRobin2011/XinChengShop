@@ -30,6 +30,7 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
         scoreBalance = (TextView) findViewById(R.id.score_balance);
         back = (ImageView) findViewById(R.id.title_back_button);
         myBank = (LinearLayout) findViewById(R.id.my_bank);
+        applyWithDraw = (LinearLayout) findViewById(R.id.apply_with_draw);
     }
 
     @Override
@@ -46,6 +47,9 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
         back.setOnClickListener(this);
         memberBalanceLayout.setOnClickListener(this);
         memberScoreLayout.setOnClickListener(this);
+        myBank.setOnClickListener(this);
+        applyWithDraw.setOnClickListener(this);
+
     }
 
     @Override

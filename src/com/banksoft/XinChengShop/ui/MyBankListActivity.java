@@ -87,7 +87,8 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(BankListData bankListData) {
             super.onPostExecute(bankListData);
-            if(bankListData == null){
+            mProgressBar.setVisibility(View.GONE);
+            if(bankListData != null){
                if(bankListData.isSuccess()){
                    if(myBankListAdapter == null){
                        myBankListAdapter = new MyBankListAdapter(mContext,bankListData.getData());

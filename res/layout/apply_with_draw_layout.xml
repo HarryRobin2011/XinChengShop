@@ -7,9 +7,58 @@
     <include layout="@layout/title"/>
     <LinearLayout android:id="@id/select_bank_card"
                   android:layout_width="match_parent"
-                  android:layout_height="@dimen/height_80"
-                  android:orientation="horizontal"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
                   android:background="@drawable/button_white_bg">
+        <TextView android:id="@id/name"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_40"
+                  android:layout_marginLeft="10.0dp"
+                  style="@style/text_style_3"
+                  android:text="中国农业银行"/>
+        <TextView android:id="@id/no"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_40"
+                  android:layout_marginLeft="10.0dp"
+                  style="@style/text_style_3"
+                  android:text="6222 6000 1150 772"/>
+        <TextView android:id="@id/account"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_40"
+                  android:layout_marginLeft="10.0dp"
+                  style="@style/text_style_3"
+                  android:text="杨斌"/>
+    </LinearLayout>
+    <LinearLayout android:id="@id/select_bank_card"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="10.0dp"
+                  android:background="@drawable/button_white_bg">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="@dimen/height_40"
+                  android:layout_marginLeft="10.0dp"
+                  style="@style/text_style_3"
+                  android:text="转出金额："/>
+        <EditText android:id="@id/money"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_40"
+                  android:layout_marginLeft="10.0dp"
+                  android:layout_weight="1"
+                  android:background="@drawable/edit_text_white_bg"
+                  style="@style/text_style_3"/>
 
     </LinearLayout>
+
+    <Button android:id="@id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            style="@style/text_style_3"
+            android:layout_marginTop="20.0dp"
+            android:background="@drawable/click_red_button"
+            android:text="@string/ok"
+            android:gravity="center"
+            android:layout_marginLeft="10.0dp"
+            android:layout_marginRight="10.0dp"
+            android:textColor="@color/text_white"/>
 </LinearLayout>

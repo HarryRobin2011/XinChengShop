@@ -154,7 +154,7 @@ public class MyBankEditActivity extends XCBaseActivity implements View.OnClickLi
         TextView cancel = (TextView) view.findViewById(R.id.cancel);
         delete.setOnClickListener(this);
         cancel.setOnClickListener(this);
-        popupWindowUtil = new PopupWindowUtil(MyBankEditActivity.this,view,findViewById(R.id.delete));
+        popupWindowUtil = new PopupWindowUtil(MyBankEditActivity.this,view,findViewById(R.id.open_card_address));
         popupWindowUtil.showPopupWindow();
     }
 }

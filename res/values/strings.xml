@@ -679,5 +679,6 @@
     <string name="manager">管理</string>
     <string name="bank_delete_success">删除成功</string>
     <string name="apply_with_draw">申请提现</string>
+    <string name="with_draw">提现</string>
 
 </resources>

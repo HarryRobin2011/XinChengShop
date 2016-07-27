@@ -16,9 +16,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.dao.SelectDialogDao;
 import com.banksoft.XinChengShop.model.base.BaseData;
-import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.widget.alertview.OnItemClickListener;
-import twitter4j.JSONObjectType;
 
 import java.lang.reflect.Type;
 import java.util.LinkedList;

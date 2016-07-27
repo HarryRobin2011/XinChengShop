@@ -76,6 +76,8 @@ public class ControlUrl {
     public static final String XC_BANNER_FIND_URL = "/app/memberBank_edit";// 查询银行卡
     public static final String XC_BANK_UPDATE_URL = "/app/memberBank_edit";//修改银行卡
 
+    public static final String XC_APPLY_WITH_DRAW = "/app/withdraw_save"; //申请提现
+
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 
     public static final String XC_SHOP_PRODUCT_TYPE_LIST = "/app/shopProductType_list";// 店铺商品分类

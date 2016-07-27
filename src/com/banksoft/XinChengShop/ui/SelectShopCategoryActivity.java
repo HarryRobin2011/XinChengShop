@@ -17,7 +17,6 @@ import com.banksoft.XinChengShop.type.ShopType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.List;
 
 /**

@@ -10,7 +10,6 @@ import com.banksoft.XinChengShop.adapter.CommonListAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
-import com.banksoft.XinChengShop.ui.OrderInfoActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
 import com.banksoft.XinChengShop.utils.JSONHelper;
@@ -33,12 +32,12 @@ public class ExpressBillListFragment extends XCBaseListFragment{
 
     @Override
     public void request() {
-        currentType = (ExpressBillListActivity.OperaType) getArguments().get(IntentFlag.TYPE);
+        currentType = (ExpressBillListActivity.OperaType) getArguments().getSerializable(IntentFlag.TYPE);
         if(ExpressBillListActivity.OperaType.MY_DISPATH_ORDER.equals(currentType)){//�ҵ����Ͷ���
-            url = ControlUrl.DISPATCH_ORDER_LIST;
+            url = ControlUrl.EXPRESS_BILL_ORDER_LIST_URL;
             params = "memberId="+activity.member.getMember().getId();
         }else{
-            url = ControlUrl.EXPRESS_BILL_ORDER_LIST_URL;
+            url = ControlUrl.DISPATCH_ORDER_LIST;
             params = "memberId="+activity.member.getMember().getId();
         }
 

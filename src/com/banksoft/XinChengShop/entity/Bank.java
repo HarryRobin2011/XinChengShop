@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.entity;
 
+import com.banksoft.XinChengShop.entity.base.BaseEntity;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -7,7 +9,7 @@ package com.banksoft.XinChengShop.entity;
  * Time: 下午3:40
  * To change this template use File | Settings | File Templates.
  */
-public class Bank {
+public class Bank extends BaseEntity{
     private String id;
     private String account; //会员ID，memberInfo.id
     private String no;    //卡号

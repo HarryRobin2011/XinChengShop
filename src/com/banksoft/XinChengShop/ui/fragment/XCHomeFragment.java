@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -33,7 +32,6 @@ import com.banksoft.XinChengShop.utils.LocationUtils;
 import com.banksoft.XinChengShop.utils.update.UpdateUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.XListView;
-import com.banksoft.XinChengShop.widget.imagezoom.easing.Linear;
 import com.banksoft.XinChengShop.widget.rollviewpager.RollPagerView;
 import com.banksoft.XinChengShop.widget.rollviewpager.hintview.ColorPointHintView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -280,6 +278,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
     }
 
     private void setHomeFragment(HashMap<String, BaseData> dataHashMap) {
+        onLoad();
         AdvertisementData advertisementData = (AdvertisementData) dataHashMap.get(MapFlag.DATA_0);
         ProductTypeData productTypeData = (ProductTypeData) dataHashMap.get(MapFlag.DATA_1);
         ShopProductListData shopProductListData = (ShopProductListData) dataHashMap.get(MapFlag.DATA_2);

@@ -1,6 +1,5 @@
 package com.banksoft.XinChengShop.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
@@ -21,7 +20,7 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
     private ImageView back;
     private ProgressBar mProgressBar;
     private DispatchDao dispatchDao;
-    private int APPLY_DISPATCHER = 0;// ÉêÇëÅÉµ¥Ô±
+    private int APPLY_DISPATCHER = 0;// ç”³è¯·æ´¾å•å‘˜
 
     @Override
     protected void initContentView() {
@@ -60,7 +59,7 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
     @Override
     protected void initOperate() {
         if(dispatchDao == null){
-           dispatchDao = new DispatchDao(mContext);
+            dispatchDao = new DispatchDao(mContext);
         }
         new MyThread().execute(dispatchDao);
     }
@@ -68,12 +67,12 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.my_dispatch_order:// ÎÒµÄÅÉËÍ¶©µ¥
+            case R.id.my_dispatch_order:// æˆ‘çš„æ´¾é€è®¢å•
                 Intent intent = new Intent(mContext,ExpressBillListActivity.class);
                 intent.putExtra(IntentFlag.TYPE,ExpressBillListActivity.OperaType.MY_DISPATH_ORDER);
                 startActivity(intent);
                 break;
-            case R.id.new_dispatch_order://ĞÂµÄÅÉËÍ¶©µ¥
+            case R.id.new_dispatch_order://æ–°çš„æ´¾é€è®¢å•
                 Intent newIntent = new Intent(mContext,ExpressBillListActivity.class);
                 newIntent.putExtra(IntentFlag.TYPE,ExpressBillListActivity.OperaType.NEW_DISPATCH_ORDER);
                 startActivity(newIntent);
@@ -81,7 +80,7 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
             case R.id.title_back_button://
                 finish();
                 break;
-            case R.id.apply_dispatch:// ÉêÇëÅÉµ¥Ô±
+            case R.id.apply_dispatch:// ç”³è¯·æ´¾å•å‘˜
                 Intent dispatchIntent = new Intent(mContext,ApplyDispatcherActivity.class);
                 startActivity(dispatchIntent);
                 break;
@@ -98,16 +97,16 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
 
         @Override
         protected DispatchMemberData doInBackground(DispatchDao... params) {
-            return params[0].getDispatchMemberData(member.getMember().getId(),true);
+            return params[0].getDispatchMemberData(member.getMember().getId(),false);
         }
 
         @Override
         protected void onPostExecute(DispatchMemberData dispatchMemberData) {
             super.onPostExecute(dispatchMemberData);
             mProgressBar.setVisibility(View.GONE);
-            if(dispatchMemberData.isSuccess()){// ÊÇÅÉµ¥Ô±
-                 toolLayout.setVisibility(View.VISIBLE);
-                 applyDispatch.setVisibility(View.GONE);
+            if(dispatchMemberData.isSuccess()){// æ˜¯æ´¾å•å‘˜
+                toolLayout.setVisibility(View.VISIBLE);
+                applyDispatch.setVisibility(View.GONE);
             }else{
                 toolLayout.setVisibility(View.GONE);
                 applyDispatch.setVisibility(View.VISIBLE);

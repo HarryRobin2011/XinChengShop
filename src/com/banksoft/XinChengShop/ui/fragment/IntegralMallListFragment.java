@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.banksoft.XinChengShop.adapter.IntegralMallListAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
+import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.entity.ShopProductListVO;
+import com.banksoft.XinChengShop.ui.ScoreProductInfoActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
 import com.banksoft.XinChengShop.utils.JSONHelper;
@@ -65,9 +68,9 @@ public class IntegralMallListFragment extends XCBaseListFragment{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Intent intent = new Intent(mContext,ScoreProductInfoActivity.class);
-//        intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position - 1)).getId());
-//        startActivityForResult(intent,Activity.RESULT_FIRST_USER);
+        Intent intent = new Intent(mContext,ScoreProductInfoActivity.class);
+        intent.putExtra(IntentFlag.PRODUCT_ID, ((ShopProductListVO) bailaAdapter.getItem(position - 1)).getId());
+        startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
 
     @Override
