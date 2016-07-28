@@ -129,6 +129,7 @@
         <activity android:name=".ui.MyBankAddActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.MyBankEditActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.ApplyWithDrawActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.WithDrawTariffActivity" android:screenOrientation="portrait"/>
         <!--   <activity
                 android:name="com.tencent.open.yyb.AppbarActivity"
                 android:configChanges="orientation|keyboardHidden"

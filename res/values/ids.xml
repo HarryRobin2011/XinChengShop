@@ -555,4 +555,6 @@
     <item name="open_card_address" type="id">open_card_address</item>
     <item name="apply_with_draw" type="id">apply_with_draw</item>
     <item name="select_bank_card" type="id">apply_with_draw_layout</item>
+    <item name="tariff" type="id">tariff</item>
+    <item name="add_layout" type="id">add_layout</item>
 </resources>

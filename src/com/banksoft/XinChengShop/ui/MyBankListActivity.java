@@ -1,5 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
@@ -8,6 +9,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.MyBankListAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MyBankDao;
+import com.banksoft.XinChengShop.entity.Bank;
 import com.banksoft.XinChengShop.model.BankListData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 
@@ -24,6 +26,7 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
     private MyBankDao myBankDao;
     private MyBankListAdapter myBankListAdapter;
     private Button add;
+    private boolean isSelect;// 是否选择用
 
     @Override
     protected void initContentView() {
@@ -41,6 +44,7 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        isSelect = getIntent().getBooleanExtra(IntentFlag.IS_SELECT,false);
         title.setText(R.string.my_bank_card);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
@@ -67,9 +71,18 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(mContext,MyBankEditActivity.class);
-        intent.putExtra(IntentFlag.DATA, (Serializable) myBankListAdapter.dataList.get(position));
-        startActivity(intent);
+        if(isSelect){
+            Bank bank = (Bank) myBankListAdapter.dataList.get(position);
+            Intent intent = new Intent();
+            intent.putExtra(IntentFlag.DATA,bank);
+            setResult(Activity.RESULT_OK,intent);
+            finish();
+        }else{
+            Intent intent = new Intent(mContext,MyBankEditActivity.class);
+            intent.putExtra(IntentFlag.DATA, (Serializable) myBankListAdapter.dataList.get(position));
+            startActivity(intent);
+        }
+
     }
 
     private class MyTask extends AsyncTask<MyBankDao,String,BankListData>{

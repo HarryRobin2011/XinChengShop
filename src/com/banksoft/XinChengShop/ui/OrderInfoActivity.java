@@ -70,7 +70,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         orderNo = (TextView) findViewById(R.id.order_no);
         contentLayout = (LinearLayout) findViewById(R.id.content_layout);
         toolLayout = (LinearLayout) findViewById(R.id.tool_layout);
-        addressLayout = (LinearLayout) findViewById(R.id.titleText);
+        addressLayout = (LinearLayout) findViewById(R.id.address_layout);
         shippingTelPhone = (TextView) findViewById(R.id.telPhone);
         shipName = (TextView) findViewById(R.id.titleText);
         shipAddress = (TextView) findViewById(R.id.address);

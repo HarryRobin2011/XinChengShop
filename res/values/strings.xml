@@ -680,5 +680,12 @@
     <string name="bank_delete_success">删除成功</string>
     <string name="apply_with_draw">申请提现</string>
     <string name="with_draw">提现</string>
+    <string name="with_draw_tariff">提现费率</string>
+    <string name="the_bank_no_empty">银行卡不能为空</string>
+    <string name="money_no_empty">金额不能为空</string>
+    <string name="money_no_zero">金额大于0</string>
+    <string name="with_draw_money_greater_than_balance">提现金额大于余额</string>
+    <string name="apply_with_draw_success">申请提现成功，请等待管理员审核</string>
+    <string name="add_bank">添加银行卡</string>
 
 </resources>

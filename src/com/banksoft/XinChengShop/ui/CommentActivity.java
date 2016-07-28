@@ -19,7 +19,7 @@ public class CommentActivity extends XCBaseActivity implements View.OnClickListe
     private ViewPager mViewPager;
     private TabPageIndicator indicator;
     private CommonTypeAdapter commonTypeAdapter;
-    private ImageView back,more;
+    private ImageView back;
     private TextView title;
 
 
@@ -33,20 +33,21 @@ public class CommentActivity extends XCBaseActivity implements View.OnClickListe
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         indicator = (TabPageIndicator) findViewById(R.id.tab_page_indicator);
         back = (ImageView) findViewById(R.id.title_back_button);
-        more = (ImageView) findViewById(R.id.more);
+       // more = (ImageView) findViewById(R.id.more);
         title = (TextView) findViewById(R.id.titleText);
     }
 
     @Override
     protected void initData() {
         isLogin();
+        title.setText(R.string.my_self_comment);
     }
 
     @Override
     protected void initOperate() {
         back.setOnClickListener(this);
         back.setVisibility(View.VISIBLE);
-        more.setOnClickListener(this);
+      //  more.setOnClickListener(this);
         if (commonTypeAdapter == null) {
             commonTypeAdapter = new CommonTypeAdapter(getSupportFragmentManager(), statuses);
         }

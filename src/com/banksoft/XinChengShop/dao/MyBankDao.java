@@ -8,6 +8,7 @@ import com.banksoft.XinChengShop.model.BankData;
 import com.banksoft.XinChengShop.model.BankListData;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.model.MemberVOData;
+import com.banksoft.XinChengShop.ui.MemberRateVOListData;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 
 /**
@@ -82,10 +83,24 @@ public class MyBankDao extends BaseDao {
         return data;
     }
 
-    public MemberVOData withDraw(){
+    /**
+     * 申请体现
+     * @return
+     */
+    public MemberVOData applyWithDraw(){
          String url = ControlUrl.XC_APPLY_WITH_DRAW;
          String params = "";
         MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_VO_DATA,false);
+        return data;
+    }
+
+    /**
+     * 提现费率列表
+     */
+    public MemberRateVOListData getMemberRateVOListData(String id){
+        String url = ControlUrl.XC_MEMBER_RATE_LIST;
+        String params = "memberId="+id;
+        MemberRateVOListData data = (MemberRateVOListData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_RATE_LIST_DATA,true);
         return data;
     }
 }
