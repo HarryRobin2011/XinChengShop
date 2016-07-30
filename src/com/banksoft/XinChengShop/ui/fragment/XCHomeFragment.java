@@ -168,19 +168,11 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
         mListView.addHeaderView(bannerView);
         mListView.setAdapter(null);
-        JPushInterface.setAliasAndTags(mContext,"",null,new JPushCallback());
 
      ///  leftBtn.setVisibility(View.VISIBLE);
       // leftBtn.setOnClickListener(this);
     }
 
-    private class JPushCallback implements TagAliasCallback{
-
-        @Override
-        public void gotResult(int i, String s, Set<String> set) {
-
-        }
-    }
 
     @Override
     public void initOperation() {
@@ -260,7 +252,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         protected HashMap<String, BaseData> doInBackground(HomeDao... params) {
             AdvertisementData advertisementData = params[0].getAdvertisementData(true);
             ProductTypeData productTypeData = params[0].getProductTypeListData(Integer.MAX_VALUE, 0, cacheFlag);
-            ShopProductListData shopListData = params[0].getShopProductListData(cacheFlag, 0, 20, 1);
+            ShopProductListData shopListData = params[0].getShopProductListData(cacheFlag, 0, 30, 1);
             HashMap<String, BaseData> dataHashMap = new HashMap<>();
             dataHashMap.put(MapFlag.DATA_0, advertisementData);
             dataHashMap.put(MapFlag.DATA_1, productTypeData);

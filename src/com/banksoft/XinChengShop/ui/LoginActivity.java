@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.LoginDao;
 import com.banksoft.XinChengShop.model.MemberData;
@@ -20,6 +22,7 @@ import com.banksoft.XinChengShop.model.MemberInfoData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
+import com.banksoft.XinChengShop.utils.JPushUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.tencent.connect.UserInfo;
@@ -34,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -64,6 +68,28 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
 
     private UMShareAPI umShareAPI;
+
+    private String TAG = "HarryRobin";
+
+    private static final int MSG_SET_ALIAS = 1001;
+    private static final int MSG_SET_TAGS = 1002;
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+                    break;
+
+
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
 
 
     @Override
@@ -283,6 +309,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             myProgressDialog.dismiss();
             if (memberData != null) {
                 if (memberData.isSuccess()) {
+                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, memberData.getData().getMember().getId()));
                     saveLogin(memberData);
                     setResult(RESULT_OK);//返回登陆成功状态
                     CommonUtil.operationKeyboard(getApplicationContext());
@@ -296,6 +323,36 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             }
         }
     }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    break;
+
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i(TAG, logs);
+                    if (JPushUtil.isConnected(getApplicationContext())) {
+                        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    } else {
+                        Log.i(TAG, "No network");
+                    }
+                    break;
+
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e(TAG, logs);
+            }
+
+            JPushUtil.showToast(logs, getApplicationContext());
+        }
+
+    };
 
 
 

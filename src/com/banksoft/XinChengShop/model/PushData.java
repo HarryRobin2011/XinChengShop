@@ -7,7 +7,7 @@ import com.banksoft.XinChengShop.type.PushType;
  */
 public class PushData<T>{
     private T data;
-    private PushType messageType;
+    private PushType msgType;
 
     public T getData() {
         return data;
@@ -17,11 +17,11 @@ public class PushData<T>{
         this.data = data;
     }
 
-    public PushType getMessageType() {
-        return messageType;
+    public PushType getMsgType() {
+        return msgType;
     }
 
-    public void setMessageType(PushType messageType) {
-        this.messageType = messageType;
+    public void setMsgType(PushType msgType) {
+        this.msgType = msgType;
     }
 }

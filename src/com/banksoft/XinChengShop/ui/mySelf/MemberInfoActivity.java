@@ -34,9 +34,9 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
     private static final int SELECT_PICTURE = 1;
     private int currentPosition;//点击的 第几个图片
-    private EditText account, telPhone_contact, member_email, member_name, sex, area, birthday, member_qq;
+    private EditText account, telPhone_contact, member_email, member_name, member_qq;
     private ProgressBar progressBar;
-    private TextView title;
+    private TextView title, sex, area, birthday;
     private ImageView back;
     private ImageLoader mImageLoader;
     private CustomShapeImageView headImage;
@@ -63,9 +63,9 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         telPhone_contact = (EditText) findViewById(R.id.telPhone_contact);
         member_email = (EditText) findViewById(R.id.member_email);
         member_name = (EditText) findViewById(R.id.member_name);
-        sex = (EditText) findViewById(R.id.sex);
-        area = (EditText) findViewById(R.id.area);
-        birthday = (EditText) findViewById(R.id.birthday);
+        sex = (TextView) findViewById(R.id.sex);
+        area = (TextView) findViewById(R.id.area);
+        birthday = (TextView) findViewById(R.id.birthday);
         member_qq = (EditText) findViewById(R.id.member_qq);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         headImage = (CustomShapeImageView) findViewById(R.id.head_image);
@@ -74,13 +74,14 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        setEditStatus();
         title.setText(R.string.member_info);
         back.setVisibility(View.VISIBLE);
         mImageLoader = ImageLoader.getInstance().getInstance();
         mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         pickPhotoUtil = PickPhotoUtil.getInstance();
         editBtn.setVisibility(View.VISIBLE);
-        editBtn.setText(R.string.complete);
+        editBtn.setText(R.string.edit);
         isLogin();
         setInfo();
     }
@@ -89,7 +90,12 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     protected void initOperate() {
         back.setOnClickListener(this);
         headImage.setOnClickListener(this);
+        headImage.setClickable(false);
         editBtn.setOnClickListener(this);
+        sex.setOnClickListener(this);
+        area.setOnClickListener(this);
+        birthday.setOnClickListener(this);
+
     }
 
     @Override
@@ -153,27 +159,45 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
                 popupWindowUtil.dismiss();
                 break;
             case R.id.titleRightButton:
-//                if(!isEdit){
-//                    editBtn.setText(R.string.complete);
-//                    isEdit = true;
-//                }else{
-//                    editBtn.setText(R.string.edit);
-//                    isEdit = false;
-//                }
-
+                if(!isEdit){
+                    editBtn.setText(R.string.complete);
+                    CommonUtil.operationKeyboard(mContext);
+                    isEdit = true;
+                }else{
+                    CommonUtil.operationKeyboard(mContext);
+                    editBtn.setText(R.string.edit);
+                    isEdit = false;
+                    if(memberInfoDao == null){
+                        memberInfoDao = new MemberInfoDao(mContext);
+                    }
+                    MemberInfo memberInfo = getMemberInfo();
+                    if(memberInfo != null){
+                        new MyTask(memberInfo).execute();
+                    }
+                }
+                setEditStatus();
+                break;
+            case R.id.head_image_layout:
+                showTakePhotoToolView();
                 break;
 
         }
     }
 
     private void setEditStatus(){
-        CommonUtil.setEditTextEditStatus(account,isEdit);
         CommonUtil.setEditTextEditStatus(member_email,isEdit);
-        CommonUtil.setEditTextEditStatus(member_name,isEdit);
-        CommonUtil.setEditTextEditStatus(sex,isEdit);
-        CommonUtil.setEditTextEditStatus(area,isEdit);
-        CommonUtil.setEditTextEditStatus(birthday,isEdit);
         CommonUtil.setEditTextEditStatus(member_qq,isEdit);
+        CommonUtil.setEditTextEditStatus(telPhone_contact,isEdit);
+        CommonUtil.setEditTextEditStatus(account,isEdit);
+        sex.setClickable(isEdit);
+        headImage.setClickable(isEdit);
+        area.setClickable(isEdit);
+        birthday.setClickable(isEdit);
+
+//        CommonUtil.setEditTextEditStatus(member_name,isEdit);
+//        CommonUtil.setEditTextEditStatus(sex,isEdit);
+//        CommonUtil.setEditTextEditStatus(area,isEdit);
+//        CommonUtil.setEditTextEditStatus(birthday,isEdit);
 
     }
 
@@ -270,7 +294,17 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
             return null;
         }
         MemberInfo memberInfo = new MemberInfo();
-        return null;
+        memberInfo.setId(member.getMember().getId());
+        memberInfo.setAccount(accountStr);
+        memberInfo.setTelephone(telPhoneStr);
+        memberInfo.setEmail(memberEmailStr);
+        memberInfo.setQq(qqStr);
+
+
+        memberInfo.setSex(member.getMember().getSex());
+        memberInfo.setTrueName(member.getMember().getTrueName());
+        memberInfo.setBirthday(member.getMember().getBirthday());
+        return memberInfo;
     }
 
     private class MyTask extends AsyncTask<MemberInfoDao,String,MemberVOData>{

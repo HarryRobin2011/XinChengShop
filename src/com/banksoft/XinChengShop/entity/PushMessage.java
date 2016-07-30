@@ -11,7 +11,7 @@ public class PushMessage extends BaseEntity {
     private String content;
     private String title;
     private String targetId;
-    private PushType pushType;
+    private PushType type;
 
     public String getContent() {
         return content;
@@ -37,11 +37,11 @@ public class PushMessage extends BaseEntity {
         this.targetId = targetId;
     }
 
-    public PushType getPushType() {
-        return pushType;
+    public PushType getType() {
+        return type;
     }
 
-    public void setPushType(PushType pushType) {
-        this.pushType = pushType;
+    public void setType(PushType type) {
+        this.type = type;
     }
 }

@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ProgressBar;
@@ -16,12 +17,10 @@ import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseFragment;
 import com.banksoft.XinChengShop.ui.fragment.*;
 import com.banksoft.XinChengShop.utils.CommonUtil;
+import com.banksoft.XinChengShop.utils.JPushUtil;
 import com.banksoft.XinChengShop.utils.update.UpdateUtil;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by harry_robin on 15/11/4.
@@ -47,11 +46,31 @@ public class XCMainActivity extends XCBaseActivity {
     private SharedPreferences pushSp;
     private UpdateDao updateDao;
 
+    private static final int MSG_SET_ALIAS = 1001;
+    private String TAG = "HarryRobin";
+
 //    public Button leftBtn;
 //    public Button rightBtn;
 //    public LinearLayout searchLayout;
 //    public TextView title;
 //    public ImageView backGround;
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+                    break;
+
+
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
 
 
     @Override
@@ -59,7 +78,13 @@ public class XCMainActivity extends XCBaseActivity {
         pushSp = getSharedPreferences(ConfigPush.PUSH_SP, Context.MODE_PRIVATE);
         setContentView(R.layout.main);
         new UpdateUtil(this, false).isUpdate();
-        JPushInterface.setAliasAndTags(getApplicationContext(),null, null, mTagsCallback);
+        Set<String> tag = new LinkedHashSet<>();
+        tag.add("PushOperation_Recomend");
+        JPushInterface.setAliasAndTags(getApplicationContext(),null, tag, mTagsCallback);
+
+        if(isLogin()){
+            JPushInterface.setAliasAndTags(getApplicationContext(),member.getMember().getId(),null,mAliasCallback);
+        }
     }
 
     public static InfoValue getDataList(HashMap<String,HashMap<String,String>> poorMap,String name){
@@ -160,6 +185,35 @@ public class XCMainActivity extends XCBaseActivity {
                     logs = "Failed with errorCode = " + code;
                     Log.e(CommonUtil.TAG, logs);
             }
+        }
+
+    };
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    break;
+
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    if (JPushUtil.isConnected(getApplicationContext())) {
+                        mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    } else {
+                        Log.i(TAG, "No network");
+                    }
+                    break;
+
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e(TAG, logs);
+            }
+
+            JPushUtil.showToast(logs, getApplicationContext());
         }
 
     };

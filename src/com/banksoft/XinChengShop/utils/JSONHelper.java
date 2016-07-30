@@ -1,6 +1,7 @@
 package com.banksoft.XinChengShop.utils;
 
 
+import com.banksoft.XinChengShop.entity.PushOrder;
 import com.banksoft.XinChengShop.entity.ShopLocalType;
 import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.model.*;
@@ -68,8 +69,8 @@ public class JSONHelper {
     public static final Type PUSH_DATA = new TypeToken<PushData>(){}.getType();
     public static final Type XC_ORDER_INFO_DATA = new TypeToken<OrderInfoData>() {}.getType();
     public static final Type BANK_LIST_DATA = new TypeToken<BankListData>(){}.getType();
-    public static final Type XC_MEMBER_RATE_LIST_DATA = new TypeToken<MemberRateVOListData>() {
-    }.getType();
+    public static final Type XC_MEMBER_RATE_LIST_DATA = new TypeToken<MemberRateVOListData>() {}.getType();
+    public static final Type PUSH_ORDER_DATA = new TypeToken<PushOrderData>(){}.getType();
 
 
     public static String toJSONString(Object o){
