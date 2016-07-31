@@ -136,4 +136,9 @@ public class ControlUrl {
     public static final String XC_EXPRESS_COMPANY_LIST_URL = "/app/_expressCompany";// 获取物流公司列表
 
     public static final String XC_ORDER_INFO_URL = "/app/memberOrder_find";//订单详情
+
+    public static final String XC_FOUND_USER_NAME = "/app/appFindPassword_findAccount";//找回密码第一步
+
+    public static final String XC_UPDATA_LOGIN_PASSWORD="/app/appFindPassword_updatePassword";//找回密码第二步
+    public static final String XC_ORDERsTATUS_NUM_URL = "/app/memberOrder_orderStatusCount";  //订单数量
 }

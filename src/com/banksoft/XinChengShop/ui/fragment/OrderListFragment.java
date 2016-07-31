@@ -15,6 +15,7 @@ import com.banksoft.XinChengShop.dao.OrderListDao;
 import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.type.OrderMaster;
+import com.banksoft.XinChengShop.type.OrderStatus;
 import com.banksoft.XinChengShop.ui.*;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -140,7 +141,7 @@ public class OrderListFragment extends XCBaseListFragment{
                 Intent orderIntent = new Intent(mContext,OrderInfoActivity.class);
                 OrderVO orderVO = (OrderVO) bailaAdapter.dataList.get(position);
                 orderIntent.putExtra(IntentFlag.ORDER_ID,orderVO.getId());
-                orderIntent.putExtra(IntentFlag.ORDER_STATUS,orderVO.getStatus());
+                orderIntent.putExtra(IntentFlag.ORDER_STATUS, OrderStatus.valueOf(orderVO.getStatus()));
                 startActivityForResult(orderIntent,Activity.RESULT_FIRST_USER);
                 break;
         }

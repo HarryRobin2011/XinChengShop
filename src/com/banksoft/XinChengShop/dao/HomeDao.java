@@ -34,10 +34,10 @@ public class HomeDao extends BaseDao {
     /**
      * 获取清仓产品
      */
-    public ShopProductListData getShopProductListData(boolean cacheFlag, int productType, int size, int index) {
+    public ShopProductListData getShopProductListData(boolean cacheFlag, int productType, boolean recommend,int size, int index) {
         String url = ControlUrl.XC_SHOP_PRODUCT_LIST_URL;
         ;
-        String params = "active=" + productType + "&size=" + size + "&index=" + index;
+        String params = "active=" + productType + "&recommend="+recommend+"&size=" + size + "&index=" + index;
         ShopProductListData data = (ShopProductListData) postHttpRequest(mContext, url, params, JSONHelper.SHOP_LIST_PRODUCT_DATA, cacheFlag);
         return data;
     }

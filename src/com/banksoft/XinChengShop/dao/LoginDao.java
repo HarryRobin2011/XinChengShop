@@ -4,6 +4,7 @@ import android.content.Context;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.model.MemberData;
+import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.utils.MD5Factory;
@@ -42,5 +43,11 @@ public class LoginDao extends BaseDao {
         MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
 
+    }
+
+    private BaseData getOrderStatus(){
+        String url = ControlUrl.XC_ORDERsTATUS_NUM_URL;
+        String parasm = "";
+        return null;
     }
 }

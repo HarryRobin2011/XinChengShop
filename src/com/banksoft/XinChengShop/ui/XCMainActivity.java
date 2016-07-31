@@ -212,8 +212,6 @@ public class XCMainActivity extends XCBaseActivity {
                     logs = "Failed with errorCode = " + code;
                     Log.e(TAG, logs);
             }
-
-            JPushUtil.showToast(logs, getApplicationContext());
         }
 
     };

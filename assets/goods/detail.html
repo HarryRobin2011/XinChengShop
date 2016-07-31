@@ -80,8 +80,8 @@
             </div>
             <div class="shop-ct cell cell-8">
                 <div class="shop-t" id="shopName">苏泊尔炊具旗舰店</div>
-                <img src="images/telphone.png" width="25" height="25" style="margin-top: 10px">
-                <img src="images/qq.png" width="25" height="25" style=" margin-left: 35px" onclick="">
+                <img src="images/telphone.png" id="telephone",width="25" height="25" style="margin-top: 10px">
+                <img src="images/qq.png" id="open_qq" width="25" height="25" style=" margin-left: 35px"  href="javascript:void(0)">
                 <div class="down-t">
                 </div>
             </div>
@@ -215,6 +215,15 @@
                     wAndroid.startAllShopsActivity();
 
                 });
+                var callPhone = elmentId("telephone");
+                callPhone.addEventListener("tab",function (e) {
+                    wAndroid.callPhone();
+                });
+
+                var open_qq = elmentId("open_qq");
+                open_qq.addEventListener("tab",function (e) {
+                    wAndroid.openQQ();
+                })
 
                 elmentEvent("pjbtn", "tap", function (e) {
                     wAndroid.startCommentActivity();

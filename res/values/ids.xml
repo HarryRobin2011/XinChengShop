@@ -557,4 +557,14 @@
     <item name="select_bank_card" type="id">apply_with_draw_layout</item>
     <item name="tariff" type="id">tariff</item>
     <item name="add_layout" type="id">add_layout</item>
+    <item name="check_all_order" type="id">check_all_order</item>
+    <item name="order_create" type="id">order_create</item>
+    <item name="order_create_num" type="id">order_create_num</item>
+    <item name="order_dispatch" type="id">order_dispatch</item>
+    <item name="order_success" type="id">order_success</item>
+    <item name="order_return" type="id">order_return</item>
+    <item name="order_return_num" type="id">order_return_num</item>
+    <item name="order_success_num" type="id">order_success_num</item>
+    <item name="order_dispatch_num" type="id">order_dispatch_num</item>
+    <item name="order_pay_num" type="id">order_pay_num</item>
 </resources>

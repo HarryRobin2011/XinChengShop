@@ -35,6 +35,7 @@ public class ClearanceAdapter extends BaseMyAdapter {
         private TextView describe;
         private TextView price;
         private TextView realPrice;
+        private TextView num;
     }
 
     @Override
@@ -44,6 +45,7 @@ public class ClearanceAdapter extends BaseMyAdapter {
         holder.describe = (TextView) cellView.findViewById(R.id.describe);
         holder.price = (TextView) cellView.findViewById(R.id.price);
         holder.realPrice = (TextView) cellView.findViewById(R.id.real_price);
+        holder.num = (TextView) cellView.findViewById(R.id.num);
         holder.realPrice.setTextColor(mContext.getResources().getColor(R.color.light_gray));
         holder.realPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG |Paint.ANTI_ALIAS_FLAG);//设置中划线并清晰
         return holder;
@@ -60,6 +62,7 @@ public class ClearanceAdapter extends BaseMyAdapter {
         holder.describe.setText(shopProductListVO.getName());
         holder.price.setText(" ¥ "+shopProductListVO.getPrice());
         holder.realPrice.setText(" ¥ "+shopProductListVO.getSalePrice());
+        holder.num.setText("已售："+(shopProductListVO.getGroupSale() + shopProductListVO.getVirtualGroup()));
         mImageLoader.displayImage(imageUrl,holder.imageView, XCApplication.options);
         return cellView;
     }

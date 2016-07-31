@@ -1,17 +1,13 @@
 package com.banksoft.XinChengShop.utils;
 
 
-import com.banksoft.XinChengShop.entity.PushOrder;
-import com.banksoft.XinChengShop.entity.ShopLocalType;
-import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
+import com.banksoft.XinChengShop.entity.FoundPassword;
 import com.banksoft.XinChengShop.model.*;
 import com.banksoft.XinChengShop.ui.MemberRateVOListData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tencent.mm.sdk.modelpay.PayReq;
 
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.LinkedHashMap;
 
 /**
@@ -71,6 +67,7 @@ public class JSONHelper {
     public static final Type BANK_LIST_DATA = new TypeToken<BankListData>(){}.getType();
     public static final Type XC_MEMBER_RATE_LIST_DATA = new TypeToken<MemberRateVOListData>() {}.getType();
     public static final Type PUSH_ORDER_DATA = new TypeToken<PushOrderData>(){}.getType();
+    public static final Type FOUND_PASSWORD = new TypeToken<FoundPassword>(){}.getType();
 
 
     public static String toJSONString(Object o){

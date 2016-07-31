@@ -450,7 +450,7 @@
     <string name="shop_free_express">店铺包邮</string>
     <string name="please_select_product">请选择产品</string>
     <string name="high_praise">好评</string>
-    <string name="middle_praise">middle_praise</string>
+    <string name="middle_praise">中评</string>
     <string name="poor_praise">差评</string>
     <string name="seller_order">卖家订单</string>
     <string name="consumption">消费验证</string>
@@ -687,5 +687,17 @@
     <string name="with_draw_money_greater_than_balance">提现金额大于余额</string>
     <string name="apply_with_draw_success">申请提现成功，请等待管理员审核</string>
     <string name="add_bank">添加银行卡</string>
+    <string name="more_product">更多商品 >></string>
+    <string name="new_group_title">最新团购</string>
+    <string name="hot_goods">热卖商品</string>
+    <string name="me_money">Me钱包</string>
+    <string name="reset_password">密码重置</string>
+    <string name="password_reset_success">密码重置成功</string>
+    <string name="found_password">找回密码</string>
+    <string name="check_all_order">查看全部订单</string>
+    <string name="order_dispatch">待收货</string>
+    <string name="order_pay">待发货</string>
+    <string name="order_success">待评价</string>
+    <string name="order_return">退款/售后</string>
 
 </resources>

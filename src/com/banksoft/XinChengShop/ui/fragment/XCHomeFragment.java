@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import com.baidu.location.BDLocation;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
@@ -40,7 +38,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by harry_robin on 15/11/4.
@@ -252,11 +249,15 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         protected HashMap<String, BaseData> doInBackground(HomeDao... params) {
             AdvertisementData advertisementData = params[0].getAdvertisementData(true);
             ProductTypeData productTypeData = params[0].getProductTypeListData(Integer.MAX_VALUE, 0, cacheFlag);
-            ShopProductListData shopListData = params[0].getShopProductListData(cacheFlag, 0, 30, 1);
+            ShopProductListData groupData = params[0].getShopProductListData(cacheFlag,2,true,6, 1);
+            ShopProductListData recommendData = params[0].getShopProductListData(cacheFlag,1,true,4,1);
+            ShopProductListData normalData = params[0].getShopProductListData(cacheFlag,0,true,30,1);
             HashMap<String, BaseData> dataHashMap = new HashMap<>();
             dataHashMap.put(MapFlag.DATA_0, advertisementData);
             dataHashMap.put(MapFlag.DATA_1, productTypeData);
-            dataHashMap.put(MapFlag.DATA_2,shopListData);
+            dataHashMap.put(MapFlag.DATA_2,groupData);
+            dataHashMap.put(MapFlag.DATA_3,recommendData);
+            dataHashMap.put(MapFlag.DATA_4,normalData);
             return dataHashMap;
         }
 
@@ -274,6 +275,8 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         AdvertisementData advertisementData = (AdvertisementData) dataHashMap.get(MapFlag.DATA_0);
         ProductTypeData productTypeData = (ProductTypeData) dataHashMap.get(MapFlag.DATA_1);
         ShopProductListData shopProductListData = (ShopProductListData) dataHashMap.get(MapFlag.DATA_2);
+        ShopProductListData shopProductListData1 = (ShopProductListData) dataHashMap.get(MapFlag.DATA_3);
+        ShopProductListData shopProductListData2 = (ShopProductListData) dataHashMap.get(MapFlag.DATA_4);
         if (advertisementData != null) {
             bannersList = advertisementData.getData();
             bannerViewPagerAdapter = new BannerViewPagerAdapter(mContext, bannersList);
@@ -287,9 +290,11 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
             }
             dataList.add(0,productTypeData);
             dataList.add(1,shopProductListData);
+            dataList.add(2,shopProductListData1);
+            dataList.add(3,shopProductListData2);
 
             if(homeDataListAdapter == null){
-                homeDataListAdapter = new HomeDataListAdapter(mContext,dataList);
+                homeDataListAdapter = new HomeDataListAdapter(getActivity(),dataList);
             }
             mListView.setAdapter(homeDataListAdapter);
 
@@ -313,10 +318,9 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
                 Intent takeoutIntent = new Intent(mContext, TakeOutMainActivity.class);
                 startActivity(takeoutIntent);
                 break;
-            case R.id.xc_bbs_layout://鑫诚论坛
-
-
-
+            case R.id.xc_bbs_layout://Me钱包
+                Intent moneyIntent = new Intent(mContext,WalletManagerActivity.class);
+                startActivity(moneyIntent);
                 break;
             case R.id.xc_location_service://本地服务
                 Intent localServiceIntent = new Intent(mContext, LocalServiceMainActivity.class);

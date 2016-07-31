@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import com.banksoft.XinChengShop.R;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +68,11 @@ public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickL
         if(dataMap.get(position) == null){
             cellView = createCellView();
             holder = createCellHolder(cellView);
-            cellView.setTag(holder);
+            cellView.setTag(R.id.tag,holder);
             dataMap.put(position,cellView);
         }else{
             cellView = dataMap.get(position);
-            holder = (BusinessHolder) cellView.getTag();
+            holder = (BusinessHolder) cellView.getTag(R.id.tag);
         }
         holder.position = position;
         buildData(position,cellView,holder);

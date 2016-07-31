@@ -2,22 +2,24 @@ package com.banksoft.XinChengShop.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.LoginDao;
+import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.type.OrderMaster;
+import com.banksoft.XinChengShop.type.OrderStatus;
 import com.banksoft.XinChengShop.ui.*;
 import com.banksoft.XinChengShop.ui.base.XCBaseFragment;
 import com.banksoft.XinChengShop.ui.mySelf.MemberInfoActivity;
 import com.banksoft.XinChengShop.utils.update.UpdateUtil;
+import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.banksoft.XinChengShop.widget.imageView.CustomShapeImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -34,11 +36,16 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
     private ImageLoader mImageLoader;
     private XCMainActivity activity;
 
+    private FrameLayout orderCreate,orderPay,orderDispatch,orderSuccess,orderReturn;
+    private TextView orderCreateNum,orderPayNum,orderDispatchNum,orderSuccessNum,orderReturnNum,checkAllOrder;
+
     private LinearLayout searchLayout;
 
     private ImageView bgImage;
 
     private TextView title;
+
+    private MyProgressDialog myProgressDialog;
 
 
 
@@ -131,6 +138,17 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
         searchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
 
         myProductManager = (LinearLayout) view.findViewById(R.id.my_product_manager);
+
+        orderCreate = (FrameLayout) view.findViewById(R.id.order_create);
+        orderCreateNum = (TextView) view.findViewById(R.id.order_create_num);
+        orderPay = (FrameLayout) view.findViewById(R.id.order_pay);
+        orderPayNum = (TextView) view.findViewById(R.id.order_pay_num);
+        orderDispatch = (FrameLayout) view.findViewById(R.id.order_dispatch);
+        orderDispatchNum = (TextView) view.findViewById(R.id.order_dispatch_num);
+        orderSuccess = (FrameLayout) view.findViewById(R.id.order_success);
+        orderSuccessNum = (TextView) view.findViewById(R.id.order_success_num);
+        orderReturn = (FrameLayout) view.findViewById(R.id.order_return);
+        orderReturnNum = (TextView) view.findViewById(R.id.order_return_num);
     }
 
     @Override
@@ -163,6 +181,12 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
         saleCheck.setOnClickListener(this);
         myProductManager.setOnClickListener(this);
         dispatch_manager.setOnClickListener(this);
+
+        orderCreate.setOnClickListener(this);
+        orderPay.setOnClickListener(this);
+        orderDispatch.setOnClickListener(this);
+        orderSuccess.setOnClickListener(this);
+        orderReturn.setOnClickListener(this);
     }
 
     @Override
@@ -353,8 +377,54 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     startActivityForResult(settingIntent,Activity.RESULT_FIRST_USER);
                 }
                 break;
+            case R.id.order_create:
+                Intent orderCreateIntent = new Intent(mContext,OrderListActivity.class);
+                orderCreateIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.CREATE.name());
+                startActivity(orderCreateIntent);
+                break;
+            case R.id.order_pay:
+                Intent orderPayIntent = new Intent(mContext,OrderListActivity.class);
+                orderPayIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.PAY.name());
+                startActivity(orderPayIntent);
+                break;
+            case R.id.order_dispatch:
+                Intent orderDispatchIntent = new Intent(mContext,OrderListActivity.class);
+                orderDispatchIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.DISPATCH.name());
+                startActivity(orderDispatchIntent);
+                break;
+            case R.id.order_success:
+                Intent orderSuccessIntent = new Intent(mContext,OrderListActivity.class);
+                orderSuccessIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.SUCCESS.name());
+                startActivity(orderSuccessIntent);
+                break;
+            case R.id.order_return:
+                Intent orderReturnIntent = new Intent(mContext,OrderReturnListActivity.class);
+                startActivity(orderReturnIntent);
+                break;
 
 
+        }
+    }
+
+    private class MyOrderStatusTask extends AsyncTask<LoginDao,String,BaseData>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(myProgressDialog == null){
+               myProgressDialog = new MyProgressDialog(getActivity());
+            }
+            myProgressDialog.showDialog(R.string.please_wait);
+        }
+
+        @Override
+        protected BaseData doInBackground(LoginDao... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(BaseData baseData) {
+            super.onPostExecute(baseData);
+            myProgressDialog.dismiss();
         }
     }
 

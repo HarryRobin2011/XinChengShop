@@ -265,7 +265,7 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         @android.webkit.JavascriptInterface
         public void startCommentActivity() {
             Intent intent = new Intent(mContext, ShopProductAssessListActivity.class);
-            intent.putExtra(IntentFlag.PRODUCT_ID, productVO.getShopId());
+            intent.putExtra(IntentFlag.PRODUCT_ID, productVO.getId());
             startActivity(intent);
         }
 
@@ -274,7 +274,7 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
          */
         @android.webkit.JavascriptInterface
         public void startShopInfoActivity() {
-            Intent intent = new Intent(mContext, ShopInfoActivity.class);
+            Intent intent = new Intent(mContext, ShopDetailActivity.class);
             intent.putExtra(IntentFlag.SHOP_ID, productVO.getShopId());
             startActivity(intent);
         }

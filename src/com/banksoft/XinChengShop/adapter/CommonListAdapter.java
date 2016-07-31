@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
-import com.banksoft.XinChengShop.entity.ProductAssessDTO;
+import com.banksoft.XinChengShop.entity.ProductAssessFrontDTO;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class CommonListAdapter extends BaseMyAdapter {
     @Override
     protected View buildData(int position, View cellView, BusinessHolder cellHolder) {
         CommonListHolder commonListHolder = (CommonListHolder) cellHolder;
-        ProductAssessDTO assessDTO = (ProductAssessDTO) dataList.get(position);
+        ProductAssessFrontDTO assessDTO = (ProductAssessFrontDTO) dataList.get(position);
         commonListHolder.productName.setText(assessDTO.getProductName());
         commonListHolder.content.setText(assessDTO.getContent());
         switch(Integer.valueOf(assessDTO.getScore())){

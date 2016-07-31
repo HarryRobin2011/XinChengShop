@@ -186,7 +186,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/xc_bbs"
+                    android:text="@string/me_money"
                     style="@style/text_style_4"
                     android:textColor="@color/text_gray"
                     android:layout_marginTop="5.0dp"/>

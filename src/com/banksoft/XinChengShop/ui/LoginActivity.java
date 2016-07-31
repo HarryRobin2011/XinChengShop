@@ -1,14 +1,9 @@
 package com.banksoft.XinChengShop.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,7 +13,6 @@ import cn.jpush.android.api.TagAliasCallback;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.LoginDao;
 import com.banksoft.XinChengShop.model.MemberData;
-import com.banksoft.XinChengShop.model.MemberInfoData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
@@ -26,15 +20,10 @@ import com.banksoft.XinChengShop.utils.JPushUtil;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.tencent.connect.UserInfo;
-import com.tencent.connect.common.Constants;
-import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.Set;
@@ -249,8 +238,9 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             case R.id.register_link:
                 startActivityForResult(new Intent(mContext, RegisterActivity.class), Activity.RESULT_FIRST_USER);
                 break;
-            case R.id.login_page_find_password://待定
-
+            case R.id.login_page_find_password://忘记密码
+                Intent foundPassword = new Intent(mContext,FoundPasswordActivity.class);
+                startActivity(foundPassword);
                 break;
             case R.id.qq_login_view://QQ登陆
                 platform = SHARE_MEDIA.QQ;
@@ -348,8 +338,6 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
                     logs = "Failed with errorCode = " + code;
                     Log.e(TAG, logs);
             }
-
-            JPushUtil.showToast(logs, getApplicationContext());
         }
 
     };
