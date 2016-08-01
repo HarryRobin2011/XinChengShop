@@ -78,6 +78,8 @@ public class ControlUrl {
 
     public static final String XC_APPLY_WITH_DRAW = "/app/withdraw_save"; //申请提现
     public static final String XC_MEMBER_RATE_LIST = "/app/withdraw_list";//提现费率列表
+    public static final String WEI_XIN_DOWNLOAD_URL = "http://a.app.qq.com/o/simple.jsp?pkgname=com.banksoft.XinChengShop";//微信下载链接
+    public static final String ANDROID_ASSETS_BASE_PATH = "file:///android_asset/";
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 

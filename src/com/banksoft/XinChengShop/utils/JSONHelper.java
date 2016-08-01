@@ -3,6 +3,7 @@ package com.banksoft.XinChengShop.utils;
 
 import com.banksoft.XinChengShop.entity.FoundPassword;
 import com.banksoft.XinChengShop.model.*;
+import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.MemberRateVOListData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -68,6 +69,8 @@ public class JSONHelper {
     public static final Type XC_MEMBER_RATE_LIST_DATA = new TypeToken<MemberRateVOListData>() {}.getType();
     public static final Type PUSH_ORDER_DATA = new TypeToken<PushOrderData>(){}.getType();
     public static final Type FOUND_PASSWORD = new TypeToken<FoundPassword>(){}.getType();
+    public static final Type BASE_DATA = new TypeToken<BaseData>(){}.getType();
+    public static final Type FOUND_PASSWORD_DATA = new TypeToken<FoundPasswordData>(){}.getType();
 
 
     public static String toJSONString(Object o){

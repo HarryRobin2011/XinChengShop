@@ -21,10 +21,7 @@ import com.banksoft.XinChengShop.http.HttpUtils;
 import com.banksoft.XinChengShop.model.*;
 import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
-import com.banksoft.XinChengShop.utils.CommonUtil;
-import com.banksoft.XinChengShop.utils.JSONHelper;
-import com.banksoft.XinChengShop.utils.PopupWindowUtil;
-import com.banksoft.XinChengShop.utils.ShareUtil;
+import com.banksoft.XinChengShop.utils.*;
 import com.banksoft.XinChengShop.widget.MyGridView;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.banksoft.XinChengShop.widget.MyWebView;
@@ -247,7 +244,15 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.share:
-                ShareUtil.shareMsg(this,getText(R.string.share).toString(),productVO.getName(),productVO.getDescription(),0);
+             //   ShareUtil.shareMsg(this,getText(R.string.share).toString(),productVO.getName(),productVO.getDescription(),0);
+                ShareUmengUtil shareUmengUtil = new ShareUmengUtil(ShopProductInfoActivity.this);
+                shareUmengUtil.setShareContext(productVO.getName());
+                String imageUrl = "";
+                if(productVO.getIcon() != null && !productVO.getIcon().isEmpty()){
+                    imageUrl = ControlUrl.BASE_URL+productVO.getIcon().split("\\|")[0];
+                }
+                shareUmengUtil.setShareImage(imageUrl);
+                shareUmengUtil.show();
                 break;
         }
     }

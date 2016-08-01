@@ -482,8 +482,8 @@
     <string name="histroy_record">历史记录</string>
     <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
     <string name="cooperate_account_login">合作账号登陆</string>
-    <string name="server_support_goods">为了给您更好的服务，请关联一个鑫诚账号</string>
-    <string name="no_xincheng_account">还没有鑫诚账号？</string>
+    <string name="server_support_goods">为了给您更好的服务，请关联一个鑫城账号</string>
+    <string name="no_xincheng_account">还没有鑫城账号？</string>
     <string name="fast_gister">快速注册</string>
     <string name="immediately">立即登陆</string>
     <string name="dear_qq_account">亲爱的QQ用户：</string>
@@ -699,5 +699,6 @@
     <string name="order_pay">待发货</string>
     <string name="order_success">待评价</string>
     <string name="order_return">退款/售后</string>
+    <string name="please_account_email_telephone_name">请输入用户名/邮箱/手机号</string>
 
 </resources>

@@ -45,9 +45,10 @@ public class LoginDao extends BaseDao {
 
     }
 
-    private BaseData getOrderStatus(){
+    public BaseData getOrderStatus(String id){
         String url = ControlUrl.XC_ORDERsTATUS_NUM_URL;
-        String parasm = "";
-        return null;
+        String parasm = "memberId="+id;
+        BaseData data = (BaseData) postHttpRequest(mContext,url,parasm,JSONHelper.BASE_DATA,false);
+        return data;
     }
 }

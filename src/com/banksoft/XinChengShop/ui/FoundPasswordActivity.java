@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.FoundPasswordDao;
 import com.banksoft.XinChengShop.entity.FoundPassword;
+import com.banksoft.XinChengShop.model.FoundPasswordData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
@@ -45,16 +47,7 @@ public class FoundPasswordActivity extends XCBaseActivity implements View.OnClic
 
     @Override
     protected void initOperate() {
-        String accountStr = account.getText().toString();
-        if(accountStr == null || accountStr.isEmpty()){
-           alert(R.string.account_not_empty);
-            return;
-        }
-
-       if(foundPasswordDao == null){
-          foundPasswordDao = new FoundPasswordDao(mContext);
-       }
-        new MyTask(accountStr).execute(foundPasswordDao);
+       next.setOnClickListener(this);
     }
 
     @Override
@@ -63,10 +56,22 @@ public class FoundPasswordActivity extends XCBaseActivity implements View.OnClic
             case R.id.title_back_button:
                 finish();
                 break;
+            case R.id.next:
+                String accountStr = account.getText().toString();
+                if(accountStr == null || accountStr.isEmpty()){
+                    alert(R.string.account_not_empty);
+                    return;
+                }
+
+                if(foundPasswordDao == null){
+                    foundPasswordDao = new FoundPasswordDao(mContext);
+                }
+                new MyTask(accountStr).execute(foundPasswordDao);
+                break;
         }
     }
 
-    private class MyTask extends AsyncTask<FoundPasswordDao,String,FoundPassword>{
+    private class MyTask extends AsyncTask<FoundPasswordDao,String,FoundPasswordData>{
         String userName;
 
         public MyTask(String userName) {
@@ -83,15 +88,22 @@ public class FoundPasswordActivity extends XCBaseActivity implements View.OnClic
         }
 
         @Override
-        protected FoundPassword doInBackground(FoundPasswordDao... params) {
+        protected FoundPasswordData doInBackground(FoundPasswordDao... params) {
             return params[0].getUserName(userName);
         }
 
         @Override
-        protected void onPostExecute(FoundPassword foundPassword) {
+        protected void onPostExecute(FoundPasswordData foundPassword) {
             super.onPostExecute(foundPassword);
+            myProgressDialog.dismiss();
             if(foundPassword != null){
-                Intent intent = new Intent(mContext,ResetPasswordActivity.class);
+                if(foundPassword.isSuccess()){
+                    Intent intent = new Intent(mContext,ResetPasswordActivity.class);
+                    intent.putExtra(IntentFlag.DATA,foundPassword.getData());
+                    startActivity(intent);
+                }else{
+                    alert(foundPassword.getMsg().toString());
+                }
             }else{
                 alert(R.string.net_error);
             }

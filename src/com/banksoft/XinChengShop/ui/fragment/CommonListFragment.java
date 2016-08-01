@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import com.banksoft.XinChengShop.adapter.CommonListAdapter;
+import com.banksoft.XinChengShop.adapter.MyCommonListAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -35,7 +36,7 @@ public class CommonListFragment extends XCBaseListFragment{
         url = ControlUrl.XC_COMMON_LIST_URL;
         params =  "type="+type+"&memberId="+activity.member.getMember().getId();
         jsonType = JSONHelper.XC_COMMON_LIST_DATA;
-        bailaAdapter = new CommonListAdapter(mContext,new ArrayList());
+        bailaAdapter = new MyCommonListAdapter(mContext,new ArrayList());
         xListView.setDividerHeight(10);
         setListDao();
     }

@@ -49,10 +49,12 @@ public class OrderListFragment extends XCBaseListFragment{
     @Override
     public void request() {
         url = ControlUrl.ORDER_LIST_URL;
+        if(OrderStatus.ALL.name().equals(type)){
+           type = "";
+        }
         if (OrderMaster.SELLER.name().equals(orderMaster)) {//卖家订单
             params = "status=" + type + "&shopId=" + activity.member.getShop().getId();
         } else {
-
             params = "status=" + type + "&memberId=" + activity.member.getMember().getId();
         }
 

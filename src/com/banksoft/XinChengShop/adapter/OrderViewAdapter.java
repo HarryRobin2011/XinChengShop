@@ -29,7 +29,6 @@ public class OrderViewAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         OrderListFragment orderListFragment = new OrderListFragment();
         Bundle bundle = new Bundle();
-
         bundle.putString(IntentFlag.ORDER_TYPE,orderStatuses[position].name());
         bundle.putString(IntentFlag.Order_MASTER, orderMaster);
         orderListFragment.setArguments(bundle);

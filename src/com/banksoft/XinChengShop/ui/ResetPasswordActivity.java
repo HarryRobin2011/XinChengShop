@@ -180,6 +180,7 @@ public class ResetPasswordActivity extends XCBaseActivity implements View.OnClic
         @Override
         protected void onPostExecute(IsFlagData isFlagData) {
             super.onPostExecute(isFlagData);
+            myProgressDialog.dismiss();
             if(isFlagData != null){
                  if(isFlagData.isSuccess()){
                      finish();

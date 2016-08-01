@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.banksoft.XinChengShop.widget.SquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/height_50"
+        android:layout_height="@dimen/height_50"
+        android:layout_centerInParent="true"/>
+
+        <TextView android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="40.0dp"
+            android:layout_below="@+id/imageView"
+            android:textColor="@color/text_gray"
+            android:textSize="16.0sp"
+            android:gravity="center" />
+    </com.banksoft.XinChengShop.widget.SquareLayout>
+</LinearLayout>

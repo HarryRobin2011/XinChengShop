@@ -10,8 +10,13 @@
         <RelativeLayout android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
             <ImageView android:id="@id/login_user_icon" android:layout_width="match_parent"
-                       android:layout_height="120.0dip" android:layout_marginTop="45.0dip"
-                       android:background="@drawable/nc_login_pic"
+                       android:layout_height="@dimen/height_120"
+                       android:layout_marginTop="65.0dip"
+                       android:adjustViewBounds="true"
+                       android:scaleType="fitCenter"
+                       android:background="@color/white"
+                       android:src="@drawable/company_logo"
+
                        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
             <RelativeLayout android:id="@id/login_editor_layout"
                             android:layout_width="fill_parent"

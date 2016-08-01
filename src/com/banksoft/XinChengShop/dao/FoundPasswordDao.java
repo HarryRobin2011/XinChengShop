@@ -4,6 +4,7 @@ import android.content.Context;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.entity.FoundPassword;
+import com.banksoft.XinChengShop.model.FoundPasswordData;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 
 /**
@@ -15,10 +16,10 @@ public class FoundPasswordDao extends BaseDao{
         super(mContext);
     }
 
-    public FoundPassword getUserName(String account){
-        String url = ControlUrl.XC_SHOP_LOCAL_TYPE_URL;
+    public FoundPasswordData getUserName(String account){
+        String url = ControlUrl.XC_FOUND_USER_NAME;
         String params = "userName="+account;
-        FoundPassword password = (FoundPassword) postHttpRequest(mContext,url,params, JSONHelper.FOUND_PASSWORD,false);
+        FoundPasswordData password = (FoundPasswordData) postHttpRequest(mContext,url,params, JSONHelper.FOUND_PASSWORD_DATA,false);
         return password;
     }
 }

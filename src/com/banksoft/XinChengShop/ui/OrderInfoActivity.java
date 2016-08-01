@@ -37,7 +37,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
     private LinearLayout contentLayout;
     private LinearLayout toolLayout;
 
-    private LinearLayout addressLayout;
+    private LinearLayout addressLayout,addressDetailLayout;
     private TextView shippingTelPhone, shipName, shipAddress;
 
     private TextView shopName;
@@ -69,10 +69,11 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         back = (ImageView) findViewById(R.id.title_back_button);
         orderNo = (TextView) findViewById(R.id.order_no);
         contentLayout = (LinearLayout) findViewById(R.id.content_layout);
-        toolLayout = (LinearLayout) findViewById(R.id.tool_layout);
+        toolLayout = (LinearLayout) findViewById(R.id.layout_tool);
         addressLayout = (LinearLayout) findViewById(R.id.address_layout);
+        addressDetailLayout = (LinearLayout) findViewById(R.id.address_detail_layout);
         shippingTelPhone = (TextView) findViewById(R.id.telPhone);
-        shipName = (TextView) findViewById(R.id.titleText);
+        shipName = (TextView) findViewById(R.id.shipping_name);
         shipAddress = (TextView) findViewById(R.id.address);
         shopName = (TextView) findViewById(R.id.shop_name);
         productContentLayout = (LinearLayout) findViewById(R.id.content);
@@ -85,8 +86,6 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         createOrderTime = (TextView) findViewById(R.id.order_create_time);
         mImageLoader = ImageLoader.getInstance();
         mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-        contentLayout = (LinearLayout) findViewById(R.id.content);
-        toolLayout = (LinearLayout) findViewById(R.id.tool_layout);
 
     }
 
@@ -135,7 +134,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         protected void onPostExecute(OrderInfoData orderInfoData) {
             super.onPostExecute(orderInfoData);
             progressDialog.dismiss();
-            if (orderInfoData == null) {
+            if (orderInfoData != null) {
                 if (orderInfoData.isSuccess()) {
                     orderVO = orderInfoData.getData();
                     showOrderInfoView(orderInfoData.getData());
@@ -154,6 +153,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
     }
 
     private void showOrderInfoView(OrderVO orderVO) {
+        contentLayout.setVisibility(View.VISIBLE);
         orderNo.setText("订单编号：" + orderVO.getNo());
         shippingTelPhone.setText(orderVO.getTelephone());
         shipName.setText(orderVO.getUserName());
@@ -164,6 +164,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         disbursements.setText("￥" + orderVO.getTotalMoney() + orderVO.getExpressMoney());
         createOrderTime.setText("下单时间：" + TimeUtils.getTimeStr(orderVO.getCreateTime(), TimeUtils.TimeType.MINUTE));
         expressMoney.setText(String.valueOf(orderVO.getExpressMoney()));
+        addressDetailLayout.setVisibility(View.VISIBLE);
 
         for (OrderProductVO productVO : orderVO.getList()) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout, null);

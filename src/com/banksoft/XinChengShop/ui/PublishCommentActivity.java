@@ -7,12 +7,15 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.PublishCommentAdapter;
+import com.banksoft.XinChengShop.adapter.PublishCommentRecyclerViewAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.PublishCommentDao;
@@ -37,7 +40,7 @@ import java.util.List;
 /**
  * Created by admin on 2016/7/11.
  */
-public class PublishCommentActivity extends XCBaseActivity implements View.OnClickListener, OnItemClickListener, AdapterView.OnItemClickListener {
+public class PublishCommentActivity extends XCBaseActivity implements View.OnClickListener, OnItemClickListener, AdapterView.OnItemClickListener,PublishCommentRecyclerViewAdapter.OnRecylerViewOnItemLinstener {
     private ListView mListView;
     private TextView title;
     private ImageView back;
@@ -58,7 +61,6 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
 
     private AlertView alertView;
     private String localTempImgDir = "xinchengShop/";
-    private HashMap<Integer, String> cameraImage = new HashMap<>();
     private static final int REQUEST_CODE_CAPTURE_CAMEIA = 0;
 
     private static final int SELECT_PICTURE = 1;
@@ -68,7 +70,11 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
     private RatingBar serviceAttitude;
 
 
-    private HashMap<Integer, HashMap<Integer, String>> photoMap;
+    private HashMap<String,LinkedList> photoMap;
+
+    private int currentRow;// 拍照当前行数
+
+    private String capturePath;// 当前拍照的图片路径
 
     @Override
     protected void initContentView() {
@@ -97,7 +103,7 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
             if (resultCode == Activity.RESULT_CANCELED) {
                 return;
             }
-            // setCaremaImage();
+             setCaremaImage();
         } else if (requestCode == SELECT_PICTURE) {
             if (data == null) {
                 return;
@@ -105,8 +111,17 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
             //选择图片
             Uri uri = data.getData();
             //      cameraImage.put(currentPosition, ImageUtil.getImageAbsolutePath(this,uri));
-            //    setCaremaImage();
+                capturePath = ImageUtil.getImageAbsolutePath(this,uri);
+                setCaremaImage();
         }
+    }
+
+    private void setCaremaImage() {
+        View view = content.getChildAt(currentRow);//点击拍照的行View
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        PublishCommentRecyclerViewAdapter adapter = (PublishCommentRecyclerViewAdapter) recyclerView.getAdapter();
+        adapter.dataList.add(capturePath);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -131,7 +146,13 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
     }
 
     private void setProductViews() {
+        if(photoMap == null){
+            photoMap = new HashMap<>();
+        }
         for (OrderProductVO orderProductVO : currentOrderVo.getList()) {
+            LinkedList photoList = new LinkedList();
+            photoList.add(ControlUrl.ANDROID_ASSETS_BASE_PATH+"take_photo.png");
+            photoMap.put(orderProductVO.getId(),photoList);
             ProductAssessBO productAssessBO = new ProductAssessBO();
             productAssessBO.setOrderId(orderProductVO.getOrderId());
             productAssessBO.setProductId(orderProductVO.getProductId());
@@ -146,10 +167,14 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
             ImageView imageView = (ImageView) view.findViewById(R.id.image);
             EditText editText = (EditText) view.findViewById(R.id.data_edit_text);
             RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
-            MyGridView myGridView = (MyGridView) view.findViewById(R.id.gridView);
-            ImageView takePhoto = (ImageView) view.findViewById(R.id.take_photo);
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-            myGridView.setOnItemClickListener(this);
+
+            GridLayoutManager manager = new GridLayoutManager(mContext,4);
+            recyclerView.setLayoutManager(manager);
+            PublishCommentRecyclerViewAdapter adapter = new PublishCommentRecyclerViewAdapter(mContext,photoMap.get(orderProductVO.getId()));
+            adapter.setOnRecylerViewOnItemLinstener(this);
+            recyclerView.setAdapter(adapter);
 
             String imageUrl = orderProductVO.getImageFile();
             if (imageUrl == null || imageUrl.isEmpty()) {
@@ -180,9 +205,6 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
                     publishCommentDao = new PublishCommentDao(mContext);
                 }
                 new MyTask(productAssessBoLIST,orderAssessBO).execute(publishCommentDao);
-                break;
-            case R.id.take_photo:
-
                 break;
         }
     }
@@ -251,29 +273,25 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
 
     @Override
     public void onItemClick(Object o, int position) {
-        int productIndex = (int) o;
-        HashMap<Integer, String> productPhotoMap = photoMap.get(productIndex);// 产品晒图
-        if (productPhotoMap == null) {
-            productPhotoMap = new HashMap<>();
-            photoMap.put(productIndex, productPhotoMap);
-        }
         switch (position) {
             case 0:
-                alertView.dismiss();
                 String state = Environment.getExternalStorageState();
                 if (state.equals(Environment.MEDIA_MOUNTED)) {
-                    //   getImageFromCamera();
+                       getImageFromCamera();
                 } else {
                     Toast.makeText(getApplicationContext(), "请确认已经插入SD卡", Toast.LENGTH_LONG).show();
                 }
+                alertView.dismiss();
                 break;
             case 1:
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "选择图片"), SELECT_PICTURE);
+                alertView.dismiss();
                 break;
             case 2:
+                alertView.dismiss();
                 break;
         }
     }
@@ -281,6 +299,29 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    /**
+     * 晒图点击
+     * @param currentRow
+     * @param position
+     */
+    @Override
+    public void onItemLinstener(int currentRow, int position,int dataSize) {
+        if(dataSize >= 5){// 跳转图片详情页
+
+        }else{
+            if(position == dataSize - 1){// 拍照
+                if(alertView.isShowing()){
+                    alertView.dismiss();
+                }else{
+                    alertView.show();
+                }
+
+            }else{//跳转图片详情
+
+            }
+        }
     }
 
     private class MyTask extends AsyncTask<PublishCommentDao, String, IsFlagData> {
@@ -327,7 +368,7 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
     /**
      * 拍照
      */
-    protected void getImageFromCamera(int photoPosition) {
+    protected void getImageFromCamera() {
         String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -336,8 +377,7 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            String capturePath = out_file_path + System.currentTimeMillis() + ".jpg";
-            cameraImage.put(photoPosition, capturePath);
+            capturePath = out_file_path + System.currentTimeMillis() + ".jpg";
             getImageByCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(capturePath)));
             getImageByCamera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
             startActivityForResult(getImageByCamera, REQUEST_CODE_CAPTURE_CAMEIA);

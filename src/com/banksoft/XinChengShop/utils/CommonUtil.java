@@ -168,7 +168,7 @@ public class CommonUtil {
     }
 
     /**
-     * 不好使
+     * EditText 编辑状态
      * @param editText
      * @param isEdit
      */
@@ -176,5 +176,17 @@ public class CommonUtil {
         editText.setFocusableInTouchMode(isEdit);
         editText.setFocusable(isEdit);
         editText.requestFocus();
+    }
+
+    /**
+     * Double 转Int
+     * @param string
+     * @return
+     */
+    public static int stringToInt(String string){
+        int j = 0;
+        String str = string.substring(0, string.indexOf("."));
+        int intgeo = Integer.parseInt(str);
+        return intgeo;
     }
 }

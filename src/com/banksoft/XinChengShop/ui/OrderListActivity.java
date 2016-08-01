@@ -19,13 +19,14 @@ import com.banksoft.XinChengShop.widget.viewpagerindicator.TitlePageIndicator;
  */
 public class OrderListActivity extends XCBaseActivity implements View.OnClickListener{
 
-    private OrderStatus[] statuses = new OrderStatus[]{OrderStatus.CREATE,OrderStatus.PAY,OrderStatus.DISPATCH,OrderStatus.SUCCESS};
+    private OrderStatus[] statuses = new OrderStatus[]{OrderStatus.ALL,OrderStatus.CREATE,OrderStatus.PAY,OrderStatus.DISPATCH,OrderStatus.SUCCESS};
     private ViewPager mViewPager;
     private TabPageIndicator indicator;
     private ImageView back,bgImage;
     private OrderViewAdapter orderViewAdapter;
     private String orderMaster;
     private TextView title;
+    private OrderStatus currentStatus;
 
 
     @Override
@@ -46,6 +47,7 @@ public class OrderListActivity extends XCBaseActivity implements View.OnClickLis
     @Override
     protected void initData() {
         isLogin();
+        currentStatus = (OrderStatus) getIntent().getSerializableExtra(IntentFlag.ORDER_STATUS);
         back.setImageResource(R.drawable.tb_icon_actionbar_back);
         back.setVisibility(View.VISIBLE);
         bgImage.setImageResource(R.color.white);
@@ -62,6 +64,21 @@ public class OrderListActivity extends XCBaseActivity implements View.OnClickLis
         orderViewAdapter.orderMaster = orderMaster;
         mViewPager.setAdapter(orderViewAdapter);
         indicator.setViewPager(mViewPager);
+
+
+        if(OrderStatus.CREATE.equals(currentStatus)){
+            mViewPager.setCurrentItem(1);
+            indicator.setCurrentItem(1);
+        }else if(OrderStatus.PAY.equals(currentStatus)){
+            mViewPager.setCurrentItem(2);
+            indicator.setCurrentItem(2);
+        }else if(OrderStatus.DISPATCH.equals(currentStatus)){
+            mViewPager.setCurrentItem(3);
+            indicator.setCurrentItem(3);
+        }else if(OrderStatus.SUCCESS.equals(currentStatus)){
+            mViewPager.setCurrentItem(4);
+            indicator.setCurrentItem(4);
+        }
     }
 
     @Override
