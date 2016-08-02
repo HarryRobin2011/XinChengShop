@@ -16,6 +16,7 @@ import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.Check;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
 /**
@@ -26,26 +27,26 @@ public class ResetPasswordActivity extends XCBaseActivity implements View.OnClic
     private EditText telephone, checkCode, password, againPassword;
     private ImageView back;
     private TextView title;
-    private Button sendCheckCode,ok;
+    private Button sendCheckCode, ok;
     private ResetDao resetDao;
     private int second = 60;
     private MyProgressDialog myProgressDialog;
     private FoundPassword foundPassword;
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:  //开始倒计时
-                    if(second <= 0){
+                    if (second <= 0) {
                         mHandler.sendEmptyMessage(1);
                         return;
                     }
-                    second --;
+                    second--;
                     sendCheckCode.setClickable(false);
                     sendCheckCode.setText(String.valueOf(second));
-                    mHandler.sendEmptyMessageDelayed(0,1000);
+                    mHandler.sendEmptyMessageDelayed(0, 1000);
                     break;
                 case 1:
                     second = 60;
@@ -111,14 +112,22 @@ public class ResetPasswordActivity extends XCBaseActivity implements View.OnClic
                 new SendThread(account1).execute(resetDao);
                 break;
             case R.id.ok:
+                CommonUtil.operationKeyboard(mContext);
                 String checkCodeStr = checkCode.getText().toString();
-                if(checkCodeStr == null || checkCodeStr.isEmpty()){
-                     alert(R.string.check_code_empty);
-                     return;
+                String passwordStr = password.getText().toString();
+                String againPasswordStr = password.getText().toString();
+
+                if (checkCodeStr == null || checkCodeStr.isEmpty()) {
+                    alert(R.string.check_code_empty);
+                    return;
+                } else if (!passwordStr.equals(againPasswordStr)) {
+                    alert(R.string.the_password_not_consistent);
+                    return;
                 }
 
-                if(resetDao == null){
-               resetDao = new ResetDao(mContext);
+
+                if (resetDao == null) {
+                    resetDao = new ResetDao(mContext);
                 }
                 new ResetTask(checkCodeStr).execute(resetDao);
                 break;
@@ -156,39 +165,41 @@ public class ResetPasswordActivity extends XCBaseActivity implements View.OnClic
         }
     }
 
-    private class ResetTask extends AsyncTask<ResetDao,String,IsFlagData>{
+    private class ResetTask extends AsyncTask<ResetDao, String, IsFlagData> {
         String checkCode;
+        String passwordStr;
 
         public ResetTask(String checkCode) {
             this.checkCode = checkCode;
+            passwordStr = password.getText().toString();
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if(myProgressDialog == null){
-               myProgressDialog = new MyProgressDialog(ResetPasswordActivity.this);
+            if (myProgressDialog == null) {
+                myProgressDialog = new MyProgressDialog(ResetPasswordActivity.this);
             }
             myProgressDialog.showDialog(R.string.please_wait);
         }
 
         @Override
         protected IsFlagData doInBackground(ResetDao... params) {
-            return params[0].resetPassword(foundPassword.getAccountId(),foundPassword.getMobilePhone(),checkCode);
+            return params[0].resetPassword(foundPassword.getAccountId(), passwordStr, foundPassword.getMobilePhone(), checkCode);
         }
 
         @Override
         protected void onPostExecute(IsFlagData isFlagData) {
             super.onPostExecute(isFlagData);
             myProgressDialog.dismiss();
-            if(isFlagData != null){
-                 if(isFlagData.isSuccess()){
-                     finish();
-                     alert(R.string.password_reset_success);
-                 }else{
-                     alert(isFlagData.getMsg().toString());
-                 }
-            }else{
+            if (isFlagData != null) {
+                if (isFlagData.isSuccess()) {
+                    finish();
+                    alert(R.string.password_reset_success);
+                } else {
+                    alert(R.string.password_reset_failed);
+                }
+            } else {
                 alert(R.string.net_error);
             }
         }

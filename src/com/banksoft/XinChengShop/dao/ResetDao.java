@@ -23,9 +23,9 @@ public class ResetDao extends BaseDao{
         return baseData;
     }
 
-    public IsFlagData resetPassword(String id,String password,String code) {
+    public IsFlagData resetPassword(String id,String password,String telephone,String code) {
         String url = ControlUrl.XC_UPDATA_LOGIN_PASSWORD;
-        String params = "accountId="+id+"&password="+ MD5Factory.encoding(password)+"mobileCode="+code;
+        String params = "id="+id+"&password="+ MD5Factory.encoding(password)+"&mobileCode="+code+"&telephone="+telephone;
         IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params,JSONHelper.IS_FLAG_DATA,false);
         return data;
     }

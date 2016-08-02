@@ -700,5 +700,7 @@
     <string name="order_success">待评价</string>
     <string name="order_return">退款/售后</string>
     <string name="please_account_email_telephone_name">请输入用户名/邮箱/手机号</string>
+    <string name="password_reset_failed">密码重置失败</string>
+    <string name="order_delete">删除订单</string>
 
 </resources>

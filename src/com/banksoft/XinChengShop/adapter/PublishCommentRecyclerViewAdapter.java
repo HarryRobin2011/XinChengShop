@@ -53,13 +53,23 @@ public class PublishCommentRecyclerViewAdapter extends RecyclerView.Adapter<Publ
     public void onBindViewHolder(PublishCommentRecyclerViewHolder holder, int position) {
         String imagePath = (String) dataList.get(position);
         if(position == dataList.size() - 1){//最后一项
+          holder.mImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
           holder.mImageView.setImageResource(R.drawable.take_photo);
         }else{
-            mImageLoader.displayImage(imagePath,holder.mImageView, XCApplication.options);
+            holder.mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            mImageLoader.displayImage("file://"+imagePath,holder.mImageView, XCApplication.options);
         }
 
         if(isEdit){
-            holder.close.setVisibility(View.VISIBLE);
+            if(dataList.size() <= 4){
+                if(position == dataList.size() - 1){
+                   holder.close.setVisibility(View.GONE);
+                }else {
+                    holder.close.setVisibility(View.VISIBLE);
+                }
+            }else{
+                holder.close.setVisibility(View.VISIBLE);
+            }
         }else{
             holder.close.setVisibility(View.GONE);
         }
@@ -73,10 +83,14 @@ public class PublishCommentRecyclerViewAdapter extends RecyclerView.Adapter<Publ
     @Override
     public int getItemCount() {
         int count = dataList == null?0:dataList.size();
-        if(count >= 5){ // 最多张图片
-           count = 5;
+        if(count > 4){ // 最多张图片
+           count = 4;
         }
         return count;
+    }
+
+    public void setCurrentRow(int currentRow) {
+        this.currentRow = currentRow;
     }
 
     @Override

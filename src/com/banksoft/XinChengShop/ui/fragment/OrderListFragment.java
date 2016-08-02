@@ -146,6 +146,9 @@ public class OrderListFragment extends XCBaseListFragment{
                 orderIntent.putExtra(IntentFlag.ORDER_STATUS, OrderStatus.valueOf(orderVO.getStatus()));
                 startActivityForResult(orderIntent,Activity.RESULT_FIRST_USER);
                 break;
+            case R.id.delete:
+
+                break;
         }
     }
 

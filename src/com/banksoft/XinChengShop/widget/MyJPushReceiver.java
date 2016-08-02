@@ -176,7 +176,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
                 Intent  intent = new Intent(mContext,ShopProductInfoActivity.class);
                 intent.putExtra(IntentFlag.PRODUCT_ID,targetId);
                 showNotification(title, content, random.nextInt(NUM),ShopProductInfoActivity.class,intent);
-            }else if (PushType.MESSAGE.name().equals(pushType)) {//推送产品
+            }else if (PushType.MESSAGE.name().equals(pushType)) {//推送消息
                 Intent  intent = new Intent(mContext,MessageListActivity.class);
                 showNotification(title, content, random.nextInt(NUM),MessageListActivity.class,intent);
             }

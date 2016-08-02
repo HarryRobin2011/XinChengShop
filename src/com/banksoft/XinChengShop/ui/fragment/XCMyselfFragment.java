@@ -71,12 +71,13 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
         if (requestCode == Activity.RESULT_FIRST_USER) {
             if (resultCode == Activity.RESULT_OK) {
                 if(activity.isLogin()){
-                    setMySelf();
+
                     if (loginDao == null) {
                         loginDao = new LoginDao(mContext);
                     }
                     new MyOrderStatusTask().execute(loginDao);
                 }
+                setMySelf();
             }
         }
     }
@@ -111,6 +112,10 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
             account.setText("");
             blance.setText("" + 0f);
             integral.setText("" + 0f);
+            orderCreateNum.setVisibility(View.GONE);
+            orderPayNum.setVisibility(View.GONE);
+            orderDispatchNum.setVisibility(View.GONE);
+            orderSuccessNum.setVisibility(View.GONE);
             // mImageLoader.displayImage(ControlUrl.BASE_URL+activity.member.getMember().getImageFile(),login, XCApplication.options);
             login.setImageResource(R.drawable.contact_avator);
             shop_layout.setVisibility(View.GONE);

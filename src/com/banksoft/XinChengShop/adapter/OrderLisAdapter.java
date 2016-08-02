@@ -42,6 +42,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         TextView pay;// 订单创建未付款
         TextView returnGoods;//申请退货
         TextView refund;// 申请退款
+         private TextView delete;//删除订单
         private LinearLayout productContent;
         private LinearLayout toolLayout;
         private LinearLayout orderItemLayout;
@@ -67,6 +68,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         orderSaleHolder.pay = (TextView) cellView.findViewById(R.id.pay);
         orderSaleHolder.returnGoods = (TextView) cellView.findViewById(R.id.return_the_goods);
         orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
+        orderSaleHolder.delete = (TextView) cellView.findViewById(R.id.delete);
         orderSaleHolder.orderItemLayout = (LinearLayout) cellView.findViewById(R.id.order_list_item);
         return orderSaleHolder;
     }
@@ -165,6 +167,13 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.pay.setVisibility(View.GONE);
             return OrderStatus.SUCCESS;
         } else if (OrderStatus.OVER.name().equals(orderStatus)) {
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.VISIBLE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             return OrderStatus.OVER;
         }
 

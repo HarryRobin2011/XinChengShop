@@ -20,6 +20,7 @@ import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.PublishCommentDao;
 import com.banksoft.XinChengShop.entity.*;
+import com.banksoft.XinChengShop.model.ImageUrlData;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.Check;
@@ -120,12 +121,13 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
         View view = content.getChildAt(currentRow);//点击拍照的行View
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         PublishCommentRecyclerViewAdapter adapter = (PublishCommentRecyclerViewAdapter) recyclerView.getAdapter();
-        adapter.dataList.add(capturePath);
+        adapter.dataList.add(0,capturePath);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void initData() {
+        alertView = new AlertView(null, null, "取消", null, new String[]{"拍照", "从相册中选择"}, this, AlertView.Style.ActionSheet, this);
         currentOrderVo = (OrderVO) getIntent().getExtras().getSerializable(IntentFlag.ORDER_VO);
         footView = LayoutInflater.from(mContext).inflate(R.layout.publish_comment_foot_layout, null);
         title.setText(R.string.publish_comment_title);
@@ -149,10 +151,11 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
         if(photoMap == null){
             photoMap = new HashMap<>();
         }
-        for (OrderProductVO orderProductVO : currentOrderVo.getList()) {
+        for (int i = 0; i < currentOrderVo.getList().size();i++) {
+            OrderProductVO orderProductVO = currentOrderVo.getList().get(i);
             LinkedList photoList = new LinkedList();
             photoList.add(ControlUrl.ANDROID_ASSETS_BASE_PATH+"take_photo.png");
-            photoMap.put(orderProductVO.getId(),photoList);
+            photoMap.put(orderProductVO.getProductId(),photoList);
             ProductAssessBO productAssessBO = new ProductAssessBO();
             productAssessBO.setOrderId(orderProductVO.getOrderId());
             productAssessBO.setProductId(orderProductVO.getProductId());
@@ -172,7 +175,8 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
 
             GridLayoutManager manager = new GridLayoutManager(mContext,4);
             recyclerView.setLayoutManager(manager);
-            PublishCommentRecyclerViewAdapter adapter = new PublishCommentRecyclerViewAdapter(mContext,photoMap.get(orderProductVO.getId()));
+            PublishCommentRecyclerViewAdapter adapter = new PublishCommentRecyclerViewAdapter(mContext,photoMap.get(orderProductVO.getProductId()));
+            adapter.setCurrentRow(i);
             adapter.setOnRecylerViewOnItemLinstener(this);
             recyclerView.setAdapter(adapter);
 
@@ -308,7 +312,8 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
      */
     @Override
     public void onItemLinstener(int currentRow, int position,int dataSize) {
-        if(dataSize >= 5){// 跳转图片详情页
+        this.currentRow = currentRow;
+        if(dataSize >4){// 跳转图片详情页
 
         }else{
             if(position == dataSize - 1){// 拍照
@@ -352,6 +357,23 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
 
         @Override
         protected IsFlagData doInBackground(PublishCommentDao... params) {
+            for(ProductAssessBO productAssessBO:productAssessBOList){
+                List imageList = photoMap.get(productAssessBO.getProductId());
+                StringBuffer imageBuffer = new StringBuffer();
+                if(imageList != null && imageList.size() > 1){
+                    for(Object data:imageList){
+                        String path = (String) data;
+                        File file = new File(path);
+                        String type = path.substring(path.lastIndexOf(".")+1,path.length());
+                        ImageUrlData imageUrl = params[0].submitImage(file, type);
+                        if(imageUrl == null){
+                            continue;
+                        }
+                        imageBuffer.append(imageUrl.getData()).append("|");
+                    }
+                }
+                productAssessBO.setImages(imageBuffer.toString());
+            }
             return params[0].submitComment(member.getMember().getId(), productAssessBOList, orderAssessBO);
         }
 
