@@ -82,6 +82,7 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
+                  android:visibility="gone"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/refund"/>
@@ -91,6 +92,7 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
+                  android:visibility="gone"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/return_the_goods"/>

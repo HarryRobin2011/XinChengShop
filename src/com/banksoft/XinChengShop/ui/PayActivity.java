@@ -243,6 +243,16 @@ public class PayActivity extends XCBaseActivity implements View.OnClickListener,
          req.sign			= json.getString("sign");
          req.extData			= "app data"; // optional
          * @param payReq
+         * IWXAPI api;
+        PayReq request = new PayReq();
+        request.appId = "wxd930ea5d5a258f4f";
+        request.partnerId = "1900000109";
+        request.prepayId= "1101000000140415649af9fc314aa427",;
+        request.packageValue = "Sign=WXPay";
+        request.nonceStr= "1101000000140429eb40476f8896f4c9";
+        request.timeStamp= "1398746574";
+        request.sign= "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
+        api.sendReq(req);
          */
         @Override
         protected void onPostExecute(PayReqData payReq) {
