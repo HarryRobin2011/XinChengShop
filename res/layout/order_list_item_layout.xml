@@ -31,7 +31,7 @@
     <LinearLayout android:id="@id/content"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:background="@color/text_white"
+                  android:background="@drawable/body_bg"
                   android:orientation="vertical"/>
     <TextView android:id="@id/total"
               android:layout_width="match_parent"
@@ -39,6 +39,7 @@
               style="@style/text_style_3"
               android:gravity="right|center_vertical"
               android:paddingRight="10.0dp"/>
+    <View style="@style/line2"/>
     <LinearLayout android:id="@id/layout_tool"
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/height_40"
@@ -50,7 +51,8 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
-                  android:background="@drawable/edit_text_bg_normal"
+                  android:background="@drawable/edit_text_red_bg"
+                  android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/comments"/>
         <TextView android:id="@id/cancel"
@@ -74,7 +76,8 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
-                  android:background="@drawable/edit_text_bg_normal"
+                  android:background="@drawable/edit_text_red_bg"
+                  android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/payment"/>
         <TextView android:id="@id/refund"
@@ -101,7 +104,8 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
-                  android:background="@drawable/edit_text_bg_normal"
+                  android:background="@drawable/edit_text_red_bg"
+                  android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/confirm_goods"/>
         <TextView android:id="@id/delivery"
@@ -109,7 +113,8 @@
                   android:layout_height="@dimen/height_30"
                   style="@style/text_style_3"
                   android:gravity="center"
-                  android:background="@drawable/edit_text_bg_normal"
+                  android:background="@drawable/edit_text_red_bg"
+                  android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
                   android:text="@string/delivery"/>
 

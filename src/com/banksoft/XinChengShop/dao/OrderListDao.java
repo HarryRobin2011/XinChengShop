@@ -29,9 +29,16 @@ public class OrderListDao extends BaseDao {
      * @return
      */
     public IsFlagData cancelOrder(String orderId) {
-        String url = ControlUrl.XC_SHOP_LOCAL_TYPE_URL;
+        String url = ControlUrl.XC_ORDER_CANCEL_URL;
         String params = "orderId=" + orderId;
         IsFlagData data = (IsFlagData) postHttpRequest(mContext, url, params, JSONHelper.IS_FLAG_DATA, false);
+        return data;
+    }
+
+    public IsFlagData deleteOrder(String orderId){
+        String url = ControlUrl.XC_ORDER_DELETE_URL;
+        String  params= "orderId="+orderId;
+        IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params,JSONHelper.IS_FLAG_DATA,false);
         return data;
     }
 

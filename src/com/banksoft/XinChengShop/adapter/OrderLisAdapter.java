@@ -103,7 +103,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             saleNum.setVisibility(View.GONE);
             holder.productContent.addView(view);
         }
-        holder.total.setText("合计：" + orderVO.getTotalMoney() + "元");
+        holder.total.setText("共"+orderVO.getList().size()+"件商品 "+"合计：" + orderVO.getTotalMoney() +"（含运费￥"+orderVO.getExpressMoney()+"）");
 
         holder.cancel.setOnClickListener(this);
         holder.cancel.setTag(position);

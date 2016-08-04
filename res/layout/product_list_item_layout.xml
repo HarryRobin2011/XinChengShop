@@ -10,7 +10,7 @@
                   android:layout_height="120.0dp"
                   android:padding="10.0dp"
                   android:orientation="horizontal"
-                  android:background="@drawable/button_white_bg">
+                  android:background="@drawable/body_bg">
 
         <LinearLayout android:id="@+id/image_layout"
                       android:layout_width="120.0dp"
@@ -83,5 +83,4 @@
         </LinearLayout>
 
     </LinearLayout>
-    <View style="@style/line1"/>
 </LinearLayout>

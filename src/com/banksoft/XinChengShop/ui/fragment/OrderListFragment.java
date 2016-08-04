@@ -43,7 +43,6 @@ public class OrderListFragment extends XCBaseListFragment{
         type = (String) getArguments().get(IntentFlag.ORDER_TYPE);
         orderMaster = getArguments().getString(IntentFlag.Order_MASTER, "");
         activity = (XCBaseActivity) getActivity();
-        myProgressDialog = new MyProgressDialog(mContext);
     }
 
     @Override
@@ -165,6 +164,9 @@ public class OrderListFragment extends XCBaseListFragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            if(myProgressDialog == null){
+                myProgressDialog = new MyProgressDialog(getActivity());
+            }
             myProgressDialog.showDialog("");
 
         }
@@ -177,6 +179,7 @@ public class OrderListFragment extends XCBaseListFragment{
         @Override
         protected void onPostExecute(IsFlagData isFlagData) {
             super.onPostExecute(isFlagData);
+            myProgressDialog.dismiss();
             if (isFlagData != null) {
                 if (isFlagData.isSuccess()) {
                     alert(R.string.order_cancel_success);
@@ -187,6 +190,27 @@ public class OrderListFragment extends XCBaseListFragment{
             } else {
                 alert(R.string.net_error);
             }
+        }
+    }
+
+    /**
+     * 删除订单
+     */
+    private class DeleteTask extends AsyncTask<OrderListDao,String,IsFlagData>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected IsFlagData doInBackground(OrderListDao... params) {
+            return params[0].deleteOrder("");
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
         }
     }
 
