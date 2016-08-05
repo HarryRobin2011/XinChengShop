@@ -33,6 +33,7 @@ public class CheckPayPasswordFragment extends android.support.v4.app.DialogFragm
     private PayActivity payActivity;
 
     private CheckPasswordDao checkPasswordDao;
+    private CheckListener checkListener;
 
 
     @Override
@@ -41,6 +42,10 @@ public class CheckPayPasswordFragment extends android.support.v4.app.DialogFragm
         memberId = getArguments().getString(IntentFlag.MEMBER_ID);
         orderIds = getArguments().getString(IntentFlag.ORDER_IDS);
         payActivity = (PayActivity) getActivity();
+    }
+
+    public void setCheckListener(CheckListener checkListener) {
+        this.checkListener = checkListener;
     }
 
     @Override
@@ -122,6 +127,7 @@ public class CheckPayPasswordFragment extends android.support.v4.app.DialogFragm
                 if(baseData.isSuccess()){
                     Intent intent = new Intent(payActivity.getApplicationContext(), OrderListActivity.class);
                     startActivity(intent);
+                    checkListener.isSuccess(true);
                 }else{
                     payActivity.showWarning(baseData.getMsg().toString());
                 }

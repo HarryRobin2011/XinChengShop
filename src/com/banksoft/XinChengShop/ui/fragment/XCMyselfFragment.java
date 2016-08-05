@@ -340,7 +340,7 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
 
             case R.id.seller_order_layout:// 卖家订单
                 if (activity.isLogin()) {
-                    Intent sellerIntent = new Intent(mContext, OrderListActivity.class);
+                    Intent sellerIntent = new Intent(mContext, SellerOrderListActivity.class);
                     sellerIntent.putExtra(IntentFlag.Order_MASTER, OrderMaster.SELLER.name());
                     startActivityForResult(sellerIntent, Activity.RESULT_FIRST_USER);
                 } else {
@@ -407,7 +407,8 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     return;
                 }
                 Intent orderCreateIntent = new Intent(mContext, OrderListActivity.class);
-                orderCreateIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.CREATE.name());
+                orderCreateIntent.putExtra(IntentFlag.Order_MASTER, OrderMaster.SALE);
+                orderCreateIntent.putExtra(IntentFlag.ORDER_STATUS,OrderStatus.CREATE);
                 startActivity(orderCreateIntent);
                 break;
             case R.id.order_pay:
@@ -417,7 +418,8 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     return;
                 }
                 Intent orderPayIntent = new Intent(mContext, OrderListActivity.class);
-                orderPayIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.PAY.name());
+                orderPayIntent.putExtra(IntentFlag.Order_MASTER, OrderMaster.SALE);
+                orderPayIntent.putExtra(IntentFlag.ORDER_STATUS,OrderStatus.PAY);
                 startActivity(orderPayIntent);
                 break;
             case R.id.order_dispatch:
@@ -427,7 +429,8 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     return;
                 }
                 Intent orderDispatchIntent = new Intent(mContext, OrderListActivity.class);
-                orderDispatchIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.DISPATCH.name());
+                orderDispatchIntent.putExtra(IntentFlag.Order_MASTER, OrderMaster.SALE);
+                orderDispatchIntent.putExtra(IntentFlag.ORDER_STATUS,OrderStatus.DISPATCH);
                 startActivity(orderDispatchIntent);
                 break;
             case R.id.order_success:
@@ -437,7 +440,8 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                     return;
                 }
                 Intent orderSuccessIntent = new Intent(mContext, OrderListActivity.class);
-                orderSuccessIntent.putExtra(IntentFlag.Order_MASTER, OrderStatus.SUCCESS.name());
+                orderSuccessIntent.putExtra(IntentFlag.Order_MASTER, OrderMaster.SALE);
+                orderSuccessIntent.putExtra(IntentFlag.ORDER_STATUS,OrderStatus.SUCCESS);
                 startActivity(orderSuccessIntent);
                 break;
             case R.id.order_return:

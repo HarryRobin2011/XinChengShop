@@ -106,7 +106,9 @@ public class PayActivity extends XCBaseActivity implements View.OnClickListener,
      */
     @Override
     public void isSuccess(boolean success) {
-
+       if(success){
+           finish();
+       }
     }
 
 
