@@ -71,6 +71,7 @@ public class JSONHelper {
     public static final Type FOUND_PASSWORD = new TypeToken<FoundPassword>(){}.getType();
     public static final Type BASE_DATA = new TypeToken<BaseData>(){}.getType();
     public static final Type FOUND_PASSWORD_DATA = new TypeToken<FoundPasswordData>(){}.getType();
+    public static final Type SCORE_INFO_DATA = new TypeToken<ScoreProductData>(){}.getType();
 
 
     public static String toJSONString(Object o){

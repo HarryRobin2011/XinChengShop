@@ -24,6 +24,7 @@ import com.banksoft.XinChengShop.model.ImageUrlData;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.Check;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.ImageUtil;
 import com.banksoft.XinChengShop.utils.PopupWindowUtil;
 import com.banksoft.XinChengShop.widget.MyGridView;
@@ -267,9 +268,9 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
         if(serviceAttitude.getRating() == 0f || describeRating.getRating() == 0f || expressService.getRating() == 0f){
           return null;
         }
-        orderAssessBO.setServiceScore(serviceAttitude.getRating());
-        orderAssessBO.setDispatchScore(expressService.getRating());
-        orderAssessBO.setMatchScore(describeRating.getRating());
+        orderAssessBO.setServiceScore((int)serviceAttitude.getRating());
+        orderAssessBO.setDispatchScore((int)expressService.getRating());
+        orderAssessBO.setMatchScore((int)describeRating.getRating());
         orderAssessBO.setMemberId(member.getMember().getId());
         return orderAssessBO;
     }

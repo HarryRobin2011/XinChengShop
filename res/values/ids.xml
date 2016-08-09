@@ -568,4 +568,5 @@
     <item name="order_dispatch_num" type="id">order_dispatch_num</item>
     <item name="order_pay_num" type="id">order_pay_num</item>
     <item name="recycler_view" type="id">recycler_view</item>
+    <item name="score" type="id">score</item>
 </resources>

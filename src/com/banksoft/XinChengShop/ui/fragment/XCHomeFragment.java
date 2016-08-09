@@ -338,9 +338,9 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
                 techantIntent.putExtra(IntentFlag.TITLE, "");
                 startActivity(techantIntent);
                 break;
-            case R.id.xc_integral_mall://积分商城
-                Intent jifenIntent = new Intent(mContext, IntegralMallActivity.class);
-                jifenIntent.putExtra(IntentFlag.TITLE, "");
+            case R.id.xc_integral_mall://鑫诚店铺
+                Intent jifenIntent = new Intent(mContext, ShopListActivity.class);
+                jifenIntent.putExtra(IntentFlag.TITLE, "鑫诚店铺");
                 startActivity(jifenIntent);
                 break;
 

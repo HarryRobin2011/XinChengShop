@@ -4,12 +4,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/button_white_bg">
+              android:background="@drawable/body_bg">
     <LinearLayout android:id="@+id/group_buy_cell_layout"
                   android:layout_width="match_parent"
                   android:layout_height="120.0dp"
                   android:padding="10.0dp"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal"
+                  android:background="@drawable/body_bg">
 
         <LinearLayout android:id="@+id/image_layout"
                       android:layout_width="120.0dp"

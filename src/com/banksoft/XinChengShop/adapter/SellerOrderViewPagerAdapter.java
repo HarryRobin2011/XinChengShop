@@ -20,11 +20,8 @@ public class SellerOrderViewPagerAdapter extends FragmentPagerAdapter{
         this.dataList = dataList;
     }
 
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        SellerOrderListFragment sellerOrderListFragment = SellerOrderListFragment.newInstance((OrderStatus) dataList.get(position));
-        return sellerOrderListFragment;
-    }
+
+
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
@@ -33,7 +30,8 @@ public class SellerOrderViewPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int i) {
-        return null;
+        SellerOrderListFragment sellerOrderListFragment = SellerOrderListFragment.newInstance((OrderStatus) dataList.get(i));
+        return sellerOrderListFragment;
     }
 
     @Override

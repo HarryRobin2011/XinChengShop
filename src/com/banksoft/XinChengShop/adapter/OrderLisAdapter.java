@@ -82,7 +82,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         holder.productContent.removeAllViews();
 
         for (OrderProductVO productVO : orderVO.getList()) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout, null);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_order_item_layout, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
             TextView name = (TextView) view.findViewById(R.id.name);
             //TextView num = (TextView) view.findViewById(R.id.describe);

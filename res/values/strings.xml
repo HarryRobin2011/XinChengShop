@@ -702,5 +702,7 @@
     <string name="please_account_email_telephone_name">请输入用户名/邮箱/手机号</string>
     <string name="password_reset_failed">密码重置失败</string>
     <string name="order_delete">删除订单</string>
+    <string name="describe_goods">商品描述</string>
+    <string name="score_change">积分兑换</string>
 
 </resources>

@@ -81,6 +81,7 @@ public class ControlUrl {
     public static final String WEI_XIN_DOWNLOAD_URL = "http://a.app.qq.com/o/simple.jsp?pkgname=com.banksoft.XinChengShop";//微信下载链接
     public static final String ANDROID_ASSETS_BASE_PATH = "file:///android_asset/";
     public static final String XC_ORDER_DELETE_URL = "";
+    public static final String SCORE_INFO_URL = "/app/scoreProduct_find";//积分产品详情
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 
