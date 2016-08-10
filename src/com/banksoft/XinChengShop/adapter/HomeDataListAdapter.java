@@ -75,7 +75,7 @@ public class HomeDataListAdapter extends BaseAdapter {
             };
             final LinkedList<ProductTypeVO> productTypeVOS = productTypeData.getData().getList();
             for (int i = 0; i < productTypeVOS.size(); i++) {
-                ImageView imageView = (ImageView) imageViews[i];
+                ImageView imageView = (ImageView) imageViews[i%13];
                 final int finalI = i;
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
