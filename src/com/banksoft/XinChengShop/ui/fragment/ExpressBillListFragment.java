@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import com.banksoft.XinChengShop.adapter.CommonListAdapter;
+import com.banksoft.XinChengShop.adapter.ExpressBillAdapter;
+import com.banksoft.XinChengShop.adapter.OrderLisAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
@@ -42,7 +44,7 @@ public class ExpressBillListFragment extends XCBaseListFragment{
         }
 
         jsonType = JSONHelper.ORDER_LIST_DATA;
-        bailaAdapter = new CommonListAdapter(mContext,new ArrayList());
+        bailaAdapter = new ExpressBillAdapter(mContext,new ArrayList());
         xListView.setDividerHeight(10);
         setListDao();
     }

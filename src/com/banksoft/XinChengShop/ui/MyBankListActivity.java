@@ -46,6 +46,7 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
     protected void initData() {
         isSelect = getIntent().getBooleanExtra(IntentFlag.IS_SELECT,false);
         title.setText(R.string.my_bank_card);
+        add.setVisibility(View.VISIBLE);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         add.setOnClickListener(this);

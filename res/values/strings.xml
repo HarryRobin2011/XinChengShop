@@ -704,5 +704,6 @@
     <string name="order_delete">删除订单</string>
     <string name="describe_goods">商品描述</string>
     <string name="score_change">积分兑换</string>
+    <string name="my_dispatch">我去派送</string>
 
 </resources>
