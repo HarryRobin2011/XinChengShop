@@ -278,6 +278,9 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
         }else if(stock.isEmpty()){
             alert(R.string.product_stock_no_empty);
             return null;
+        }else if(currentExpressPriceBO == null){
+            alert(R.string.please_select_express_model);
+            return null;
         }
 
         productBO.setName(name);

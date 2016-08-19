@@ -94,7 +94,7 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
             } else {
                 mImageLoader.displayImage(ControlUrl.BASE_URL + activity.member.getMember().getImageFile().split("\\|")[0], login, XCApplication.options);
             }
-            if (activity.member.getShop() != null && activity.member.getShop().isAuditStatus()) {// 开店了
+            if (activity.member.getShop() != null) {// 开店了
                 if (activity.member.getShop().isStatus()) {//店铺开启了
 
                 } else {//店铺未开启
