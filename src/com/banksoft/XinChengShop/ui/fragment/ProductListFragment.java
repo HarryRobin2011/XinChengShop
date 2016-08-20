@@ -78,6 +78,7 @@ public class ProductListFragment extends XCBaseListFragment {
 
         jsonType = JSONHelper.SHOP_LIST_PRODUCT_DATA;
         bailaAdapter = new ProductListAdapter(mContext,new ArrayList());
+        xListView.setDividerHeight(1);
         setListDao();
     }
 

@@ -59,9 +59,9 @@ public class XCApplication extends Application {
     private void setOptions() {
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.default_picture_icon)
-                .showImageForEmptyUri(R.drawable.default_picture_icon)
-                .showImageOnFail(R.drawable.image_error_logo)
+                .showImageOnLoading(R.drawable.white_drawable)
+                .showImageForEmptyUri(R.drawable.white_drawable)
+                .showImageOnFail(R.drawable.white_drawable)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)

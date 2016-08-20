@@ -18,7 +18,7 @@
     </com.banksoft.XinChengShop.widget.SquareLayout>
     <TextView android:id="@id/describe"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/height_30"
+              android:layout_height="wrap_content"
               android:background="@color/white"
               style="@style/text_style_3"
               android:singleLine="true"

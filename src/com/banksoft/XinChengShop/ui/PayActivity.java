@@ -155,6 +155,7 @@ public class PayActivity extends XCBaseActivity implements View.OnClickListener,
                 bundle.putString(IntentFlag.MEMBER_ID, member.getMember().getId());
                 bundle.putString(IntentFlag.ORDER_IDS, getOrderIds(orderVOLinkedList));
                 checkPayPasswordFragment.setArguments(bundle);
+                checkPayPasswordFragment.setCheckListener(this);
                 checkPayPasswordFragment.show(getSupportFragmentManager(), "");
                 break;
 

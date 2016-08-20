@@ -12,7 +12,8 @@
             android:scaleType="fitXY"/>
     <TextView android:id="@id/name"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/height_30"
+              android:layout_height="wrap_content"
+              android:padding="2.0dp"
               android:lines="2"
               android:ellipsize="end"
               style="@style/text_style_3"/>

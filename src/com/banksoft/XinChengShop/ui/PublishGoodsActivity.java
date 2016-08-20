@@ -278,10 +278,11 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
         }else if(stock.isEmpty()){
             alert(R.string.product_stock_no_empty);
             return null;
-        }else if(currentExpressPriceBO == null){
-            alert(R.string.please_select_express_model);
-            return null;
         }
+//        else if(currentExpressPriceBO == null){
+//            alert(R.string.please_select_express_model);
+//            return null;
+//        }
 
         productBO.setName(name);
         productBO.setPrice(Float.valueOf(price));
@@ -296,7 +297,10 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
         productBO.setTypeNo(currentShopProductTypeBo.getNo());
         productBO.setAreaNo(currentCode);
         productBO.setShopId(member.getShop().getId());
-        productBO.setExpressModelId(currentExpressPriceBO.getId());
+        if(currentExpressPriceBO != null){
+            productBO.setExpressModelId(currentExpressPriceBO.getId());
+        }
+
         productBO.setActive(goodsType);
         return productBO;
     }

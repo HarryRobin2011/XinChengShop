@@ -6,7 +6,7 @@
               android:layout_height="match_parent">
     <include layout="@layout/title"/>
     <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+                 android:layout_height="@dimen/height_200">
         <ListView android:id="@id/list_view"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -14,6 +14,11 @@
                   android:divider="@color/line_dark2"
                   android:dividerHeight="0.1dp"
                   android:cacheColorHint="@color/transparent"/>
+        <TextView android:id="@+id/express_model"
+                  android:layout_width="match_parent"
+                  android:visibility="gone"
+                  android:gravity="center"
+                  android:layout_height="@dimen/height_200"/>
         <ProgressBar android:id="@id/progressBar"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"

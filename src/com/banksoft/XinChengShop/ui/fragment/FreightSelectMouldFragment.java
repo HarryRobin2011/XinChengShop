@@ -33,6 +33,7 @@ public class FreightSelectMouldFragment extends DialogFragment implements Adapte
     private FreightSelectDao freightSelectDao;
     private FreightMouldAdapter freightMouldAdapter;
     private String shopId;
+    private TextView expressModel;
 
 
     @Override
@@ -56,6 +57,7 @@ public class FreightSelectMouldFragment extends DialogFragment implements Adapte
         title = (TextView) view.findViewById(R.id.titleText);
         listView = (ListView) view.findViewById(R.id.list_view);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        expressModel = (TextView) view.findViewById(R.id.express_model);
         shopId = (String) getArguments().get(IntentFlag.SHOP_ID);
         listView.setOnItemClickListener(this);
         title.setText(R.string.please_select_freight_mould);
@@ -86,6 +88,13 @@ public class FreightSelectMouldFragment extends DialogFragment implements Adapte
             super.onPostExecute(expressModelBOData);
             if(expressModelBOData != null){
                 if(expressModelBOData.isSuccess()){
+                    if(expressModelBOData.getData() == null||expressModelBOData.getData().size() == 0){
+                        expressModel.setVisibility(View.VISIBLE);
+                        listView.setVisibility(View.GONE);
+                        expressModel.setText(R.string.un_add_shop_express_model);
+                        return;
+                    }
+                    listView.setVisibility(View.VISIBLE);
                     if(freightMouldAdapter == null){
                         freightMouldAdapter = new FreightMouldAdapter(getActivity().getApplicationContext(),expressModelBOData.getData());
                     }

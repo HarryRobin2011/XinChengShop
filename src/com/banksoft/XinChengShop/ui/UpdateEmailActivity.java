@@ -51,7 +51,8 @@ public class UpdateEmailActivity extends XCBaseActivity implements View.OnClickL
         title.setText(R.string.update_email_title);
         update.setText(R.string.update);
         update.setVisibility(View.VISIBLE);
-        back.setVisibility(View.GONE);
+        back.setVisibility(View.VISIBLE);
+        back.setOnClickListener(this);
 
     }
 
