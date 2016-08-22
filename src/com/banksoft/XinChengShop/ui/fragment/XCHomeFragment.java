@@ -279,8 +279,15 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         ShopProductListData shopProductListData2 = (ShopProductListData) dataHashMap.get(MapFlag.DATA_4);
         if (advertisementData != null) {
             bannersList = advertisementData.getData();
-            bannerViewPagerAdapter = new BannerViewPagerAdapter(mContext, bannersList);
-            rollPagerView.setAdapter(bannerViewPagerAdapter);
+            if(bannerViewPagerAdapter == null){
+                bannerViewPagerAdapter = new BannerViewPagerAdapter(mContext, bannersList);
+                rollPagerView.setAdapter(bannerViewPagerAdapter);
+            }else{
+                bannerViewPagerAdapter.dataList.clear();
+                bannerViewPagerAdapter.dataList = bannersList;
+                bannerViewPagerAdapter.notifyDataSetChanged();
+            }
+
             rollPagerView.setHintView(new ColorPointHintView(mContext, getResources().getColor(R.color.bg_red), getResources().getColor(R.color.white)));
             String imageUrl = ControlUrl.BASE_URL + bannersList.get(bannersList.size() - 1).getImageUrl();
             mImageLoader.displayImage(imageUrl, salesPromotionImage, XCApplication.options);

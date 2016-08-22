@@ -570,4 +570,5 @@
     <item name="recycler_view" type="id">recycler_view</item>
     <item name="score" type="id">score</item>
     <item name="my_dispatch" type="id">my_dispatch</item>
+    <item name="sex_layout" type="id">sex_layout</item>
 </resources>

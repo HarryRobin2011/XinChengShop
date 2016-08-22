@@ -707,5 +707,6 @@
     <string name="my_dispatch">我去派送</string>
     <string name="please_select_express_model">请选择物流模板</string>
     <string name="un_add_shop_express_model">没有添加店铺运费模板</string>
+    <string name="sex_is_empty">性别不能为空</string>
 
 </resources>

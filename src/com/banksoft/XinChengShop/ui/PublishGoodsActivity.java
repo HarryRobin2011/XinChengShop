@@ -53,6 +53,7 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
     private AlertView mAlertView;
     private HashMap<Integer, String> cameraImage = new HashMap<>();
     private int currentPosition;
+    private LinearLayout expressLayout;
 
     private String localTempImgDir = "xinchengShop/";
 
@@ -100,6 +101,7 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
         rightBtn.setVisibility(View.VISIBLE);
         rightBtn.setText(R.string.send_supply);
 
+        shopFreight.setOnCheckedChangeListener(this);
         specialtyGoodsRadiogroup.setOnCheckedChangeListener(this);
         recommendGoodsRadiogroup.setOnCheckedChangeListener(this);
         inventoryGoodsRadiogroup.setOnCheckedChangeListener(this);
@@ -131,6 +133,7 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
         goodMarkPrice = (EditText) findViewById(R.id.good_mark_price);
         goodStock = (EditText) findViewById(R.id.goods_stock);
         publish = (Button) findViewById(R.id.titleRightButton);
+        expressLayout = (LinearLayout) findViewById(R.id.express_layout);
     }
 
     @Override
@@ -279,10 +282,13 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
             alert(R.string.product_stock_no_empty);
             return null;
         }
-//        else if(currentExpressPriceBO == null){
-//            alert(R.string.please_select_express_model);
-//            return null;
-//        }
+        if(isFreight){
+             if(currentExpressPriceBO == null){
+                alert(R.string.please_select_express_model);
+                return null;
+            }
+        }
+
 
         productBO.setName(name);
         productBO.setPrice(Float.valueOf(price));
@@ -312,8 +318,10 @@ public class PublishGoodsActivity extends XCBaseActivity implements View.OnClick
             case R.id.good_freight_group://运费
                 if (group.getCheckedRadioButtonId() == R.id.shop_freight) {
                     isFreight = true;
+                    expressLayout.setVisibility(View.VISIBLE);
                 } else if (group.getCheckedRadioButtonId() == R.id.member_freight) {
                     isFreight = false;
+                    expressLayout.setVisibility(View.GONE);
                 }
                 break;
             case R.id.recommend_goods_radiogroup://商品推荐

@@ -137,7 +137,9 @@
 
                 </LinearLayout>
                 <View style="@style/line2"/>
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                        android:id="@id/sex_layout"
+                        android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:background="@color/white"
                               android:orientation="horizontal">
@@ -159,7 +161,9 @@
 
                 </LinearLayout>
                 <View style="@style/line2"/>
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                        android:id="@id/area_layout"
+                        android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:background="@color/white"
                               android:orientation="horizontal">
@@ -180,7 +184,9 @@
 
                 </LinearLayout>
                 <View style="@style/line2"/>
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                        android:id="@id/time_layout"
+                        android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
                               android:background="@color/white"
                               android:orientation="horizontal">

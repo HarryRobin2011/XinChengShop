@@ -1,5 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
     private ProductManagerListFragment productManagerPutawayListFragment;
     private ProductManagerListFragment productManagerTakeoffListFragment;
     private ViewPagerAdapter viewPagerAdapter;
+    private final int OPERATION_PUBLISH_CODE = 0 ;
 
     @Override
     protected void initContentView() {
@@ -45,6 +47,16 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
         searchEdit = (EditText) findViewById(R.id.search_edit);
         tabPageIndicator = (TabPageIndicator) findViewById(R.id.tab_page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == OPERATION_PUBLISH_CODE){
+            if(resultCode == Activity.RESULT_OK){
+                productManagerTakeoffListFragment.onRefresh();
+            }
+        }
     }
 
     @Override
@@ -112,7 +124,7 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
                 break;
             case R.id.titleRightButton:
                 Intent intent = new Intent(mContext,PublishGoodsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,OPERATION_PUBLISH_CODE);
                 break;
         }
     }

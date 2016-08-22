@@ -349,7 +349,13 @@ public class RollPagerView extends RelativeLayout implements OnPageChangeListene
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 		mRecentTouchTime = System.currentTimeMillis();
-        return super.dispatchTouchEvent(ev);
+		boolean flag = false;
+		try {
+			 flag = super.dispatchTouchEvent(ev);
+		}catch (Exception e){
+			 e.printStackTrace();
+		}
+        return flag;
     }
 
     @Override

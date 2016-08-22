@@ -12,16 +12,24 @@ import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.config.ControlUrl;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MemberInfoDao;
+import com.banksoft.XinChengShop.entity.MemberAddressVO;
 import com.banksoft.XinChengShop.entity.MemberInfo;
 import com.banksoft.XinChengShop.model.ImageUrlData;
 import com.banksoft.XinChengShop.model.MemberVOData;
+import com.banksoft.XinChengShop.ui.AddressSelectActivity;
+import com.banksoft.XinChengShop.ui.AreaListActivity;
+import com.banksoft.XinChengShop.ui.ShopListActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.ui.fragment.SexSelectFragment;
+import com.banksoft.XinChengShop.ui.fragment.TimeSelectFragment;
 import com.banksoft.XinChengShop.utils.*;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.banksoft.XinChengShop.widget.imageView.CustomShapeImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.sina.weibo.sdk.register.mobile.SelectCountryActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -29,10 +37,12 @@ import java.util.HashMap;
 /**
  * Created by harry_robin on 16/1/22.
  */
-public class MemberInfoActivity extends XCBaseActivity implements View.OnClickListener{
+public class MemberInfoActivity extends XCBaseActivity implements View.OnClickListener,TimeSelectFragment.OnSelectTimeListener,SexSelectFragment.SelectSexListener {
     private static final int REQUEST_CODE_CAPTURE_CAMEIA = 0;
 
     private static final int SELECT_PICTURE = 1;
+
+    private int OPERATION_SELECT_AREA = 2;
     private int currentPosition;//点击的 第几个图片
     private EditText account, telPhone_contact, member_email, member_name, member_qq;
     private ProgressBar progressBar;
@@ -48,7 +58,13 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     private MemberInfoDao memberInfoDao;
     private MyProgressDialog myProgressDialog;
 
+    private LinearLayout areaLayout,sexLayout,timeLayout;
+
     private HashMap<Integer, String> cameraImage = new HashMap<>();
+
+    private String sexStr;
+
+
 
     @Override
     protected void initContentView() {
@@ -70,6 +86,9 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         headImage = (CustomShapeImageView) findViewById(R.id.head_image);
         editBtn = (Button) findViewById(R.id.titleRightButton);
+        areaLayout = (LinearLayout) findViewById(R.id.area_layout);
+        sexLayout = (LinearLayout) findViewById(R.id.sex_layout);
+        timeLayout = (LinearLayout) findViewById(R.id.time_layout);
     }
 
     @Override
@@ -92,10 +111,10 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         headImage.setOnClickListener(this);
         headImage.setClickable(false);
         editBtn.setOnClickListener(this);
-        sex.setOnClickListener(this);
-        area.setOnClickListener(this);
         birthday.setOnClickListener(this);
-
+        sexLayout.setOnClickListener(this);
+        timeLayout.setOnClickListener(this);
+        areaLayout.setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +133,11 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
             Uri uri = data.getData();
             cameraImage.put(currentPosition, ImageUtil.getImageAbsolutePath(this,uri));
             setCaremaImage();
+        }else if(requestCode == OPERATION_SELECT_AREA){// 选择的地理位置
+            if (resultCode == RESULT_OK) {
+                String areaName = data.getStringExtra(IntentFlag.AREA_NAME);
+                area.setText(areaName);
+            }
         }
     }
 
@@ -127,6 +151,9 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        if(!isEdit){
+            return;
+        }
         switch (v.getId()){
             case R.id.cancellation:
                 clearLogin();
@@ -179,6 +206,18 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
                 break;
             case R.id.head_image_layout:
                 showTakePhotoToolView();
+                break;
+            case R.id.area_layout:
+                Intent areaIntent = new Intent(mContext, AreaListActivity.class);
+                startActivityForResult(areaIntent,OPERATION_SELECT_AREA);
+                break;
+            case R.id.time_layout:
+                TimeSelectFragment timeSelectFragment = new TimeSelectFragment();
+                timeSelectFragment.show(getSupportFragmentManager(),"TimeSelectFragment");
+                break;
+            case R.id.sex_layout:
+                SexSelectFragment sexSelectFragment = new SexSelectFragment();
+                sexSelectFragment.show(getSupportFragmentManager(),"SexSelectFragment");
                 break;
 
         }
@@ -292,6 +331,9 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         }else if(qqStr.isEmpty()){
             alert(R.string.qq_no_empty);
             return null;
+        }else if(sexStr == null || sexStr.isEmpty()){
+            alert(R.string.sex_is_empty);
+            return null;
         }
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.setId(member.getMember().getId());
@@ -301,10 +343,27 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         memberInfo.setQq(qqStr);
 
 
-        memberInfo.setSex(member.getMember().getSex());
+        memberInfo.setSex(sexStr);
         memberInfo.setTrueName(member.getMember().getTrueName());
         memberInfo.setBirthday(member.getMember().getBirthday());
         return memberInfo;
+    }
+
+    @Override
+    public void OnSelectTime(String currentTime) {
+        birthday.setText(currentTime);
+    }
+
+    @Override
+    public void OnSelectSex(int position) {
+        switch (position){
+            case 0://男
+                this.sexStr = "男";
+                break;
+            case 1://女
+                this.sexStr = "女";
+                break;
+        }
     }
 
     private class MyTask extends AsyncTask<MemberInfoDao,String,MemberVOData>{

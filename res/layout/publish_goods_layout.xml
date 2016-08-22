@@ -216,6 +216,7 @@
                             <RadioButton android:id="@id/member_freight"
                                          android:layout_width="@dimen/height_20"
                                          android:layout_height="@dimen/height_20"
+                                         android:checked="true"
                                          android:background="@drawable/cart_product_checkbox_bg"
                                          android:button="@null"/>
                             <TextView android:layout_width="match_parent"
@@ -228,8 +229,11 @@
                     </LinearLayout>
                 </LinearLayout>
                 <View style="@style/line1"/>
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout
+                        android:id="@id/express_layout"
+                        android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
+                        android:visibility="gone"
                               android:orientation="horizontal">
                     <TextView android:layout_width="@dimen/height_80"
                               android:layout_height="match_parent"
@@ -296,6 +300,7 @@
                         <RadioButton android:id="@id/specialty_no"
                                      android:layout_width="@dimen/height_20"
                                      android:layout_height="@dimen/height_20"
+                                     android:checked="true"
                                      android:background="@drawable/cart_product_checkbox_bg"
                                      android:button="@null"/>
                         <TextView android:layout_width="match_parent"
@@ -335,6 +340,7 @@
                         <RadioButton android:id="@id/recommend_no"
                                      android:layout_width="@dimen/height_20"
                                      android:layout_height="@dimen/height_20"
+                                     android:checked="true"
                                      android:background="@drawable/cart_product_checkbox_bg"
                                      android:button="@null"/>
                         <TextView android:layout_width="match_parent"
@@ -374,6 +380,7 @@
                         <RadioButton android:id="@id/Inventory_no"
                                      android:layout_width="@dimen/height_20"
                                      android:layout_height="@dimen/height_20"
+                                     android:checked="true"
                                      android:background="@drawable/cart_product_checkbox_bg"
                                      android:button="@null"/>
                         <TextView android:layout_width="match_parent"
