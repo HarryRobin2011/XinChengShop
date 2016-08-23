@@ -207,6 +207,7 @@ public class TakeMenuSubmitOrderAcvitity extends XCBaseActivity implements View.
                break;
            case R.id.time:
                TimeSelectFragment timeSelectFragment = new TimeSelectFragment();
+               timeSelectFragment.setOnSelectTimeListener(this);
                timeSelectFragment.show(getSupportFragmentManager(),timeSelectFragment.getClass().getSimpleName());
                break;
        }

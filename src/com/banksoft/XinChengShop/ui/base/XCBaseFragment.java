@@ -100,6 +100,11 @@ public abstract class XCBaseFragment extends Fragment implements BaseFragmentInt
         Toast.makeText(mContext, resId, Toast.LENGTH_SHORT).show();
     }
 
+    public void alert(String resStr) {
+        Toast.makeText(mContext, resStr, Toast.LENGTH_SHORT).show();
+    }
+
+
     public void addAsync(AsyncTask asyncTask) {
         asyncTaskLinkedList.add(asyncTask);
     }

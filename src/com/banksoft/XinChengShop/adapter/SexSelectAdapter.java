@@ -39,6 +39,8 @@ public class SexSelectAdapter extends BaseMyAdapter{
         String sex = (String) dataList.get(position);
         SexSelectAdapterHolder holder = (SexSelectAdapterHolder) cellHolder;
         holder.checkedTextView.setText(sex);
+        holder.checkedTextView.setBackgroundResource(R.color.white);
+        holder.checkedTextView.setTextColor(mContext.getResources().getColor(R.color.text_black_light));
         return cellView;
     }
 }

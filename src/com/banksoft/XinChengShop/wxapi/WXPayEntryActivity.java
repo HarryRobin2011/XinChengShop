@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.PayConfig;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
@@ -47,13 +48,19 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
 
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.alert);
-			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-			builder.show();
+			switch (resp.errCode){
+				case 0:
+
+					break;
+				case -1:
+					Toast.makeText(getApplicationContext(),getText(R.string.pay_error_again),Toast.LENGTH_SHORT).show();
+					break;
+				case -2:
+					finish();
+					break;
+			}
 		}
 	}
 }

@@ -22,6 +22,7 @@ import com.banksoft.XinChengShop.ui.AddressSelectActivity;
 import com.banksoft.XinChengShop.ui.AreaListActivity;
 import com.banksoft.XinChengShop.ui.ShopListActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.ui.fragment.DateTimeSelectFragment;
 import com.banksoft.XinChengShop.ui.fragment.SexSelectFragment;
 import com.banksoft.XinChengShop.ui.fragment.TimeSelectFragment;
 import com.banksoft.XinChengShop.utils.*;
@@ -37,32 +38,31 @@ import java.util.HashMap;
 /**
  * Created by harry_robin on 16/1/22.
  */
-public class MemberInfoActivity extends XCBaseActivity implements View.OnClickListener,TimeSelectFragment.OnSelectTimeListener,SexSelectFragment.SelectSexListener {
+public class MemberInfoActivity extends XCBaseActivity implements View.OnClickListener,SexSelectFragment.SelectSexListener{
     private static final int REQUEST_CODE_CAPTURE_CAMEIA = 0;
 
     private static final int SELECT_PICTURE = 1;
 
     private int OPERATION_SELECT_AREA = 2;
     private int currentPosition;//点击的 第几个图片
-    private EditText account, telPhone_contact, member_email, member_name, member_qq;
+    private EditText account, telPhone_contact;
     private ProgressBar progressBar;
-    private TextView title, sex, area, birthday;
+    private TextView title, sex,area;
     private ImageView back;
     private ImageLoader mImageLoader;
     private CustomShapeImageView headImage;
     private PopupWindowUtil popupWindowUtil;
     private PickPhotoUtil pickPhotoUtil;
     private String localTempImgDir = "xinchengShop/";
-    private Button editBtn;
-    private boolean isEdit = false;
     private MemberInfoDao memberInfoDao;
     private MyProgressDialog myProgressDialog;
 
-    private LinearLayout areaLayout,sexLayout,timeLayout;
+    private LinearLayout areaLayout,sexLayout,addressLayout;
 
     private HashMap<Integer, String> cameraImage = new HashMap<>();
 
     private String sexStr;
+    private Button ok;
 
 
 
@@ -77,30 +77,23 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         back = (ImageView) findViewById(R.id.title_back_button);
         account = (EditText) findViewById(R.id.account);
         telPhone_contact = (EditText) findViewById(R.id.telPhone_contact);
-        member_email = (EditText) findViewById(R.id.member_email);
-        member_name = (EditText) findViewById(R.id.member_name);
         sex = (TextView) findViewById(R.id.sex);
-        area = (TextView) findViewById(R.id.area);
-        birthday = (TextView) findViewById(R.id.birthday);
-        member_qq = (EditText) findViewById(R.id.member_qq);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         headImage = (CustomShapeImageView) findViewById(R.id.head_image);
-        editBtn = (Button) findViewById(R.id.titleRightButton);
         areaLayout = (LinearLayout) findViewById(R.id.area_layout);
         sexLayout = (LinearLayout) findViewById(R.id.sex_layout);
-        timeLayout = (LinearLayout) findViewById(R.id.time_layout);
+        addressLayout = (LinearLayout) findViewById(R.id.address_layout);
+        area = (TextView) findViewById(R.id.area);
+        ok = (Button) findViewById(R.id.ok);
     }
 
     @Override
     protected void initData() {
-        setEditStatus();
         title.setText(R.string.member_info);
         back.setVisibility(View.VISIBLE);
         mImageLoader = ImageLoader.getInstance().getInstance();
         mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         pickPhotoUtil = PickPhotoUtil.getInstance();
-        editBtn.setVisibility(View.VISIBLE);
-        editBtn.setText(R.string.edit);
         isLogin();
         setInfo();
     }
@@ -109,12 +102,10 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     protected void initOperate() {
         back.setOnClickListener(this);
         headImage.setOnClickListener(this);
-        headImage.setClickable(false);
-        editBtn.setOnClickListener(this);
-        birthday.setOnClickListener(this);
         sexLayout.setOnClickListener(this);
-        timeLayout.setOnClickListener(this);
         areaLayout.setOnClickListener(this);
+        addressLayout.setOnClickListener(this);
+        ok.setOnClickListener(this);
     }
 
     @Override
@@ -151,9 +142,6 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(!isEdit){
-            return;
-        }
         switch (v.getId()){
             case R.id.cancellation:
                 clearLogin();
@@ -185,25 +173,6 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
             case R.id.cancel:
                 popupWindowUtil.dismiss();
                 break;
-            case R.id.titleRightButton:
-                if(!isEdit){
-                    editBtn.setText(R.string.complete);
-                    CommonUtil.operationKeyboard(mContext);
-                    isEdit = true;
-                }else{
-                    CommonUtil.operationKeyboard(mContext);
-                    editBtn.setText(R.string.edit);
-                    isEdit = false;
-                    if(memberInfoDao == null){
-                        memberInfoDao = new MemberInfoDao(mContext);
-                    }
-                    MemberInfo memberInfo = getMemberInfo();
-                    if(memberInfo != null){
-                        new MyTask(memberInfo).execute();
-                    }
-                }
-                setEditStatus();
-                break;
             case R.id.head_image_layout:
                 showTakePhotoToolView();
                 break;
@@ -211,33 +180,28 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
                 Intent areaIntent = new Intent(mContext, AreaListActivity.class);
                 startActivityForResult(areaIntent,OPERATION_SELECT_AREA);
                 break;
-            case R.id.time_layout:
-                TimeSelectFragment timeSelectFragment = new TimeSelectFragment();
-                timeSelectFragment.show(getSupportFragmentManager(),"TimeSelectFragment");
-                break;
             case R.id.sex_layout:
                 SexSelectFragment sexSelectFragment = new SexSelectFragment();
                 sexSelectFragment.show(getSupportFragmentManager(),"SexSelectFragment");
                 break;
+            case R.id.account:
+                alert(R.string.account_no_updata);
+                break;
+            case R.id.address_layout:
+                Intent addressIntent = new Intent(mContext,AddressSelectActivity.class);
+                startActivity(addressIntent);
+                break;
+            case R.id.ok:
+                MemberInfo info = getMemberInfo();
+                if(info != null){
+                  if(memberInfoDao == null){
+                      memberInfoDao = new MemberInfoDao(mContext);
+                  }
+                  new MyTask(info).execute(memberInfoDao);
+                }
+                break;
 
         }
-    }
-
-    private void setEditStatus(){
-        CommonUtil.setEditTextEditStatus(member_email,isEdit);
-        CommonUtil.setEditTextEditStatus(member_qq,isEdit);
-        CommonUtil.setEditTextEditStatus(telPhone_contact,isEdit);
-        CommonUtil.setEditTextEditStatus(account,isEdit);
-        sex.setClickable(isEdit);
-        headImage.setClickable(isEdit);
-        area.setClickable(isEdit);
-        birthday.setClickable(isEdit);
-
-//        CommonUtil.setEditTextEditStatus(member_name,isEdit);
-//        CommonUtil.setEditTextEditStatus(sex,isEdit);
-//        CommonUtil.setEditTextEditStatus(area,isEdit);
-//        CommonUtil.setEditTextEditStatus(birthday,isEdit);
-
     }
 
     protected void getImageFromCamera() {
@@ -275,12 +239,7 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     private void setInfo(){
         account.setText(getStr(member.getMemberInfo().getAccount()));
         telPhone_contact.setText(getStr(member.getMemberInfo().getTelephone()));
-        member_email.setText(getStr(member.getMemberInfo().getEmail()));
-        member_name.setText(getStr(member.getMemberInfo().getTrueName()));
         sex.setText(getStr(member.getMemberInfo().getSex()));
-        area.setText(member.getMemberInfo().getRegion());
-        birthday.setText(TimeUtils.getTimeStr(member.getMemberInfo().getBirthday(), TimeUtils.TimeType.Day));
-        member_qq.setText(getStr(member.getMemberInfo().getQq()));
         String headImageUrl = member.getMember().getImageFile();
         if(headImageUrl == null || headImageUrl.isEmpty()){
            headImageUrl = "";
@@ -302,12 +261,6 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     private MemberInfo getMemberInfo(){
         String accountStr = account.getText().toString();
         String telPhoneStr = telPhone_contact.getText().toString();
-        String memberEmailStr =  member_email.getText().toString();
-        String memberNameStr =member_name.getText().toString();
-
-        String areaStr = area.getText().toString();
-        String bitthdayStr = birthday.getText().toString();
-        String qqStr =  member_qq.getText().toString();
 
         if(accountStr.isEmpty()){
             alert(R.string.account_not_empty);
@@ -315,21 +268,6 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
         }else if(telPhoneStr.isEmpty()){
             alert(R.string.telephone_no_empty);
-            return null;
-        }else if(memberEmailStr.isEmpty()){
-            alert(R.string.email_no_empty);
-            return null;
-        }else if(memberNameStr.isEmpty()){
-            alert(R.string.member_name_no_empty);
-            return null;
-        }else if(areaStr.isEmpty()){
-            alert(R.string.area_no_empty);
-            return null;
-        }else if(bitthdayStr.isEmpty()){
-            alert(R.string.birthday_no_empty);
-            return null;
-        }else if(qqStr.isEmpty()){
-            alert(R.string.qq_no_empty);
             return null;
         }else if(sexStr == null || sexStr.isEmpty()){
             alert(R.string.sex_is_empty);
@@ -339,20 +277,13 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         memberInfo.setId(member.getMember().getId());
         memberInfo.setAccount(accountStr);
         memberInfo.setTelephone(telPhoneStr);
-        memberInfo.setEmail(memberEmailStr);
-        memberInfo.setQq(qqStr);
 
 
         memberInfo.setSex(sexStr);
-        memberInfo.setTrueName(member.getMember().getTrueName());
-        memberInfo.setBirthday(member.getMember().getBirthday());
         return memberInfo;
     }
 
-    @Override
-    public void OnSelectTime(String currentTime) {
-        birthday.setText(currentTime);
-    }
+
 
     @Override
     public void OnSelectSex(int position) {
@@ -364,6 +295,7 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
                 this.sexStr = "女";
                 break;
         }
+        sex.setText(sexStr);
     }
 
     private class MyTask extends AsyncTask<MemberInfoDao,String,MemberVOData>{

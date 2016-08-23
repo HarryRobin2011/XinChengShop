@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.SexSelectAdapter;
@@ -23,6 +24,7 @@ import java.util.List;
 public class SexSelectFragment extends DialogFragment implements AdapterView.OnItemClickListener{
     private ListView listView;
     private TextView titleText;
+    private ProgressBar mProgressBar;
 
     private SexSelectAdapter sexSelectAdapter;
     private List dataList;
@@ -33,6 +35,9 @@ public class SexSelectFragment extends DialogFragment implements AdapterView.OnI
         View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.list_layout,null);
         listView = (ListView) view.findViewById(R.id.list_view);
         titleText = (TextView) view.findViewById(R.id.titleText);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
+        titleText.setText(R.string.please_select_sex);
         dataList = new LinkedList();
         dataList.clear();
         for (String sex:sexs){
@@ -50,6 +55,7 @@ public class SexSelectFragment extends DialogFragment implements AdapterView.OnI
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ((MemberInfoActivity)getActivity()).OnSelectSex(position);
+        dismiss();
     }
 
     public interface SelectSexListener{

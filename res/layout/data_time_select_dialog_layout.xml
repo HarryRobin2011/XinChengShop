@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+    <include layout="@layout/title"/>
+    <DatePicker
+            android:id="@id/time_pickker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dp"/>
+    <View style="@style/line1"
+          android:layout_marginTop="10.0dp"/>
+    <TextView android:id="@id/ok"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/height_50"
+              style="@style/text_style_3"
+              android:gravity="center"
+              android:background="@drawable/button_white_bg"
+              android:text="@string/ok"/>
+</LinearLayout>

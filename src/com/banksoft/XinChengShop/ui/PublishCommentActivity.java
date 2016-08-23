@@ -268,9 +268,9 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
         if(serviceAttitude.getRating() == 0f || describeRating.getRating() == 0f || expressService.getRating() == 0f){
           return null;
         }
-        orderAssessBO.setServiceScore((int)serviceAttitude.getRating());
-        orderAssessBO.setDispatchScore((int)expressService.getRating());
-        orderAssessBO.setMatchScore((int)describeRating.getRating());
+        orderAssessBO.setServiceScore(Math.round(serviceAttitude.getRating()));
+        orderAssessBO.setDispatchScore(Math.round(expressService.getRating()));
+        orderAssessBO.setMatchScore(Math.round(describeRating.getRating()));
         orderAssessBO.setMemberId(member.getMember().getId());
         return orderAssessBO;
     }

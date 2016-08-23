@@ -16,6 +16,7 @@ import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.type.OrderMaster;
 import com.banksoft.XinChengShop.type.OrderStatus;
+import com.banksoft.XinChengShop.type.OrderType;
 import com.banksoft.XinChengShop.ui.*;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -55,6 +56,9 @@ public class OrderListFragment extends XCBaseListFragment{
             params = "status=" + type + "&shopId=" + activity.member.getShop().getId();
         } else {
             params = "status=" + type + "&memberId=" + activity.member.getMember().getId();
+            if(type.equals(OrderStatus.SUCCESS.name())){//待评价
+                params = params+"&assessStatus=false";
+            }
         }
 
         jsonType = JSONHelper.ORDER_LIST_DATA;
@@ -68,10 +72,10 @@ public class OrderListFragment extends XCBaseListFragment{
         if (requestCode == Activity.RESULT_FIRST_USER) {
             switch (resultCode) {
                 case Activity.RESULT_OK:  //�����ɹ�
-                    request();
+                   onRefresh();
                     break;
                 case Activity.RESULT_CANCELED: //ȡ�����
-                    request();
+                   onRefresh();
                     break;
             }
         }
@@ -120,7 +124,10 @@ public class OrderListFragment extends XCBaseListFragment{
                 cancelTask(((OrderVO)bailaAdapter.dataList.get(position)).getId());
                 break;
             case R.id.confirm://确认收货
-
+                if (orderListDao == null) {
+                    orderListDao = new OrderListDao(mContext);
+                }
+                new ReceiptGoodsTask(((OrderVO)bailaAdapter.dataList.get(position)).getId()).execute(orderListDao);
                 break;
             case R.id.pay://支付
                 Intent payIntent = new Intent(mContext, PayActivity.class);
@@ -132,7 +139,7 @@ public class OrderListFragment extends XCBaseListFragment{
             case R.id.comments://评价
                 Intent commentIntent = new Intent(mContext, PublishCommentActivity.class);
                 commentIntent.putExtra(IntentFlag.ORDER_VO, (Serializable) bailaAdapter.dataList.get(position));
-                startActivity(commentIntent);
+                startActivityForResult(commentIntent,Activity.RESULT_FIRST_USER);
                 break;
             case R.id.return_the_goods://退货
                 break;
@@ -148,6 +155,46 @@ public class OrderListFragment extends XCBaseListFragment{
             case R.id.delete:
 
                 break;
+        }
+    }
+
+    /**
+     * 确认收货
+     */
+    private class ReceiptGoodsTask extends AsyncTask<OrderListDao,String,IsFlagData>{
+        String orderId;
+
+        public ReceiptGoodsTask(String orderId) {
+            this.orderId = orderId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(myProgressDialog == null){
+                myProgressDialog = new MyProgressDialog(getActivity());
+            }
+            myProgressDialog.showDialog(R.string.please_wait);
+        }
+
+        @Override
+        protected IsFlagData doInBackground(OrderListDao... params) {
+            return params[0].confirmGoods(orderId);
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
+            myProgressDialog.dismiss();
+            if(isFlagData != null){
+                if(isFlagData.isSuccess()){
+                    onRefresh();
+                }else{
+                    alert(isFlagData.getMsg().toString());
+                }
+            }else{
+                alert(R.string.net_error);
+            }
         }
     }
 
