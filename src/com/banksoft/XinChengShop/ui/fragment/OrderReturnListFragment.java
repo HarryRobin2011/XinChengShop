@@ -36,10 +36,18 @@ import java.util.List;
  * 退货返修
  */
 public class OrderReturnListFragment extends XCBaseListFragment{
-    private String type;
+    private OrderStatus type;
     private XCBaseActivity activity;
     private OrderListDao orderListDao;
     private MyProgressDialog myProgressDialog;
+
+    public static OrderReturnListFragment getInstance(OrderStatus orderStatus){
+        OrderReturnListFragment orderReturnListFragment = new OrderReturnListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentFlag.ORDER_STATUS,orderStatus);
+        orderReturnListFragment.setArguments(bundle);
+        return orderReturnListFragment;
+    }
 
 
     @Override
@@ -50,9 +58,9 @@ public class OrderReturnListFragment extends XCBaseListFragment{
 
     @Override
     public void request() {
-        type = (String) getArguments().get(IntentFlag.ORDER_STATUS);
+        type = (OrderStatus) getArguments().get(IntentFlag.ORDER_STATUS);
         url = ControlUrl.ORDER_LIST_URL;
-        params = "status=" + type + "&memberId=" + activity.member.getMember().getId();
+        params = "status=" + type.name() + "&memberId=" + activity.member.getMember().getId();
         jsonType = JSONHelper.ORDER_LIST_DATA;
         bailaAdapter = new OrderLisAdapter(mContext, new ArrayList());
         xListView.setDividerHeight(20);

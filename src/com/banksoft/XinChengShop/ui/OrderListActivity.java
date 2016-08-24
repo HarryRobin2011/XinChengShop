@@ -23,10 +23,10 @@ public class OrderListActivity extends XCBaseActivity implements View.OnClickLis
     private ViewPager mViewPager;
     private TabPageIndicator indicator;
     private ImageView back,bgImage;
-    private OrderViewAdapter orderViewAdapter;
     private String orderMaster;
     private TextView title;
     private OrderStatus currentStatus;
+    private OrderViewAdapter orderViewAdapter;
 
 
     @Override
