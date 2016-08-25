@@ -42,7 +42,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         TextView pay;// 订单创建未付款
         TextView returnMoney;// 退款金额
        // TextView returnGoods;//申请退货
-      //  TextView refund;// 申请退款
+        TextView refund;// 申请退款
          private TextView delete;//删除订单
         private LinearLayout productContent;
         private LinearLayout toolLayout;
@@ -71,7 +71,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         orderSaleHolder.pay = (TextView) cellView.findViewById(R.id.pay);
         orderSaleHolder.returnMoney = (TextView) cellView.findViewById(R.id.return_money);
 //        orderSaleHolder.returnGoods = (TextView) cellView.findViewById(R.id.return_the_goods);
-//        orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
+       orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
         orderSaleHolder.delete = (TextView) cellView.findViewById(R.id.delete);
         orderSaleHolder.orderItemLayout = (LinearLayout) cellView.findViewById(R.id.order_list_item);
         return orderSaleHolder;
@@ -118,6 +118,8 @@ public class OrderLisAdapter extends BaseMyAdapter{
         holder.comments.setTag(position);
         holder.orderItemLayout.setOnClickListener(this);
         holder.orderItemLayout.setTag(position);
+        holder.refund.setOnClickListener(this);
+        holder.refund.setTag(position);
         return cellView;
     }
 
@@ -142,7 +144,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.comments.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.VISIBLE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-//            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
@@ -153,7 +155,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-//            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.refund.setVisibility(View.VISIBLE);
             orderSaleHolder.pay.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
@@ -162,7 +164,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {//待确认收货
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.VISIBLE);
-//            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.VISIBLE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
@@ -177,7 +179,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.VISIBLE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-//            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
@@ -190,7 +192,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.comments.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-//            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.VISIBLE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);

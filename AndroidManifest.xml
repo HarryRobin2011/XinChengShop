@@ -145,7 +145,7 @@
         <activity android:name=".ui.SettingActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.PublishCommentActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.SelectShopCategoryActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ReturnGoodsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ReturnGoodsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustNothing|stateHidden"/>
         <activity android:name=".ui.MyBankListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.MyBankAddActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.MyBankEditActivity" android:screenOrientation="portrait"/>

@@ -62,7 +62,9 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:background="@drawable/button_white_bg">
-                <EditText android:layout_width="match_parent"
+                <EditText
+                          android:id="@id/return_reason"
+                          android:layout_width="match_parent"
                           android:layout_height="@dimen/height_100"
                           style="@style/text_style_3"
                           android:paddingLeft="10.0dp"
@@ -96,7 +98,9 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:background="@drawable/button_white_bg">
-                <EditText android:layout_width="match_parent"
+                <EditText
+                        android:id="@id/money"
+                         android:layout_width="match_parent"
                           android:layout_height="match_parent"
                           style="@style/text_style_3"
                           android:paddingLeft="10.0dp"

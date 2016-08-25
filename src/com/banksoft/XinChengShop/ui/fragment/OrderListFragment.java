@@ -144,6 +144,9 @@ public class OrderListFragment extends XCBaseListFragment{
             case R.id.return_the_goods://退货
                 break;
             case R.id.refund://退款
+                Intent refundIntent = new Intent(mContext,ReturnGoodsActivity.class);
+                refundIntent.putExtra(IntentFlag.ORDER_VO, (Serializable) bailaAdapter.getItem(position));
+                startActivity(refundIntent);
                 break;
             case R.id.order_list_item:// 订单详情
                 Intent orderIntent = new Intent(mContext,OrderInfoActivity.class);
