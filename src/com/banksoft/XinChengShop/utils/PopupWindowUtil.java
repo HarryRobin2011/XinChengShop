@@ -56,6 +56,10 @@ public class PopupWindowUtil {
 
     }
 
+    public boolean isShowing(){
+       return window.isShowing();
+    }
+
 
     /**
      * 设置添加屏幕的背景透明度

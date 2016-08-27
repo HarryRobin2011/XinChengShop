@@ -63,16 +63,16 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/button_white_bg">
                 <EditText
-                          android:id="@id/return_reason"
-                          android:layout_width="match_parent"
-                          android:layout_height="@dimen/height_100"
-                          style="@style/text_style_3"
-                          android:paddingLeft="10.0dp"
-                          android:gravity="top"
-                          android:paddingTop="10.0dp"
-                          android:layout_weight="1"
-                          android:background="@drawable/edit_text_white_bg"
-                          android:hint="@string/please_select_return_money_reason"/>
+                        android:id="@id/return_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_100"
+                        style="@style/text_style_3"
+                        android:paddingLeft="10.0dp"
+                        android:gravity="top"
+                        android:paddingTop="10.0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_white_bg"
+                        android:hint="@string/please_select_return_money_reason"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="@dimen/height_50"
@@ -100,13 +100,13 @@
                     android:background="@drawable/button_white_bg">
                 <EditText
                         android:id="@id/money"
-                         android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          style="@style/text_style_3"
-                          android:paddingLeft="10.0dp"
-                          android:layout_weight="1"
-                          android:background="@drawable/edit_text_white_bg"
-                          android:hint="@string/please_input_return_money_amount"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/text_style_3"
+                        android:paddingLeft="10.0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_white_bg"
+                        android:hint="@string/please_input_return_money_amount"/>
             </LinearLayout>
 
             <TextView android:layout_width="match_parent"
@@ -125,43 +125,22 @@
                     android:visibility="gone"
                     android:background="@drawable/button_white_bg">
                 <EditText
-                          android:id="@id/return_describe"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          style="@style/text_style_3"
-                          android:paddingLeft="10.0dp"
-                          android:layout_weight="1"
-                          android:background="@drawable/edit_text_white_bg"
-                          android:hint="@string/please_input_return_describe"/>
+                        android:id="@id/return_describe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/text_style_3"
+                        android:paddingLeft="10.0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_white_bg"
+                        android:hint="@string/please_input_return_describe"/>
             </LinearLayout>
-            <LinearLayout
-                    android:id="@id/submit_photo_max_three"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50"
-                    android:background="@drawable/edit_gray_transparent_bg"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="10.0dp"
-                    android:orientation="horizontal">
-                <ImageView android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:paddingLeft="10.0dp"
-                           android:src="@drawable/camera"/>
-                <LinearLayout android:id="@id/image_layout"
-                              android:layout_width="match_parent"
-                              android:layout_height="match_parent"
-                              android:orientation="horizontal"
-                              android:gravity="right"
-                              android:visibility="gone"
-                              android:layout_weight="1"/>
-                <TextView
-                        android:id="@id/submit_photo_max_alert"
-                         android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          style="@style/text_style_3"
-                          android:gravity="right|center_vertical"
-                          android:paddingRight="10.0dp"
-                          android:text="@string/submit_photo_max_three"/>
-            </LinearLayout>
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="@dimen/height_100"
+                         android:layout_marginTop="10.0dp">
+                <android.support.v7.widget.RecyclerView android:id="@id/recycler_view"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="@dimen/height_100"/>
+            </FrameLayout>
 
         </LinearLayout>
 
