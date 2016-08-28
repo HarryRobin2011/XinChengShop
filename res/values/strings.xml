@@ -713,5 +713,7 @@
     <string name="ok_updata">确定修改</string>
     <string name="please_select_sex">请选择性别</string>
     <string name="pay_error_again">支付错误，请重试~</string>
+    <string name="express_no">物流单号</string>
+    <string name="submit_apply_success">提交申请成功</string>
 
 </resources>

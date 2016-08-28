@@ -49,6 +49,27 @@
                         style="@style/text_style_3"
                         android:paddingLeft="10.0dp"/>
             </RadioGroup>
+            <LinearLayout
+                    android:id="@id/express_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:paddingLeft="10.0dp"
+                          android:textColor="@color/text_black"
+                          android:gravity="center_vertical"
+                          android:text="@string/express_no"/>
+                <EditText android:id="@id/express_no"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@drawable/edit_text_white_bg"
+                          android:paddingLeft="10.0dp"
+                          android:hint="@string/please_input_express_no"
+                          android:singleLine="true"/>
+            </LinearLayout>
+
             <TextView android:layout_width="match_parent"
                       android:layout_height="@dimen/height_50"
                       android:paddingLeft="10.0dp"

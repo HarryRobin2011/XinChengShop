@@ -21,6 +21,7 @@ import com.banksoft.XinChengShop.dao.ReturnGoodsDao;
 import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.entity.ReturnMoney;
 import com.banksoft.XinChengShop.entity.ReturnProduct;
+import com.banksoft.XinChengShop.model.ImageUrlData;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.type.OrderStatus;
 import com.banksoft.XinChengShop.type.ReturnType;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Robin on 2016/7/22.
@@ -81,6 +83,9 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
 
     private String capturePath;// 当前拍照的图片路径
 
+    private LinearLayout expressLayout;
+    private EditText expressNoEdit;
+
     @Override
     protected void initContentView() {
         setContentView(R.layout.return_goods_layout);
@@ -99,6 +104,8 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
         orderMoney = (TextView) findViewById(R.id.order_money);
         returnGoods = (RadioButton) findViewById(R.id.return_the_goods);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        expressLayout = (LinearLayout) findViewById(R.id.express_layout);
+        expressNoEdit = (EditText) findViewById(R.id.express_no);
     }
 
     @Override
@@ -176,8 +183,10 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.return_money) {//退款
                     returnType = ReturnType.RETURN_MONEY;// 退款
+                    expressLayout.setVisibility(View.GONE);
                 } else {
                     returnType = ReturnType.RETURN_GOODS;// 退货
+                    expressLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -189,7 +198,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
             case R.id.title_back_button:
                 finish();
                 break;
-            case R.id.submit_apply:
+            case R.id.submit_apply:// 提交退货申请
                 if (OrderStatus.PAY.name().equals(orderVO.getStatus())) {// 已付款未发货
                   ReturnMoney returnMoney = getReturnMoney();
                     if(returnMoney != null){
@@ -205,7 +214,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
                         if(returnGoodsDao == null){
                             returnGoodsDao = new ReturnGoodsDao(mContext);
                         }
-                        new ReturnMoneyTask(returnProduct).execute(returnGoodsDao);
+                        new ReturnGoodsTask(returnProduct).execute(returnGoodsDao);
                     }
 
                 }
@@ -299,6 +308,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
     private ReturnProduct getReturnProduct() {
         String returnReasonStr = returnReasonEdit.getText().toString();
         String returnMoney = returnMoneyEdit.getText().toString();
+        String expressNo = expressNoEdit.getText().toString();
         //   String returnDescribeStr = returnDescribe.getText().toString();
         BigDecimal returnMoneyBigDecimal = new BigDecimal(returnMoney);
         BigDecimal orderMoneyBigDecimal = new BigDecimal(orderVO.getTotalMoney());
@@ -313,6 +323,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
             alert("最多申请退款" + orderVO.getTotalMoney());
             return null;
         }
+
         ReturnProduct returnProduct = new ReturnProduct();
         returnProduct.setMemberId(member.getMember().getId());
         returnProduct.setOrderTotal(orderVO.getTotalMoney());
@@ -320,13 +331,19 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
         returnProduct.setMemberMoney(Float.valueOf(returnMoney));
         returnProduct.setOrderNo(orderVO.getNo());
         returnProduct.setMemberReason(returnReasonStr);
+        returnProduct.setShopId(orderVO.getShopId());
+        returnProduct.setShopAccount(orderVO.getShopAccount());
         if (ReturnType.RETURN_MONEY.equals(returnType)) {
             returnProduct.setReturnProduct(false);
         } else {
+            if(expressNo == null || expressNo.isEmpty()){
+                alert(R.string.express_no_not_empty);
+                return null;
+            }
+            returnProduct.setNo(expressNo);
             returnProduct.setReturnProduct(true);
         }
         return returnProduct;
-
     }
 
     /**
@@ -393,6 +410,11 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
      */
     private class ReturnGoodsTask extends AsyncTask<ReturnGoodsDao, String, IsFlagData> {
         ReturnProduct returnProduct;
+
+        public ReturnGoodsTask(ReturnProduct returnProduct) {
+            this.returnProduct = returnProduct;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -404,6 +426,21 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
 
         @Override
         protected IsFlagData doInBackground(ReturnGoodsDao... params) {
+            List imageList = null;
+            StringBuffer imageBuffer = new StringBuffer();
+            if(imageList != null && imageList.size() > 1){
+                for(Object data:imageList){
+                    String path = (String) data;
+                    File file = new File(path);
+                    String type = path.substring(path.lastIndexOf(".")+1,path.length());
+                    ImageUrlData imageUrl = params[0].submitImage(file, type);
+                    if(imageUrl == null){
+                        continue;
+                    }
+                    imageBuffer.append(imageUrl.getData()).append("|");
+                }
+            }
+            returnProduct.setMemberImage(imageBuffer.toString());
             if (returnType == ReturnType.RETURN_GOODS){//退货
               return params[0].returnProductMoney(returnProduct);
             }else if(returnType == ReturnType.RETURN_MONEY){//退款
@@ -419,6 +456,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
                 if(isFlagData.isSuccess()){
                     setResult(Activity.RESULT_OK);
                     finish();
+                    alert(R.string.submit_apply_success);
                 }else{
                     alert(isFlagData.getMsg().toString());
                 }
