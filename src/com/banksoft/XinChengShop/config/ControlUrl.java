@@ -102,11 +102,11 @@ public class ControlUrl {
 
     public static final String APPLY_LEAFLET_URL = "/app/_dispatchMemberApply";//申请派单员
 
-    public static final String DISPATCH_ORDER_LIST = "app/dispatchOrder_list";// 派单员抢单列表
+    public static final String DISPATCH_ORDER_LIST = "/app/dispatchOrder_list";// 派单员抢单列表
 
     public static final String EXPRESS_BILL_ORDER_LIST_URL=  "/app/dispatchOrder_dispatchList";// 派单员订单列表
 
-    public static final String DISPATCH_ORDER_URL = "app/dispatchOrder_dispatchOrder";//派单员抢单
+    public static final String DISPATCH_ORDER_URL = "/app/dispatchOrder_dispatchOrder";//派单员抢单
 
     public static final String SHOP_EXPRESS_MODEL_URL = "/app/_shopExpress";//店铺运费模板
 

@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.http;
 
 
 import com.banksoft.XinChengShop.config.ControlUrl;
+import org.apache.http.impl.conn.DefaultClientConnection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,10 +21,10 @@ import java.net.URL;
 public class HttpUrlConnection {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
-    public static byte[] postFromWebByHttpUrlConnection(String postUrl,byte[] params) throws IOException {
+    public static byte[] postFromWebByHttpUrlConnection(String postUrl, byte[] params) throws IOException {
         HttpURLConnection connection = null;
         ByteArrayOutputStream bos = null;
-        URL url = new URL(ControlUrl.BASE_URL+postUrl);
+        URL url = new URL(ControlUrl.BASE_URL + postUrl);
         connection = (HttpURLConnection) url.openConnection();//打开链接
         connection.setConnectTimeout(20 * 1000);
         connection.setReadTimeout(20 * 1000);
@@ -31,25 +32,27 @@ public class HttpUrlConnection {
         connection.setDoOutput(true);
         connection.setUseCaches(false);
         connection.setRequestMethod("POST");
+        //connection.setInstanceFollowRedirects(true);
         connection.connect();
 
         OutputStream os = connection.getOutputStream();
-        if(os!= null){
-          os.write(params);
-          os.close();
+        if (os != null) {
+            os.write(params);
+            os.flush();
+            os.close();
         }
         InputStream is = connection.getInputStream();
         bos = new ByteArrayOutputStream();
         byte[] data = new byte[1024];
         int len;
-        while((len = is.read(data)) != -1){
-          bos.write(data,0,len);
-          bos.close();
+        while ((len = is.read(data)) != -1) {
+            bos.write(data, 0, len);
+            bos.close();
         }
         return bos.toByteArray();
     }
 
-    public static byte[] postServer(String postUrl) throws IOException{
+    public static byte[] postServer(String postUrl) throws IOException {
         URL url = new URL(postUrl);
         InputStream is = null;
         ByteArrayOutputStream os = null;
@@ -63,8 +66,8 @@ public class HttpUrlConnection {
             }
             return os.toByteArray();
         } finally {
-            if(os != null) os.close();
-            if(is != null) is.close();
+            if (os != null) os.close();
+            if (is != null) is.close();
         }
     }
 }

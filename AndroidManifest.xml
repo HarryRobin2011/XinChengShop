@@ -159,6 +159,7 @@
                   android:theme="@style/StyledIndicators"/>
         <activity android:name=".ui.ScoreProductInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.OrderReturnListActivity" android:screenOrientation="portrait" android:theme="@style/StyledIndicators"/>
+        <activity android:name=".ui.SellerDispatchOrderActivity" android:screenOrientation="portrait"/>
         <!--   <activity
                 android:name="com.tencent.open.yyb.AppbarActivity"
                 android:configChanges="orientation|keyboardHidden"

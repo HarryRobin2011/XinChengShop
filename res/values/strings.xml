@@ -715,5 +715,13 @@
     <string name="pay_error_again">支付错误，请重试~</string>
     <string name="express_no">物流单号</string>
     <string name="submit_apply_success">提交申请成功</string>
+    <string name="dispatch_logistics">物流公司配送</string>
+    <string name="manual_input">手动输入</string>
+    <string name="dispatch_my_self">自主配送</string>
+    <string name="dispatch_person">派单员派送</string>
+    <string name="express_company">物流公司</string>
+    <string name="dispatch_persion_price">派送佣金</string>
+    <string name="please_input_dispatch_persion_price">请输入派送佣金</string>
+    <string name="please_select_express_company">请选择物流公司</string>
 
 </resources>

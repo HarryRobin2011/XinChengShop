@@ -571,4 +571,13 @@
     <item name="score" type="id">score</item>
     <item name="my_dispatch" type="id">my_dispatch</item>
     <item name="sex_layout" type="id">sex_layout</item>
+    <item name="dispatch_logistics" type="id">dispatch_logistics</item>
+    <item name="dispatch_manual" type="id">dispatch_manual</item>
+    <item name="dispatch_my_self" type="id">dispatch_my_self</item>
+    <item name="dispatch_person" type="id">dispatch_person</item>
+    <item name="dispatch_manual_layout" type="id">dispatch_manual_layout</item>
+    <item name="dispatch_person_layout" type="id">dispatch_person_layout</item>
+    <item name="dispatch_persion_price" type="id">dispatch_persion_price</item>
+    <item name="express_edit" type="id">express_edit</item>
+    <item name="dispatch_select_layout" type="id">dispatch_select_layout</item>
 </resources>

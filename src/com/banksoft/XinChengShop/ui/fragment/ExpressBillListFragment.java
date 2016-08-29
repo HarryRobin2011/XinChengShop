@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -11,6 +12,9 @@ import com.banksoft.XinChengShop.adapter.ExpressBillAdapter;
 import com.banksoft.XinChengShop.adapter.OrderLisAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.TextDao;
+import com.banksoft.XinChengShop.model.IsFlagData;
+import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 public class ExpressBillListFragment extends XCBaseListFragment{
     private ExpressBillListActivity.OperaType currentType;
     private XCBaseActivity activity;
+    private TextDao textDao;
 
 
     @Override
@@ -84,4 +89,7 @@ public class ExpressBillListFragment extends XCBaseListFragment{
     public void onAdapterCLick(View view, int position) {
 
     }
+
+
+
 }
