@@ -203,6 +203,10 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                     return;
                 }
                 if (isLogin()) {
+                    if(member.getShop() != null && member.getShop().getId().equals(productVO.getShopId())){//不能购买自己商店商品
+                        alert(R.string.no_buy_my_self_shop_product);
+                        return;
+                    }
                     showPopwindow(R.id.buy);
                 } else {
                     Intent intent = new Intent(mContext, LoginActivity.class);
@@ -212,6 +216,10 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 break;
             case R.id.add_shop_cart:
                 if (isLogin()) {
+                    if(member.getShop() != null && member.getShop().getId().equals(productVO.getShopId())){//不能购买自己商店商品
+                        alert(R.string.no_buy_my_self_shop_product);
+                        return;
+                    }
                     showPopwindow(R.id.add_shop_cart);
                 } else {
                     Intent intent = new Intent(mContext, LoginActivity.class);
@@ -223,6 +231,10 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     startActivity(intent);
                 } else {
+                    if(member.getShop() != null && member.getShop().getId().equals(productVO.getShopId())){//不能购买自己商店商品
+                        alert(R.string.no_collect_my_self_shop_product);
+                        return;
+                    }
                     if ((Boolean) collectImage.getTag()) {// 已收藏取消收藏
                         new CancelCollectProductThread().execute(shopProductInfoDao);
                     } else {//没有收藏，收藏操作

@@ -104,7 +104,7 @@ public class DispatchOrderManagerActivity extends XCBaseActivity implements View
         protected void onPostExecute(DispatchMemberData dispatchMemberData) {
             super.onPostExecute(dispatchMemberData);
             mProgressBar.setVisibility(View.GONE);
-            if(dispatchMemberData.isSuccess()){// 是派单员
+            if(dispatchMemberData.isSuccess() || dispatchMemberData.getCode() == 2){// 是派单员
                 toolLayout.setVisibility(View.VISIBLE);
                 applyDispatch.setVisibility(View.GONE);
             }else{
