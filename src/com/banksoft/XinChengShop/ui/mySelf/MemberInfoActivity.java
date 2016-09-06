@@ -14,9 +14,11 @@ import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MemberInfoDao;
+import com.banksoft.XinChengShop.entity.Member;
 import com.banksoft.XinChengShop.entity.MemberAddressVO;
 import com.banksoft.XinChengShop.entity.MemberInfo;
 import com.banksoft.XinChengShop.model.ImageUrlData;
+import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.ui.AddressSelectActivity;
 import com.banksoft.XinChengShop.ui.AreaListActivity;
@@ -61,7 +63,7 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
 
     private HashMap<Integer, String> cameraImage = new HashMap<>();
 
-    private String sexStr;
+    private String sexStr = "";
     private Button ok;
 
 
@@ -239,7 +241,12 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     private void setInfo(){
         account.setText(getStr(member.getMemberInfo().getAccount()));
         telPhone_contact.setText(getStr(member.getMemberInfo().getTelephone()));
-        sex.setText(getStr(member.getMemberInfo().getSex()));
+        if(member.getMember().getSex().equals("WOMAN")){
+            sexStr = "女";
+        }else{
+            sexStr = "男";
+        }
+        sex.setText(sexStr);
         String headImageUrl = member.getMember().getImageFile();
         if(headImageUrl == null || headImageUrl.isEmpty()){
            headImageUrl = "";
@@ -289,13 +296,14 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     public void OnSelectSex(int position) {
         switch (position){
             case 0://男
-                this.sexStr = "男";
+                this.sexStr = "MAN";
+                sex.setText("男");
                 break;
             case 1://女
-                this.sexStr = "女";
+                this.sexStr = "WOMAN";
+                sex.setText("女");
                 break;
         }
-        sex.setText(sexStr);
     }
 
     private class MyTask extends AsyncTask<MemberInfoDao,String,MemberVOData>{
@@ -331,9 +339,20 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(MemberVOData memberData) {
             super.onPostExecute(memberData);
+            myProgressDialog.dismiss();
             if(memberData != null){
                 if(memberData.isSuccess()){
+                    MemberData data = new MemberData();
+                    Member member1 = new Member();
+                    member1.setMember(memberData.getData());
+                    member1.setAccountInfo(member.getAccountInfo());
+                    member1.setMemberInfo(member.getMemberInfo());
+                    member1.setShop(member.getShop());
+                    data.setData(member1);
+                    data.setSuccess(true);
+
                      alert(R.string.update_success);
+                    saveLogin(data);
                      setResult(Activity.RESULT_OK);
                     finish();
                 }else{
@@ -344,6 +363,8 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
             }
         }
     }
+
+
 
 
 

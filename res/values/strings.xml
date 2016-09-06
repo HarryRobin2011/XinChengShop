@@ -725,5 +725,6 @@
     <string name="please_select_express_company">请选择物流公司</string>
     <string name="no_buy_my_self_shop_product">不能购买自己商店商品</string>
     <string name="no_collect_my_self_shop_product">不能收藏自己店铺商品</string>
+    <string name="qq_empty">卖家没有预留QQ号</string>
 
 </resources>

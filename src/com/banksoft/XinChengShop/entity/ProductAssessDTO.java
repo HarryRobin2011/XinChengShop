@@ -7,6 +7,8 @@
  */
 package com.banksoft.XinChengShop.entity;
 
+import com.banksoft.XinChengShop.entity.base.BaseEntity;
+
 /**
  * 类的功能，目的，描述等写在此处
  *
@@ -14,7 +16,7 @@ package com.banksoft.XinChengShop.entity;
  * @version 1.0
  */
 
-public class ProductAssessDTO {
+public class ProductAssessDTO extends BaseEntity{
     private String id;
     private long createTime;
     private int score;
@@ -28,6 +30,7 @@ public class ProductAssessDTO {
     private String grade;//等级10
     private String gradeType;
     private String shopId;
+    private String images; //晒图
 
     public String getProductId() {
         return productId;
@@ -133,5 +136,11 @@ public class ProductAssessDTO {
         this.shopId = shopId;
     }
 
+    public String getImages() {
+        return images;
+    }
 
+    public void setImages(String images) {
+        this.images = images;
+    }
 }

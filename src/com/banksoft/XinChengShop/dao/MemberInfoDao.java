@@ -21,7 +21,7 @@ public class MemberInfoDao extends BaseDao{
     }
 
     public MemberVOData updataMemberInfo(MemberInfo memberInfo){
-        String url = ControlUrl.XC_UPDATA_MEMBER_INFO_URL;
+        String url = ControlUrl.XC_UPDATA_MEMBER_UPDATE_URL;
         String params = getParams(memberInfo,"data");
         MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params, JSONHelper.XC_MEMBER_VO_DATA,false);
         return data;

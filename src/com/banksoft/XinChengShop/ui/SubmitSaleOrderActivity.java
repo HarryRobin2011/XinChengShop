@@ -337,7 +337,7 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                 shoppingCartVO.setProductId(productCart.getProductVO().getId());
                 shoppingCartVO.setProductName(productCart.getProductVO().getName());
                 shoppingCartVO.setImageFile(productCart.getProductVO().getIcon());
-                shoppingCartVO.setPrice(productCart.getProductVO().getPrice());
+                shoppingCartVO.setPrice(productCart.getSalePrice());
                 shoppingCartVO.setGoodsNum(productCart.getNum());
                 shoppingCartVO.setTotal(productCart.getTotal());
                 shoppingCartVOLinkedList.add(shoppingCartVO);

@@ -7,6 +7,8 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
+import com.banksoft.XinChengShop.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -160,6 +162,10 @@ public class CommonUtil {
     }
 
     public static void openQQ(Context context,String s) {
+        if(s == null || "".equals(s)){
+            Toast.makeText(context,context.getText(R.string.qq_empty).toString(),Toast.LENGTH_SHORT).show();
+            return;
+        }
         String url="mqqwpa://im/chat?chat_type=wpa&uin=123456";
         String params = url.replace("123456",s);
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(params));

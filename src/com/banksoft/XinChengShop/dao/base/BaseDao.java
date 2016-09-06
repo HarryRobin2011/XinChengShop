@@ -66,6 +66,15 @@ public class BaseDao implements HttpRequest {
         Field[] fields = object.getClass().getDeclaredFields();
         StringBuilder builder = new StringBuilder();
         for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                Object fieldO = field.get(object);
+                if(fieldO == null){
+                    continue;
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             String name = field.getName();
             String c = name.charAt(0) + "";
             c = c.toUpperCase();

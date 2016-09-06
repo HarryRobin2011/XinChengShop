@@ -34,7 +34,7 @@ public class PublishCommentDao extends BaseDao{
      */
     public IsFlagData submitComment(String id, List<ProductAssessBO> productAssessBOs, OrderAssessBO orderAssessBO) {
         String url = ControlUrl.XC_ORDER_COMMENT_URL;
-        String params = "memberId="+id+"&productData="+getListParams(productAssessBOs,"productData")+"&orderData="+getParams(orderAssessBO,"orderData")+"assessStatus="+"false"+"";
+        String params = "memberId="+id+"&"+getListParams(productAssessBOs,"productData")+"&orderData="+getParams(orderAssessBO,"orderData")+"";
         IsFlagData isFlagData = (IsFlagData) postHttpRequest(mContext,url,params, JSONHelper.IS_FLAG_DATA,false);
         return isFlagData;
     }

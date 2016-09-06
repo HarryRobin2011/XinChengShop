@@ -25,6 +25,8 @@ import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.math.BigDecimal;
+
 /**
  * 订单详情
  * Created by harry_robin on 15/11/23.
@@ -153,6 +155,9 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
     }
 
     private void showOrderInfoView(OrderVO orderVO) {
+        BigDecimal bigDecimal = new BigDecimal(orderVO.getTotalMoney());
+        bigDecimal.add(new BigDecimal(orderVO.getExpressMoney()));
+
         contentLayout.setVisibility(View.VISIBLE);
         orderNo.setText("订单编号：" + orderVO.getNo());
         shippingTelPhone.setText(orderVO.getTelephone());
@@ -161,7 +166,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         shopName.setText(orderVO.getShopName());
         payMethod.setText(orderVO.getPayType());
         productTotalMoney.setText("￥" + String.valueOf(orderVO.getTotalMoney()));
-        disbursements.setText("￥" + orderVO.getTotalMoney() + orderVO.getExpressMoney());
+        disbursements.setText("￥" + bigDecimal.toString());
         createOrderTime.setText("下单时间：" + TimeUtils.getTimeStr(orderVO.getCreateTime(), TimeUtils.TimeType.MINUTE));
         expressMoney.setText(String.valueOf(orderVO.getExpressMoney()));
         addressDetailLayout.setVisibility(View.VISIBLE);

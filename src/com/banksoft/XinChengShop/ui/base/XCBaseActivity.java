@@ -142,6 +142,8 @@ public abstract class XCBaseActivity extends FragmentActivity {
         preferences.edit().putString(SharedPreTag.MEMBER, JSONHelper.toJSONString(memberData)).commit();
     }
 
+
+
     public void saveArea(String areaID, String areaName) {
         preferences.edit().putString(SharedPreTag.AREA_ID, areaID).commit();
         preferences.edit().putString(SharedPreTag.AREA_NAME, areaName).commit();

@@ -1,6 +1,7 @@
 package com.banksoft.XinChengShop.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.entity.ProductAssessDTO;
 import com.banksoft.XinChengShop.entity.ProductAssessFrontDTO;
+import com.banksoft.XinChengShop.utils.TimeUtils;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class MyCommonListAdapter extends BaseMyAdapter {
         private TextView productName;
         private TextView content;
         private TextView time;
+        private LinearLayout imageLayout;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class MyCommonListAdapter extends BaseMyAdapter {
         commonListHolder.productName = (TextView) cellView.findViewById(R.id.product_name);
         commonListHolder.content = (TextView) cellView.findViewById(R.id.content);
         commonListHolder.time = (TextView) cellView.findViewById(R.id.time);
+        commonListHolder.imageLayout = (LinearLayout) cellView.findViewById(R.id.image_layout);
         return commonListHolder;
     }
 
@@ -49,6 +53,14 @@ public class MyCommonListAdapter extends BaseMyAdapter {
         ProductAssessDTO assessDTO = (ProductAssessDTO) dataList.get(position);
         commonListHolder.productName.setText(assessDTO.getProductName());
         commonListHolder.content.setText(assessDTO.getContent());
+        commonListHolder.time.setText(TimeUtils.getTimeStr(assessDTO.getCreateTime(), TimeUtils.TimeType.SECOND));
+        String images = assessDTO.getImages();
+        if(images != null && "".equals(images)){
+            for(String image:images.split("\\|")){
+                View itemView  = mInflater.inflate(R.layout.image_layout_cell,null);
+            }
+        }
+
         switch(Integer.valueOf(assessDTO.getScore())){
             case 1:
                 commonListHolder.common.setText(R.string.high_praise);
