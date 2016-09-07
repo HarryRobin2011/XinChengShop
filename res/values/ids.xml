@@ -581,4 +581,5 @@
     <item name="express_edit" type="id">express_edit</item>
     <item name="dispatch_select_layout" type="id">dispatch_select_layout</item>
     <item name="image_content" type="id">image_content</item>
+    <item name="order_updata" type="id">order_updata</item>
 </resources>

@@ -1,7 +1,5 @@
 package com.banksoft.XinChengShop.ui;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
+import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.OrderInfoDao;
@@ -28,10 +27,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.math.BigDecimal;
 
 /**
- * 订单详情
- * Created by harry_robin on 15/11/23.
+ * Created by Robin on 2016/9/7.
  */
-public class OrderInfoActivity extends XCBaseActivity implements View.OnClickListener {
+public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnClickListener{
     private TextView title;
     private ImageView back;
     private TextView orderNo;//订单编号
@@ -44,7 +42,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
 
     private TextView shopName;
     private LinearLayout productContentLayout;
-    private Button contactShop;
+    private Button orderUpdata;
     private TextView payMethod;
     private TextView productTotalMoney;
     private TextView expressMoney;
@@ -61,7 +59,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
 
     @Override
     protected void initContentView() {
-        setContentView(R.layout.order_info_layout);
+        setContentView(R.layout.sale_order_info_layout);
 
     }
 
@@ -79,7 +77,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         shipAddress = (TextView) findViewById(R.id.address);
         shopName = (TextView) findViewById(R.id.shop_name);
         productContentLayout = (LinearLayout) findViewById(R.id.content);
-        contactShop = (Button) findViewById(R.id.contact_shop);
+        orderUpdata = (Button) findViewById(R.id.order_updata);
 
         payMethod = (TextView) findViewById(R.id.pay_method);
         productTotalMoney = (TextView) findViewById(R.id.product_total_money);
@@ -107,7 +105,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
 
     @Override
     protected void initOperate() {
-        contactShop.setOnClickListener(this);
+        orderUpdata.setOnClickListener(this);
     }
 
     @Override
@@ -116,18 +114,19 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
             case R.id.title_back_button:
                 finish();
                 break;
-            case R.id.contact_shop:
-                CommonUtil.callPhone(mContext, orderVO.getTelephone());
+            case R.id.order_updata:
+
                 break;
         }
     }
+
 
     private class MyTask extends AsyncTask<OrderInfoDao, String, OrderInfoData> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             if (progressDialog == null) {
-                progressDialog = new MyProgressDialog(OrderInfoActivity.this);
+                progressDialog = new MyProgressDialog(SellerOrderInfoActivity.this);
             }
             progressDialog.showDialog(R.string.please_wait);
         }

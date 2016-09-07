@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import com.banksoft.XinChengShop.R;
-import com.banksoft.XinChengShop.adapter.OrderLisAdapter;
 import com.banksoft.XinChengShop.adapter.SellerOrderLisAdapter;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.type.OrderStatus;
+import com.banksoft.XinChengShop.ui.SellerOrderInfoActivity;
 import com.banksoft.XinChengShop.ui.SellerDispatchOrderActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -74,6 +73,9 @@ public class SellerOrderListFragment extends XCBaseListFragment implements BaseM
            case R.id.refund:
                Intent intent = new Intent(mContext, SellerDispatchOrderActivity.class);
                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+               break;
+           case R.id.pay:
+               Intent orderInfoIntent = new Intent(mContext, SellerOrderInfoActivity.class);
                break;
        }
     }

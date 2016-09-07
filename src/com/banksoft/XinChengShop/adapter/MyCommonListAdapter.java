@@ -7,10 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
+import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.ProductAssessDTO;
 import com.banksoft.XinChengShop.entity.ProductAssessFrontDTO;
 import com.banksoft.XinChengShop.utils.TimeUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
@@ -18,8 +22,11 @@ import java.util.ArrayList;
  * Created by harry_robin on 16/1/24.
  */
 public class MyCommonListAdapter extends BaseMyAdapter {
+    private ImageLoader mImageLoader;
     public MyCommonListAdapter(Context mContext, ArrayList arrayList) {
         super(mContext,arrayList);
+        mImageLoader = ImageLoader.getInstance();
+        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class CommonListHolder extends BusinessHolder{
@@ -43,7 +50,8 @@ public class MyCommonListAdapter extends BaseMyAdapter {
         commonListHolder.productName = (TextView) cellView.findViewById(R.id.product_name);
         commonListHolder.content = (TextView) cellView.findViewById(R.id.content);
         commonListHolder.time = (TextView) cellView.findViewById(R.id.time);
-        commonListHolder.imageLayout = (LinearLayout) cellView.findViewById(R.id.image_layout);
+        commonListHolder.imageLayout = (LinearLayout) cellView.findViewById(R.id.image_content);
+        commonListHolder.mImageView = (ImageView) cellView.findViewById(R.id.image);
         return commonListHolder;
     }
 
@@ -54,11 +62,19 @@ public class MyCommonListAdapter extends BaseMyAdapter {
         commonListHolder.productName.setText(assessDTO.getProductName());
         commonListHolder.content.setText(assessDTO.getContent());
         commonListHolder.time.setText(TimeUtils.getTimeStr(assessDTO.getCreateTime(), TimeUtils.TimeType.SECOND));
+        ((CommonListHolder) cellHolder).mImageView.setImageResource(R.drawable.icon);
+        commonListHolder.imageLayout.removeAllViews();
         String images = assessDTO.getImages();
-        if(images != null && "".equals(images)){
-            for(String image:images.split("\\|")){
-                View itemView  = mInflater.inflate(R.layout.image_layout_cell,null);
+        if(images != null && !"".equals(images)){
+            String[] imageArray = images.split("\\|");
+            for(int i = 0;i<imageArray.length;i++){
+                View itemView  = mInflater.inflate(R.layout.grid_image_item_layout,null);
+                ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
+                mImageLoader.displayImage(ControlUrl.BASE_URL+imageArray[i],imageView, XCApplication.options);
+                commonListHolder.imageLayout.addView(itemView);
             }
+        }else{
+            commonListHolder.imageLayout.setVisibility(View.GONE);
         }
 
         switch(Integer.valueOf(assessDTO.getScore())){

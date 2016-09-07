@@ -155,8 +155,12 @@ public class OrderListFragment extends XCBaseListFragment{
                 orderIntent.putExtra(IntentFlag.ORDER_STATUS, OrderStatus.valueOf(orderVO.getStatus()));
                 startActivityForResult(orderIntent,Activity.RESULT_FIRST_USER);
                 break;
-            case R.id.delete:
-
+            case R.id.delete://查看订单详情
+                Intent odIntent = new Intent(mContext,OrderInfoActivity.class);
+                OrderVO order = (OrderVO) bailaAdapter.dataList.get(position);
+                odIntent.putExtra(IntentFlag.ORDER_ID,order.getId());
+                odIntent.putExtra(IntentFlag.ORDER_STATUS, OrderStatus.valueOf(order.getStatus()));
+                startActivityForResult(odIntent,Activity.RESULT_FIRST_USER);
                 break;
         }
     }

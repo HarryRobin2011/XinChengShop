@@ -53,9 +53,6 @@ public class ScoreOrderListAdapter extends BaseMyAdapter {
         orderSaleHolder.productContent = (LinearLayout) cellView.findViewById(R.id.content);
         orderSaleHolder.toolLayout = (LinearLayout) cellView.findViewById(R.id.layout_tool);
         orderSaleHolder.confirm = (TextView) cellView.findViewById(R.id.confirm);
-
-
-
         return orderSaleHolder;
     }
 
@@ -65,27 +62,28 @@ public class ScoreOrderListAdapter extends BaseMyAdapter {
         OrderSaleHolder holder = (OrderSaleHolder) cellHolder;
         holder.shopName.setText(scoreOrder.getNo());
         holder.productContent.removeAllViews();
+        holder.toolLayout.setVisibility(View.GONE);
 
-            View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView name = (TextView) view.findViewById(R.id.name);
-            //TextView num = (TextView) view.findViewById(R.id.describe);
-            TextView discountPrice = (TextView) view.findViewById(R.id.discount_price);
-            TextView realPrice = (TextView) view.findViewById(R.id.real_price);
-            TextView saleNum = (TextView) view.findViewById(R.id.sale_num);
-            String imageUrl = "";
-            if(!"".equals(scoreOrder.getImageFile()) && scoreOrder.getImageFile() != null){
-                imageUrl = ControlUrl.BASE_URL + scoreOrder.getImageFile().split("\\|")[0];
-            }
+        View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        TextView name = (TextView) view.findViewById(R.id.name);
+        //TextView num = (TextView) view.findViewById(R.id.describe);
+        TextView discountPrice = (TextView) view.findViewById(R.id.discount_price);
+        TextView realPrice = (TextView) view.findViewById(R.id.real_price);
+        TextView saleNum = (TextView) view.findViewById(R.id.sale_num);
+        String imageUrl = "";
+        if (!"".equals(scoreOrder.getImageFile()) && scoreOrder.getImageFile() != null) {
+            imageUrl = ControlUrl.BASE_URL + scoreOrder.getImageFile().split("\\|")[0];
+        }
 
-            mImageViewLoader.displayImage(imageUrl, imageView, XCApplication.options);
+        mImageViewLoader.displayImage(imageUrl, imageView, XCApplication.options);
 
-            name.setText(scoreOrder.getProductName());
-            // num.setText(productVO.getNum()+"");
-            discountPrice.setText(scoreOrder.getProductScore() + "分");
-            realPrice.setVisibility(View.GONE);
-            saleNum.setVisibility(View.GONE);
-            holder.productContent.addView(view);
+        name.setText(scoreOrder.getProductName());
+        // num.setText(productVO.getNum()+"");
+        discountPrice.setText(scoreOrder.getProductScore() + "分");
+        realPrice.setVisibility(View.GONE);
+        saleNum.setVisibility(View.GONE);
+        holder.productContent.addView(view);
         holder.total.setText("合计：" + scoreOrder.getScore() + "分");
         return cellView;
     }

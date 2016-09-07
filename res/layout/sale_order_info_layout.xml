@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/body_bg">
+    <include layout="@layout/title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+        <LinearLayout
+                android:id="@id/content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:orientation="vertical">
+            <TextView android:id="@id/order_no"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/height_50"
+                      android:background="@color/white"
+                      style="@style/text_style_3"/>
+            <include layout="@layout/shipping_address_layout"
+                     android:layout_marginTop="10.0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="50.0dp"
+                              android:padding="10.0dp"
+                              android:background="@color/white"
+                              android:layout_marginTop="10.0dp"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                    <ImageView android:layout_width="@dimen/height_20"
+                               android:layout_height="@dimen/height_20"
+                               android:src="@drawable/ic_product_detail_shop_into"/>
+                    <TextView android:id="@id/shop_name"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:gravity="center_vertical"
+                              android:textSize="@dimen/text_size_3"
+                              android:layout_marginLeft="10.0dp"
+                              android:textColor="@color/red"
+                              android:singleLine="true"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/arrow_expend_right"
+                               android:layout_marginLeft="20.0dp"/>
+                </LinearLayout>
+                <View style="@style/line2"/>
+                <LinearLayout android:id="@id/content"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@color/white"
+                              android:orientation="vertical"/>
+                <View style="@style/line2"/>
+                <Button android:id="@id/order_updata"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_50"
+                        android:background="@drawable/button_white_bg"
+                        style="@style/text_style_3"
+                        android:gravity="center"
+                        android:text="@string/contact_shop"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10.0dp"
+                          android:background="@color/white"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_30"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              style="@style/text_style_3"
+                              android:layout_weight="1"
+                              android:text="@string/pay_method_1"
+                              android:paddingLeft="10.0dp"
+                              android:layout_height="@dimen/height_30"/>
+                    <TextView
+                            android:id="@id/pay_method"
+                            android:layout_width="wrap_content"
+                            style="@style/text_style_3"
+                            android:paddingRight="10.0dp"
+                            android:layout_height="@dimen/height_30"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_30"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              style="@style/text_style_3"
+                              android:layout_weight="1"
+                              android:text="@string/product_total_money"
+                              android:paddingLeft="10.0dp"
+                              android:layout_height="@dimen/height_30"/>
+                    <TextView android:id="@id/product_total_money"
+                              android:layout_width="wrap_content"
+                              style="@style/text_style_3"
+                              android:paddingRight="10.0dp"
+                              android:textColor="@color/red_normal"
+                              android:layout_height="@dimen/height_30"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_30"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="match_parent"
+                              style="@style/text_style_3"
+                              android:layout_weight="1"
+                              android:text="@string/express_money"
+                              android:paddingLeft="10.0dp"
+                              android:layout_height="@dimen/height_30"/>
+                    <TextView
+                            android:id="@id/express_money"
+                            android:layout_width="wrap_content"
+                            style="@style/text_style_3"
+                            android:paddingRight="10.0dp"
+                            android:textColor="@color/red_normal"
+                            android:layout_height="@dimen/height_30"/>
+                </LinearLayout>
+
+                <View style="@style/line2"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="@dimen/height_80"
+                              android:background="@color/white"
+                              android:gravity="center_vertical"
+                              android:orientation="vertical">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
+                        <TextView android:layout_width="match_parent"
+                                  android:layout_height="@dimen/height_30"
+                                  style="@style/text_style_3"
+                                  android:gravity="right|center_vertical"
+                                  android:text="@string/disbursements"
+                                  android:layout_weight="1"/>
+                        <TextView
+                                android:id="@id/disbursements"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_30"
+                                style="@style/text_style_3"
+                                android:gravity="right|center_vertical"
+                                android:paddingRight="10.0dp"
+                                android:textColor="@color/red_normal"
+                                android:layout_weight="2"/>
+                    </LinearLayout>
+                    <TextView
+                            android:id="@id/order_create_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_30"
+                            style="@style/text_style_4"
+                            android:gravity="right|center_vertical"
+                            android:paddingRight="10.0dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout android:id="@id/layout_tool"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_50"
+                  android:gravity="center_vertical|right"
+                  android:layout_marginRight="10.0dp"
+                  android:layout_marginLeft="10.0dp"
+                  android:visibility="gone"
+                  android:orientation="horizontal">
+        <TextView android:id="@id/comments"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/comments"/>
+        <TextView android:id="@id/cancel"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/order_cancel"/>
+        <TextView android:id="@id/pay"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/payment"/>
+        <TextView android:id="@id/refund"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/refund"/>
+
+        <TextView android:id="@id/return_the_goods"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/return_the_goods"/>
+        <TextView android:id="@id/confirm"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/confirm_goods"/>
+        <TextView android:id="@id/delivery"
+                  android:layout_width="80.0dp"
+                  android:layout_height="@dimen/height_30"
+                  style="@style/text_style_3"
+                  android:gravity="center"
+                  android:background="@drawable/edit_text_bg_normal"
+                  android:layout_margin="5.0dp"
+                  android:text="@string/delivery"/>
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -135,15 +135,16 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
         if (OrderStatus.CREATE.name().equals(orderStatus)) {// 待付款
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.cancel.setVisibility(View.VISIBLE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.VISIBLE);
+            orderSaleHolder.pay.setText(R.string.updata_order_price);
          //   orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.CREATE;
         } else if (OrderStatus.PAY.name().equals(orderStatus)) {//待发货
-            orderSaleHolder.delivery.setVisibility(View.VISIBLE);
+            orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
@@ -154,8 +155,8 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             return OrderStatus.PAY;
         } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {//待确认收货
             orderSaleHolder.delivery.setVisibility(View.GONE);
-            orderSaleHolder.confirm.setVisibility(View.VISIBLE);
-            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.VISIBLE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
@@ -166,7 +167,7 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
-            orderSaleHolder.comments.setVisibility(View.VISIBLE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.GONE);
@@ -180,7 +181,7 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.pay.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.VISIBLE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.OVER;
         }else if(OrderStatus.REPEALING.name().equals(orderStatus)){//订单退货
             orderSaleHolder.delivery.setVisibility(View.GONE);
@@ -190,7 +191,7 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.pay.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
            orderSaleHolder.refund.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.VISIBLE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
         }
 
         return null;

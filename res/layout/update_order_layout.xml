@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+    <include layout="@layout/title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="10.0dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="@dimen/height_50"
+                  android:text="@string/order_total"
+                  style="@style/text_style_3"/>
+        <com.banksoft.XinChengShop.widget.ClearEditText android:layout_width="match_parent"
+                                                        android:layout_height="@dimen/height_50"
+                                                        android:layout_marginLeft="10.0dp"
+                                                        android:background="@drawable/edit_text_white_bg"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="10.0dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="@dimen/height_50"
+                  android:text="@string/express_money_total"
+                  style="@style/text_style_3"/>
+        <com.banksoft.XinChengShop.widget.ClearEditText android:layout_width="match_parent"
+                                                        android:layout_height="@dimen/height_50"
+                                                        android:layout_marginLeft="10.0dp"
+                                                        android:background="@drawable/edit_text_white_bg"/>
+    </LinearLayout>
+
+    <Button android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            style="@style/text_style_3"
+            android:textColor="@color/text_white"
+            android:layout_margin="10.0dp"
+            android:text="@string/ok"
+            android:gravity="center"
+            android:background="@drawable/click_red_button"/>
+
+</LinearLayout>

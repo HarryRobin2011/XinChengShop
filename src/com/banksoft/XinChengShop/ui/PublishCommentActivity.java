@@ -224,6 +224,7 @@ public class PublishCommentActivity extends XCBaseActivity implements View.OnCli
 
         for (int i = 0; i < content.getChildCount(); i++) {
             final int[] score = new int[1];
+            score[0] = 1;//默认好评
             int c = 0;
             View itemView = content.getChildAt(i);
             EditText editText = (EditText) itemView.findViewById(R.id.data_edit_text);

@@ -43,7 +43,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         TextView returnMoney;// 退款金额
        // TextView returnGoods;//申请退货
         TextView refund;// 申请退款
-         private TextView delete;//删除订单
+         private TextView delete;//删除订单   删除接口没有 改为查看详情
         private LinearLayout productContent;
         private LinearLayout toolLayout;
         private LinearLayout orderItemLayout;

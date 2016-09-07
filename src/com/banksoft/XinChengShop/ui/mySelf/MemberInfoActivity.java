@@ -241,7 +241,7 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
     private void setInfo(){
         account.setText(getStr(member.getMemberInfo().getAccount()));
         telPhone_contact.setText(getStr(member.getMemberInfo().getTelephone()));
-        if(member.getMember().getSex().equals("WOMAN")){
+        if("WOMAN".equals(member.getMember().getSex())){
             sexStr = "女";
         }else{
             sexStr = "男";
