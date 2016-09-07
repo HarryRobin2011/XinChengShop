@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -12,6 +14,7 @@ import com.banksoft.XinChengShop.ui.fragment.ScoreOrderListFragment;
 public class ScoreOrderListActivity extends XCBaseActivity {
     private TextView title;
     private ScoreOrderListFragment scoreOrderListFragment;
+    private ImageView back;
     @Override
     protected void initContentView() {
         setContentView(R.layout.content_layout);
@@ -20,11 +23,19 @@ public class ScoreOrderListActivity extends XCBaseActivity {
     @Override
     protected void initView() {
         title = (TextView) findViewById(R.id.titleText);
+        back = (ImageView) findViewById(R.id.title_back_button);
     }
 
     @Override
     protected void initData() {
         title.setText(R.string.my_score_order);
+        back.setVisibility(View.VISIBLE);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

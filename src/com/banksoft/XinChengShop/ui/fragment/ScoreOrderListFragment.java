@@ -28,6 +28,7 @@ public class ScoreOrderListFragment extends XCBaseListFragment{
 
     @Override
     public void request() {
+        xListView.setDividerHeight(20);
         url = ControlUrl.XC_SCORE_ORDER_LIST_URL;
         params = "memberId="+activity.member.getMember().getId();
         jsonType = JSONHelper.SCORE_ORDER_LIST_DATA;

@@ -33,7 +33,7 @@ import java.util.LinkedList;
  * 美食外卖店铺列表
  * Created by harry_robin on 16/1/21.
  */
-public class TakeOutShopListFragment extends XCBaseListFragment  {
+public class TakeOutShopListFragment extends XCBaseListFragment implements AdapterView.OnItemClickListener{
     private TakeOutMainActivity takeOutMainActivity;
     private View headView;
     private MyGridView myGridView;
@@ -71,6 +71,8 @@ public class TakeOutShopListFragment extends XCBaseListFragment  {
         new ShopTypeServerList().execute(takeOutMainDao);
 
     }
+
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

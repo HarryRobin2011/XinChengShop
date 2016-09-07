@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
-import com.banksoft.XinChengShop.XCApplication;
-import com.banksoft.XinChengShop.adapter.PublishCommentRecyclerViewAdapter;
 import com.banksoft.XinChengShop.adapter.ReturnGoodRecyclerViewAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
@@ -35,7 +33,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
