@@ -18,6 +18,7 @@ import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -56,26 +57,31 @@ public class SellerOrderListFragment extends XCBaseListFragment implements BaseM
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+         Intent intent = new Intent(mContext,SellerOrderInfoActivity.class);
+         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Activity.RESULT_FIRST_USER){
-
+            if(requestCode == Activity.RESULT_OK){
+                onRefresh();
+            }
         }
     }
 
     @Override
     public void onAdapterCLick(View view, int position) {
        switch (view.getId()){
-           case R.id.refund:
+           case R.id.delivery:
                Intent intent = new Intent(mContext, SellerDispatchOrderActivity.class);
+               intent.putExtra(IntentFlag.ORDER_VO, (Serializable) bailaAdapter.getItem(position));
                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                break;
            case R.id.pay:
                Intent orderInfoIntent = new Intent(mContext, SellerOrderInfoActivity.class);
+               startActivity(orderInfoIntent);
                break;
        }
     }

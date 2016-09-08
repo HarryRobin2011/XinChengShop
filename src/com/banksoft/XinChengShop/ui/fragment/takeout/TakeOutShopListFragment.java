@@ -21,6 +21,7 @@ import com.banksoft.XinChengShop.model.ShopServerTypeData;
 import com.banksoft.XinChengShop.service.LocationService;
 import com.banksoft.XinChengShop.type.ShopType;
 import com.banksoft.XinChengShop.ui.LoginActivity;
+import com.banksoft.XinChengShop.ui.ShopListActivity;
 import com.banksoft.XinChengShop.ui.takeout.TakeOutInfoActivity;
 import com.banksoft.XinChengShop.ui.takeout.TakeOutMainActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -118,7 +119,16 @@ public class TakeOutShopListFragment extends XCBaseListFragment implements Adapt
                 .android_my_jd_messages};
 
         myGridView.setAdapter(shopServerGridViewAdapter);
-
+        myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext, ShopListActivity.class);
+                intent.putExtra(IntentFlag.TITLE,shopServerTypeData.getData().get(position).getName());
+                intent.putExtra(IntentFlag.SHOP_TYPE,ShopType.SHOP_SERVER);
+                intent.putExtra(IntentFlag.NO,shopServerTypeData.getData().get(position).getNo());
+                startActivity(intent);
+            }
+        });
 
         xListView.addHeaderView(headView);
 

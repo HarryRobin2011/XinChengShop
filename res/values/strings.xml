@@ -189,7 +189,7 @@
     <string name="discuss">商议</string>
     <string name="wait_distribution">--：--：--</string>
     <string name="please_input_express_no">请输入物流单号</string>
-    <string name="express_no_not_empty">订单编号不能为空</string>
+    <string name="express_no_not_empty">快递单号不能为空</string>
     <string name="please_input_express_name">请输入物流公司名称</string>
     <string name="express_name_not_empty">物流名称不能为空</string>
     <string name="notification_order_create">您有一条新的订单~</string>
@@ -722,12 +722,13 @@
     <string name="express_company">物流公司</string>
     <string name="dispatch_persion_price">派送佣金</string>
     <string name="please_input_dispatch_persion_price">请输入派送佣金</string>
-    <string name="please_select_express_company">请选择物流公司</string>
     <string name="no_buy_my_self_shop_product">不能购买自己商店商品</string>
     <string name="no_collect_my_self_shop_product">不能收藏自己店铺商品</string>
     <string name="qq_empty">卖家没有预留QQ号</string>
     <string name="updata_order_price">修改订单价格</string>
     <string name="order_total">订单总价</string>
     <string name="express_money_total">运费总价</string>
+    <string name="please_select_logistic_company">请选择物流公司</string>
+    <string name="commission_no_empty">佣金不能为空</string>
 
 </resources>

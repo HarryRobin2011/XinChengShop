@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.entity;
 
+import com.banksoft.XinChengShop.entity.base.BaseEntity;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -7,7 +9,7 @@ package com.banksoft.XinChengShop.entity;
  * Time: 下午3:50
  * To change this template use File | Settings | File Templates.
  */
-public class ExpressCompanyCell {
+public class ExpressCompanyCell extends BaseEntity{
     private String name;   //快递公司名称
     private String key;  //key值，数据库保存
     private String address;

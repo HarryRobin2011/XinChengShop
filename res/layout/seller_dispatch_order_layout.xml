@@ -82,7 +82,7 @@
                     <TextView android:id="@id/express_name"
                               android:layout_width="match_parent"
                               android:layout_height="@dimen/height_50"
-                              android:text="@string/please_select_express_company"
+                              android:text="@string/please_select_logistic_company"
                               style="@style/text_style_3"
                               android:layout_weight="1"
                               android:paddingLeft="10.0dp"/>
@@ -130,7 +130,9 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <Button android:layout_width="match_parent"
+    <Button
+            android:id="@id/send"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/height_50"
             style="@style/text_style_3"
             android:text="@string/send"

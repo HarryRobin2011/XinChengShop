@@ -193,7 +193,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.pay.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.VISIBLE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
             return OrderStatus.OVER;
@@ -201,11 +201,13 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
             orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.REPEALING;
         }else if(OrderStatus.REPEAL_OVER.name().equals(orderStatus)){//订单退货完成
             orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
             orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
+            orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.REPEAL_OVER;
         }
 

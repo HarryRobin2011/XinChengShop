@@ -114,6 +114,8 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
         holder.comments.setTag(position);
         holder.orderItemLayout.setOnClickListener(this);
         holder.orderItemLayout.setTag(position);
+        holder.delivery.setOnClickListener(this);
+        holder.delivery.setTag(position);
         Intent intent = new Intent();
         return cellView;
     }
@@ -144,12 +146,12 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.CREATE;
         } else if (OrderStatus.PAY.name().equals(orderStatus)) {//待发货
-            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.delivery.setVisibility(View.VISIBLE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.VISIBLE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             return OrderStatus.PAY;

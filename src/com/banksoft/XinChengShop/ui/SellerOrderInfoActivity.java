@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.math.BigDecimal;
 /**
  * Created by Robin on 2016/9/7.
  */
-public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnClickListener{
+public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnClickListener {
     private TextView title;
     private ImageView back;
     private TextView orderNo;//订单编号
@@ -37,7 +39,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
     private LinearLayout contentLayout;
     private LinearLayout toolLayout;
 
-    private LinearLayout addressLayout,addressDetailLayout;
+    private LinearLayout addressLayout, addressDetailLayout;
     private TextView shippingTelPhone, shipName, shipAddress;
 
     private TextView shopName;
@@ -115,11 +117,25 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
                 finish();
                 break;
             case R.id.order_updata:
-
+                Intent intent = new Intent(mContext, UpdateOrderPriceActivity.class);
+                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Activity.RESULT_FIRST_USER) {
+            if (data != null) {
+                float orderTotal = data.getFloatExtra(IntentFlag.ORDER_MONEY, 0F);
+                float expressMoney = data.getFloatExtra(IntentFlag.EXPRESS_MONEY, 0F);
+                orderVO.setTotalMoney(orderTotal);
+                orderVO.setExpressMoney(expressMoney);
+                showOrderInfoView(orderVO);
+            }
+        }
+    }
 
     private class MyTask extends AsyncTask<OrderInfoDao, String, OrderInfoData> {
         @Override

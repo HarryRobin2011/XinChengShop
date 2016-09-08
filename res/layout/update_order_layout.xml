@@ -13,10 +13,17 @@
                   android:layout_height="@dimen/height_50"
                   android:text="@string/order_total"
                   style="@style/text_style_3"/>
-        <com.banksoft.XinChengShop.widget.ClearEditText android:layout_width="match_parent"
-                                                        android:layout_height="@dimen/height_50"
-                                                        android:layout_marginLeft="10.0dp"
-                                                        android:background="@drawable/edit_text_white_bg"/>
+        <com.banksoft.XinChengShop.widget.ClearEditText
+                android:id="@id/total"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_marginLeft="10.0dp"
+                android:paddingRight="10.0dp"
+                android:gravity="right|center_vertical"
+                android:inputType="number"
+                android:text="0"
+                android:imeOptions="actionNext"
+                android:background="@drawable/edit_text_white_bg"/>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -27,12 +34,20 @@
                   android:text="@string/express_money_total"
                   style="@style/text_style_3"/>
         <com.banksoft.XinChengShop.widget.ClearEditText android:layout_width="match_parent"
+                                                        android:id="@id/express_money"
                                                         android:layout_height="@dimen/height_50"
                                                         android:layout_marginLeft="10.0dp"
+                                                        android:inputType="number"
+                                                        android:imeOptions="actionDone"
+                                                        android:text="0"
+                                                        android:paddingRight="10.0dp"
+                                                        android:gravity="right|center_vertical"
                                                         android:background="@drawable/edit_text_white_bg"/>
     </LinearLayout>
 
-    <Button android:layout_width="match_parent"
+    <Button
+            android:id="@id/ok"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/height_40"
             style="@style/text_style_3"
             android:textColor="@color/text_white"
