@@ -18,6 +18,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="@dimen/height_50"
                       android:background="@color/white"
+                      android:paddingLeft="10.0dp"
                       style="@style/text_style_3"/>
             <include layout="@layout/shipping_address_layout"
                      android:layout_marginTop="10.0dp"

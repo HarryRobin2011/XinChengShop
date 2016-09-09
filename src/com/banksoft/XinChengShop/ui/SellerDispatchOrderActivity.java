@@ -30,7 +30,7 @@ public class SellerDispatchOrderActivity extends XCBaseActivity implements View.
     private TextView dispatchExpressName;
     private Button send;
 
-    private OperationType currentType;
+    private OperationType currentType = OperationType.EXPRESS;
 
     private ExpressCompanyCell expressCompanyCell;
 

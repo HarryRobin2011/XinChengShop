@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -7,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.UpdateDao;
+import com.banksoft.XinChengShop.dao.UpdateOrderDao;
 import com.banksoft.XinChengShop.entity.OrderVO;
+import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 
 /**
@@ -20,6 +25,8 @@ public class UpdateOrderPriceActivity extends XCBaseActivity implements View.OnC
     private EditText expressEdit;
     private Button ok;
     private OrderVO currentOrderVo;
+    private UpdateOrderDao updateOrderDao;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void initContentView() {
@@ -60,11 +67,33 @@ public class UpdateOrderPriceActivity extends XCBaseActivity implements View.OnC
                 String total = totalEdit.getText().toString();
                 String expressMoney = expressEdit.getText().toString();
                 if ("".equals(total)) {
-
+                      alert(R.string.total_no_empty);
+                    return;
                 } else if ("".equals(expressMoney)) {
-
+                    alert(R.string.express_money_no_empty);
+                    return;
                 }
                 break;
+        }
+    }
+
+    private class MyTask extends AsyncTask<UpdateOrderDao,String,IsFlagData>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(progressDialog == null){
+                progressDialog = ProgressDialog.show(UpdateOrderPriceActivity.this,getText(R.string.alert),getText(R.string.please_wait));
+            }
+        }
+
+        @Override
+        protected IsFlagData doInBackground(UpdateOrderDao... params) {
+            return params[0].UpdatePrice();
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
         }
     }
 }

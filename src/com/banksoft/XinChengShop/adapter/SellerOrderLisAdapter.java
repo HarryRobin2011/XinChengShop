@@ -139,8 +139,7 @@ public class SellerOrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.confirm.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.pay.setVisibility(View.VISIBLE);
-            orderSaleHolder.pay.setText(R.string.updata_order_price);
+            orderSaleHolder.pay.setVisibility(View.GONE);
          //   orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);

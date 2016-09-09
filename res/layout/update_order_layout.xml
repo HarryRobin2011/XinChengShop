@@ -20,7 +20,8 @@
                 android:layout_marginLeft="10.0dp"
                 android:paddingRight="10.0dp"
                 android:gravity="right|center_vertical"
-                android:inputType="number"
+                android:hint="@string/pleaset_input_order_total"
+                android:inputType="numberDecimal"
                 android:text="0"
                 android:imeOptions="actionNext"
                 android:background="@drawable/edit_text_white_bg"/>
@@ -37,9 +38,10 @@
                                                         android:id="@id/express_money"
                                                         android:layout_height="@dimen/height_50"
                                                         android:layout_marginLeft="10.0dp"
-                                                        android:inputType="number"
+                                                        android:inputType="numberDecimal"
                                                         android:imeOptions="actionDone"
-                                                        android:text="0"
+                                                         android:text="0"
+                                                        android:hint="@string/please_input_express_price"
                                                         android:paddingRight="10.0dp"
                                                         android:gravity="right|center_vertical"
                                                         android:background="@drawable/edit_text_white_bg"/>

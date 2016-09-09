@@ -152,7 +152,8 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
             }
             //选择图片
             Uri uri = data.getData();
-            photoList.add(0, ImageUtil.getImageAbsolutePath(this, uri));
+           // photoList.add(0, ImageUtil.getImageAbsolutePath(this, uri));
+            capturePath = ImageUtil.getImageAbsolutePath(this,uri);
             setCaremaImage();
         }
     }
@@ -198,7 +199,12 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
                 break;
             case R.id.submit_apply:// 提交退货申请
                 if (returnType == ReturnType.RETURN_MONEY) {// 已付款未发货
-                    ReturnMoney returnMoney = getReturnMoney();
+                    ReturnMoney returnMoney = null;
+                    try {
+                        returnMoney = getReturnMoney();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     if (returnMoney != null) {
                         if (returnGoodsDao == null) {
                             returnGoodsDao = new ReturnGoodsDao(mContext);
@@ -275,7 +281,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
     }
 
 
-    private ReturnMoney getReturnMoney() {
+    private ReturnMoney getReturnMoney() throws Exception{
         String returnReasonStr = returnReasonEdit.getText().toString();
         String returnMoneyStr = returnMoneyEdit.getText().toString();
         if (returnMoneyStr.isEmpty()) {

@@ -21,7 +21,7 @@ public class SellerOrderListActivity extends XCBaseActivity implements View.OnCl
     private ImageView back;
     private TabPageIndicator indicator;
     private ViewPager viewPager;
-    private OrderStatus[] orderStatuses = new OrderStatus[]{OrderStatus.ALL, OrderStatus.PAY, OrderStatus.DISPATCH};
+    private OrderStatus[] orderStatuses = new OrderStatus[]{OrderStatus.ALL, OrderStatus.CREATE,OrderStatus.PAY, OrderStatus.DISPATCH};
     private SellerOrderViewPagerAdapter sellerOrderViewPagerAdapter;
     private List dataList;
 

@@ -61,7 +61,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
 
     @Override
     protected void initContentView() {
-        setContentView(R.layout.sale_order_info_layout);
+        setContentView(R.layout.seller_order_info_layout);
 
     }
 
@@ -98,6 +98,12 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
         title.setText(orderStatus.getName());
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
+        if(!orderStatus.equals(OrderStatus.CREATE)){
+            orderUpdata.setVisibility(View.GONE);
+        }else{
+            orderUpdata.setVisibility(View.VISIBLE);
+            orderUpdata.setText(R.string.updata_order_price);
+        }
         addressLayout.setVisibility(View.VISIBLE);
         if (orderInfoDao == null) {
             orderInfoDao = new OrderInfoDao(mContext);
@@ -118,6 +124,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
                 break;
             case R.id.order_updata:
                 Intent intent = new Intent(mContext, UpdateOrderPriceActivity.class);
+                intent.putExtra(IntentFlag.ORDER_VO,orderVO);
                 startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                 break;
         }
@@ -181,7 +188,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
         shopName.setText(orderVO.getShopName());
         payMethod.setText(orderVO.getPayType());
         productTotalMoney.setText("￥" + String.valueOf(orderVO.getTotalMoney()));
-        disbursements.setText("￥" + bigDecimal.toString());
+        disbursements.setText("￥" + bigDecimal.floatValue());
         createOrderTime.setText("下单时间：" + TimeUtils.getTimeStr(orderVO.getCreateTime(), TimeUtils.TimeType.MINUTE));
         expressMoney.setText(String.valueOf(orderVO.getExpressMoney()));
         addressDetailLayout.setVisibility(View.VISIBLE);
@@ -203,7 +210,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
 
             name.setText(productVO.getProductName());
             // num.setText(productVO.getNum()+"");
-            discountPrice.setText(Math.round(productVO.getPrice()) + "元");
+            discountPrice.setText(productVO.getPrice() + "元");
             realPrice.setVisibility(View.GONE);
             saleNum.setVisibility(View.GONE);
             productContentLayout.addView(view);

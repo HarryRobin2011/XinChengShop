@@ -730,5 +730,9 @@
     <string name="express_money_total">运费总价</string>
     <string name="please_select_logistic_company">请选择物流公司</string>
     <string name="commission_no_empty">佣金不能为空</string>
+    <string name="pleaset_input_order_total">请输入订单金额</string>
+    <string name="please_input_express_price">请输入运费金额</string>
+    <string name="total_no_empty">订单金额不能为空</string>
+    <string name="express_money_no_empty">运费金额不能为空</string>
 
 </resources>

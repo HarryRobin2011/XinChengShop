@@ -19,7 +19,7 @@ public class SellerDispatchDao extends BaseDao {
      * 卖家发货
      */
     public IsFlagData sendOrder(String orderId,String companyKey, String expressNo,String dispatchPrice, String expressType) {
-        String url = ControlUrl.XC_SHOP_TYPE_LIST;
+        String url = ControlUrl.XC_SELLER_ORDER_URL;
         String params = "id="+orderId+"&dispatchPrice="+dispatchPrice+"&expressCompany="+companyKey+"&expressNo="+expressNo+"&expressType="+expressType;
         IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params,JSONHelper.IS_FLAG_DATA,false);
         return data;

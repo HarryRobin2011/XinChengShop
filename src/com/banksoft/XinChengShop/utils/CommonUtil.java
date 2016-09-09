@@ -195,4 +195,12 @@ public class CommonUtil {
         int intgeo = Integer.parseInt(str);
         return intgeo;
     }
+
+    public static String filteredNull(String data){
+        String response = "";
+        if(data.indexOf("null") != -1){
+         response =   data.replace("null","");
+        }
+        return response;
+    }
 }

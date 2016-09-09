@@ -83,6 +83,7 @@ public class ControlUrl {
     public static final String ANDROID_ASSETS_BASE_PATH = "file:///android_asset/";
     public static final String XC_ORDER_DELETE_URL = "";
     public static final String SCORE_INFO_URL = "/app/scoreProduct_find";//积分产品详情
+    public static final String XC_SHOP_UPDATE_ORDER_PRICE ="/app/shopOrder_changePrice";//卖家修改金额
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 

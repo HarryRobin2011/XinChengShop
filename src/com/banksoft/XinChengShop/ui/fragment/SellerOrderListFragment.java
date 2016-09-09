@@ -11,6 +11,7 @@ import com.banksoft.XinChengShop.adapter.SellerOrderLisAdapter;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.type.OrderStatus;
 import com.banksoft.XinChengShop.ui.SellerOrderInfoActivity;
 import com.banksoft.XinChengShop.ui.SellerDispatchOrderActivity;
@@ -57,15 +58,14 @@ public class SellerOrderListFragment extends XCBaseListFragment implements BaseM
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-         Intent intent = new Intent(mContext,SellerOrderInfoActivity.class);
-         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Activity.RESULT_FIRST_USER){
-            if(requestCode == Activity.RESULT_OK){
+            if(resultCode == Activity.RESULT_OK){
                 onRefresh();
             }
         }
@@ -80,8 +80,15 @@ public class SellerOrderListFragment extends XCBaseListFragment implements BaseM
                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                break;
            case R.id.pay:
-               Intent orderInfoIntent = new Intent(mContext, SellerOrderInfoActivity.class);
-               startActivity(orderInfoIntent);
+//               Intent orderInfoIntent = new Intent(mContext, SellerOrderInfoActivity.class);
+//               startActivity(orderInfoIntent);
+               break;
+           case R.id.order_list_item:
+               OrderVO orderVO = (OrderVO) bailaAdapter.dataList.get(position);
+               Intent orderInfoIntent = new Intent(mContext,SellerOrderInfoActivity.class);
+               orderInfoIntent.putExtra(IntentFlag.ORDER_STATUS,OrderStatus.valueOf(orderVO.getStatus()));
+               orderInfoIntent.putExtra(IntentFlag.ORDER_ID,orderVO.getId());
+               startActivityForResult(orderInfoIntent,Activity.RESULT_FIRST_USER);
                break;
        }
     }

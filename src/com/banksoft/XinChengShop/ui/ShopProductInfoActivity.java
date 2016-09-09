@@ -216,6 +216,9 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
                 break;
             case R.id.add_shop_cart:
                 if (isLogin()) {
+                    if(productVO == null){
+                        return;
+                    }
                     if(member.getShop() != null && member.getShop().getId().equals(productVO.getShopId())){//不能购买自己商店商品
                         alert(R.string.no_buy_my_self_shop_product);
                         return;

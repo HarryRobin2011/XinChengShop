@@ -18,6 +18,7 @@ import com.banksoft.XinChengShop.entity.OrderProductVO;
 import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.model.OrderInfoData;
 import com.banksoft.XinChengShop.type.OrderStatus;
+import com.banksoft.XinChengShop.type.PayType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.TimeUtils;
@@ -160,13 +161,13 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
 
         contentLayout.setVisibility(View.VISIBLE);
         orderNo.setText("订单编号：" + orderVO.getNo());
-        shippingTelPhone.setText(orderVO.getTelephone());
+        shippingTelPhone.setText(CommonUtil.filteredNull(orderVO.getTelephone()));
         shipName.setText(orderVO.getUserName());
         shipAddress.setText(orderVO.getAddress());
         shopName.setText(orderVO.getShopName());
-        payMethod.setText(orderVO.getPayType());
+        payMethod.setText(PayType.valueOf(orderVO.getPayType()).getName());
         productTotalMoney.setText("￥" + String.valueOf(orderVO.getTotalMoney()));
-        disbursements.setText("￥" + bigDecimal.toString());
+        disbursements.setText("￥" + bigDecimal.floatValue());
         createOrderTime.setText("下单时间：" + TimeUtils.getTimeStr(orderVO.getCreateTime(), TimeUtils.TimeType.MINUTE));
         expressMoney.setText(String.valueOf(orderVO.getExpressMoney()));
         addressDetailLayout.setVisibility(View.VISIBLE);
@@ -188,7 +189,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
 
             name.setText(productVO.getProductName());
             // num.setText(productVO.getNum()+"");
-            discountPrice.setText(Math.round(productVO.getPrice()) + "元");
+            discountPrice.setText(productVO.getPrice() + "元");
             realPrice.setVisibility(View.GONE);
             saleNum.setVisibility(View.GONE);
             productContentLayout.addView(view);
