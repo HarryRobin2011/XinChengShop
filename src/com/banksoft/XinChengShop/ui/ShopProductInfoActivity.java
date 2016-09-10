@@ -322,7 +322,12 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         }
 
         public void openQQ() {
-            CommonUtil.openQQ(mContext, shopVO.getQq());
+            try {
+                CommonUtil.openQQ(mContext, shopVO.getQq());
+            } catch (Exception e) {
+                alert(R.string.qq_not_installed);
+                e.printStackTrace();
+            }
 
         }
     }

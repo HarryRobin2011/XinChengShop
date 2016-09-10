@@ -734,5 +734,7 @@
     <string name="please_input_express_price">请输入运费金额</string>
     <string name="total_no_empty">订单金额不能为空</string>
     <string name="express_money_no_empty">运费金额不能为空</string>
+    <string name="update_order_success">修改价格成功</string>
+    <string name="qq_not_installed">检测到您没有安装QQ，请先安装</string>
 
 </resources>

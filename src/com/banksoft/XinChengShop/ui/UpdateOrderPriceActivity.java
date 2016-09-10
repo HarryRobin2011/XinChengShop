@@ -1,5 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.view.View;
@@ -73,11 +74,23 @@ public class UpdateOrderPriceActivity extends XCBaseActivity implements View.OnC
                     alert(R.string.express_money_no_empty);
                     return;
                 }
+                if(updateOrderDao == null){
+                    updateOrderDao = new UpdateOrderDao(mContext);
+                }
+                new MyTask(total,expressMoney).execute(updateOrderDao);
                 break;
         }
     }
 
     private class MyTask extends AsyncTask<UpdateOrderDao,String,IsFlagData>{
+        private String total;
+        private String expressMoney;
+
+        public MyTask(String total, String expressMoney) {
+            this.total = total;
+            this.expressMoney = expressMoney;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -88,12 +101,23 @@ public class UpdateOrderPriceActivity extends XCBaseActivity implements View.OnC
 
         @Override
         protected IsFlagData doInBackground(UpdateOrderDao... params) {
-            return params[0].UpdatePrice();
+            return params[0].UpdatePrice(currentOrderVo.getId(),total,expressMoney);
         }
 
         @Override
         protected void onPostExecute(IsFlagData isFlagData) {
             super.onPostExecute(isFlagData);
+            if(isFlagData != null){
+                if(isFlagData.isSuccess()){
+                    alert(R.string.update_order_success);
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }else{
+                    alert(isFlagData.getMsg().toString());
+                }
+            }else{
+                alert(R.string.net_error);
+            }
         }
     }
 }

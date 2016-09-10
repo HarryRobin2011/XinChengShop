@@ -3,6 +3,7 @@ package com.banksoft.XinChengShop.dao;
 import android.content.Context;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
+import com.banksoft.XinChengShop.entity.BalanceRecord;
 import com.banksoft.XinChengShop.entity.Bank;
 import com.banksoft.XinChengShop.model.BankData;
 import com.banksoft.XinChengShop.model.BankListData;
@@ -29,7 +30,7 @@ public class MyBankDao extends BaseDao {
     public BankListData getBankListData(String id) {
         String url = ControlUrl.XC_MY_BANK_LIST_URL;
         String params = "memberId=" + id;
-        BankListData data = (BankListData) postHttpRequest(mContext, url, params, JSONHelper.BANK_LIST_DATA, true);
+        BankListData data = (BankListData) postHttpRequest(mContext, url, params, JSONHelper.BANK_LIST_DATA, false);
         return data;
     }
 
@@ -42,7 +43,7 @@ public class MyBankDao extends BaseDao {
     public IsFlagData saveBankData(Bank bank) {
         String url = ControlUrl.XC_BANK_SAVE_URL;
         String params = getParams(bank, "data");
-        IsFlagData data = (IsFlagData) postHttpRequest(mContext, url, params, JSONHelper.IS_FLAG_DATA, true);
+        IsFlagData data = (IsFlagData) postHttpRequest(mContext, url, params, JSONHelper.IS_FLAG_DATA, false);
         return data;
     }
 
@@ -87,9 +88,9 @@ public class MyBankDao extends BaseDao {
      * 申请体现
      * @return
      */
-    public MemberVOData applyWithDraw(){
+    public MemberVOData applyWithDraw(String memberId, BalanceRecord bankListData, String password){
          String url = ControlUrl.XC_APPLY_WITH_DRAW;
-         String params = "";
+         String params = "password="+password+"&memberId="+memberId+"&data="+getParams(bankListData,"data");
         MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_VO_DATA,false);
         return data;
     }
@@ -103,4 +104,18 @@ public class MyBankDao extends BaseDao {
         MemberRateVOListData data = (MemberRateVOListData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_RATE_LIST_DATA,true);
         return data;
     }
+
+    /**
+     * 获取会员详情
+     * @param memberId
+     * @return
+     */
+    public MemberVOData getMemberVOData(String memberId){
+        String url = ControlUrl.XC_MEMBER_INFO_URL;
+        String params = "memberId="+memberId;
+        MemberVOData data = (MemberVOData) postHttpRequest(mContext,url,params,JSONHelper.XC_MEMBER_VO_DATA,false);
+        return data;
+    }
+
+
 }

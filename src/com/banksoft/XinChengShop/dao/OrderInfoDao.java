@@ -17,7 +17,7 @@ public class OrderInfoDao extends BaseDao{
     public OrderInfoData getOrderInfoData(String orderId){
         String url = ControlUrl.XC_ORDER_INFO_URL;
         String params = "orderId="+orderId;
-        OrderInfoData data = (OrderInfoData) postHttpRequest(mContext,url,params, JSONHelper.XC_ORDER_INFO_DATA,true);
+        OrderInfoData data = (OrderInfoData) postHttpRequest(mContext,url,params, JSONHelper.XC_ORDER_INFO_DATA,false);
         return data;
     }
 }

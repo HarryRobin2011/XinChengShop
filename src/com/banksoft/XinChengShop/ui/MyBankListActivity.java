@@ -47,9 +47,20 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
         isSelect = getIntent().getBooleanExtra(IntentFlag.IS_SELECT,false);
         title.setText(R.string.my_bank_card);
         add.setVisibility(View.VISIBLE);
+        add.setText(R.string.add);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         add.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                new MyTask().execute(myBankDao);
+            }
+        }
     }
 
     @Override
@@ -67,6 +78,10 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
             case R.id.title_back_button:
                 finish();
                 break;
+            case R.id.titleRightButton:
+                Intent intent = new Intent(mContext,MyBankAddActivity.class);
+                startActivityForResult(intent,Activity.RESULT_FIRST_USER);
+                break;
         }
     }
 
@@ -81,7 +96,7 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
         }else{
             Intent intent = new Intent(mContext,MyBankEditActivity.class);
             intent.putExtra(IntentFlag.DATA, (Serializable) myBankListAdapter.dataList.get(position));
-            startActivity(intent);
+            startActivityForResult(intent,Activity.RESULT_FIRST_USER);
         }
 
     }
@@ -106,8 +121,11 @@ public class MyBankListActivity extends XCBaseActivity implements View.OnClickLi
                if(bankListData.isSuccess()){
                    if(myBankListAdapter == null){
                        myBankListAdapter = new MyBankListAdapter(mContext,bankListData.getData());
+                       mListView.setAdapter(myBankListAdapter);
+                   }else{
+                       myBankListAdapter.dataList = bankListData.getData();
+                       myBankListAdapter.notifyDataSetChanged();
                    }
-                   mListView.setAdapter(myBankListAdapter);
                }else{
                    alert(bankListData.getMsg().toString());
                }

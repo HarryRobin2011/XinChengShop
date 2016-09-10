@@ -129,6 +129,7 @@ public class MyBankAddActivity extends XCBaseActivity implements View.OnClickLis
         bank.setBankName(bankNameStr);
         bank.setName(nameStr);
         bank.setNo(cardNoStr);
+        bank.setAddress(openCardAddressStr);
         return bank;
     }
 }

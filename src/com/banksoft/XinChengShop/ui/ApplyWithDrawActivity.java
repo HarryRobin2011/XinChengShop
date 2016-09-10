@@ -10,6 +10,7 @@ import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MyBankDao;
 import com.banksoft.XinChengShop.entity.BalanceRecord;
 import com.banksoft.XinChengShop.entity.Bank;
+import com.banksoft.XinChengShop.entity.MemberVO;
 import com.banksoft.XinChengShop.model.BankListData;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -20,9 +21,9 @@ import java.math.BigDecimal;
 /**
  * Created by Robin on 2016/7/26.
  */
-public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClickListener{
+public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClickListener {
     private ImageView back;
-    private TextView title,name,no,account;
+    private TextView title, name, no, account;
     private EditText money;
     private Button ok;
     private MyBankDao myBankDao;
@@ -32,7 +33,9 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
     private LinearLayout contentLayout;
     private LinearLayout selectCardLayout;
     private LinearLayout addLayout;
+    private MemberVO memberVO;
     private ProgressBar progressBar;
+
     @Override
     protected void initContentView() {
         setContentView(R.layout.apply_with_draw_layout);
@@ -57,20 +60,22 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
 
     @Override
     protected void initData() {
+        memberVO = (MemberVO) getIntent().getSerializableExtra(IntentFlag.MEMBER);
         title.setText(R.string.with_draw);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         rightButton.setText(R.string.with_draw_tariff);
         rightButton.setVisibility(View.VISIBLE);
         rightButton.setOnClickListener(this);
+        money.setHint("最多可申请提现"+memberVO.getBalance()+"元");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Activity.RESULT_FIRST_USER){
-            if(resultCode == Activity.RESULT_OK){
-                if(data != null){
+        if (requestCode == Activity.RESULT_FIRST_USER) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
                     currentBank = (Bank) data.getSerializableExtra(IntentFlag.DATA);
                     showBankView(currentBank);
                 }
@@ -80,52 +85,68 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
 
     @Override
     protected void initOperate() {
-      addLayout.setOnClickListener(this);
-      BalanceRecord record = getBalanceRecord();
-        if(record != null){
-            if(myBankDao == null){
-                myBankDao = new MyBankDao(mContext);
-            }
+        addLayout.setOnClickListener(this);
+        rightButton.setOnClickListener(this);
+        selectCardLayout.setOnClickListener(this);
+        ok.setOnClickListener(this);
+        if (myBankDao == null) {
+            myBankDao = new MyBankDao(mContext);
         }
+        new MyBankList().execute(myBankDao);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_back_button:
                 finish();
                 break;
             case R.id.titleRightButton:
-                Intent intent = new Intent(mContext,WithDrawTariffActivity.class);
+                Intent intent = new Intent(mContext, WithDrawTariffActivity.class);
                 startActivity(intent);
                 break;
             case R.id.add_layout:
-                Intent bankListIntent = new Intent(mContext,MyBankListActivity.class);
-                bankListIntent.putExtra(IntentFlag.IS_SELECT,true);
+                Intent bankListIntent = new Intent(mContext, MyBankListActivity.class);
+                bankListIntent.putExtra(IntentFlag.IS_SELECT, true);
                 startActivityForResult(bankListIntent, Activity.RESULT_FIRST_USER);
+                break;
+            case R.id.ok:
+                BalanceRecord record = getBalanceRecord();
+                if (record != null) {
+                   showPayPasswordView();
+                }
+                break;
+            case R.id.select_bank_card:
+                Intent bankListIntent2 = new Intent(mContext, MyBankListActivity.class);
+                bankListIntent2.putExtra(IntentFlag.IS_SELECT, true);
+                startActivityForResult(bankListIntent2, Activity.RESULT_FIRST_USER);
                 break;
 
         }
     }
 
-    private BalanceRecord getBalanceRecord(){
-       if(currentBank == null){
-           alert(R.string.the_bank_no_empty);
-           return null;
-       }
-       String moneyStr = money.getText().toString();
+    private void showPayPasswordView() {
 
-        if(moneyStr.isEmpty()){
-          alert(R.string.money_no_empty);
-          return null;
-        }else if (moneyStr.equals("0")){
-           alert(R.string.money_no_zero);
+    }
+
+    private BalanceRecord getBalanceRecord() {
+        if (currentBank == null) {
+            alert(R.string.the_bank_no_empty);
+            return null;
+        }
+        String moneyStr = money.getText().toString();
+
+        if (moneyStr.isEmpty()) {
+            alert(R.string.money_no_empty);
+            return null;
+        } else if (moneyStr.equals("0")) {
+            alert(R.string.money_no_zero);
             return null;
         }
         BigDecimal moneyDecimal = new BigDecimal(moneyStr);
         BigDecimal balanceDecimal = new BigDecimal(member.getMember().getBalance());
 
-         if(moneyDecimal.compareTo(balanceDecimal) == 1){
+        if (moneyDecimal.compareTo(balanceDecimal) == 1) {
             alert(R.string.with_draw_money_greater_than_balance);
             return null;
         }
@@ -138,7 +159,13 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
         return balanceRecord;
     }
 
-    private class MyTask extends AsyncTask<MyBankDao,String,MemberVOData>{
+    private class MyTask extends AsyncTask<MyBankDao, String, MemberVOData> {
+        private BalanceRecord record;
+
+        public MyTask(BalanceRecord record) {
+            this.record = record;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -148,26 +175,27 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
 
         @Override
         protected MemberVOData doInBackground(MyBankDao... params) {
-            return params[0].applyWithDraw();
+            return params[0].applyWithDraw(member.getMember().getId(),record，);
         }
 
         @Override
         protected void onPostExecute(MemberVOData memberVOData) {
             super.onPostExecute(memberVOData);
-            if(memberVOData != null){
-                if(memberVOData.isSuccess()){
+            progressDialog.dismiss();
+            if (memberVOData != null) {
+                if (memberVOData.isSuccess()) {
                     alert(R.string.apply_with_draw_success);
                     finish();
-                }else{
+                } else {
                     alert(memberVOData.getMsg().toString());
                 }
-            }else{
+            } else {
                 alert(R.string.net_error);
             }
         }
     }
 
-    private class MyBankList extends AsyncTask<MyBankDao,String,BankListData>{
+    private class MyBankList extends AsyncTask<MyBankDao, String, BankListData> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -184,27 +212,27 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
             super.onPostExecute(bankListData);
             contentLayout.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
-            if(bankListData != null){
-                if(bankListData.isSuccess()){
-                    if(bankListData.getData().size() != 0){
+            if (bankListData != null) {
+                if (bankListData.isSuccess()) {
+                    if (bankListData.getData().size() != 0) {
                         selectCardLayout.setVisibility(View.VISIBLE);
                         addLayout.setVisibility(View.GONE);
                         currentBank = bankListData.getData().get(0);
                         showBankView(currentBank);
-                    }else{
+                    } else {
                         selectCardLayout.setVisibility(View.GONE);
                         addLayout.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
                     alert(bankListData.getMsg().toString());
                 }
-            }else{
+            } else {
                 alert(R.string.net_error);
             }
         }
     }
 
-    private void showBankView(Bank bank){
+    private void showBankView(Bank bank) {
         name.setText(bank.getBankName());
         no.setText(bank.getNo());
         account.setText(bank.getName());

@@ -117,7 +117,12 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
                 break;
             case R.id.shop_linker:
                 if(shopVO != null){
-                    CommonUtil.openQQ(mContext, shopVO.getQq());
+                    try {
+                        CommonUtil.openQQ(mContext, shopVO.getQq());
+                    } catch (Exception e) {
+                        alert(R.string.qq_not_installed);
+                        e.printStackTrace();
+                    }
                 }
                 break;
             case R.id.shop_introduction:

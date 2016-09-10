@@ -134,13 +134,12 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Activity.RESULT_FIRST_USER) {
-            if (data != null) {
-                float orderTotal = data.getFloatExtra(IntentFlag.ORDER_MONEY, 0F);
-                float expressMoney = data.getFloatExtra(IntentFlag.EXPRESS_MONEY, 0F);
-                orderVO.setTotalMoney(orderTotal);
-                orderVO.setExpressMoney(expressMoney);
-                showOrderInfoView(orderVO);
-            }
+           if(resultCode == Activity.RESULT_OK){
+               if(orderInfoDao == null){
+                   orderInfoDao = new OrderInfoDao(mContext);
+               }
+               new MyTask().execute(orderInfoDao);
+           }
         }
     }
 
@@ -182,7 +181,7 @@ public class SellerOrderInfoActivity extends XCBaseActivity implements View.OnCl
 
         contentLayout.setVisibility(View.VISIBLE);
         orderNo.setText("订单编号：" + orderVO.getNo());
-        shippingTelPhone.setText(orderVO.getTelephone());
+        shippingTelPhone.setText(CommonUtil.filteredNull(orderVO.getTelephone()));
         shipName.setText(orderVO.getUserName());
         shipAddress.setText(orderVO.getAddress());
         shopName.setText(orderVO.getShopName());

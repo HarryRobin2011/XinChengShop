@@ -50,6 +50,7 @@ public class MyBankEditActivity extends XCBaseActivity implements View.OnClickLi
     protected void initData() {
         bank = (Bank) getIntent().getSerializableExtra(IntentFlag.DATA);
         back.setVisibility(View.VISIBLE);
+        back.setOnClickListener(this);
         save.setVisibility(View.VISIBLE);
         title.setText(R.string.details);
         save.setText(R.string.manager);
@@ -65,6 +66,9 @@ public class MyBankEditActivity extends XCBaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.title_back_button:
+                finish();
+                break;
             case R.id.titleRightButton:
                showPopupWindows();
                 break;

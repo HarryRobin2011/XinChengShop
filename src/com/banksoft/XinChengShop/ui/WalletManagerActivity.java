@@ -1,20 +1,28 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.MyBankDao;
+import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 
 /**
  * Created by Robin on 2016/4/8.
  */
-public class WalletManagerActivity extends XCBaseActivity implements View.OnClickListener{
-    private LinearLayout memberBalanceLayout, memberScoreLayout,myBank,applyWithDraw;
+public class WalletManagerActivity extends XCBaseActivity implements View.OnClickListener {
+    private LinearLayout memberBalanceLayout, memberScoreLayout, myBank, applyWithDraw;
     private TextView title, moneyBalance, scoreBalance;
     private ImageView back;
+    private MyBankDao myBankDao;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void initContentView() {
@@ -54,26 +62,60 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_back_button:
-               finish();
+                finish();
                 break;
             case R.id.my_balance:
-                Intent balanceIntent = new Intent(mContext,MoneyBalanceActivity.class);
+                Intent balanceIntent = new Intent(mContext, MoneyBalanceActivity.class);
                 startActivity(balanceIntent);
                 break;
             case R.id.user_score:
-                Intent scoreIntent = new Intent(mContext,ScoreListActivity.class);
+                Intent scoreIntent = new Intent(mContext, ScoreListActivity.class);
                 startActivity(scoreIntent);
                 break;
             case R.id.my_bank:
-                Intent intent = new Intent(mContext,MyBankListActivity.class);
+                Intent intent = new Intent(mContext, MyBankListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.apply_with_draw:
-                Intent withDraw = new Intent(mContext,ApplyWithDrawActivity.class);
-                startActivity(withDraw);
+                if (myBankDao == null) {
+                    myBankDao = new MyBankDao(mContext);
+                }
+                new MyTask().execute(myBankDao);
                 break;
+        }
+    }
+
+    private class MyTask extends AsyncTask<MyBankDao, String, MemberVOData> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (progressDialog == null) {
+                progressDialog = ProgressDialog.show(WalletManagerActivity.this, getText(R.string.alert), getText(R.string.please_wait));
+            }
+        }
+
+        @Override
+        protected MemberVOData doInBackground(MyBankDao... params) {
+            return params[0].getMemberVOData(member.getMember().getId());
+        }
+
+        @Override
+        protected void onPostExecute(MemberVOData memberVOData) {
+            super.onPostExecute(memberVOData);
+            progressDialog.dismiss();
+            if (memberVOData != null) {
+                if (memberVOData.isSuccess()) {
+                    Intent intent = new Intent(mContext, ApplyWithDrawActivity.class);
+                    intent.putExtra(IntentFlag.MEMBER, memberVOData.getData());
+                    startActivity(intent);
+                } else {
+                    alert(memberVOData.getMsg().toString());
+                }
+            } else {
+                alert(R.string.net_error);
+            }
         }
     }
 }

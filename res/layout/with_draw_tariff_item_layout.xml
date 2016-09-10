@@ -7,14 +7,14 @@
               android:layout_width="match_parent"
               android:layout_height="@dimen/height_50"
               style="@style/text_style_3"
-              android:gravity="left"
+              android:gravity="left|center_vertical"
               android:layout_weight="1"
               android:layout_marginLeft="10.0dp"/>
     <TextView android:id="@id/tariff"
               android:layout_width="match_parent"
               android:layout_height="@dimen/height_50"
               style="@style/text_style_3"
-              android:gravity="left"
+              android:gravity="left|center_vertical"
               android:paddingLeft="10.0dp"
               android:layout_marginRight="10.0dp"
               android:layout_weight="1"/>

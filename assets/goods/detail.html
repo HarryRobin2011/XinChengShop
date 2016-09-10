@@ -80,8 +80,8 @@
             </div>
             <div class="shop-ct cell cell-8">
                 <div class="shop-t" id="shopName">苏泊尔炊具旗舰店</div>
-                <img src="images/telphone.png" id="telephone",width="25" height="25" style="margin-top: 10px">
-                <img src="images/qq.png" id="open_qq" width="25" height="25" style=" margin-left: 35px"  href="javascript:void(0)">
+                <img src="images/telphone.png" id="telephone",width="25" height="25" style="margin-top: 10px" onclick="callTelephone()">
+                <img src="images/qq.png" id="open_qq" width="25" height="25" style=" margin-left: 35px"  href="javascript:void(0)" onclick="openQQ()">
                 <div class="down-t">
                 </div>
             </div>
@@ -230,8 +230,16 @@
                 });
             });
 
+
+
         }
         return false;
+    }
+    function callTelephone() {
+        javascript:android.callPhone();
+    }
+    function openQQ() {
+        javascript:android.openQQ();
     }
 
 </script>

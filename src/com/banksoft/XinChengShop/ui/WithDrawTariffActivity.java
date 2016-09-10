@@ -1,21 +1,26 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.WithDrawTariffAdapter;
+import com.banksoft.XinChengShop.dao.MyBankDao;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 
 /**
  * Created by Robin on 2016/7/28.
  */
-public class WithDrawTariffActivity extends XCBaseActivity implements View.OnClickListener{
+public class WithDrawTariffActivity extends XCBaseActivity implements View.OnClickListener {
     private ImageView back;
     private ListView listView;
     private TextView title;
     private WithDrawTariffAdapter withDrawTariffAdapter;
+    private MyBankDao myBankDao;
+    private ProgressBar progressBar;
 
     @Override
     protected void initContentView() {
@@ -27,6 +32,7 @@ public class WithDrawTariffActivity extends XCBaseActivity implements View.OnCli
         back = (ImageView) findViewById(R.id.title_back_button);
         listView = (ListView) findViewById(R.id.list_view);
         title = (TextView) findViewById(R.id.titleText);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
@@ -37,15 +43,55 @@ public class WithDrawTariffActivity extends XCBaseActivity implements View.OnCli
 
     @Override
     protected void initOperate() {
-       back.setOnClickListener(this);
+        back.setOnClickListener(this);
+        if (myBankDao == null) {
+            myBankDao = new MyBankDao(mContext);
+        }
+        new MyTask().execute(myBankDao);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_back_button:
                 finish();
                 break;
         }
+    }
+
+    private class MyTask extends AsyncTask<MyBankDao, String, MemberRateVOListData> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected MemberRateVOListData doInBackground(MyBankDao... params) {
+            return params[0].getMemberRateVOListData(member.getMember().getId());
+        }
+
+        @Override
+        protected void onPostExecute(MemberRateVOListData memberRateVOListData) {
+            super.onPostExecute(memberRateVOListData);
+            progressBar.setVisibility(View.GONE);
+            if (memberRateVOListData != null) {
+                if (memberRateVOListData.isSuccess()) {
+                    showTariffView(memberRateVOListData);
+                } else {
+                    alert(memberRateVOListData.getMsg().toString());
+                }
+            } else {
+                alert(R.string.net_error);
+            }
+        }
+    }
+
+    private void showTariffView(MemberRateVOListData memberRateVOListData) {
+        if (withDrawTariffAdapter == null) {
+            withDrawTariffAdapter = new WithDrawTariffAdapter(mContext, memberRateVOListData.getData());
+        }
+        listView.setAdapter(withDrawTariffAdapter);
     }
 }
