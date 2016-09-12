@@ -18,7 +18,7 @@ import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
  * Created by Robin on 2016/4/8.
  */
 public class WalletManagerActivity extends XCBaseActivity implements View.OnClickListener {
-    private LinearLayout memberBalanceLayout, memberScoreLayout, myBank, applyWithDraw;
+    private LinearLayout memberBalanceLayout, memberScoreLayout, myBank, applyWithDraw,applyWithDrawHistory;
     private TextView title, moneyBalance, scoreBalance;
     private ImageView back;
     private MyBankDao myBankDao;
@@ -39,6 +39,7 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
         back = (ImageView) findViewById(R.id.title_back_button);
         myBank = (LinearLayout) findViewById(R.id.my_bank);
         applyWithDraw = (LinearLayout) findViewById(R.id.apply_with_draw);
+        applyWithDrawHistory = (LinearLayout) findViewById(R.id.apply_with_draw_histroy);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
         memberScoreLayout.setOnClickListener(this);
         myBank.setOnClickListener(this);
         applyWithDraw.setOnClickListener(this);
-
+        applyWithDrawHistory.setOnClickListener(this);
     }
 
     @Override
@@ -83,6 +84,9 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
                     myBankDao = new MyBankDao(mContext);
                 }
                 new MyTask().execute(myBankDao);
+                break;
+            case R.id.apply_with_draw_histroy:
+                Intent applyIntent = new Intent(mContext,ApplyWithDrawHistoryActivity.class);
                 break;
         }
     }

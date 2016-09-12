@@ -1,20 +1,21 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.WithDrawTariffAdapter;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MyBankDao;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+
+import java.io.Serializable;
 
 /**
  * Created by Robin on 2016/7/28.
  */
-public class WithDrawTariffActivity extends XCBaseActivity implements View.OnClickListener {
+public class WithDrawTariffActivity extends XCBaseActivity implements View.OnClickListener,AdapterView.OnItemClickListener{
     private ImageView back;
     private ListView listView;
     private TextView title;
@@ -44,6 +45,7 @@ public class WithDrawTariffActivity extends XCBaseActivity implements View.OnCli
     @Override
     protected void initOperate() {
         back.setOnClickListener(this);
+        listView.setOnItemClickListener(this);
         if (myBankDao == null) {
             myBankDao = new MyBankDao(mContext);
         }
@@ -57,6 +59,14 @@ public class WithDrawTariffActivity extends XCBaseActivity implements View.OnCli
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent();
+        intent.putExtra(IntentFlag.DATA, (Serializable) withDrawTariffAdapter.dataList.get(position));
+        setResult(100,intent);
+        finish();
     }
 
     private class MyTask extends AsyncTask<MyBankDao, String, MemberRateVOListData> {

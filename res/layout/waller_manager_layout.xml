@@ -95,6 +95,32 @@
                           android:layout_marginRight="10.0dp"/>
             </LinearLayout>
             <View style="@style/line2"/>
+            <LinearLayout android:id="@id/apply_with_draw_histroy"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/height_50"
+                          android:background="@drawable/button_white_bg"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal">
+                <ImageView android:layout_width="35.0dp"
+                           android:layout_height="35.0dp"
+                           android:src="@drawable/android_my_jd_wallet"
+                           android:paddingLeft="10.0dp"/>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="@string/apply_with_draw_history"
+                          style="@style/text_style_3"
+                          android:layout_weight="1"
+                          android:paddingLeft="10.0dp"/>
+                <TextView  android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           style="@style/text_style_3"
+                           android:layout_marginRight="10.0dp"/>
+                <TextView android:layout_width="15.0dp"
+                          android:layout_height="15.0dp"
+                          android:background="@drawable/settings_arrow"
+                          android:layout_marginRight="10.0dp"/>
+            </LinearLayout>
+            <View style="@style/line2"/>
             <LinearLayout android:id="@id/my_bank"
                           android:layout_width="match_parent"
                           android:layout_height="@dimen/height_50"

@@ -2,6 +2,8 @@ package com.banksoft.XinChengShop.utils;
 
 
 import com.banksoft.XinChengShop.entity.FoundPassword;
+import com.banksoft.XinChengShop.entity.Member;
+import com.banksoft.XinChengShop.entity.MemberRateVO;
 import com.banksoft.XinChengShop.model.*;
 import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.MemberRateVOListData;
@@ -72,6 +74,8 @@ public class JSONHelper {
     public static final Type BASE_DATA = new TypeToken<BaseData>(){}.getType();
     public static final Type FOUND_PASSWORD_DATA = new TypeToken<FoundPasswordData>(){}.getType();
     public static final Type SCORE_INFO_DATA = new TypeToken<ScoreProductData>(){}.getType();
+    public static final Type MEMBER = new TypeToken<Member>(){}.getType();
+    public static final Type XC_APPLY_WITH_DRAW_HISTORY_LIST_DATA = new TypeToken<WithDrawBalanceRecordData>(){}.getType();//提现记录列表
 
 
     public static String toJSONString(Object o){

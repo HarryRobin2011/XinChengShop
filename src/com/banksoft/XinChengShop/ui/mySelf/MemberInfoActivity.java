@@ -352,7 +352,7 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
                     data.setSuccess(true);
 
                      alert(R.string.update_success);
-                    saveLogin(data);
+                    saveLogin(data.getData());
                      setResult(Activity.RESULT_OK);
                     finish();
                 }else{

@@ -736,5 +736,12 @@
     <string name="express_money_no_empty">运费金额不能为空</string>
     <string name="update_order_success">修改价格成功</string>
     <string name="qq_not_installed">检测到您没有安装QQ，请先安装</string>
+    <string name="apple_with_draw">申请提现</string>
+    <string name="pleaet_select_rates">请选择提现费率</string>
+    <string name="apply_with_draw_history">提现记录</string>
+    <string name="with_draw_record">提现记录</string>
+    <string name="pay_cancel">取消支付</string>
+    <string name="pay_success">支付成功</string>
+    <string name="login_cancel">取消登录</string>
 
 </resources>

@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.entity;
 
+import com.banksoft.XinChengShop.entity.base.BaseEntity;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -8,7 +10,7 @@ package com.banksoft.XinChengShop.entity;
  * To change this template use File | Settings | File Templates.
  * 存放用户余额变化的记录表
  */
-public class BalanceRecord {
+public class BalanceRecord extends BaseEntity{
     private String id;
     private String no;
     private String siteId;

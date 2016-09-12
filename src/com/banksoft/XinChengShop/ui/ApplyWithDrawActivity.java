@@ -3,6 +3,8 @@ package com.banksoft.XinChengShop.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
@@ -10,10 +12,16 @@ import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MyBankDao;
 import com.banksoft.XinChengShop.entity.BalanceRecord;
 import com.banksoft.XinChengShop.entity.Bank;
+import com.banksoft.XinChengShop.entity.MemberRateVO;
 import com.banksoft.XinChengShop.entity.MemberVO;
 import com.banksoft.XinChengShop.model.BankListData;
+import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.ui.fragment.CheckPay2PasswordFragment;
+import com.banksoft.XinChengShop.ui.fragment.CheckPayPasswordFragment;
+import com.banksoft.XinChengShop.utils.CommonUtil;
+import com.banksoft.XinChengShop.utils.PopupWindowUtil;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
 import java.math.BigDecimal;
@@ -21,7 +29,7 @@ import java.math.BigDecimal;
 /**
  * Created by Robin on 2016/7/26.
  */
-public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClickListener {
+public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClickListener,CheckPay2PasswordFragment.CheckListener{
     private ImageView back;
     private TextView title, name, no, account;
     private EditText money;
@@ -35,6 +43,9 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
     private LinearLayout addLayout;
     private MemberVO memberVO;
     private ProgressBar progressBar;
+     private TextView rates;
+    private final int APPLY_WITH_DRAW_RATES = 100;
+    private MemberRateVO memberRateVo;
 
     @Override
     protected void initContentView() {
@@ -56,6 +67,7 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
         addLayout = (LinearLayout) findViewById(R.id.add_layout);
         selectCardLayout = (LinearLayout) findViewById(R.id.select_bank_card);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        rates = (TextView) findViewById(R.id.rates);
     }
 
     @Override
@@ -65,7 +77,7 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         rightButton.setText(R.string.with_draw_tariff);
-        rightButton.setVisibility(View.VISIBLE);
+        rightButton.setVisibility(View.GONE);
         rightButton.setOnClickListener(this);
         money.setHint("最多可申请提现"+memberVO.getBalance()+"元");
     }
@@ -80,6 +92,11 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
                     showBankView(currentBank);
                 }
             }
+        }else if(requestCode == APPLY_WITH_DRAW_RATES){//选择提现费率
+            if(data != null){
+                memberRateVo = (MemberRateVO) data.getSerializableExtra(IntentFlag.DATA);
+                rates.setText(memberRateVo.getRate()+"%");
+            }
         }
     }
 
@@ -88,6 +105,7 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
         addLayout.setOnClickListener(this);
         rightButton.setOnClickListener(this);
         selectCardLayout.setOnClickListener(this);
+        rates.setOnClickListener(this);
         ok.setOnClickListener(this);
         if (myBankDao == null) {
             myBankDao = new MyBankDao(mContext);
@@ -102,8 +120,7 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.titleRightButton:
-                Intent intent = new Intent(mContext, WithDrawTariffActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.add_layout:
                 Intent bankListIntent = new Intent(mContext, MyBankListActivity.class);
@@ -113,7 +130,7 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
             case R.id.ok:
                 BalanceRecord record = getBalanceRecord();
                 if (record != null) {
-                   showPayPasswordView();
+                   showPayPasswordView(record);
                 }
                 break;
             case R.id.select_bank_card:
@@ -121,12 +138,21 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
                 bankListIntent2.putExtra(IntentFlag.IS_SELECT, true);
                 startActivityForResult(bankListIntent2, Activity.RESULT_FIRST_USER);
                 break;
+            case R.id.rates:
+                Intent intent = new Intent(mContext,WithDrawTariffActivity.class);
+                startActivityForResult(intent,APPLY_WITH_DRAW_RATES);
+                break;
 
         }
     }
 
-    private void showPayPasswordView() {
-
+    private void showPayPasswordView(BalanceRecord balanceRecord) {
+        CheckPay2PasswordFragment checkPayPasswordFragment = new CheckPay2PasswordFragment();
+        checkPayPasswordFragment.setCheckListener(this);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentFlag.DATA,balanceRecord);
+        checkPayPasswordFragment.setArguments(bundle);
+        checkPayPasswordFragment.show(getSupportFragmentManager(),"CheckPay2PasswordFragment");
     }
 
     private BalanceRecord getBalanceRecord() {
@@ -142,6 +168,9 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
         } else if (moneyStr.equals("0")) {
             alert(R.string.money_no_zero);
             return null;
+        }else if(memberRateVo == null){
+            alert(R.string.pleaet_select_rates);
+            return null;
         }
         BigDecimal moneyDecimal = new BigDecimal(moneyStr);
         BigDecimal balanceDecimal = new BigDecimal(member.getMember().getBalance());
@@ -151,49 +180,86 @@ public class ApplyWithDrawActivity extends XCBaseActivity implements View.OnClic
             return null;
         }
         BalanceRecord balanceRecord = new BalanceRecord();
-        balanceRecord.setNo(currentBank.getNo());
         balanceRecord.setCreateTime(System.currentTimeMillis());
-        balanceRecord.setMemberAccount(member.getMember().getAccount());
+        balanceRecord.setMemberAccount(currentBank.getAccount());
+        balanceRecord.setWithdrawAccount(currentBank.getNo());
+        balanceRecord.setWithdrawName(currentBank.getName());
+        balanceRecord.setWithdrawBank(currentBank.getBankName());
+        balanceRecord.setWithdrawSubBank(currentBank.getAddress());
         balanceRecord.setMemberId(member.getMember().getId());
         balanceRecord.setMoney(Float.valueOf(moneyStr));
+        balanceRecord.setWithdrawRate(memberRateVo.getRate());
+        balanceRecord.setWithdrawRateName(memberRateVo.getName());
         return balanceRecord;
     }
+    /**
+     *     private String memberId;     会员id
+     private float money;      //提现金额
+     private String remark;
+     private String withdrawAccount;    //提现帐号(银行卡号)
+     private String memberAccount;   //会员帐号
+     private String withdrawName;        //开户人姓名
+     private float withdrawRate;     //提现费率
+     private String withdrawRateName;     //提现限制
+     private String withdrawBank;        //所属银行
+     private String withdrawSubBank;    //所属分行
 
-    private class MyTask extends AsyncTask<MyBankDao, String, MemberVOData> {
-        private BalanceRecord record;
+     */
 
-        public MyTask(BalanceRecord record) {
-            this.record = record;
-        }
+    /**
+     * 支付是否成功
+     * @param success
+     * @param memberVO
+     */
+    @Override
+    public void isSuccess(boolean success, MemberVO memberVO) {
+          if(success){
+              alert(R.string.apply_with_draw_success);
+//              member.setMember(memberVO);
+//              saveLogin(member);
+              finish();
+          }else{
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new MyProgressDialog(ApplyWithDrawActivity.this);
-            progressDialog.showDialog(R.string.please_wait);
-        }
-
-        @Override
-        protected MemberVOData doInBackground(MyBankDao... params) {
-            return params[0].applyWithDraw(member.getMember().getId(),record，);
-        }
-
-        @Override
-        protected void onPostExecute(MemberVOData memberVOData) {
-            super.onPostExecute(memberVOData);
-            progressDialog.dismiss();
-            if (memberVOData != null) {
-                if (memberVOData.isSuccess()) {
-                    alert(R.string.apply_with_draw_success);
-                    finish();
-                } else {
-                    alert(memberVOData.getMsg().toString());
-                }
-            } else {
-                alert(R.string.net_error);
-            }
-        }
+          }
     }
+//
+//    private class MyTask extends AsyncTask<MyBankDao, String, MemberVOData> {
+//        private BalanceRecord record;
+//        private String password;
+//
+//        public MyTask(BalanceRecord record,String password) {
+//            this.record = record;
+//            this.password = password;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            progressDialog = new MyProgressDialog(ApplyWithDrawActivity.this);
+//            progressDialog.showDialog(R.string.please_wait);
+//        }
+//
+//        @Override
+//        protected MemberVOData doInBackground(MyBankDao... params) {
+//            return params[0].applyWithDraw(member.getMember().getId(),record,password);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(MemberVOData memberVOData) {
+//            super.onPostExecute(memberVOData);
+//            progressDialog.dismiss();
+//            if (memberVOData != null) {
+//                if (memberVOData.isSuccess()) {
+//                    alert(R.string.apply_with_draw_success);
+//                    finish();
+//                } else {
+//                    alert(memberVOData.getMsg().toString());
+//                }
+//            } else {
+//                alert(R.string.net_error);
+//            }
+//        }
+//    }
 
     private class MyBankList extends AsyncTask<MyBankDao, String, BankListData> {
         @Override

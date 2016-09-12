@@ -114,7 +114,10 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-
+            if(loginDao == null){
+                loginDao = new LoginDao(mContext);
+            }
+           // new ThirdLogin().execute(loginDao);
         }
 
         @Override
@@ -124,7 +127,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+            Toast.makeText( getApplicationContext(), R.string.login_cancel, Toast.LENGTH_SHORT).show();
         }
     };
     /** delauth callback interface**/
@@ -300,7 +303,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             if (memberData != null) {
                 if (memberData.isSuccess()) {
                     mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, memberData.getData().getMember().getId()));
-                    saveLogin(memberData);
+                    saveLogin(memberData.getData());
                     setResult(RESULT_OK);//返回登陆成功状态
                     CommonUtil.operationKeyboard(getApplicationContext());
                     finish();
@@ -362,7 +365,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             super.onPostExecute(memberData);
             if (memberData != null) {
                 if (memberData.isSuccess()) {
-                    saveLogin(memberData);
+                    saveLogin(memberData.getData());
                     setResult(Activity.RESULT_OK);
                     finish();
                 } else {

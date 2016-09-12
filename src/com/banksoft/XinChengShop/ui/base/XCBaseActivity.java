@@ -128,7 +128,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
         if (memberJson.equals("") || memberJson.equals("")) {
             return false;
         } else {
-            member = ((MemberData)JSONHelper.fromJSONObject(memberJson,JSONHelper.MEMBER_DATA)).getData();
+            member =  JSONHelper.fromJSONObject(memberJson,JSONHelper.MEMBER);
             return true;
         }
     }
@@ -138,8 +138,8 @@ public abstract class XCBaseActivity extends FragmentActivity {
         return isGuide;
     }
 
-    public void saveLogin(MemberData memberData) {
-        preferences.edit().putString(SharedPreTag.MEMBER, JSONHelper.toJSONString(memberData)).commit();
+    public void saveLogin(Member member) {
+        preferences.edit().putString(SharedPreTag.MEMBER, JSONHelper.toJSONString(member)).commit();
     }
 
 

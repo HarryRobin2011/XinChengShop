@@ -49,6 +49,27 @@ public class PopupWindowUtil {
         window.setOnDismissListener(new PopwindowDismissListener());
     }
 
+    public void showPopuWindowMenu(){
+        window = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+        window.setFocusable(true);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        // ColorDrawable dw = new ColorDrawable(00000000);
+        window.setBackgroundDrawable(dw);
+        //window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.PopupWindowAnimation);
+        window.showAtLocation(parentView,
+                Gravity.CENTER, 0, 0);
+        window.setOnDismissListener(new PopwindowDismissListener());
+    }
+
     public void dismiss() {
         if(window.isShowing()){
             window.dismiss();
