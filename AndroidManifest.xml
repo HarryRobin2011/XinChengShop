@@ -107,8 +107,7 @@
                   android:theme="@style/StyledIndicators"/>
         <activity android:name=".ui.localservice.LocalServiceMainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.localservice.LocalServiceInfoActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.SearchAutoCompleteActivity" android:screenOrientation="portrait"
-                  android:launchMode="singleTop"/>
+        <activity android:name=".ui.SearchAutoCompleteActivity" android:screenOrientation="portrait" android:noHistory="true"/>
         <activity android:name=".ui.MipcaActivityCapture" android:screenOrientation="portrait"/>
         <activity android:name=".ui.AssociatedActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.WalletManagerActivity" android:screenOrientation="portrait"/>

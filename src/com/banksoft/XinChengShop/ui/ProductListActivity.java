@@ -3,6 +3,7 @@ package com.banksoft.XinChengShop.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -75,7 +76,6 @@ public class ProductListActivity extends XCBaseActivity implements View.OnClickL
         shopServerType = getIntent().getExtras().getString(IntentFlag.SHOP_SERVER_TYPE, "");
         titleName = getIntent().getStringExtra(IntentFlag.TITLE);
         recommend = getIntent().getBooleanExtra(IntentFlag.RECOMMEND,true);
-
 
         searchEdit.setText(titleName);
         searchEdit.setOnClickListener(new View.OnClickListener() {

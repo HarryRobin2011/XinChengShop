@@ -584,4 +584,6 @@
     <item name="order_updata" type="id">order_updata</item>
     <item name="apply_with_draw_histroy" type="id">apply_with_draw_histroy</item>
     <item name="rates" type="id">rates</item>
+    <item name="search_type" type="id">search_type</item>
+    <item name="product" type="id">product</item>
 </resources>

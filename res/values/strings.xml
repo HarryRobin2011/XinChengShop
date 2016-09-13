@@ -466,7 +466,7 @@
     <string name="sentiment_hight">人气最高</string>
     <string name="sales_preferred">销量优先</string>
     <string name="check_the_number">√</string>
-    <string name="please_input_shop_name">请输入店铺名，商品名</string>
+    <string name="please_input_shop_name">请输入店铺名称</string>
     <string name="take_out">外卖</string>
     <string name="location_ing">正在定位...</string>
     <string name="no_data">暂无数据</string>
@@ -743,5 +743,7 @@
     <string name="pay_cancel">取消支付</string>
     <string name="pay_success">支付成功</string>
     <string name="login_cancel">取消登录</string>
+    <string name="product">商品</string>
+    <string name="clear_history_search">清空历史搜索</string>
 
 </resources>

@@ -116,11 +116,6 @@ public class XCMainActivity extends XCBaseActivity {
     protected void initView() {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         tabFragment = (TabBarFragment) getSupportFragmentManager().findFragmentById(R.id.tab_fragment);
-//        leftBtn = (Button) findViewById(R.id.titleLeftButton);
-//        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
-//        rightBtn = (Button) findViewById(R.id.titleRightButton);
-//        title = (TextView) findViewById(R.id.titleText);
-//        backGround = (ImageView) findViewById(R.id.titleBg);
     }
 
     @Override

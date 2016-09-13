@@ -40,10 +40,15 @@ public class ShopListFragment extends XCBaseListFragment{
 
     @Override
     public void request() {
-        type = getArguments().getString(IntentFlag.SHOP_TYPE, ShopType.SHOP_SALE.name());
+        type = getArguments().getString(IntentFlag.SHOP_TYPE,"");
         no = getArguments().getString(IntentFlag.NO,"");
         url = ControlUrl.XC_SHOP_LIST_URL;
-        params = "shopSeverType="+type+"&no="+no;
+        if(type != null && !"".equals(type)){
+            params += "shopSeverType="+type;
+        }
+        if(no != null && !"".equals(no)){
+            params += "&no="+no;
+        }
         jsonType = JSONHelper.SHOP_LIST_DATA;
         bailaAdapter = new ShopListAdapter(mContext,new ArrayList());
         setListDao();
