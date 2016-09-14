@@ -44,7 +44,7 @@ public class ShopListFragment extends XCBaseListFragment{
         no = getArguments().getString(IntentFlag.NO,"");
         url = ControlUrl.XC_SHOP_LIST_URL;
         if(type != null && !"".equals(type)){
-            params += "shopSeverType="+type;
+            params += "shopServerType="+type;
         }
         if(no != null && !"".equals(no)){
             params += "&no="+no;

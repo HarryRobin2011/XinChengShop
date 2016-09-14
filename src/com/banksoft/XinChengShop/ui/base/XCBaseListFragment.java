@@ -31,7 +31,7 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
     public boolean cacheFlag = false;
     public View nullPager;
     public String url;
-    public String params;
+    public String params = "";
     public Type jsonType;
 
     private boolean firstStart = true;

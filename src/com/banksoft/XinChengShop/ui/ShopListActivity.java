@@ -46,7 +46,7 @@ public class ShopListActivity extends XCBaseActivity implements View.OnClickList
             shopListFragment = new ShopListFragment();
         }
         Bundle bundle = new Bundle();
-        bundle.putSerializable(IntentFlag.SHOP_SERVER_TYPE,shopType);
+        bundle.putSerializable(IntentFlag.SHOP_TYPE,shopType);
         bundle.putSerializable(IntentFlag.NO,no);
         shopListFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content,shopListFragment).commit();

@@ -124,7 +124,7 @@ public class TakeOutShopListFragment extends XCBaseListFragment implements Adapt
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, ShopListActivity.class);
                 intent.putExtra(IntentFlag.TITLE,shopServerTypeData.getData().get(position).getName());
-                intent.putExtra(IntentFlag.SHOP_TYPE,ShopType.SHOP_SERVER);
+                intent.putExtra(IntentFlag.SHOP_TYPE,ShopType.SHOP_SERVER.name());
                 intent.putExtra(IntentFlag.NO,shopServerTypeData.getData().get(position).getNo());
                 startActivity(intent);
             }
