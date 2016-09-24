@@ -24,6 +24,12 @@ public class TimeSelectFragment extends DialogFragment implements View.OnClickLi
     private long currentTime;
     private OnSelectTimeListener onSelectTimeListener;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL,R.style.Theme_picker);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

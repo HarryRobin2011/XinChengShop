@@ -2,8 +2,6 @@ package com.banksoft.XinChengShop.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,18 +13,14 @@ import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.PopupWindowUtil;
-import com.banksoft.XinChengShop.widget.ClearEditText;
-import com.banksoft.XinChengShop.widget.XListView;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static android.R.attr.name;
-
 /**
  * Created by Robin on 2016/3/31.
  */
-public class SearchAutoCompleteActivity extends XCBaseActivity implements AdapterView.OnItemClickListener,View.OnClickListener{
+public class SearchAutoCompleteActivity extends XCBaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
     private ListView listView;
     private EditText searchEdit;
     private TextView searchbtn;
@@ -40,28 +34,18 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
     private Button searchType;
     private SearchType selectType = SearchType.PRODUCT;// 搜索类型
     private PopupWindowUtil popupWindowUtil;
-//    private Handler mHandler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what){
-//                case 0:
-//                    CommonUtil.operationKeyboard(getApplicationContext());
-//                    break;
-//            }
-//        }
-//    };
+    private boolean editFlag = false;
 
     @Override
     protected void initContentView() {
         setContentView(R.layout.search_auto_complete_layout);
-    //    mHandler.sendEmptyMessageDelayed(0,500);
+        //    mHandler.sendEmptyMessageDelayed(0,500);
     }
 
     /**
      * 显示ListView
      */
-    private void showListView(){
+    private void showListView() {
         // 获取搜索记录文件内容
         SharedPreferences sp = getSharedPreferences("search_history", 0);
         String history = sp.getString("history", "|");
@@ -77,7 +61,6 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
                 dataList.add(his);
             }
             searchAutoCompleteAdapter = new SearchAutoCompleteAdapter(mContext, dataList);
-
 
 
             listView.addHeaderView(headView);
@@ -96,12 +79,12 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
         back = (ImageView) findViewById(R.id.title_back_button);
         searchType = (Button) findViewById(R.id.search_type);
 
-        headView = LayoutInflater.from(mContext).inflate(R.layout.search_auto_complete__item_layout,null);
+        headView = LayoutInflater.from(mContext).inflate(R.layout.search_auto_complete__item_layout, null);
         headTitle = (TextView) headView.findViewById(R.id.name);
         headTitle.setText(R.string.histroy_record);
         headTitle.setTextColor(getResources().getColor(R.color.text_black));
 
-        footerView = LayoutInflater.from(mContext).inflate(R.layout.search_auto_complete__item_foot_layout,null);
+        footerView = LayoutInflater.from(mContext).inflate(R.layout.search_auto_complete__item_foot_layout, null);
         footerTitle = (TextView) footerView.findViewById(R.id.name);
         footerTitle.setOnClickListener(this);
     }
@@ -119,26 +102,35 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
         searchbtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-             finish();
+                if(editFlag){
+                    CommonUtil.operationKeyboard(getApplicationContext());
+                }
+                finish();
             }
 
+        });
+        searchEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editFlag = true;
+            }
         });
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // TODO Auto-generated method stub
                     String searchName = searchEdit.getText().toString().trim();
-                    if(searchName.equals("")){
+                    if (searchName.equals("")) {
                         alert(R.string.search_name_no_empty);
-                    }else{
-                        if(SearchType.PRODUCT == selectType){
-                            Intent intent = new Intent(mContext,ProductListActivity.class);
-                            intent.putExtra(IntentFlag.NAME,searchName);
+                    } else {
+                        if (SearchType.PRODUCT == selectType) {
+                            Intent intent = new Intent(mContext, ProductListActivity.class);
+                            intent.putExtra(IntentFlag.NAME, searchName);
                             startActivity(intent);
-                        }else{
-                            Intent intent = new Intent(mContext,ShopListActivity.class);
-                            intent.putExtra(IntentFlag.TITLE,searchName);
+                        } else {
+                            Intent intent = new Intent(mContext, ShopListActivity.class);
+                            intent.putExtra(IntentFlag.TITLE, searchName);
                             startActivity(intent);
                         }
 
@@ -152,22 +144,22 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
         searchType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(popupWindowUtil != null && popupWindowUtil.isShowing()){
+                if (popupWindowUtil != null && popupWindowUtil.isShowing()) {
                     popupWindowUtil.dismiss();
-                }else{
-                 showPopuMenu();
+                } else {
+                    showPopuMenu();
                 }
             }
         });
     }
 
-    private void showPopuMenu(){
-        View view = LayoutInflater.from(mContext).inflate(R.layout.search_auto_type_layout,null);
+    private void showPopuMenu() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.search_auto_type_layout, null);
         RadioGroup group = (RadioGroup) view.findViewById(R.id.search_type);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.product:
                         popupWindowUtil.dismiss();
                         searchEdit.setHint(R.string.please_input_product_name);
@@ -182,7 +174,7 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
                 searchType.setText(selectType.name);
             }
         });
-        popupWindowUtil = new PopupWindowUtil(SearchAutoCompleteActivity.this,view,searchType);
+        popupWindowUtil = new PopupWindowUtil(SearchAutoCompleteActivity.this, view, searchType);
         popupWindowUtil.showPopuWindowMenuDropDown();
     }
 
@@ -195,7 +187,7 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
 
         // 利用StringBuilder.append新增内容，逗号便于读取内容时用逗号拆分开
         StringBuilder builder = new StringBuilder(old_text);
-        builder.insert(0,text+"|");
+        builder.insert(0, text + "|");
 
         // 判断搜索内容是否已经存在于历史文件，已存在则不重复添加
         if (!old_text.contains(text + "|")) {
@@ -223,35 +215,36 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String searchName = (String) searchAutoCompleteAdapter.getItem(position-1);
-        if(SearchType.PRODUCT == selectType){
-            Intent intent = new Intent(mContext,ProductListActivity.class);
-            intent.putExtra(IntentFlag.NAME,searchName);
+        String searchName = (String) searchAutoCompleteAdapter.getItem(position - 1);
+        if (SearchType.PRODUCT == selectType) {
+            Intent intent = new Intent(mContext, ProductListActivity.class);
+            intent.putExtra(IntentFlag.NAME, searchName);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(mContext,ShopListActivity.class);
-            intent.putExtra(IntentFlag.TITLE,searchName);
+        } else {
+            Intent intent = new Intent(mContext, ShopListActivity.class);
+            intent.putExtra(IntentFlag.TITLE, searchName);
             startActivity(intent);
         }
     }
 
     @Override
     public void onClick(View v) {
-       switch (v.getId()){
-           case R.id.name:
-               cleanHistory();
-               break;
-           case R.id.cancel:
-               finish();
-               break;
-       }
+        switch (v.getId()) {
+            case R.id.name:
+                cleanHistory();
+                break;
+            case R.id.cancel:
+                finish();
+                break;
+        }
     }
 
-    private enum SearchType{
+    private enum SearchType {
         PRODUCT("商品"),
         SHOP("店铺");
         private String name;
-        private SearchType(String name){
+
+        private SearchType(String name) {
             this.name = name;
         }
     }
@@ -259,14 +252,17 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(popupWindowUtil != null && popupWindowUtil.isShowing()){
+        if (popupWindowUtil != null && popupWindowUtil.isShowing()) {
             popupWindowUtil.dismiss();
+        }
+        if(editFlag){
+           CommonUtil.operationKeyboard(getApplicationContext());
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-      //  CommonUtil.operationKeyboard(getApplicationContext());
+        //  CommonUtil.operationKeyboard(getApplicationContext());
     }
 }

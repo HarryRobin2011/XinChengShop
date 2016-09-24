@@ -71,4 +71,14 @@ public class Check{
         return telPhone.replace("+86","");
     }
 
+    /**
+     * 匹配中国邮政编码
+     * @param postCode 邮政编码
+     * @return 验证成功返回true，验证失败返回false
+     */
+    public static boolean isPostCode(String postCode){
+        String reg = "[1-9]\\d{5}";
+        return Pattern.matches(reg, postCode);
+    }
+
 }

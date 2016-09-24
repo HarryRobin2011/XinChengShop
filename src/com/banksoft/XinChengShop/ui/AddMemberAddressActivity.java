@@ -13,6 +13,8 @@ import com.banksoft.XinChengShop.dao.AddressMemberDao;
 import com.banksoft.XinChengShop.entity.MemberAddressVO;
 import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.Check;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
 /**
@@ -174,6 +176,12 @@ public class AddMemberAddressActivity extends XCBaseActivity implements View.OnC
             return false;
         }else if(region == null){
             mHandler.sendMessage(mHandler.obtainMessage(0,getText(R.string.please_select_area)));
+            return false;
+        }else if(!Check.isCellphone(add_address_telPhone.getText().toString())){
+            mHandler.sendMessage(mHandler.obtainMessage(0,getText(R.string.telphone_format_error)));
+             return false;
+        }else if(!Check.isPostCode(add_address_post_code.getText().toString())){
+            mHandler.sendMessage(mHandler.obtainMessage(0,getText(R.string.post_code_format_error)));
             return false;
         }
         return true;

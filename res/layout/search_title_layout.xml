@@ -18,14 +18,14 @@
                   android:background="@drawable/edit_text_bg"
                   android:orientation="horizontal">
         <Button android:id="@id/search_type"
-        android:layout_width="@dimen/height_50"
-        android:layout_height="match_parent"
+                android:layout_width="@dimen/height_50"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10.0dp"
-        style="@style/text_style_3"
-        android:gravity="center"
+                style="@style/text_style_3"
+                android:gravity="center"
                 android:background="@color/white"
                 android:drawableRight="@drawable/btn_title_down"
-        android:text="@string/product"/>
+                android:text="@string/product"/>
         <com.banksoft.XinChengShop.widget.ClearEditText
                 android:id="@id/search_edit"
                 android:layout_width="0dp"
@@ -37,16 +37,17 @@
                 android:cursorVisible="true"
                 android:singleLine="true"
                 android:imeOptions="actionSearch"
+                android:focusable="true"
                 android:background="@drawable/edit_text_white_bg"
                 android:hint="@string/please_input_product_name"/>
     </LinearLayout>
 
     <TextView android:id="@id/search"
-            android:layout_width="@dimen/height_50"
-            android:layout_marginLeft="10.0dp"
-            style="@style/text_style_3"
-            android:text="@string/cancel"
-            android:gravity="center"
-            android:layout_marginRight="5.0dp"
-            android:layout_height="@dimen/height_30"/>
+              android:layout_width="@dimen/height_50"
+              android:layout_marginLeft="10.0dp"
+              style="@style/text_style_3"
+              android:text="@string/cancel"
+              android:gravity="center"
+              android:layout_marginRight="5.0dp"
+              android:layout_height="@dimen/height_30"/>
 </LinearLayout>

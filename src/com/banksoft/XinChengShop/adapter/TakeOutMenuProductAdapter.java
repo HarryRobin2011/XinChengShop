@@ -65,6 +65,7 @@ public class TakeOutMenuProductAdapter extends BaseMyAdapter implements View.OnC
                 if (productMap != null) {//购物车有了
                     if (num == 0) {// 产品数量变为0
                         fragment.cartMap.remove(shopProductListVO.getId());
+                        fragment.setDataNum(fragment.cartMap);
                         return;
                     }
                     productMap.put(MapFlag.DATA_0, shopProductListVO);

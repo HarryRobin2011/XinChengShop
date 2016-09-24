@@ -29,7 +29,7 @@
     <style name="AppTheme" parent="android:Theme.Light">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:splitMotionEvents">true</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="PopupWindowAnimation">
@@ -299,6 +299,14 @@
         <item name="android:background">#FFCCCCCC</item>
         <item name="fadeLength">1000</item>
         <item name="fadeDelay">1000</item>
+    </style>
+
+    <style name="Theme.picker" parent="android:Theme.Holo.Light">
+        <item name="android:editTextStyle">@style/Widget.EditText.White</item>
+    </style>
+
+    <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/bg_red</item>
     </style>
 
 

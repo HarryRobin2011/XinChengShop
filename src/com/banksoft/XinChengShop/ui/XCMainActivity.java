@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
@@ -41,6 +42,8 @@ public class XCMainActivity extends XCBaseActivity {
     private Toast toast;
 
     public TabBarFragment tabFragment;
+
+    private FrameLayout mFragmentLayout;
 
 
     private SharedPreferences pushSp;
@@ -80,14 +83,14 @@ public class XCMainActivity extends XCBaseActivity {
         new UpdateUtil(this, false).isUpdate();
         Set<String> tag = new LinkedHashSet<>();
         tag.add("PushOperation_Recomend");
-        JPushInterface.setAliasAndTags(getApplicationContext(),null, tag, mTagsCallback);
+        JPushInterface.setAliasAndTags(getApplicationContext(), null, tag, mTagsCallback);
 
-        if(isLogin()){
-            JPushInterface.setAliasAndTags(getApplicationContext(),member.getMember().getId(),null,mAliasCallback);
+        if (isLogin()) {
+            JPushInterface.setAliasAndTags(getApplicationContext(), member.getMember().getId(), null, mAliasCallback);
         }
     }
 
-    public static InfoValue getDataList(HashMap<String,HashMap<String,String>> poorMap,String name){
+    public static InfoValue getDataList(HashMap<String, HashMap<String, String>> poorMap, String name) {
         InfoValue dataInfo = new InfoValue();
         dataInfo.setName(name);
         dataInfo.setIsLeaf(false);
@@ -115,7 +118,8 @@ public class XCMainActivity extends XCBaseActivity {
     @Override
     protected void initView() {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        tabFragment = (TabBarFragment) getSupportFragmentManager().findFragmentById(R.id.tab_fragment);
+        tabFragment = new TabBarFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.tab_fragment, tabFragment).commit();
     }
 
     @Override
@@ -164,7 +168,7 @@ public class XCMainActivity extends XCBaseActivity {
 
         @Override
         public void gotResult(int code, String alias, Set<String> tags) {
-            String logs ;
+            String logs;
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";
@@ -188,7 +192,7 @@ public class XCMainActivity extends XCBaseActivity {
 
         @Override
         public void gotResult(int code, String alias, Set<String> tags) {
-            String logs ;
+            String logs;
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";

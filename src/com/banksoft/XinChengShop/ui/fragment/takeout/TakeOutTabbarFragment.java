@@ -45,6 +45,8 @@ public class TakeOutTabbarFragment extends Fragment{
 
     private FragmentTransaction fragmentTransaction;
 
+    private OnTabSelectListener onTabSelectListener;
+
 
 
     @Override
@@ -68,6 +70,10 @@ public class TakeOutTabbarFragment extends Fragment{
     public void onActivityCreated(Bundle paramBundle) {
         super.onActivityCreated(paramBundle);
         setRetainInstance(true);
+    }
+
+    public void setOnTabSelectListener(OnTabSelectListener onTabSelectListener) {
+        this.onTabSelectListener = onTabSelectListener;
     }
 
     private void init(View mainView) {
@@ -112,6 +118,7 @@ public class TakeOutTabbarFragment extends Fragment{
 
     public void onTabSelected(int position) {
         baseFragment = (XCBaseFragment) viewHashMap.get(position);
+        onTabSelectListener.onTabSelect(position);
         switch (position) {
             case 0:
                 this.tab_one.setImageResource(R.drawable.guide_home_on);
@@ -191,5 +198,9 @@ public class TakeOutTabbarFragment extends Fragment{
     public void onResume() {
 
         super.onResume();
+    }
+
+    public interface OnTabSelectListener{
+        public void onTabSelect(int position);
     }
 }

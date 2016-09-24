@@ -161,6 +161,7 @@ public class CommonUtil {
         m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+
     public static void openQQ(Context context,String s) throws Exception{
         if(s == null || "".equals(s)){
             Toast.makeText(context,context.getText(R.string.qq_empty).toString(),Toast.LENGTH_SHORT).show();

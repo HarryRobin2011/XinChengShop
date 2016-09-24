@@ -152,7 +152,12 @@ public class TakeOutMenuFragment extends XCBaseFragment implements AdapterView.O
                 submitOrder.setText(R.string.settlement);
                 break;
         }
-        cartMoney.setText(totalDecimal.toString() + "元");
+        if(totalDecimal.compareTo(new BigDecimal(0))==0){
+            cartMoney.setText("");
+        }else{
+            cartMoney.setText(totalDecimal.toString() + "元");
+        }
+
     }
 
     @Override

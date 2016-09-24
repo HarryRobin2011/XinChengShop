@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by harry_robin on 16/3/17.
  */
-public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopListFragment.LocationListener {
+public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopListFragment.LocationListener,TakeOutTabbarFragment.OnTabSelectListener {
     public LinearLayout nearbyLayout;
     public TextView nearbyName;
     public ImageView back;
@@ -38,6 +38,7 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
         bgImage = (ImageView) findViewById(R.id.titleBg);
         title = (TextView) findViewById(R.id.titleText);
         takeOutTabbarFragment = (TakeOutTabbarFragment) getSupportFragmentManager().findFragmentById(R.id.take_tab_fragment);
+        takeOutTabbarFragment.setOnTabSelectListener(this);
     }
 
     @Override
@@ -89,4 +90,24 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
 
     }
 
+    @Override
+    public void onTabSelect(int position) {
+        switch (position){
+            case 0:
+                nearbyName.setVisibility(View.VISIBLE);
+                title.setVisibility(View.GONE);
+                break;
+            case 1:
+                nearbyName.setVisibility(View.GONE);
+                title.setVisibility(View.VISIBLE);
+                title.setText(R.string.order);
+                break;
+            case 2:
+                nearbyName.setVisibility(View.GONE);
+                title.setVisibility(View.VISIBLE);
+                title.setText(R.string.my_self);
+                break;
+
+        }
+    }
 }
