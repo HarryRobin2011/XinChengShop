@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by harry_robin on 16/3/17.
  */
-public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopListFragment.LocationListener,TakeOutTabbarFragment.OnTabSelectListener {
+public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopListFragment.LocationListener, TakeOutTabbarFragment.OnTabSelectListener {
     public LinearLayout nearbyLayout;
     public TextView nearbyName;
     public ImageView back;
@@ -37,8 +37,8 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
         back = (ImageView) findViewById(R.id.title_back_button);
         bgImage = (ImageView) findViewById(R.id.titleBg);
         title = (TextView) findViewById(R.id.titleText);
-        takeOutTabbarFragment = (TakeOutTabbarFragment) getSupportFragmentManager().findFragmentById(R.id.take_tab_fragment);
-        takeOutTabbarFragment.setOnTabSelectListener(this);
+        takeOutTabbarFragment = TakeOutTabbarFragment.newInstance(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.take_tab_fragment, takeOutTabbarFragment).commit();
     }
 
     @Override
@@ -51,12 +51,12 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
 
     @Override
     protected void initOperate() {
-       back.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               setMyFragment();
-           }
-       });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setMyFragment();
+            }
+        });
     }
 
     @Override
@@ -65,13 +65,15 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
         setMyFragment();
     }
 
-    private void setMyFragment(){}{
-        if(takeOutTabbarFragment != null && takeOutTabbarFragment.currentFragment != null){
-            if(takeOutTabbarFragment.currentFragment.getClass().equals(TakeOutShopListFragment.class)){
-                finish();
-            }else{
-                takeOutTabbarFragment.onTabSelected(0);
+    private void setMyFragment() {
+    }
 
+    {
+        if (takeOutTabbarFragment != null && takeOutTabbarFragment.currentFragment != null) {
+            if (takeOutTabbarFragment.currentFragment.getClass().equals(TakeOutShopListFragment.class)) {
+                finish();
+            } else {
+                takeOutTabbarFragment.onTabSelected(0);
             }
         }
 
@@ -79,12 +81,13 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
 
     /**
      * 定位成功
+     *
      * @param location
      */
     @Override
     public void location(BDLocation location) {
         List<Poi> poiList = location.getPoiList();
-        if(poiList.size() != 0){
+        if (poiList.size() != 0) {
             nearbyName.setText(poiList.get(0).getName());
         }
 
@@ -92,17 +95,20 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
 
     @Override
     public void onTabSelect(int position) {
-        switch (position){
+        switch (position) {
             case 0:
+                nearbyLayout.setVisibility(View.VISIBLE);
                 nearbyName.setVisibility(View.VISIBLE);
                 title.setVisibility(View.GONE);
                 break;
             case 1:
+                nearbyLayout.setVisibility(View.GONE);
                 nearbyName.setVisibility(View.GONE);
                 title.setVisibility(View.VISIBLE);
                 title.setText(R.string.order);
                 break;
             case 2:
+                nearbyLayout.setVisibility(View.GONE);
                 nearbyName.setVisibility(View.GONE);
                 title.setVisibility(View.VISIBLE);
                 title.setText(R.string.my_self);

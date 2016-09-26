@@ -80,8 +80,10 @@
             </div>
             <div class="shop-ct cell cell-8">
                 <div class="shop-t" id="shopName">苏泊尔炊具旗舰店</div>
-                <img src="images/telphone.png" id="telephone",width="25" height="25" style="margin-top: 10px" onclick="callTelephone()">
-                <img src="images/qq.png" id="open_qq" width="25" height="25" style=" margin-left: 35px"  href="javascript:void(0)" onclick="openQQ()">
+                <img src="images/telphone.png" id="telephone" ,width="25" height="25" style="margin-top: 10px"
+                     onclick="callTelephone()">
+                <img src="images/qq.png" id="open_qq" width="25" height="25" style=" margin-left: 35px"
+                     href="javascript:void(0)" onclick="openQQ()">
                 <div class="down-t">
                 </div>
             </div>
@@ -106,8 +108,7 @@
 
         <div class="action mui-flex align-center">
 
-            <a class="all-product cell"
-               href="javascript:void(0)" id="shop_all_btn">全部商品</a>
+            <a class="all-product cell" href="javascript:void(0)" id="shop_all_btn">全部商品</a>
             <a class="go-shop cell" href="javascript:void(0)" id="shop_btn">进入店铺</a>
         </div>
     </section>
@@ -138,8 +139,8 @@
 
         });
     }
-    function isd(v,str){
-        if(!v) {
+    function isd(v, str) {
+        if (!v) {
             return str;
         }
         return v;
@@ -176,7 +177,7 @@
             setInnerHtml("addrs", d.county ? (d.province + "&bnsp;&bnsp;" + d.city + "&bnsp;&bnsp;" + d.county) : "");
             setInnerHtml("shopName", d.shopName);
 
-            if (d.shopImg!=""&&d.shopImg!=undefined) {
+            if (d.shopImg != "" && d.shopImg != undefined) {
                 document.getElementById("shopLogo").src = localurl + d.shopImg;
             }
             setInnerHtml("matchScore", isd(d.matchScore, "5.0"));
@@ -216,12 +217,12 @@
 
                 });
                 var callPhone = elmentId("telephone");
-                callPhone.addEventListener("tab",function (e) {
+                callPhone.addEventListener("tab", function (e) {
                     wAndroid.callPhone();
                 });
 
                 var open_qq = elmentId("open_qq");
-                open_qq.addEventListener("tab",function (e) {
+                open_qq.addEventListener("tab", function (e) {
                     wAndroid.openQQ();
                 })
 
@@ -229,7 +230,6 @@
                     wAndroid.startCommentActivity();
                 });
             });
-
 
 
         }

@@ -5,10 +5,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.Config;
@@ -29,6 +26,7 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
     public SearchView mSearchView;
     public TextView mSearchTextView;
     public boolean cacheFlag = false;
+    public FrameLayout noLoginLayout;
     public View nullPager;
     public String url;
     public String params = "";
@@ -42,6 +40,8 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
 
 
     private ListDao listDao;
+
+    public Button login;
 
 
     public void setListDao() {
@@ -88,6 +88,8 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         mSearchTextView = (TextView) mSearchView.findViewById(id);
         mSearchTextView.setTextColor(getResources().getColor(android.R.color.black));
+        noLoginLayout = (FrameLayout) view.findViewById(R.id.no_login);
+        login = (Button) view.findViewById(R.id.login);
 
         setDefaultXlistView();
         request();

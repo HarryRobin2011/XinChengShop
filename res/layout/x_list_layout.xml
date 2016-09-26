@@ -34,5 +34,6 @@
                      android:layout_height="wrap_content"
                      android:layout_gravity="center"
                      android:indeterminateDrawable="@drawable/my_progress_bg"/>
+        <include layout="@layout/no_login_layout"/>
     </FrameLayout>
 </LinearLayout>

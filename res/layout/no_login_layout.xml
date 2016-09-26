@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/no_login"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:visibility="gone">
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="150.0dp"
+                android:layout_height="150.0dp"
+                android:layout_gravity="center"
+                android:src="@drawable/un_login"/>
+
+        <TextView
+                android:id="@+id/text"
+                style="@style/text_style_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20.0dp"
+                android:text="@string/un_login"/>
+
+        <Button
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/login"
+                style="@style/text_style_3"
+                android:layout_width="@dimen/height_100"
+                android:layout_height="@dimen/height_40"
+                android:layout_marginTop="20.0dp"
+                android:background="@drawable/click_red_button"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/text_white"/>
+
+    </LinearLayout>
+
+</FrameLayout>

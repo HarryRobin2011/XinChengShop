@@ -33,11 +33,10 @@ public class TakeOutOrderListFragment extends XCBaseListFragment {
         super.onCreate(savedInstanceState);
 
         activity = (TakeOutMainActivity) getActivity();
-        if (!activity.isLogin()) {
-            Intent intent = new Intent(mContext, LoginActivity.class);
-            startActivityForResult(intent, Activity.RESULT_FIRST_USER);
-        }
-
+//        if (!activity.isLogin()) {
+//            Intent intent = new Intent(mContext, LoginActivity.class);
+//            startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+//        }
     }
 
 
@@ -48,9 +47,10 @@ public class TakeOutOrderListFragment extends XCBaseListFragment {
     @Override
     public void request() {
         if(activity.isLogin()){// 登陆了
+            noLoginLayout.setVisibility(View.GONE);
             url = ControlUrl.ORDER_LIST_URL;
 
-            params = "&memberId=" + activity.member.getMember().getId() + "orderType=" + OrderType.SERVER.name();
+            params = "&memberId=" + activity.member.getMember().getId() + "&orderType=" + OrderType.SERVER.name();
 
 
             jsonType = JSONHelper.ORDER_LIST_DATA;
@@ -61,6 +61,15 @@ public class TakeOutOrderListFragment extends XCBaseListFragment {
             activity.title.setText(R.string.order);
             activity.nearbyLayout.setVisibility(View.GONE);
             setListDao();
+        }else{
+            noLoginLayout.setVisibility(View.VISIBLE);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                }
+            });
         }
     }
 

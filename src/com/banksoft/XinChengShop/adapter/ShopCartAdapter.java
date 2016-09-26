@@ -85,7 +85,7 @@ public class ShopCartAdapter extends BaseMyAdapter{
             TextView priceText = (TextView) view.findViewById(R.id.real_price);
             ImageButton cartReduce = (ImageButton) view.findViewById(R.id.cart_single_product_num_reduce);
             ImageButton cartAdd = (ImageButton) view.findViewById(R.id.cart_single_product_num_add);
-            final TextView num = (TextView) view.findViewById(R.id.cart_single_product_et_num);
+            final EditText num = (EditText) view.findViewById(R.id.cart_single_product_et_num);
             String imageUrl = "";
             if(!"".equals(productCart.getProductVO().getIcon()) && productCart.getProductVO().getIcon() != null){
                imageUrl = ControlUrl.BASE_URL + productCart.getProductVO().getIcon().split("\\|")[0];

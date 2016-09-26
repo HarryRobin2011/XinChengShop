@@ -300,6 +300,16 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         }
 
         /**
+         * 全部商品
+         */
+        @android.webkit.JavascriptInterface
+        public void startAllShopsActivity(){
+            Intent intent = new Intent(mContext, ShopDetailActivity.class);
+            intent.putExtra(IntentFlag.SHOP_ID, productVO.getShopId());
+            startActivity(intent);
+        }
+
+        /**
          * 跳转图片页面
          *
          * @param currentPosition 传点击图片的当前角标  从0开始

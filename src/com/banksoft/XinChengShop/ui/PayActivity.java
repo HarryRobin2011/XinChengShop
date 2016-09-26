@@ -160,7 +160,7 @@ public class PayActivity extends XCBaseActivity implements View.OnClickListener,
                 break;
 
             case R.id.title_back_button:
-                finish();
+                showAlertDialog();
                 break;
             case R.id.titleRightButton:
                 Intent intent = new Intent(mContext, OrderListActivity.class);
@@ -202,6 +202,10 @@ public class PayActivity extends XCBaseActivity implements View.OnClickListener,
 
     @Override
     public void onBackPressed() {
+    showAlertDialog();
+    }
+
+    private void showAlertDialog(){
         new AlertDialog.Builder(this).setTitle(R.string.alert).setMessage(R.string.exit_order_pay).setNegativeButton(getText(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

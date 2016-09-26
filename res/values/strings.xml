@@ -747,5 +747,6 @@
     <string name="clear_history_search">清空历史搜索</string>
     <string name="xc_shop_store">鑫城店铺</string>
     <string name="post_code_format_error">邮政编码格式错误</string>
+    <string name="un_login">您还没有登录，请登录</string>
 
 </resources>

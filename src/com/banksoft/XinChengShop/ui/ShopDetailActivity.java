@@ -20,6 +20,7 @@ import com.banksoft.XinChengShop.model.ShopInfoData;
 import com.banksoft.XinChengShop.model.ShopProductListData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
+import com.banksoft.XinChengShop.utils.ShareUmengUtil;
 import com.banksoft.XinChengShop.utils.ShareUtil;
 import com.banksoft.XinChengShop.widget.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -129,7 +130,15 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
 
                 break;
             case R.id.share:
-                ShareUtil.shareMsg(this,getText(R.string.app_name).toString(),shopVO.getName(),shopVO.getDescription(),0);
+               // ShareUtil.shareMsg(this,getText(R.string.app_name).toString(),shopVO.getName(),shopVO.getDescription(),0);
+                ShareUmengUtil shareUmengUtil = new ShareUmengUtil(ShopDetailActivity.this);
+                shareUmengUtil.setShareContext(shopVO.getName());
+                String imageUrl = "";
+                if(shopVO.getLogo() != null && !shopVO.getLogo().isEmpty()){
+                    imageUrl = ControlUrl.BASE_URL+shopVO.getLogo().split("\\|")[0];
+                }
+                shareUmengUtil.setShareImage(imageUrl);
+                shareUmengUtil.show();
                 break;
         }
     }

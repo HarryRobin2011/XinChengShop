@@ -12,9 +12,8 @@
                  android:layout_height="match_parent"
                  android:layout_weight="1"/>
 
-    <fragment android:id="@id/take_tab_fragment"
+    <FrameLayout android:id="@id/take_tab_fragment"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/height_50"
-              android:layout_alignParentBottom="true"
-              android:name="com.banksoft.XinChengShop.ui.fragment.takeout.TakeOutTabbarFragment"/>
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"/>
 </LinearLayout>

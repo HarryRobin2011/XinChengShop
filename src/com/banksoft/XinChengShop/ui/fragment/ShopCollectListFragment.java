@@ -10,6 +10,7 @@ import com.banksoft.XinChengShop.adapter.CollectShopAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.entity.ShopCollectionVO;
+import com.banksoft.XinChengShop.ui.ShopDetailActivity;
 import com.banksoft.XinChengShop.ui.ShopInfoActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -69,7 +70,7 @@ public class ShopCollectListFragment extends XCBaseListFragment{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(mContext,ShopInfoActivity.class);
+        Intent intent = new Intent(mContext,ShopDetailActivity.class);
         intent.putExtra(IntentFlag.SHOP_ID,((ShopCollectionVO)bailaAdapter.getItem(position - 1)).getShopId());
         startActivityForResult(intent,Activity.RESULT_FIRST_USER);
     }

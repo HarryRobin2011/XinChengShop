@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.ui.fragment.takeout;
 
 import android.annotation.TargetApi;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +46,7 @@ public class TakeOutTabbarFragment extends Fragment{
 
     private FragmentTransaction fragmentTransaction;
 
-    private OnTabSelectListener onTabSelectListener;
+    public static OnTabSelectListener onTabSelectListener;
 
 
 
@@ -55,13 +56,17 @@ public class TakeOutTabbarFragment extends Fragment{
         myActivity = (TakeOutMainActivity) getActivity();
     }
 
+    public static TakeOutTabbarFragment newInstance(OnTabSelectListener selectListener) {
+        onTabSelectListener = selectListener;
+        TakeOutTabbarFragment takeOutTabbarFragment = new TakeOutTabbarFragment();
+        return takeOutTabbarFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mainView = inflater.inflate(R.layout.take_out_tab_fragment_layout, container, false);
         viewHashMap = new HashMap<>();
         init(mainView);
-
         return mainView;
     }
 
@@ -72,9 +77,6 @@ public class TakeOutTabbarFragment extends Fragment{
         setRetainInstance(true);
     }
 
-    public void setOnTabSelectListener(OnTabSelectListener onTabSelectListener) {
-        this.onTabSelectListener = onTabSelectListener;
-    }
 
     private void init(View mainView) {
         this.tab_one = (ImageView) mainView.findViewById(R.id.toolbar_tabone);
