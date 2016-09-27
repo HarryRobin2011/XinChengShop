@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.fragment.MemberScoreListFragment;
+import com.banksoft.XinChengShop.widget.viewpagerindicator.TabPageIndicator;
 
 /**
  * Created by Robin on 2016/4/9.
@@ -13,6 +14,7 @@ import com.banksoft.XinChengShop.ui.fragment.MemberScoreListFragment;
 public class ScoreListActivity extends XCBaseActivity implements View.OnClickListener {
     private MemberScoreListFragment memberScoreListFragment;
     private ImageView back;
+    private TextView title;
 
     @Override
     protected void initContentView() {
@@ -25,6 +27,9 @@ public class ScoreListActivity extends XCBaseActivity implements View.OnClickLis
         back.setVisibility(View.VISIBLE);
         back.setBackgroundResource(R.drawable.tb_icon_actionbar_back);
         back.setOnClickListener(this);
+        title = (TextView) findViewById(R.id.title);
+        title.setVisibility(View.VISIBLE);
+        title.setText(R.string.user_score);
     }
 
     @Override

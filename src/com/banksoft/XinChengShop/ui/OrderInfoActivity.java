@@ -165,7 +165,12 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         shipName.setText(orderVO.getUserName());
         shipAddress.setText(orderVO.getAddress());
         shopName.setText(orderVO.getShopName());
-        payMethod.setText(PayType.valueOf(orderVO.getPayType()).getName());
+        if(orderVO.getPayType() == null){
+            payMethod.setText(OrderStatus.valueOf(orderVO.getStatus()).getName());
+        }else{
+            payMethod.setText(PayType.valueOf(orderVO.getPayType()).getName());
+        }
+
         productTotalMoney.setText("￥" + String.valueOf(orderVO.getTotalMoney()));
         disbursements.setText("￥" + bigDecimal.floatValue());
         createOrderTime.setText("下单时间：" + TimeUtils.getTimeStr(orderVO.getCreateTime(), TimeUtils.TimeType.MINUTE));

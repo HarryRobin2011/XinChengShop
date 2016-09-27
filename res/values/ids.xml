@@ -586,4 +586,5 @@
     <item name="rates" type="id">rates</item>
     <item name="search_type" type="id">search_type</item>
     <item name="product" type="id">product</item>
+    <item name="linker_telephone" type="id">linker_telephone</item>
 </resources>

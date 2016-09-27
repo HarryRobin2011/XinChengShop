@@ -61,7 +61,7 @@
     <string name="time_s">有效期至：</string>
     <string name="goods_describe">问题描述</string>
     <string name="details">详情</string>
-    <string name="pg_more_help_lb_copy_right_top">Copyright©2015-2018</string>
+    <string name="pg_more_help_lb_copy_right_top">Copyright©2016-2018</string>
     <string name="pg_more_help_lb_copy_right_bottom">鑫城广场 http://xincheng.market  版权所有</string>
     <string name="pg_more_about_quick_mark_download">扫描二维码,关注我们的微信公共号</string>
     <string name="push_order">接收订单消息</string>
@@ -748,5 +748,7 @@
     <string name="xc_shop_store">鑫城店铺</string>
     <string name="post_code_format_error">邮政编码格式错误</string>
     <string name="un_login">您还没有登录，请登录</string>
+    <string name="un_pay">未付款</string>
+    <string name="linker_telephone">联系电话：400-0536-825 0536-6886366</string>
 
 </resources>
