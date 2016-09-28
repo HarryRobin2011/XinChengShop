@@ -73,4 +73,6 @@ public class IntentFlag {
     public static final String ORDER_STATUS = "ORDER_STATUS";
     public static final String IS_SELECT = "IS_SELECT";
     public static final String EXPRESS_MONEY = "EXPRESS_MONEY";
+    public static final String SHARE_MEDIA = "SHARE_MEDIA";
+    public static final String OPEN_ID = "OPEN_ID";
 }

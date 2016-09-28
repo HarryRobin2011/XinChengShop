@@ -587,4 +587,5 @@
     <item name="search_type" type="id">search_type</item>
     <item name="product" type="id">product</item>
     <item name="linker_telephone" type="id">linker_telephone</item>
+    <item name="binding_account" type="id">binding_account</item>
 </resources>

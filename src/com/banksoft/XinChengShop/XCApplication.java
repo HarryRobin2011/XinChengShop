@@ -93,9 +93,9 @@ public class XCApplication extends Application {
     private void initUmengSetting(){
         PlatformConfig.setWeixin("wxe4d53f58f26cd989", "9a5eaf0585b6bb69462d2c7e17dbfd7a");
         //微信 appid appsecret
-        PlatformConfig.setSinaWeibo("1105213693","Nxy0UY02TzUVz1VT");
+        PlatformConfig.setSinaWeibo("4230626533","4cf54bb72a9a04767e3051f8451702b0");
         //新浪微博 appkey appsecret
-        PlatformConfig.setQQZone("1105238003", "MDYUtspmILTPqrNf");
+        PlatformConfig.setQQZone("1105213693", "Nxy0UY02TzUVz1VT");
         // QQ和Qzone appid appkey
     }
 }

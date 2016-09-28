@@ -8,6 +8,7 @@ import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 import com.banksoft.XinChengShop.utils.MD5Factory;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 /**
  * Created by harry_robin on 15/11/12.
@@ -37,9 +38,19 @@ public class LoginDao extends BaseDao {
      * @param openid
      * @return
      */
-    public MemberData thirdLogin(MergeType mergeType, String openid) {
+    public MemberData thirdLogin(SHARE_MEDIA mergeType, String openid) {
         String url = ControlUrl.THIRD_LOGIN;
-        String params = "type="+mergeType+"&openid="+openid;
+        MergeType type = null;
+        if(mergeType.equals(SHARE_MEDIA.QQ)){
+            type = MergeType.QQ;
+        }else if(mergeType.equals(SHARE_MEDIA.WEIXIN)){
+            type = MergeType.WEIXIN;
+        }else if(mergeType.equals(SHARE_MEDIA.SINA)){
+            type = MergeType.WEIBO;
+        }else{
+            type = MergeType.QQ;
+        }
+        String params = "type="+type.toString()+"&openid="+openid;
         MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
 
@@ -49,6 +60,17 @@ public class LoginDao extends BaseDao {
         String url = ControlUrl.XC_ORDERsTATUS_NUM_URL;
         String parasm = "memberId="+id;
         BaseData data = (BaseData) postHttpRequest(mContext,url,parasm,JSONHelper.BASE_DATA,false);
+        return data;
+    }
+
+    /**
+     * 关联账号
+     * @return
+     */
+    public MemberData bindingLogin(String account,String password,String openId,MergeType type) {
+        String url = ControlUrl.THIRD_LOGIN_LOGIN;
+        String params = "account="+account+"&password="+ MD5Factory.encoding(password)+"&openId="+openId+"&type"+type.toString();
+        MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
     }
 }

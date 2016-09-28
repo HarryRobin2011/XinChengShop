@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.RegisterDao;
 import com.banksoft.XinChengShop.entity.MemberBO;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.model.base.BaseData;
+import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.Check;
 import com.banksoft.XinChengShop.utils.MD5Factory;
@@ -43,6 +45,8 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
     private ImageView back;
     private int second = 60;
     private BaseData<String> checkData;
+    private String operaType;
+    private String openID;
 
     private Handler mHandler = new Handler(){
         @Override
@@ -96,6 +100,13 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
 
     @Override
     public void initData() {
+        try {
+            operaType = getIntent().getStringExtra(IntentFlag.TYPE);
+            openID = getIntent().getStringExtra(IntentFlag.OPEN_ID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         back.setVisibility(View.VISIBLE);
         title.setText(R.string.member_register);
     }
@@ -214,9 +225,13 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
             }
             if(registerData != null){
                 if(registerData.isSuccess()){
-                    showWarning(R.string.register_success);
-                    setResult(Activity.RESULT_OK);
-                    finish();
+                    if(operaType != null && openID != null){
+                        //关联第三方
+                    }else{
+                        showWarning(R.string.register_success);
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
                 }else {
                     showWarning(registerData.getMsg().toString());
                 }

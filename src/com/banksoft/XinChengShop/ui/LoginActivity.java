@@ -11,6 +11,7 @@ import android.widget.*;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.LoginDao;
 import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.type.MergeType;
@@ -42,7 +43,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     public static Tencent mTencent;
     private UserInfo mInfo;
 
-//    public static final String QQAppid = "1105213693";
+    //    public static final String QQAppid = "1105213693";
 //    public static final String WXAppid = "wxe4d53f58f26cd989";
 //    public static final String SinaAppid = "";// 新浪微博
     private Button loginBtn;
@@ -53,7 +54,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     private ImageView sinaLoginTextView;
     private LoginDao loginDao;
 
-    private MergeType currentType;
+    private SHARE_MEDIA currentType;
 
 
     private UMShareAPI umShareAPI;
@@ -103,34 +104,38 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     @Override
     public void initData() {
         title.setText(R.string.login_title);
-        umShareAPI =  UMShareAPI.get(getApplicationContext());
+        umShareAPI = UMShareAPI.get(getApplicationContext());
 
     }
 
     /**
-     * 友盟注册
      */
-    /** auth callback interface**/
+    /**
+     * auth callback interface
+     **/
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            if(loginDao == null){
+            if (loginDao == null) {
                 loginDao = new LoginDao(mContext);
             }
-           // new ThirdLogin().execute(loginDao);
+            Log.i("HarryRobin", data.toString());
+                 new ThirdLogin(data.get("openid")).execute(loginDao);
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
+            // Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText( getApplicationContext(), R.string.login_cancel, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.login_cancel, Toast.LENGTH_SHORT).show();
         }
     };
-    /** delauth callback interface**/
+    /**
+     * delauth callback interface
+     **/
     private UMAuthListener umdelAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
@@ -139,41 +144,12 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText( getApplicationContext(), "delete Authorize fail", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "delete Authorize fail", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText( getApplicationContext(), "delete Authorize cancel", Toast.LENGTH_SHORT).show();
-        }
-    };
-    /** info callback interface**/
-    private UMAuthListener umInfoListener = new UMAuthListener() {
-        @Override
-        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            Log.d("auth callbacl","getting data"+data.toString());
-            if (data!=null){
-                Log.d("auth callbacl","getting data");
-                Toast.makeText(getApplicationContext(), data.toString(), Toast.LENGTH_SHORT).show();
-                if(SHARE_MEDIA.QQ.equals(platform)){//QQ登陆
-                     String openId = data.get("openID");
-                }else if(SHARE_MEDIA.WEIXIN.equals(platform)){//微信登陆
-                    String openId = data.get("openID");
-                }else if(SHARE_MEDIA.SINA.equals(platform)){// 新浪登陆
-                    String openId = data.get("openID");
-                }
-            }
-
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText( getApplicationContext(), "get fail", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText( getApplicationContext(), "get cancel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "delete Authorize cancel", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -242,27 +218,26 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
                 startActivityForResult(new Intent(mContext, RegisterActivity.class), Activity.RESULT_FIRST_USER);
                 break;
             case R.id.login_page_find_password://忘记密码
-                Intent foundPassword = new Intent(mContext,FoundPasswordActivity.class);
+                Intent foundPassword = new Intent(mContext, FoundPasswordActivity.class);
                 startActivity(foundPassword);
                 break;
             case R.id.qq_login_view://QQ登陆
                 platform = SHARE_MEDIA.QQ;
-                this.currentType = MergeType.QQ;
+                this.currentType = platform;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
             case R.id.weixin_login_view://微信登陆
                 platform = SHARE_MEDIA.WEIXIN;
-                this.currentType = MergeType.WEIXIN;
+                this.currentType = platform;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
             case R.id.sina_login_view:// 新浪登陆
                 platform = SHARE_MEDIA.SINA;
-                this.currentType = MergeType.WEIBO;
+                this.currentType = platform;
                 umShareAPI.doOauthVerify(this, platform, umAuthListener);
                 break;
         }
     }
-
 
 
     @Override
@@ -284,7 +259,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if(myProgressDialog == null){
+            if (myProgressDialog == null) {
                 myProgressDialog = new MyProgressDialog(mContext);
             }
             myProgressDialog.showDialog(R.string.please_wait);
@@ -321,7 +296,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
         @Override
         public void gotResult(int code, String alias, Set<String> tags) {
-            String logs ;
+            String logs;
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";
@@ -346,8 +321,6 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     };
 
 
-
-
     private class ThirdLogin extends AsyncTask<LoginDao, String, MemberData> {
         String openID = "";
 
@@ -357,7 +330,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 
         @Override
         protected MemberData doInBackground(LoginDao... params) {
-            return params[0].thirdLogin(currentType,openID);
+            return params[0].thirdLogin(currentType, openID);
         }
 
         @Override
@@ -369,10 +342,11 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
                     setResult(Activity.RESULT_OK);
                     finish();
                 } else {
-                    if(memberData.getCode() == 9){ //未绑定账号
-                         Intent intent = new Intent(mContext,AssociatedActivity.class);
-                         startActivity(intent);
-                    }else{
+                    if (memberData.getCode() == 9) { //未绑定账号
+                        Intent intent = new Intent(mContext, AssociatedActivity.class);
+                        intent.putExtra(IntentFlag.SHARE_MEDIA,currentType);
+                        startActivity(intent);
+                    } else {
                         alert((String) memberData.msg);
                     }
 

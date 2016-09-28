@@ -65,7 +65,7 @@
                       android:layout_marginLeft="10.0dp"
                       android:layout_gravity="bottom"
                       android:layout_marginBottom="3.0dp"
-                      android:text="@string/no_xincheng_account"/>
+                      android:text="@string/already_xincheng_account"/>
         </LinearLayout>
         <Button android:id="@id/associted_account"
                  android:layout_width="match_parent"

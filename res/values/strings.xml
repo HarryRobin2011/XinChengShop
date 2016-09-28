@@ -750,5 +750,8 @@
     <string name="un_login">您还没有登录，请登录</string>
     <string name="un_pay">未付款</string>
     <string name="linker_telephone">联系电话：400-0536-825 0536-6886366</string>
+    <string name="already_xincheng_account">已有鑫城广场账号</string>
+    <string name="binding">立即绑定</string>
+    <string name="binding_account">账号绑定</string>
 
 </resources>

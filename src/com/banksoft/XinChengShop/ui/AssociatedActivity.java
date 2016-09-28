@@ -1,20 +1,32 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 /**
  * Created by Robin on 2016/4/3.
  * 关联注册页
  */
-public class AssociatedActivity extends XCBaseActivity implements View.OnClickListener{
+public class AssociatedActivity extends XCBaseActivity implements View.OnClickListener {
     private ImageView imageView;
 
     private TextView tag;
@@ -25,7 +37,13 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
 
     private Button assisted;//关联账号
 
-    private MergeType currentMergeType;
+    private SHARE_MEDIA currentMergeType;
+    private MergeType mergeType;
+
+    private String openid;
+    private ImageLoader mImageLoader;
+
+    private UMShareAPI umShareAPI;
 
 
     @Override
@@ -44,25 +62,95 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
-        currentMergeType = (MergeType) getIntent().getSerializableExtra(IntentFlag.MERGE_TYPE);
+        currentMergeType = (SHARE_MEDIA) getIntent().getSerializableExtra(IntentFlag.SHARE_MEDIA);
+        mImageLoader = ImageLoader.getInstance();
+        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+
+        umShareAPI = UMShareAPI.get(this);
+
+        umShareAPI.getPlatformInfo(this,currentMergeType,umInfoListener);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                finish();
+            }
+        }
     }
 
     @Override
     protected void initOperate() {
-        if (currentMergeType.QQ.equals(currentMergeType)) {
+        if (SHARE_MEDIA.QQ.equals(currentMergeType)) {
             tag.setText(R.string.dear_qq_account);
-        } else if (currentMergeType.WEIXIN.equals(currentMergeType)) {
+            mergeType = MergeType.QQ;
+        } else if (SHARE_MEDIA.WEIXIN.equals(currentMergeType)) {
             tag.setText(R.string.dear_weixin_account);
-        } else if (currentMergeType.WEIBO.equals(currentMergeType)) {
+            mergeType = MergeType.WEIXIN;
+        } else if (SHARE_MEDIA.SINA.equals(currentMergeType)) {
             tag.setText(R.string.dear_weibo_account);
+            mergeType =MergeType.WEIBO;
         }
     }
+
+    /**
+     * info callback interface
+     **/
+    private UMAuthListener umInfoListener = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            Log.d("auth callbacl", "getting data" + data.toString());
+            String name = null;
+            String headImage = null;
+            if (data != null) {
+                openid = data.get("openid");
+                if (SHARE_MEDIA.QQ.equals(platform)) {//QQ登陆
+                     name = data.get("screenname");
+                     headImage = data.get("profile_image_url");
+                } else if (SHARE_MEDIA.WEIXIN.equals(platform)) {//微信登陆
+                    name = data.get("screenname");
+                    headImage = data.get("profile_image_url");
+                } else if (SHARE_MEDIA.SINA.equals(platform)) {// 新浪登陆
+                    name = data.get("screen_name");
+                    headImage = data.get("profile_image_url");
+                }
+            }
+            account.setText(name);
+            mImageLoader.displayImage(headImage,imageView, XCApplication.options);
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText(getApplicationContext(), "get fail", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText(getApplicationContext(), "get cancel", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
+            case R.id.register:
+                Intent regIntent = new Intent(mContext,RegisterActivity.class);
+                regIntent.putExtra(IntentFlag.TYPE,mergeType);
+                regIntent.putExtra(IntentFlag.OPEN_ID,openid);
+                startActivityForResult(regIntent, Activity.RESULT_FIRST_USER);
 
+                break;
+            case R.id.associted_account:
+                Intent intent = new Intent(mContext,BindingLoginActivity.class);
+                intent.putExtra(IntentFlag.TYPE,mergeType);
+                intent.putExtra(IntentFlag.OPEN_ID,openid);
+                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                break;
         }
     }
 }
