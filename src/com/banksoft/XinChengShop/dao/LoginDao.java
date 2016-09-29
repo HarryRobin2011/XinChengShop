@@ -1,6 +1,8 @@
 package com.banksoft.XinChengShop.dao;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.model.MemberData;
@@ -50,7 +52,8 @@ public class LoginDao extends BaseDao {
         }else{
             type = MergeType.QQ;
         }
-        String params = "type="+type.toString()+"&openid="+openid;
+        String params = "type="+type.toString()+"&openId="+openid;
+        Log.i("HarryRobin",params);
         MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
 
@@ -69,7 +72,8 @@ public class LoginDao extends BaseDao {
      */
     public MemberData bindingLogin(String account,String password,String openId,MergeType type) {
         String url = ControlUrl.THIRD_LOGIN_LOGIN;
-        String params = "account="+account+"&password="+ MD5Factory.encoding(password)+"&openId="+openId+"&type"+type.toString();
+        String params = "account="+account+"&password="+password+"&openId="+openId+"&type="+type.toString();
+        Log.i("HarryRobin",params);
         MemberData data = (MemberData) postHttpRequest(mContext,url,params, JSONHelper.MEMBER_DATA,false);
         return data;
     }

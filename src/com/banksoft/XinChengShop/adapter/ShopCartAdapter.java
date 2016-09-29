@@ -155,8 +155,8 @@ public class ShopCartAdapter extends BaseMyAdapter{
                 for (int position = 0;position < productData.getProductVOHashMap().keySet().size();position++){
                     ProductCart productCart = productData.getProductVOHashMap().get(productData.getProductVOHashMap().keySet().toArray()[position]);
                     productCart.setIsSelect(isSelect);
-                 //   CheckBox checkChildBox = (CheckBox) content.getChildAt(position).findViewById(R.id.check_child_box);
-                   // checkChildBox.setChecked(isSelect);
+                    CheckBox checkChildBox = (CheckBox) getView(position,null,null).findViewById(resID);
+                    checkChildBox.setChecked(isSelect);
                 }
                 break;
 

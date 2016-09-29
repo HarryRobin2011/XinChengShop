@@ -1,7 +1,6 @@
 package com.banksoft.XinChengShop.ui;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +43,7 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
     private ImageLoader mImageLoader;
 
     private UMShareAPI umShareAPI;
+    private TextView title;
 
 
     @Override
@@ -55,9 +55,10 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
     protected void initView() {
         imageView = (ImageView) findViewById(R.id.image);
         tag = (TextView) findViewById(R.id.tag);
-        account = (TextView) findViewById(R.id.account);
+        account = (TextView) findViewById(R.id.name);
         register = (Button) findViewById(R.id.register);
         assisted = (Button) findViewById(R.id.associted_account);
+        title = (TextView) findViewById(R.id.titleText);
     }
 
     @Override
@@ -69,6 +70,7 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
         umShareAPI = UMShareAPI.get(this);
 
         umShareAPI.getPlatformInfo(this,currentMergeType,umInfoListener);
+        title.setText(R.string.combined_login);
 
     }
 
@@ -77,6 +79,7 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Activity.RESULT_FIRST_USER){
             if(resultCode == Activity.RESULT_OK){
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         }
@@ -94,6 +97,8 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
             tag.setText(R.string.dear_weibo_account);
             mergeType =MergeType.WEIBO;
         }
+        register.setOnClickListener(this);
+        assisted.setOnClickListener(this);
     }
 
     /**
@@ -108,11 +113,11 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
             if (data != null) {
                 openid = data.get("openid");
                 if (SHARE_MEDIA.QQ.equals(platform)) {//QQ登陆
-                     name = data.get("screenname");
+                     name = data.get("screen_name");
                      headImage = data.get("profile_image_url");
                 } else if (SHARE_MEDIA.WEIXIN.equals(platform)) {//微信登陆
-                    name = data.get("screenname");
-                    headImage = data.get("profile_image_url");
+                    name = data.get("nickname");
+                    headImage = data.get("headimgurl");
                 } else if (SHARE_MEDIA.SINA.equals(platform)) {// 新浪登陆
                     name = data.get("screen_name");
                     headImage = data.get("profile_image_url");

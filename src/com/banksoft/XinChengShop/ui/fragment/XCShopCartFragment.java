@@ -74,7 +74,6 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
 
     @Override
     public void initData() {
-
         title.setText(R.string.shop_cart);
         title.setTextColor(getResources().getColor(R.color.text_black));
         searchLayout.setVisibility(View.GONE);

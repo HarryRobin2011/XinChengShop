@@ -14,6 +14,7 @@ import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.model.MemberVOData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.MD5Factory;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 
 /**
@@ -56,6 +57,7 @@ public class BindingLoginActivity extends XCBaseActivity implements View.OnClick
     @Override
     protected void initOperate() {
         back.setOnClickListener(this);
+        binding.setOnClickListener(this);
     }
 
     @Override
@@ -90,20 +92,22 @@ public class BindingLoginActivity extends XCBaseActivity implements View.OnClick
         protected void onPreExecute() {
             super.onPreExecute();
             if(progressDialog == null){
-                progressDialog = ProgressDialog.show(getApplicationContext(),"",getText(R.string.please_wait));
+                progressDialog = ProgressDialog.show(BindingLoginActivity.this,"",getText(R.string.please_wait));
             }
         }
 
         @Override
         protected MemberData doInBackground(LoginDao... params) {
-            return params[0].bindingLogin(accountStr, passwordStr, openId, currentType);
+            return params[0].bindingLogin(accountStr, MD5Factory.encoding(passwordStr), openId, currentType);
         }
 
         @Override
         protected void onPostExecute(MemberData memberData) {
             super.onPostExecute(memberData);
+            progressDialog.dismiss();
             if(memberData!= null){
                 if(memberData.isSuccess()){
+                    alert(R.string.bind_success);
                     saveLogin(memberData.getData());
                     setResult(Activity.RESULT_OK);
                     finish();

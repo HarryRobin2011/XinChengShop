@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.LoginDao;
 import com.banksoft.XinChengShop.dao.RegisterDao;
 import com.banksoft.XinChengShop.entity.MemberBO;
 import com.banksoft.XinChengShop.model.IsFlagData;
+import com.banksoft.XinChengShop.model.MemberData;
 import com.banksoft.XinChengShop.model.base.BaseData;
 import com.banksoft.XinChengShop.type.MergeType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -45,7 +47,7 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
     private ImageView back;
     private int second = 60;
     private BaseData<String> checkData;
-    private String operaType;
+    private MergeType operaType;
     private String openID;
 
     private Handler mHandler = new Handler(){
@@ -101,7 +103,7 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
     @Override
     public void initData() {
         try {
-            operaType = getIntent().getStringExtra(IntentFlag.TYPE);
+            operaType = (MergeType) getIntent().getSerializableExtra(IntentFlag.TYPE);
             openID = getIntent().getStringExtra(IntentFlag.OPEN_ID);
         }catch (Exception e){
             e.printStackTrace();
@@ -227,6 +229,7 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
                 if(registerData.isSuccess()){
                     if(operaType != null && openID != null){
                         //关联第三方
+                        new CorrelationAccountThread().execute(new LoginDao(getApplicationContext()));
                     }else{
                         showWarning(R.string.register_success);
                         setResult(Activity.RESULT_OK);
@@ -260,6 +263,30 @@ public class RegisterActivity extends XCBaseActivity implements View.OnClickList
                 }
             } else {
                 showWarning(R.string.netWork_error);
+            }
+        }
+    }
+
+    private class CorrelationAccountThread extends AsyncTask<LoginDao,String,MemberData>{
+
+        @Override
+        protected MemberData doInBackground(LoginDao... params) {
+            return params[0].bindingLogin(memberBO.getAccount(),memberBO.getPassword(),openID,operaType);
+        }
+
+        @Override
+        protected void onPostExecute(MemberData memberData) {
+            super.onPostExecute(memberData);
+            if(memberData != null){
+                if(memberData.isSuccess()){
+                    saveLogin(memberData.getData());
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }else{
+                    alert(memberData.getMsg().toString());
+                }
+            }else{
+                alert(R.string.net_error);
             }
         }
     }

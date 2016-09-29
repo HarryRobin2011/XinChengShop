@@ -64,6 +64,8 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
     private static final int MSG_SET_ALIAS = 1001;
     private static final int MSG_SET_TAGS = 1002;
 
+    private final int THIRD_LOGIN = 1000;
+
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
@@ -175,6 +177,9 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
 //                String accountName = data.getStringExtra(IntentFlag.ACCOUNT);
 //                userNameEdit.setText(accountName);
             }
+        }else if(requestCode == THIRD_LOGIN){
+            setResult(Activity.RESULT_OK);
+            finish();
         }
 //        else if (resultCode == SINA_LOGIN) {// 新浪微博登陆回掉
 //            // SSO 授权回调
@@ -345,7 +350,8 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
                     if (memberData.getCode() == 9) { //未绑定账号
                         Intent intent = new Intent(mContext, AssociatedActivity.class);
                         intent.putExtra(IntentFlag.SHARE_MEDIA,currentType);
-                        startActivity(intent);
+                        intent.putExtra(IntentFlag.OPEN_ID,openID);
+                        startActivityForResult(intent,THIRD_LOGIN);
                     } else {
                         alert((String) memberData.msg);
                     }

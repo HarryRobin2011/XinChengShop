@@ -485,7 +485,7 @@
     <string name="server_support_goods">为了给您更好的服务，请关联一个鑫城账号</string>
     <string name="no_xincheng_account">还没有鑫城账号？</string>
     <string name="fast_gister">快速注册</string>
-    <string name="immediately">立即登陆</string>
+    <string name="immediately">立即关联</string>
     <string name="dear_qq_account">亲爱的QQ用户：</string>
     <string name="dear_weixin_account">亲爱的微信用户：</string>
     <string name="dear_weibo_account">亲爱的新浪微博用户：</string>
@@ -753,5 +753,7 @@
     <string name="already_xincheng_account">已有鑫城广场账号</string>
     <string name="binding">立即绑定</string>
     <string name="binding_account">账号绑定</string>
+    <string name="combined_login">联合登录</string>
+    <string name="bind_success">账号绑定成功~</string>
 
 </resources>
