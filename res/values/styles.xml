@@ -300,14 +300,14 @@
         <item name="fadeLength">1000</item>
         <item name="fadeDelay">1000</item>
     </style>
-
     <style name="Theme.picker" parent="android:Theme.Holo.Light">
         <item name="android:editTextStyle">@style/Widget.EditText.White</item>
     </style>
 
     <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
-        <item name="android:textColor">@color/bg_red</item>
+        <item name="android:textColor">@color/black</item>
     </style>
+
 
 
 </resources>

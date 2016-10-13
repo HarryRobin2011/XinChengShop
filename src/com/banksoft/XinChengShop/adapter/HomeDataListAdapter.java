@@ -42,7 +42,6 @@ public class HomeDataListAdapter extends BaseAdapter {
         this.mActivity = activity;
         this.dataList = dataList;
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     @Override

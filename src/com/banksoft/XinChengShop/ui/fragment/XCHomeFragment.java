@@ -185,9 +185,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         shoppingLayout.setOnClickListener(this);
         mySelfLayout.setOnClickListener(this);
 
-        mListView.setPullLoadEnable(false);
-        mListView.setXListViewListener(this);
-        mListView.setPullRefreshEnable(true);
+
 
         searchText.setOnClickListener(this);
         mesageLayout.setOnClickListener(this);
@@ -305,8 +303,14 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
                 homeDataListAdapter = new HomeDataListAdapter(getActivity(),dataList);
             }
             mListView.setAdapter(homeDataListAdapter);
-
         }
+        setxListView();
+    }
+
+    private void setxListView(){
+        mListView.setPullLoadEnable(false);
+        mListView.setXListViewListener(this);
+        mListView.setPullRefreshEnable(true);
     }
 
     @Override

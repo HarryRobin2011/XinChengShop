@@ -53,6 +53,7 @@ public class TakeOutInfoActivity extends XCBaseActivity implements View.OnClickL
     @Override
     protected void initData() {
         back.setVisibility(View.VISIBLE);
+        back.setImageResource(R.drawable.ic_action_previous_item);
         back.setOnClickListener(this);
         shopVO = (ShopVO) getIntent().getExtras().get(IntentFlag.SHOP_VO);
         title.setText(shopVO.getName());

@@ -1,12 +1,10 @@
 package com.banksoft.XinChengShop.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
+import android.view.*;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import com.banksoft.XinChengShop.R;
@@ -27,14 +25,15 @@ public class TimeSelectFragment extends DialogFragment implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.Theme_picker);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        View view =  LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.time_select_dialog_layout,null);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.Theme_picker);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        View view =  localInflater.inflate(R.layout.time_select_dialog_layout,null);
         initView(view);
         initData();
         initOperation();

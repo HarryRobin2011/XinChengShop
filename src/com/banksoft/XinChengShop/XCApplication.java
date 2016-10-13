@@ -9,9 +9,13 @@ import com.baidu.mapapi.SDKInitializer;
 import com.banksoft.XinChengShop.service.LocationService;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.iflytek.cloud.SpeechUtility;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.umeng.socialize.PlatformConfig;
 
@@ -56,16 +60,49 @@ public class XCApplication extends Application {
         return bailaAppLication;
     }
 
+    /**
+     * ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+     .memoryCacheExtraOptions(480, 800) // default = device screen dimensions
+     .diskCacheExtraOptions(480, 800, null)
+     .taskExecutor(...)
+     .taskExecutorForCachedImages(...)
+     .threadPoolSize(3) // default
+     .threadPriority(Thread.NORM_PRIORITY - 1) // default
+     .tasksProcessingOrder(QueueProcessingType.FIFO) // default
+     .denyCacheImageMultipleSizesInMemory()
+     .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+     .memoryCacheSize(2 * 1024 * 1024)
+     .memoryCacheSizePercentage(13) // default
+     .diskCache(new UnlimitedDiscCache(cacheDir)) // default
+     .diskCacheSize(50 * 1024 * 1024)
+     .diskCacheFileCount(100)
+     .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
+     .imageDownloader(new BaseImageDownloader(context)) // default
+     .imageDecoder(new BaseImageDecoder()) // default
+     .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+     .writeDebugLogs()
+     .build();
+     */
     private void setOptions() {
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
+        config.threadPriority(Thread.NORM_PRIORITY - 2);
+        config.denyCacheImageMultipleSizesInMemory();
+        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
+        config.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config.writeDebugLogs(); // Remove for release app
+
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config.build());
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.list_thumbnail_loading_ss)
-                .showImageForEmptyUri(R.drawable.white_drawable)
-                .showImageOnFail(R.drawable.white_drawable)
+                .showImageForEmptyUri(R.drawable.list_thumbnail_loading_ss)
+                .showImageOnFail(R.drawable.list_thumbnail_loading_ss)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
                 .displayer(new FadeInBitmapDisplayer(100))// 淡入
                 .build();
 

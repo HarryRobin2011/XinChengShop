@@ -10,6 +10,7 @@ import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.SearchAutoCompleteAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.type.ShopType;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.PopupWindowUtil;
@@ -130,7 +131,9 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(mContext, ShopListActivity.class);
-                            intent.putExtra(IntentFlag.TITLE, searchName);
+                            intent.putExtra(IntentFlag.NAME,searchName);
+                            intent.putExtra(IntentFlag.TITLE,"店铺");
+                            intent.putExtra(IntentFlag.SHOP_TYPE, ShopType.SHOP_SALE.toString());
                             startActivity(intent);
                         }
 
@@ -222,7 +225,9 @@ public class SearchAutoCompleteActivity extends XCBaseActivity implements Adapte
             startActivity(intent);
         } else {
             Intent intent = new Intent(mContext, ShopListActivity.class);
-            intent.putExtra(IntentFlag.TITLE, searchName);
+            intent.putExtra(IntentFlag.NAME,searchName);
+            intent.putExtra(IntentFlag.TITLE,"店铺");
+            intent.putExtra(IntentFlag.SHOP_TYPE, ShopType.SHOP_SALE.toString());
             startActivity(intent);
         }
     }

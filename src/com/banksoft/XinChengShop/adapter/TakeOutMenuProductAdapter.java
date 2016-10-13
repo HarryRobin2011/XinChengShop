@@ -145,7 +145,7 @@ public class TakeOutMenuProductAdapter extends BaseMyAdapter implements View.OnC
         }
         mImageLoader.displayImage(ControlUrl.BASE_URL + imageUrl, takeOutMenuProductHolder.mImageView, XCApplication.options);
         takeOutMenuProductHolder.saleNum.setText("已售：" + shopProductListVO.getSales());
-        takeOutMenuProductHolder.price.setText(shopProductListVO.getSalePrice() + "元/份");
+        takeOutMenuProductHolder.price.setText(shopProductListVO.getPrice() + "元/份");
 
 
         if (num > 0) {

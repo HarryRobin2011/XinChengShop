@@ -19,6 +19,7 @@ public class ShopListActivity extends XCBaseActivity implements View.OnClickList
     private String titleStr;
     private String shopType;
     private String no;
+    private String name;
     @Override
     protected void initContentView() {
         setContentView(R.layout.content_layout);
@@ -35,6 +36,7 @@ public class ShopListActivity extends XCBaseActivity implements View.OnClickList
         titleStr = getIntent().getStringExtra(IntentFlag.TITLE);
         shopType = getIntent().getStringExtra(IntentFlag.SHOP_TYPE);
         no = getIntent().getStringExtra(IntentFlag.NO);
+        name = getIntent().getStringExtra(IntentFlag.NAME);
         title.setText(titleStr);
     }
 
@@ -48,6 +50,7 @@ public class ShopListActivity extends XCBaseActivity implements View.OnClickList
         Bundle bundle = new Bundle();
         bundle.putSerializable(IntentFlag.SHOP_TYPE,shopType);
         bundle.putSerializable(IntentFlag.NO,no);
+        bundle.putString(IntentFlag.NAME,name);
         shopListFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.content,shopListFragment).commit();
     }

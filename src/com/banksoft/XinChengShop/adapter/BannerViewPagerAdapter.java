@@ -30,7 +30,6 @@ public class BannerViewPagerAdapter extends PagerAdapter {
         this.mContext = context;
         mImageLoader = ImageLoader.getInstance();
         viewHashMap = new HashMap<>();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     };
 
     @Override

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class ShopListFragment extends XCBaseListFragment{
     private String type;
     private String no;
+    private String name;
     private XCBaseActivity activity;
     private ImageView menu;
 
@@ -42,12 +43,17 @@ public class ShopListFragment extends XCBaseListFragment{
     public void request() {
         type = getArguments().getString(IntentFlag.SHOP_TYPE,"");
         no = getArguments().getString(IntentFlag.NO,"");
+        name = getArguments().getString(IntentFlag.NAME,"");
+
         url = ControlUrl.XC_SHOP_LIST_URL;
         if(type != null && !"".equals(type)){
             params += "shopServerType="+type;
         }
         if(no != null && !"".equals(no)){
             params += "&no="+no;
+        }
+        if(name != null && !name.isEmpty()){
+            params +="&name="+name;
         }
         jsonType = JSONHelper.SHOP_LIST_DATA;
         bailaAdapter = new ShopListAdapter(mContext,new ArrayList());
