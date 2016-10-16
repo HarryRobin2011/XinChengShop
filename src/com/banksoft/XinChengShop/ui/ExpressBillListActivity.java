@@ -16,7 +16,6 @@ public class ExpressBillListActivity extends XCBaseActivity implements View.OnCl
     private TextView title;
     private ImageView back;
     private OperaType currentOperaType;
-    private ExpressBillListFragment expressBillListFragment;
 
     @Override
     protected void initContentView() {

@@ -5,11 +5,9 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.dao.SettingDao;
-import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.model.MemberInfoData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.utils.CommonUtil;
@@ -76,8 +74,6 @@ public class UpdateEmailActivity extends XCBaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.send_check_code:
-                break;
-            case R.id.titleRightButton:
                 emailStr = newEmail.getText().toString();
                 checkCodeStr = checkCode.getText().toString();
                 if (emailStr == null && emailStr.isEmpty()) {
@@ -91,6 +87,9 @@ public class UpdateEmailActivity extends XCBaseActivity implements View.OnClickL
                     settingDao = new SettingDao(mContext);
                 }
                 new MyTask().execute(settingDao);
+                break;
+            case R.id.titleRightButton:
+
                 break;
         }
     }

@@ -22,7 +22,7 @@ import java.util.LinkedList;
 /**
  * Created by Robin on 2016/4/9.
  */
-public class ProductManagerListActivity extends XCBaseActivity implements View.OnClickListener{
+public class ProductManagerListActivity extends XCBaseActivity implements View.OnClickListener,TextView.OnEditorActionListener{
     private TextView title;
     private Button submitGood;
     private ImageView back;
@@ -92,28 +92,7 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
         tabPageIndicator.setViewPager(mViewPager);
         tabPageIndicator.setCurrentItem(0);
 
-        searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                    Log.i("HarryRobin","IME_ACTION_SEARCH");
-                    String name = searchEdit.getText().toString().trim();
-                    if(name.equals("")){
-                        alert(R.string.goods_search_name_no_empty);
-                        return false;
-                    }
-                    if(mViewPager.getCurrentItem() == 0){// 出售中
-                        productManagerPutawayListFragment.goodName = name;
-                        productManagerPutawayListFragment.onRefresh();
-                    }else if(mViewPager.getCurrentItem() == 1){//仓库中
-                        productManagerTakeoffListFragment.goodName = name;
-                        productManagerTakeoffListFragment.onRefresh();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
+        searchEdit.setOnEditorActionListener(this);
     }
 
     @Override
@@ -127,5 +106,26 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
                 startActivityForResult(intent,OPERATION_PUBLISH_CODE);
                 break;
         }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if(actionId == EditorInfo.IME_ACTION_SEARCH){
+            Log.i("HarryRobin","IME_ACTION_SEARCH");
+            String name = searchEdit.getText().toString().trim();
+            if(name.equals("")){
+                alert(R.string.goods_search_name_no_empty);
+                return false;
+            }
+            if(mViewPager.getCurrentItem() == 0){// 出售中
+                productManagerPutawayListFragment.goodName = name;
+                productManagerPutawayListFragment.onRefresh();
+            }else if(mViewPager.getCurrentItem() == 1){//仓库中
+                productManagerTakeoffListFragment.goodName = name;
+                productManagerTakeoffListFragment.onRefresh();
+            }
+            return true;
+        }
+        return false;
     }
 }

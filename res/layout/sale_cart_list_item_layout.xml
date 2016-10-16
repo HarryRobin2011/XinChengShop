@@ -10,6 +10,7 @@
                   android:layout_width="21.0dp"
                   android:layout_height="21.0dp"
                   android:button="@null"
+                  android:visibility="gone"
                   android:background="@drawable/cart_product_checkbox_bg"
                   android:layout_gravity="center_vertical"
                   android:layout_marginLeft="10.0dp"/>

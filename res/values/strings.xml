@@ -755,5 +755,6 @@
     <string name="binding_account">账号绑定</string>
     <string name="combined_login">联合登录</string>
     <string name="bind_success">账号绑定成功~</string>
+    <string name="update_telphone_title">修改手机号</string>
 
 </resources>

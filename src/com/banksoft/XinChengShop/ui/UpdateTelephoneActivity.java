@@ -62,7 +62,7 @@ public class UpdateTelephoneActivity extends XCBaseActivity implements View.OnCl
 
     @Override
     protected void initData() {
-        title.setText(R.string.update_pay_password,null);
+        title.setText(R.string.update_telphone_title,null);
         back.setVisibility(View.VISIBLE);
     }
 

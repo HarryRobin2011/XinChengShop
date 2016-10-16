@@ -3,29 +3,15 @@ package com.banksoft.XinChengShop.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.AreaListAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
-import com.banksoft.XinChengShop.dao.PublishDao;
 import com.banksoft.XinChengShop.dao.SelectGoodsCategoryDao;
-import com.banksoft.XinChengShop.entity.ProductBO;
 import com.banksoft.XinChengShop.entity.ProductTypeVO;
-import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.model.ProductTypeData;
-import com.banksoft.XinChengShop.model.ShopProductTypeBOData;
-import com.banksoft.XinChengShop.ui.PublishGoodsActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
-
-import java.util.Objects;
 
 /**
  * Created by Robin on 2016/4/12.
@@ -45,7 +31,7 @@ public class SelectGoodsCategoryActivity extends XCBaseActivity implements Adapt
 
     @Override
     protected void initContentView() {
-        setContentView(R.layout.select_goods_ctegory_list_layout);
+        setContentView(R.layout.select_goods_ctegory_list_full_layout);
     }
 
     @Override

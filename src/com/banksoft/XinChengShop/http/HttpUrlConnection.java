@@ -2,7 +2,6 @@ package com.banksoft.XinChengShop.http;
 
 
 import com.banksoft.XinChengShop.config.ControlUrl;
-import org.apache.http.impl.conn.DefaultClientConnection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

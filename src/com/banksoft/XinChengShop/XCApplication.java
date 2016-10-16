@@ -10,7 +10,6 @@ import com.banksoft.XinChengShop.service.LocationService;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.iflytek.cloud.SpeechUtility;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -95,9 +94,9 @@ public class XCApplication extends Application {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.list_thumbnail_loading_ss)
-                .showImageForEmptyUri(R.drawable.list_thumbnail_loading_ss)
-                .showImageOnFail(R.drawable.list_thumbnail_loading_ss)
+                .showImageOnLoading(R.drawable.default_picture_icon)
+                .showImageForEmptyUri(R.drawable.default_picture_icon)
+                .showImageOnFail(R.drawable.default_picture_icon)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)

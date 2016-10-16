@@ -213,8 +213,14 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
     @Override
     public void onRefresh() {
         cacheFlag = false;
-        bannerViewPagerAdapter.dataList.clear();
-        homeDataListAdapter.dataList.clear();
+        if(homeDataListAdapter.dataList != null){
+            bannerViewPagerAdapter.dataList.clear();
+        }
+        if(homeDataListAdapter.dataList != null){
+            homeDataListAdapter.dataList.clear();
+        }
+
+
         if(homeDao == null){
            homeDao = new HomeDao(mContext);
         }

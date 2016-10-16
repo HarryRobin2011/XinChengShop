@@ -12,7 +12,6 @@ import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.OrderProductVO;
 import com.banksoft.XinChengShop.entity.OrderVO;
-import com.banksoft.XinChengShop.type.OrderStatus;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -34,6 +33,7 @@ public class ExpressBillAdapter extends BaseMyAdapter {
     private class OrderSaleHolder extends BusinessHolder {
         private TextView shopName;
         private TextView total;
+        private TextView initAddress,destination,telphone;
 
         TextView myDispatch; // 我去送货
 
@@ -59,6 +59,9 @@ public class ExpressBillAdapter extends BaseMyAdapter {
         orderSaleHolder.toolLayout = (LinearLayout) cellView.findViewById(R.id.layout_tool);
         orderSaleHolder.myDispatch = (TextView) cellView.findViewById(R.id.my_dispatch);
         orderSaleHolder.orderItemLayout = (LinearLayout) cellView.findViewById(R.id.order_list_item);
+        orderSaleHolder.initAddress = (TextView) cellView.findViewById(R.id.init_address);
+        orderSaleHolder.destination = (TextView) cellView.findViewById(R.id.destination);
+        orderSaleHolder.telphone = (TextView) cellView.findViewById(R.id.telPhone);
         return orderSaleHolder;
     }
 
@@ -93,8 +96,12 @@ public class ExpressBillAdapter extends BaseMyAdapter {
             holder.productContent.addView(view);
         }
         holder.total.setText("共"+orderVO.getList().size()+"件商品 "+"合计：" + orderVO.getTotalMoney() +"（含运费￥"+orderVO.getExpressMoney()+"）");
-
+        holder.telphone.setText("联系电话："+orderVO.getTelephone());
+        holder.initAddress.setText("初始地："+orderVO.getShopAddress());
+        holder.destination.setText("目的地："+orderVO.getAddress());
         holder.orderItemLayout.setOnClickListener(this);
+        holder.myDispatch.setOnClickListener(this);
+        holder.myDispatch.setTag(position);
         holder.orderItemLayout.setTag(position);
         return cellView;
     }

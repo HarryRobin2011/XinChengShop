@@ -1,15 +1,20 @@
 package com.banksoft.XinChengShop.ui.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
+import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.ExpressBillAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
+import com.banksoft.XinChengShop.dao.ExpressDao;
 import com.banksoft.XinChengShop.dao.TextDao;
+import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
@@ -24,6 +29,7 @@ public class ExpressBillListFragment extends XCBaseListFragment{
     private ExpressBillListActivity.OperaType currentType;
     private XCBaseActivity activity;
     private TextDao textDao;
+    private ExpressDao expressDao;
 
 
     @Override
@@ -82,7 +88,45 @@ public class ExpressBillListFragment extends XCBaseListFragment{
 
     @Override
     public void onAdapterCLick(View view, int position) {
+       switch (view.getId()){
+           case R.id.my_dispatch:
+               if(expressDao == null){
+                   expressDao = new ExpressDao(mContext);
+               }
+               new MyDispatch().execute(expressDao);
+               break;
+       }
+    }
 
+    private class MyDispatch extends AsyncTask<ExpressDao,String,IsFlagData>{
+        ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(progressDialog == null){
+                progressDialog = ProgressDialog.show(getActivity(),"",getText(R.string.please_wait));
+            }
+        }
+
+        @Override
+        protected IsFlagData doInBackground(ExpressDao... params) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
+            if(isFlagData != null){
+                if(isFlagData.isSuccess()){
+
+                }else{
+                    alert(isFlagData.getMsg().toString());
+                }
+            }else{
+                alert(R.string.net_error);
+            }
+        }
     }
 
 

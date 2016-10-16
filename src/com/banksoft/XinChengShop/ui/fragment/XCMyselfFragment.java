@@ -22,13 +22,9 @@ import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.update.UpdateUtil;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.banksoft.XinChengShop.widget.imageView.CustomShapeImageView;
-import com.banksoft.XinChengShop.widget.imagezoom.easing.Linear;
 import com.google.gson.internal.LinkedTreeMap;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 /**
  * Created by harry_robin on 15/11/4.

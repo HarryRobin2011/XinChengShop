@@ -5,13 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.ShareToolEntity;
@@ -20,10 +14,8 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.utils.BitmapUtils;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Robin on 2016/7/19.
@@ -106,7 +98,7 @@ public class ShareUmengUtil {
                 }
                 shareAction.withTargetUrl(ControlUrl.WEI_XIN_DOWNLOAD_URL);
                 shareAction.setPlatform(share_media).setCallback(umShareListener).share();
-                popupWindowUtil.dismiss();;
+                popupWindowUtil.dismiss();
             }
         });
 

@@ -588,4 +588,6 @@
     <item name="product" type="id">product</item>
     <item name="linker_telephone" type="id">linker_telephone</item>
     <item name="binding_account" type="id">binding_account</item>
+    <item name="init_address" type="id">init_address</item>
+    <item name="destination" type="id">destination</item>
 </resources>

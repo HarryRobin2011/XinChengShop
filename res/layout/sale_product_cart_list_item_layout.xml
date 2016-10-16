@@ -16,6 +16,7 @@
                   android:layout_height="21.0dp"
                   android:layout_gravity="center_vertical"
                   android:button="@null"
+                  android:visibility="gone"
                   android:background="@drawable/cart_product_checkbox_bg"/>
         <LinearLayout android:id="@+id/image_layout"
                       android:layout_width="100.0dp"

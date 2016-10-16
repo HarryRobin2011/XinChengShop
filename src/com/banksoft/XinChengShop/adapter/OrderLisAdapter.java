@@ -33,7 +33,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
 
     private class OrderSaleHolder extends BusinessHolder {
         private TextView shopName;
-        private TextView total;
+        private TextView total,status;
 
         TextView delivery; // 同意退货后发货
         TextView confirm;//确认收货
@@ -73,6 +73,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
 //        orderSaleHolder.returnGoods = (TextView) cellView.findViewById(R.id.return_the_goods);
        orderSaleHolder.refund = (TextView) cellView.findViewById(R.id.refund);
         orderSaleHolder.delete = (TextView) cellView.findViewById(R.id.delete);
+        orderSaleHolder.status = (TextView) cellView.findViewById(R.id.status);
         orderSaleHolder.orderItemLayout = (LinearLayout) cellView.findViewById(R.id.order_list_item);
         return orderSaleHolder;
     }
@@ -195,6 +196,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
             orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(OrderStatus.valueOf(orderStatus).getName());
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
             return OrderStatus.OVER;
         }else if(OrderStatus.REPEALING.name().equals(orderStatus)){//订单退货中
