@@ -12,6 +12,7 @@ import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.OrderProductVO;
 import com.banksoft.XinChengShop.entity.OrderVO;
+import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -22,11 +23,11 @@ import java.util.List;
  */
 public class ExpressBillAdapter extends BaseMyAdapter {
     public ImageLoader mImageViewLoader;
+    private ExpressBillListActivity.OperaType currentType;
 
     public ExpressBillAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageViewLoader = ImageLoader.getInstance();
-        mImageViewLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
 
@@ -43,6 +44,10 @@ public class ExpressBillAdapter extends BaseMyAdapter {
 
         private OrderVO orderVO;
 
+    }
+
+    public void setCurrentType(ExpressBillListActivity.OperaType currentType) {
+        this.currentType = currentType;
     }
 
     @Override
@@ -96,13 +101,22 @@ public class ExpressBillAdapter extends BaseMyAdapter {
             holder.productContent.addView(view);
         }
         holder.total.setText("共"+orderVO.getList().size()+"件商品 "+"合计：" + orderVO.getTotalMoney() +"（含运费￥"+orderVO.getExpressMoney()+"）");
-        holder.telphone.setText("联系电话："+orderVO.getTelephone());
+       if(orderVO.getTelephone() != null){
+           String[] tels = orderVO.getTelephone().split("/");
+           if(tels.length >0){
+               holder.telphone.setText("联系电话："+tels[0]);
+           }
+        }
+
         holder.initAddress.setText("初始地："+orderVO.getShopAddress());
         holder.destination.setText("目的地："+orderVO.getAddress());
         holder.orderItemLayout.setOnClickListener(this);
         holder.myDispatch.setOnClickListener(this);
         holder.myDispatch.setTag(position);
         holder.orderItemLayout.setTag(position);
+        if(ExpressBillListActivity.OperaType.NEW_DISPATCH_ORDER.equals(currentType)){
+            holder.toolLayout.setVisibility(View.VISIBLE);
+        }
         return cellView;
     }
 

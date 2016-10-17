@@ -27,7 +27,6 @@ public class ShopListAdapter extends BaseMyAdapter {
     public ShopListAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class ProductListHolder extends BusinessHolder{

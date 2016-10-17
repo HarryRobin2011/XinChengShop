@@ -116,7 +116,7 @@
         <activity android:name=".ui.ScoreListActivity" android:screenOrientation="portrait"
                   android:theme="@style/StyledIndicators"/>
         <activity android:name=".ui.ProductManagerListActivity" android:screenOrientation="portrait"
-                  android:theme="@style/StyledIndicators" android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+                  android:theme="@style/StyledIndicators"/>
         <activity android:name=".ui.PublishGoodsActivity" android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity android:name=".ui.MessageListActivity" android:screenOrientation="portrait"/>

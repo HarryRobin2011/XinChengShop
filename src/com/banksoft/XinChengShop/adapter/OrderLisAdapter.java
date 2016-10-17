@@ -27,7 +27,6 @@ public class OrderLisAdapter extends BaseMyAdapter{
     public OrderLisAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageViewLoader = ImageLoader.getInstance();
-        mImageViewLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
 

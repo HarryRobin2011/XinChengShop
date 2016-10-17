@@ -51,6 +51,7 @@ public class ExpressBillListFragment extends XCBaseListFragment{
 
         jsonType = JSONHelper.ORDER_LIST_DATA;
         bailaAdapter = new ExpressBillAdapter(mContext,new ArrayList());
+        ((ExpressBillAdapter)bailaAdapter).setCurrentType(currentType);
         xListView.setDividerHeight(10);
         setListDao();
     }

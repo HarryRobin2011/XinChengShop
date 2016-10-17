@@ -76,7 +76,6 @@ public class ScoreProductInfoActivity extends XCBaseActivity implements View.OnC
         cachePath = getFilesDir().getAbsolutePath() +getClass().getSimpleName()+ File.separator+ CACHE_DIRFILE;
         setmWebViewSettings();
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     @Override

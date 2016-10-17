@@ -36,7 +36,6 @@ public class TakeOutMenuProductAdapter extends BaseMyAdapter implements View.OnC
         super(context, dataList);
         this.fragment = (TakeOutMenuFragment) fragment;
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     @Override

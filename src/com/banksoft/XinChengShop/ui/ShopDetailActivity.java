@@ -83,7 +83,6 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
     protected void initData() {
         share.setVisibility(View.VISIBLE);
         mImageLoadrer = ImageLoader.getInstance();
-        mImageLoadrer.init(ImageLoaderConfiguration.createDefault(mContext));
 
         shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
         back.setVisibility(View.VISIBLE);

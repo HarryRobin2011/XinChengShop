@@ -62,7 +62,6 @@ public class OfSizesFragment extends XCBaseFragment implements View.OnClickListe
     public void initData() {
         String imageFile = "";
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         price.setText(productVO.getSalePrice() + "元");
         inventory.setText(productVO.getStockNum() + "件");
         if (productVO.getIcon() != null) {

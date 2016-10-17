@@ -92,7 +92,6 @@
                   android:background="@drawable/edit_text_red_bg"
                   android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
-                  android:visibility="gone"
                   android:text="@string/my_dispatch"/>
     </LinearLayout>
 

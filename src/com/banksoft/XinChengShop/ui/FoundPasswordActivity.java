@@ -102,7 +102,7 @@ public class FoundPasswordActivity extends XCBaseActivity implements View.OnClic
                     intent.putExtra(IntentFlag.DATA,foundPassword.getData());
                     startActivity(intent);
                 }else{
-                    alert(foundPassword.getMsg().toString());
+                    alert(R.string.account_error);
                 }
             }else{
                 alert(R.string.net_error);

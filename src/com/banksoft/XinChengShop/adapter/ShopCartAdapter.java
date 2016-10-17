@@ -30,7 +30,6 @@ public class ShopCartAdapter extends BaseMyAdapter{
     @Override
     protected View createCellView() {
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         return LinearLayout.inflate(mContext,R.layout.sale_cart_list_item_layout,null);
     }
 

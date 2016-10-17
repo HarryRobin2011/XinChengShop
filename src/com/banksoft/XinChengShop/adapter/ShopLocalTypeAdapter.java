@@ -29,7 +29,6 @@ public class ShopLocalTypeAdapter extends BaseMyAdapter{
         super(activity.getApplicationContext(), dataList);
         this.activity = activity;
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class ShopLocalTypeHolder extends BusinessHolder{

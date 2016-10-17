@@ -132,7 +132,6 @@ public class ApplyOpenShopActivity extends XCBaseActivity implements OnItemClick
     @Override
     protected void initData() {
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         arryshoptype = getResources().getStringArray(R.array.arryshoptype);
         arryhouse = getResources().getStringArray(R.array.arryhouse);
         title.setText(R.string.store_to_apply);

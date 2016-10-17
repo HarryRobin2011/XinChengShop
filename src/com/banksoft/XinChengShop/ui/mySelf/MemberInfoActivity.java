@@ -94,7 +94,6 @@ public class MemberInfoActivity extends XCBaseActivity implements View.OnClickLi
         title.setText(R.string.member_info);
         back.setVisibility(View.VISIBLE);
         mImageLoader = ImageLoader.getInstance().getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         pickPhotoUtil = PickPhotoUtil.getInstance();
         isLogin();
         setInfo();

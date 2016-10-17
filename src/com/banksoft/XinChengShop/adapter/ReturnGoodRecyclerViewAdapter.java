@@ -30,7 +30,6 @@ public class ReturnGoodRecyclerViewAdapter extends RecyclerView.Adapter<ReturnGo
         this.dataList = dataList;
         this.mContext = mContext;
         this.mImageLoader = ImageLoader.getInstance();
-        this.mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     public void setOnRecylerViewOnItemLinstener(OnRecylerViewOnItemLinstener onRecylerViewOnItemLinstener) {

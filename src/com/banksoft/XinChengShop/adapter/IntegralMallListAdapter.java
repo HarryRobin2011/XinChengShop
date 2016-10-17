@@ -26,7 +26,6 @@ public class IntegralMallListAdapter extends BaseMyAdapter {
     public IntegralMallListAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class ProductListHolder extends BusinessHolder{

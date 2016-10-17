@@ -24,7 +24,6 @@ public class CollectShopAdapter extends BaseMyAdapter {
     public CollectShopAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class CollectShopHolder extends BusinessHolder{

@@ -161,7 +161,6 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
     public void initData() {
         mainActivity = (XCMainActivity) getActivity();
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         // messageLayout.setVisibility(View.VISIBLE);
 
         mListView.addHeaderView(bannerView);

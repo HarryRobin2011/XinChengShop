@@ -65,7 +65,6 @@ public class AssociatedActivity extends XCBaseActivity implements View.OnClickLi
     protected void initData() {
         currentMergeType = (SHARE_MEDIA) getIntent().getSerializableExtra(IntentFlag.SHARE_MEDIA);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 
         umShareAPI = UMShareAPI.get(this);
 
