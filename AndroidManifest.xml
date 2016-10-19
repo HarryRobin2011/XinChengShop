@@ -245,6 +245,7 @@
                 android:windowSoftInputMode="adjustResize"
                 android:exported="false">
         </activity>
+        <activity android:name=".ui.DisPatchInfoActivity" android:screenOrientation="portrait"/>
         <service
                 android:name="com.sina.weibo.sdk.net.DownloadService"
                 android:exported="false">

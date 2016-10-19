@@ -39,7 +39,6 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
     private LinkedList shopCartDataList;
     private FrameLayout nullPager;
     private LinearLayout operation_layout;
-    private LinkedHashMap<String, ShopCartProductData> selectDataMap;
 
     private LinearLayout searchLayout;
     private TextView title;

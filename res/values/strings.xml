@@ -757,5 +757,8 @@
     <string name="bind_success">账号绑定成功~</string>
     <string name="update_telphone_title">修改手机号</string>
     <string name="account_error">账号错误，请核实后重试</string>
+    <string name="go_dispacth">去派送</string>
+    <string name="initially">初始地：</string>
+    <string name="destination">目的地：</string>
 
 </resources>
