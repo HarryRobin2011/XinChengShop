@@ -13,8 +13,7 @@ import com.banksoft.XinChengShop.entity.ProductStandard;
 import com.banksoft.XinChengShop.entity.ProductVO;
 import com.banksoft.XinChengShop.entity.Standard;
 import com.banksoft.XinChengShop.ui.base.XCBaseFragment;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.banksoft.XinChengShop.utils.ImageUtil;
 
 /**
  * Created by harry_robin on 15/11/20.
@@ -31,7 +30,6 @@ public class OfSizesFragment extends XCBaseFragment implements View.OnClickListe
     private Standard selectStandard;
     private ProductStandard productStandard;
     private ProductVO productVO;
-    private ImageLoader mImageLoader;
     private String imageUrl;
 
     @Override
@@ -61,13 +59,12 @@ public class OfSizesFragment extends XCBaseFragment implements View.OnClickListe
     @Override
     public void initData() {
         String imageFile = "";
-        mImageLoader = ImageLoader.getInstance();
         price.setText(productVO.getSalePrice() + "元");
         inventory.setText(productVO.getStockNum() + "件");
         if (productVO.getIcon() != null) {
             imageFile = productVO.getIcon().split("\\|")[0];
         }
-        mImageLoader.displayImage(ControlUrl.BASE_URL + imageFile, mImageView, XCApplication.options);
+        ImageUtil.loadImage(mContext,ControlUrl.BASE_URL + imageFile,mImageView);
     }
 
 

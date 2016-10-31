@@ -116,6 +116,7 @@ public class TakeOutMenuFragment extends XCBaseFragment implements AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.list_view:
+                categoryListAdapter.setSelected(position);
                 setChildView(position, categoryListAdapter.getItem(position));
                 break;
 
@@ -248,7 +249,6 @@ public class TakeOutMenuFragment extends XCBaseFragment implements AdapterView.O
             fragmentTransaction.add(R.id.content, takeOutMenuProductFragment).commit();
         }
         this.currentMenuFragment = takeOutMenuProductFragment;
-        categoryListAdapter.setSelected(position);
     }
 
 

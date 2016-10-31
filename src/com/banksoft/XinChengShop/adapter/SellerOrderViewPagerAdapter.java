@@ -20,9 +20,6 @@ public class SellerOrderViewPagerAdapter extends FragmentPagerAdapter{
         this.dataList = dataList;
     }
 
-
-
-
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         super.destroyItem(container, position, object);

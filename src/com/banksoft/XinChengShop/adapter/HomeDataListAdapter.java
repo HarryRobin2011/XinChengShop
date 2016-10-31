@@ -22,8 +22,7 @@ import com.banksoft.XinChengShop.ui.ProductListActivity;
 import com.banksoft.XinChengShop.ui.ShopDetailActivity;
 import com.banksoft.XinChengShop.ui.ShopProductInfoActivity;
 import com.banksoft.XinChengShop.widget.MyGridView;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.bumptech.glide.Glide;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,14 +33,14 @@ import java.util.List;
 public class HomeDataListAdapter extends BaseAdapter {
     private Context mContext;
     public List dataList;
-    private ImageLoader mImageLoader;
+   // private ImageLoader mImageLoader;
     private Activity mActivity;
 
     public HomeDataListAdapter(Activity activity, List dataList) {
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
         this.dataList = dataList;
-        mImageLoader = ImageLoader.getInstance();
+       // mImageLoader = ImageLoader.getInstance();
     }
 
     @Override
@@ -86,7 +85,8 @@ public class HomeDataListAdapter extends BaseAdapter {
                         mContext.startActivity(intent);
                     }
                 });
-                mImageLoader.displayImage(ControlUrl.BASE_URL + productTypeVOS.get(i).getIcon(), imageView, XCApplication.options);
+            //    mImageLoader.displayImage(ControlUrl.BASE_URL + productTypeVOS.get(i).getIcon(), imageView, XCApplication.options);
+                Glide.with(mContext).load(ControlUrl.BASE_URL + productTypeVOS.get(i).getIcon()).placeholder(R.drawable.list_thumbnail_loading_ss).centerCrop().crossFade().into(imageView);
             }
 
 

@@ -97,6 +97,7 @@ public abstract class XCBaseListFragment extends XCBaseFragment implements XList
 
     @Override
     public void onRefresh() {
+        params = "";
         cacheFlag = false;
         firstStart = true;
         bailaAdapter.dataList.clear();

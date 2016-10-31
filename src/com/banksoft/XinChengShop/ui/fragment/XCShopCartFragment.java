@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.ShopCartAdapter;
+import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.config.SharedPreTag;
 import com.banksoft.XinChengShop.entity.ProductCart;
@@ -29,7 +30,7 @@ import java.util.LinkedList;
 /**
  * Created by harry_robin on 15/11/4.
  */
-public class XCShopCartFragment extends XCBaseFragment implements View.OnClickListener {
+public class XCShopCartFragment extends XCBaseFragment implements View.OnClickListener,BaseMyAdapter.OnAdapterClickListener{
     private ListView listView;
     private TextView price;
     private Button ok;
@@ -51,7 +52,8 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View view) {
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
         shopCartSP = getActivity().getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
 
@@ -91,6 +93,7 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
         if (shopCartAdapter == null) {
             shopCartAdapter = new ShopCartAdapter(this, shopCartDataList);
         }
+        shopCartAdapter.setOnAdapterClickListener(this);
         setTotalMoney(shopCartDataList);
         listView.setAdapter(shopCartAdapter);
     }
@@ -165,6 +168,8 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
 
     }
 
+
+
     /**
      * 获取购物车选中数据
      */
@@ -192,5 +197,19 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
             }
         }
         return shopCartProductDataHashMap;
+    }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+       switch (view.getId()){
+           case R.id.delete:
+              shopCartAdapter.remove(position);
+               shopCartDataMap.remove(shopCartDataMap.keySet().toArray()[position]);
+               shopCartSP.edit().putString(SharedPreTag.SHOP_CART_PRODUCT,JSONHelper.toJSONString(shopCartDataMap)).commit();
+               break;
+           case R.id.num:
+
+               break;
+       }
     }
 }

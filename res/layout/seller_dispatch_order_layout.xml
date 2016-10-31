@@ -126,6 +126,7 @@
                           android:hint="@string/please_input_dispatch_persion_price"
                           style="@style/text_style_3"
                           android:paddingLeft="10.0dp"
+                          android:inputType="numberSigned"
                           android:background="@drawable/edit_text_white_bg"/>
             </LinearLayout>
         </LinearLayout>

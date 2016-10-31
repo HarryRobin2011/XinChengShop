@@ -85,11 +85,12 @@ public class ShareUmengUtil {
                         share_media = SHARE_MEDIA.QQ;
                         break;
                     case 2:
-                        share_media = SHARE_MEDIA.WEIXIN;
-                        break;
-                    case 3:
                         share_media = SHARE_MEDIA.WEIXIN_CIRCLE;
                         break;
+                    case 3:
+                        share_media = SHARE_MEDIA.WEIXIN;
+                        break;
+
                 }
                 shareAction.withText(shareContext);
                 if(shareImage != null && !shareImage.isEmpty()){

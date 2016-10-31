@@ -150,24 +150,28 @@ public class SellerDispatchOrderActivity extends XCBaseActivity implements View.
                 dispatchPersonPriceLayout.setVisibility(View.GONE);
                 dispatchExpressNo.setVisibility(View.VISIBLE);
                 dispatchSelectLayout.setVisibility(View.VISIBLE);
+                dispatchManualLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.dispatch_manual:
                 currentType = OperationType.MANUAL;
                 dispatchPersonPriceLayout.setVisibility(View.GONE);
                 dispatchExpressNo.setVisibility(View.VISIBLE);
                 dispatchSelectLayout.setVisibility(View.GONE);
+                dispatchManualLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.dispatch_my_self:
                 currentType = OperationType.MYSELF;
                 dispatchPersonPriceLayout.setVisibility(View.GONE);
                 dispatchExpressNo.setVisibility(View.GONE);
                 dispatchSelectLayout.setVisibility(View.GONE);
+                dispatchManualLayout.setVisibility(View.GONE);
                 break;
             case R.id.dispatch_person:
                 currentType = OperationType.PERSON;
                 dispatchPersonPriceLayout.setVisibility(View.VISIBLE);
                 dispatchExpressNo.setVisibility(View.GONE);
                 dispatchSelectLayout.setVisibility(View.GONE);
+                dispatchManualLayout.setVisibility(View.GONE);
                 break;
         }
     }
@@ -199,7 +203,7 @@ public class SellerDispatchOrderActivity extends XCBaseActivity implements View.
 
         @Override
         protected IsFlagData doInBackground(SellerDispatchDao... params) {
-            return params[0].sendOrder(currentOrderVO.getId(),key, no,type,dispatchPrice);
+            return params[0].sendOrder(currentOrderVO.getId(),key, no,dispatchPrice,type);
         }
 
         @Override

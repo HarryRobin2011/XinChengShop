@@ -14,6 +14,7 @@ import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.ExpressDao;
 import com.banksoft.XinChengShop.dao.TextDao;
+import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.ui.DisPatchInfoActivity;
 import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
@@ -42,6 +43,7 @@ public class ExpressBillListFragment extends XCBaseListFragment {
 
     @Override
     public void request() {
+        cacheFlag = false;
         currentType = (ExpressBillListActivity.OperaType) getArguments().getSerializable(IntentFlag.TYPE);
         if (ExpressBillListActivity.OperaType.MY_DISPATH_ORDER.equals(currentType)) {//�ҵ����Ͷ���
             url = ControlUrl.EXPRESS_BILL_ORDER_LIST_URL;
@@ -97,13 +99,18 @@ public class ExpressBillListFragment extends XCBaseListFragment {
                 if (expressDao == null) {
                     expressDao = new ExpressDao(mContext);
                 }
-                new MyDispatch().execute(expressDao);
+                new MyDispatch(((OrderVO)bailaAdapter.dataList.get(position)).getId()).execute(expressDao);
                 break;
         }
     }
 
     private class MyDispatch extends AsyncTask<ExpressDao, String, IsFlagData> {
         ProgressDialog progressDialog;
+        private String orderId;
+
+        public MyDispatch(String orderId) {
+            this.orderId = orderId;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -115,16 +122,17 @@ public class ExpressBillListFragment extends XCBaseListFragment {
 
         @Override
         protected IsFlagData doInBackground(ExpressDao... params) {
-
-            return null;
+            return params[0].getExpressBillOrder(activity.member.getMember().getId(),orderId);
         }
 
         @Override
         protected void onPostExecute(IsFlagData isFlagData) {
             super.onPostExecute(isFlagData);
+            progressDialog.dismiss();
             if (isFlagData != null) {
                 if (isFlagData.isSuccess()) {
-
+                    alert(R.string.express_bill_success);
+                    onRefresh();
                 } else {
                     alert(isFlagData.getMsg().toString());
                 }

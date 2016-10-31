@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
@@ -9,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.SharedPreTag;
 
 import java.io.File;
 import java.io.IOException;
@@ -203,5 +205,10 @@ public class CommonUtil {
          response =   data.replace("null","");
         }
         return response;
+    }
+
+    public static void clearShopCart(Context context){
+        SharedPreferences sharedPreferences  = context.getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
     }
 }

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
+import com.banksoft.XinChengShop.utils.CommonUtil;
 
 /**
  * Created by admin on 2016/7/6.
@@ -87,6 +88,7 @@ public class SettingActivity extends XCBaseActivity implements View.OnClickListe
                 break;
             case R.id.quit:
                 clearLogin();
+                CommonUtil.clearShopCart(getApplicationContext());
                 setResult(RESULT_OK);
                 finish();
                 break;

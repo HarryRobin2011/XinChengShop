@@ -14,6 +14,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.widget.ImageView;
+import com.banksoft.XinChengShop.R;
+import com.bumptech.glide.Glide;
 
 import java.io.*;
 import java.util.HashMap;
@@ -209,6 +212,16 @@ public class ImageUtil {
                 cursor.close();
         }
         return null;
+    }
+
+    /**
+     * 加载图片
+     * @param context
+     * @param imageUrl
+     * @param imageView
+     */
+    public static void loadImage(Context context, String imageUrl, ImageView imageView){
+        Glide.with(context).load(imageUrl).placeholder(R.drawable.list_thumbnail_loading_ss).centerCrop().crossFade().into(imageView);
     }
 
     /**

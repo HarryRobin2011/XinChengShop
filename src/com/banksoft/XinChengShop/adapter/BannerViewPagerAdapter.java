@@ -10,8 +10,7 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.Advertisement;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,13 +21,11 @@ import java.util.List;
 public class BannerViewPagerAdapter extends PagerAdapter {
     public List dataList;
     private Context mContext;
-    private ImageLoader mImageLoader;
     private HashMap<Integer,View> viewHashMap;
 
     public BannerViewPagerAdapter(Context context,List dataList){
         this.dataList = dataList;
         this.mContext = context;
-        mImageLoader = ImageLoader.getInstance();
         viewHashMap = new HashMap<>();
     };
 
@@ -43,7 +40,8 @@ public class BannerViewPagerAdapter extends PagerAdapter {
         if(imageView == null){
             imageView = (ImageView) LayoutInflater.from(mContext).inflate(R.layout.banner_image_cell, null);
             Advertisement advertisement = (Advertisement) dataList.get(position);
-            mImageLoader.displayImage(ControlUrl.BASE_URL + advertisement.getImageUrl(), imageView, XCApplication.options);
+           // mImageLoader.displayImage(ControlUrl.BASE_URL + advertisement.getImageUrl(), imageView, XCApplication.options);
+            Glide.with(mContext).load(ControlUrl.BASE_URL + advertisement.getImageUrl()).placeholder(R.drawable.list_thumbnail_loading_ss).centerCrop().crossFade().into(imageView);
             container.addView(imageView);
         }
         return imageView;

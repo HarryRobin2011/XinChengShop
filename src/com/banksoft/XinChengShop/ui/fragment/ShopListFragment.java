@@ -65,10 +65,10 @@ public class ShopListFragment extends XCBaseListFragment{
         if(requestCode == Activity.RESULT_FIRST_USER){
             switch (resultCode){
                 case Activity.RESULT_OK:  //�����ɹ�
-                    request();
+                   onRefresh();
                     break;
                 case Activity.RESULT_CANCELED: //ȡ�����
-                    request();
+                  //  onRefresh();
                     break;
             }
         }

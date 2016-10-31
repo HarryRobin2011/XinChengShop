@@ -1,6 +1,9 @@
 package com.banksoft.XinChengShop.adapter;
 
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
@@ -83,7 +86,8 @@ public class ShopCartAdapter extends BaseMyAdapter{
             TextView priceText = (TextView) view.findViewById(R.id.real_price);
             ImageButton cartReduce = (ImageButton) view.findViewById(R.id.cart_single_product_num_reduce);
             ImageButton cartAdd = (ImageButton) view.findViewById(R.id.cart_single_product_num_add);
-            final TextView num = (TextView) view.findViewById(R.id.cart_single_product_et_num);
+            ImageView delete = (ImageView) view.findViewById(R.id.delete);
+            final EditText num = (EditText) view.findViewById(R.id.cart_single_product_et_num);
             String imageUrl = "";
             if(!"".equals(productCart.getProductVO().getIcon()) && productCart.getProductVO().getIcon() != null){
                imageUrl = ControlUrl.BASE_URL + productCart.getProductVO().getIcon().split("\\|")[0];
@@ -94,6 +98,26 @@ public class ShopCartAdapter extends BaseMyAdapter{
             mImageLoader.displayImage(imageUrl,imageView, XCApplication.options);
             productName.setText(productCart.getProductVO().getName());
             num.setText(productCart.getNum()+"");
+            num.setTag(position);
+            num.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    productCart.setNum(Integer.valueOf(num.getText().toString()));
+                    xcShopCartFragment.setTotalMoney((LinkedList<ShopCartProductData>) dataList);
+                }
+            });
+            delete.setTag(position);
+            delete.setOnClickListener(this);
             priceText.setText(productCart.getSalePrice()+"元");
             holder.content.addView(view);
             checkBox.setChecked(productCart.isSelect());
@@ -165,4 +189,5 @@ public class ShopCartAdapter extends BaseMyAdapter{
         xcShopCartFragment.setTotalMoney((LinkedList<ShopCartProductData>) dataList);
 
     }
+
 }

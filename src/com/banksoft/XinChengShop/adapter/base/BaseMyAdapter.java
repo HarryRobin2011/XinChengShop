@@ -93,4 +93,10 @@ public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickL
         int position = (int) v.getTag();
         onAdapterClickListener.onAdapterCLick(v,position);
     }
+
+    public void remove(int position){
+        dataList.remove(position);
+        dataMap.clear();
+        notifyDataSetChanged();
+    }
 }

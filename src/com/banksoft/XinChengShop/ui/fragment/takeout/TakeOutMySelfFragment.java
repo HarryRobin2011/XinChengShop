@@ -45,6 +45,18 @@ public class TakeOutMySelfFragment extends XCBaseFragment implements View.OnClic
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 100){
+            if(activity.isLogin()){// 登陆了
+                account.setText(activity.member.getMember().getAccount());
+                super.onActivityResult(requestCode, resultCode, data);
+            }else {// 没有登陆
+                account.setText(R.string.click_login);
+            }
+        }
+    }
+
+    @Override
     public void initOperation() {
          account.setOnClickListener(this);
          addressManager.setOnClickListener(this);
