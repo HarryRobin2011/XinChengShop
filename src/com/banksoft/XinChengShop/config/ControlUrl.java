@@ -35,6 +35,7 @@ public class ControlUrl {
     public static final String XC_COLLECT_SHOP_URL = "/app/shopCollection_save";//收藏店铺
     public static final String XC_SHOP_SCORE_PRODUCT_LIST_URL = "/app/scoreProduct_list";//积分产品列表
     public static final String XC_DELETE_COLLECT_PRODUCT_URL = "/app/productCollection_frontDelete";//详情页取消收藏
+    public static final String XC_DELETE_COLLECT_SHOP_URL = "/app/shopCollection_frontDelete";//店铺详情页取消收藏
     public static final String SHIPPING_LIST_URL = "/app/memberAddress_list";//收货地址列表
     public static final String ADDRESS_SAVE = "/app/memberAddress_save";
     public static final String ADDRESS_DELETE = "/app/memberAddress_delete";
@@ -85,6 +86,7 @@ public class ControlUrl {
     public static final String SCORE_INFO_URL = "/app/scoreProduct_find";//积分产品详情
     public static final String XC_SHOP_UPDATE_ORDER_PRICE ="/app/shopOrder_changePrice";//卖家修改金额
     public static final String XC_APPLY_WITH_DRAW_HISTORY_LIST_URL = "/app/withdraw_list";//提现记录列表
+    public static final String XC_IS_CHECK_SHOP_URL = "/app/shopCollection_check";//是否收藏店铺
 
     public static String XC_COMMON_LIST_URL = "/app/memberAssess_list";// 评论列表
 
