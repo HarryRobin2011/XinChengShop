@@ -13,6 +13,7 @@ import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.OrderProductVO;
 import com.banksoft.XinChengShop.entity.OrderVO;
 import com.banksoft.XinChengShop.type.OrderStatus;
+import com.banksoft.XinChengShop.type.ReturnProductStatus;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -83,7 +84,7 @@ public class OrderLisAdapter extends BaseMyAdapter{
         OrderSaleHolder holder = (OrderSaleHolder) cellHolder;
         holder.shopName.setText(orderVO.getShopName());
         holder.orderVO = orderVO;
-        filterOrder(orderVO.getStatus(), holder);
+        filterOrder(orderVO.getStatus(),orderVO.getRemarkStatus(), holder);
         holder.productContent.removeAllViews();
 
         for (OrderProductVO productVO : orderVO.getList()) {
@@ -136,82 +137,219 @@ public class OrderLisAdapter extends BaseMyAdapter{
      * @param orderStatus
      * @return
      */
-    private OrderStatus filterOrder(String orderStatus,OrderSaleHolder orderSaleHolder) {
-        if (OrderStatus.CREATE.name().equals(orderStatus)) {// 待付款
-            orderSaleHolder.delivery.setVisibility(View.GONE);
-            orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.cancel.setVisibility(View.VISIBLE);
-            orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.pay.setVisibility(View.VISIBLE);
+    private OrderStatus filterOrder(String orderStatus,String returnStatus,OrderSaleHolder orderSaleHolder) {
+            if (OrderStatus.CREATE.name().equals(orderStatus)) {// 待付款
+                orderSaleHolder.delivery.setVisibility(View.GONE);
+                orderSaleHolder.confirm.setVisibility(View.GONE);
+                orderSaleHolder.cancel.setVisibility(View.VISIBLE);
+                orderSaleHolder.comments.setVisibility(View.GONE);
+                orderSaleHolder.pay.setVisibility(View.VISIBLE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.GONE);
-            orderSaleHolder.returnMoney.setVisibility(View.GONE);
-            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
-            return OrderStatus.CREATE;
-        } else if (OrderStatus.PAY.name().equals(orderStatus)) {//待发货
-            orderSaleHolder.delivery.setVisibility(View.GONE);
-            orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.cancel.setVisibility(View.GONE);
-            orderSaleHolder.comments.setVisibility(View.GONE);
+                orderSaleHolder.refund.setVisibility(View.GONE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                orderSaleHolder.returnMoney.setVisibility(View.GONE);
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                return OrderStatus.CREATE;
+            } else if (OrderStatus.PAY.name().equals(orderStatus)) {//待发货
+                orderSaleHolder.delivery.setVisibility(View.GONE);
+                orderSaleHolder.confirm.setVisibility(View.GONE);
+                orderSaleHolder.cancel.setVisibility(View.GONE);
+                orderSaleHolder.comments.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.VISIBLE);
-            orderSaleHolder.pay.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.GONE);
-            orderSaleHolder.returnMoney.setVisibility(View.GONE);
-            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
-            return OrderStatus.PAY;
-        } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {//待确认收货
-            orderSaleHolder.delivery.setVisibility(View.GONE);
-            orderSaleHolder.confirm.setVisibility(View.VISIBLE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
+                orderSaleHolder.refund.setVisibility(View.VISIBLE);
+                orderSaleHolder.pay.setVisibility(View.GONE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                orderSaleHolder.returnMoney.setVisibility(View.GONE);
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                checkReturnOrderStatus(returnStatus,orderSaleHolder);
+                return OrderStatus.PAY;
+            } else if (OrderStatus.DISPATCH.name().equals(orderStatus)) {//待确认收货
+                orderSaleHolder.delivery.setVisibility(View.GONE);
+                orderSaleHolder.confirm.setVisibility(View.VISIBLE);
+                orderSaleHolder.refund.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.VISIBLE);
-            orderSaleHolder.cancel.setVisibility(View.GONE);
-            orderSaleHolder.comments.setVisibility(View.GONE);
-            orderSaleHolder.pay.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.GONE);
-            orderSaleHolder.returnMoney.setVisibility(View.GONE);
-            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
-            return OrderStatus.DISPATCH;
-        } else if (OrderStatus.SUCCESS.name().equals(orderStatus)) {//待评价
+                orderSaleHolder.cancel.setVisibility(View.GONE);
+                orderSaleHolder.comments.setVisibility(View.GONE);
+                orderSaleHolder.pay.setVisibility(View.GONE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                orderSaleHolder.returnMoney.setVisibility(View.GONE);
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                checkReturnOrderStatus(returnStatus,orderSaleHolder);
+                return OrderStatus.DISPATCH;
+            } else if (OrderStatus.SUCCESS.name().equals(orderStatus)) {//待评价
+                orderSaleHolder.delivery.setVisibility(View.GONE);
+                orderSaleHolder.confirm.setVisibility(View.GONE);
+                orderSaleHolder.cancel.setVisibility(View.GONE);
+                orderSaleHolder.comments.setVisibility(View.VISIBLE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+                orderSaleHolder.refund.setVisibility(View.GONE);
+                orderSaleHolder.pay.setVisibility(View.GONE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                orderSaleHolder.returnMoney.setVisibility(View.GONE);
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                return OrderStatus.SUCCESS;
+            } else if (OrderStatus.OVER.name().equals(orderStatus)) {
+                orderSaleHolder.delivery.setVisibility(View.GONE);
+                orderSaleHolder.confirm.setVisibility(View.GONE);
+                orderSaleHolder.cancel.setVisibility(View.GONE);
+                orderSaleHolder.comments.setVisibility(View.GONE);
+                orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+                orderSaleHolder.refund.setVisibility(View.GONE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                orderSaleHolder.returnMoney.setVisibility(View.GONE);
+                orderSaleHolder.status.setText(OrderStatus.valueOf(orderStatus).getName());
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                return OrderStatus.OVER;
+            }else if(OrderStatus.REPEALING.name().equals(orderStatus)){//订单退货中
+                orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
+                orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                return OrderStatus.OVER;
+            }else if(OrderStatus.REPEAL_OVER.name().equals(orderStatus)){//订单退货完成
+                orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
+                orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+                orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
+                orderSaleHolder.delete.setVisibility(View.GONE);
+                return OrderStatus.REPEAL_OVER;
+            }
+        return null;
+    }
+
+    private OrderStatus checkReturnOrderStatus(String returnStatus,OrderSaleHolder orderSaleHolder){
+        if(ReturnProductStatus.APPLY_MONEY.name().equals(returnStatus)){
             orderSaleHolder.delivery.setVisibility(View.GONE);
             orderSaleHolder.confirm.setVisibility(View.GONE);
             orderSaleHolder.cancel.setVisibility(View.GONE);
-            orderSaleHolder.comments.setVisibility(View.VISIBLE);
-//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
-            orderSaleHolder.refund.setVisibility(View.GONE);
-            orderSaleHolder.pay.setVisibility(View.GONE);
-            orderSaleHolder.delete.setVisibility(View.GONE);
-            orderSaleHolder.returnMoney.setVisibility(View.GONE);
-            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
-            return OrderStatus.SUCCESS;
-        } else if (OrderStatus.OVER.name().equals(orderStatus)) {
-            orderSaleHolder.delivery.setVisibility(View.GONE);
-            orderSaleHolder.confirm.setVisibility(View.GONE);
-            orderSaleHolder.cancel.setVisibility(View.GONE);
             orderSaleHolder.comments.setVisibility(View.GONE);
             orderSaleHolder.pay.setVisibility(View.GONE);
 //            orderSaleHolder.returnGoods.setVisibility(View.GONE);
             orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
             orderSaleHolder.returnMoney.setVisibility(View.GONE);
-            orderSaleHolder.status.setText(OrderStatus.valueOf(orderStatus).getName());
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
             return OrderStatus.OVER;
-        }else if(OrderStatus.REPEALING.name().equals(orderStatus)){//订单退货中
-            orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
-            orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
-            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+        }else if(ReturnProductStatus.APPLY_PART_MONEY.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
-            return OrderStatus.REPEALING;
-        }else if(OrderStatus.REPEAL_OVER.name().equals(orderStatus)){//订单退货完成
-            orderSaleHolder.returnMoney.setVisibility(View.VISIBLE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
             orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
-            orderSaleHolder.returnMoney.setText(String.valueOf(orderSaleHolder.orderVO.getTotalMoney()));
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.APPLY_PRODUCT.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
             orderSaleHolder.delete.setVisibility(View.GONE);
-            return OrderStatus.REPEAL_OVER;
-        }
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.SHOP_NOT_AGREE_PRODUCT.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
 
-        return null;
+        }else if(ReturnProductStatus.SHOP_NOT_PART_MONEY.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.SHOP_NOT_AGREE_PRODUCT.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.apply_return_ing);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.SHOP_NOT_AGREE_MONEY.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.no_agree_return);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.AGREE_DISPATCH.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.agree_dispatch);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.AGREE_NO_DISPATCH.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.agree_no_dispatch);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }else if(ReturnProductStatus.AGREE_OVER.name().equals(returnStatus)){
+            orderSaleHolder.delivery.setVisibility(View.GONE);
+            orderSaleHolder.confirm.setVisibility(View.GONE);
+            orderSaleHolder.cancel.setVisibility(View.GONE);
+            orderSaleHolder.comments.setVisibility(View.GONE);
+            orderSaleHolder.pay.setVisibility(View.GONE);
+//            orderSaleHolder.returnGoods.setVisibility(View.GONE);
+            orderSaleHolder.refund.setVisibility(View.GONE);
+            orderSaleHolder.delete.setVisibility(View.GONE);
+            orderSaleHolder.returnMoney.setVisibility(View.GONE);
+            orderSaleHolder.status.setText(R.string.return_good_yes);
+            orderSaleHolder.toolLayout.setVisibility(View.VISIBLE);
+            return OrderStatus.OVER;
+        }
+        return OrderStatus.OVER;
     }
 }

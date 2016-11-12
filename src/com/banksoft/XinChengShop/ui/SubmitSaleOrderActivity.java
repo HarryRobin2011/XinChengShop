@@ -25,6 +25,7 @@ import com.banksoft.XinChengShop.utils.StringNumber;
 import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.MyProgressDialog;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -507,6 +508,26 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
         }
         submitOrderAdapter.dataList = shopCartProductDataList;
         submitOrderAdapter.notifyDataSetChanged();
+    }
+
+    public void setTotalMoney(LinkedList<ShopCartProductData> dataList) {
+        String totalMoney = "0";
+        for (ShopCartProductData productData : dataList) {
+            for (int position = 0; position < productData.getProductVOHashMap().keySet().size(); position++) {
+                ProductCart productCart = productData.getProductVOHashMap().get(productData.getProductVOHashMap().keySet().toArray()[position]);
+                if (productCart.isSelect()) {
+                    BigDecimal total = new BigDecimal(totalMoney);
+                    BigDecimal price = new BigDecimal("" + productCart.getSalePrice());
+                    BigDecimal num = new BigDecimal("" + productCart.getNum());
+                    BigDecimal singleMoney = price.multiply(num);
+                    totalMoney = total.add(singleMoney).toString();
+                }
+
+            }
+
+        }
+        price.setText(totalMoney + "元");
+
     }
 
 }
