@@ -34,7 +34,6 @@ public class MoneyBalanceDetailFragment extends XCBaseListFragment {
 
     @Override
     public void request() {
-
         if(Type.RECHARGE.equals(currentType)){// 充值明细
             url = ControlUrl.XC_MEMBER_MONEY_LIST;
             params = "memberId="+activity.member.getMember().getId();

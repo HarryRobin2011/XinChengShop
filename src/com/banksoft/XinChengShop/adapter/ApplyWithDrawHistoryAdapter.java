@@ -2,6 +2,7 @@ package com.banksoft.XinChengShop.adapter;
 
 import android.content.Context;
 import android.view.View;
+import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class ApplyWithDrawHistoryAdapter extends com.banksoft.XinChengShop.adapt
     @Override
     protected View createCellView() {
         return null;
+    }
+
+    private class ApplyWithDrawHistoryHolder extends BusinessHolder{
     }
 
     @Override

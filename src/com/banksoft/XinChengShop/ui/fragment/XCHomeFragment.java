@@ -152,7 +152,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         searchText.setFocusable(false);
      //   leftBtn = (Button) view.findViewById(R.id.titleLeftButton);
 
-       new UpdateUtil(getActivity(),false).isUpdate();
+       //new UpdateUtil(getActivity(),false).isUpdate();
     }
 
 

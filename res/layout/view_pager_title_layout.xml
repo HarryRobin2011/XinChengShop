@@ -27,6 +27,7 @@
                android:layout_centerVertical="true"
                android:layout_alignParentRight="true"
                android:layout_marginRight="10.0dp"
+               android:visibility="gone"
                android:background="@drawable/tb_icon_actionbar_more"/>
 
 </RelativeLayout>

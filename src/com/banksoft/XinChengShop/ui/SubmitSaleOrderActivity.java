@@ -62,7 +62,6 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
     private boolean isFreeShipping = false;
 
 
-
     private final int SELECT_ADDRESS_ARNO = 0;// 选择收货地址
     private final int ADDRESS_MANAGER = 1;//收货地址管理
 
@@ -201,11 +200,12 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
      */
     private class SubmitThread extends AsyncTask<SubmitOrderDao, String, OrderVOListData> {
         SubmitOrder submitOrder;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             submitOrder = getSubmitOrder();
-            if(submitOrder == null){
+            if (submitOrder == null) {
                 this.cancel(true);
                 return;
             }
@@ -213,7 +213,6 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                 myProgressDialog = new MyProgressDialog(SubmitSaleOrderActivity.this);
             }
             myProgressDialog.showDialog(R.string.please_wait);
-
         }
 
         @Override
@@ -227,7 +226,7 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
             myProgressDialog.dismiss();
             if (orderVOListData != null) {
                 if (orderVOListData.isSuccess()) {
-                    Intent intent = new Intent(mContext,PayActivity.class);
+                    Intent intent = new Intent(mContext, PayActivity.class);
                     intent.putExtra(IntentFlag.ORDER_VO_LIST, orderVOListData.getData().getOrderList());
                     startActivity(intent);
                     finish();
@@ -299,30 +298,29 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
             return null;
         }
 
-        for (int position = 0; position < shopCartProductDataList.size();position++) {
+        for (int position = 0; position < shopCartProductDataList.size(); position++) {
             ShopCartProductData shopCartData = shopCartProductDataList.get(position);
             shopIdBuffer.append(shopCartData.getShopId()).append("|");
-            if(shopCartData.getExpressPriceVO() == null && !shopCartData.isFree()){//未选择运费模版
+            if (shopCartData.getExpressPriceVO() == null && !shopCartData.isFree()) {//未选择运费模版
                 showWarning(R.string.please_select_express_model_title);
                 return null;
             }
 
             View cellView = submitOrderAdapter.dataMap.get(position);
-            String remarkStr = ((ClearEditText)cellView.findViewById(R.id.leave_message)).getText().toString();
+            String remarkStr = ((ClearEditText) cellView.findViewById(R.id.leave_message)).getText().toString();
             shopCartData.setRemark(remarkStr);
 
-            if(shopCartData.getExpressPriceVO() != null){
+            if (shopCartData.getExpressPriceVO() != null) {
                 shopExpressTypeBuffer.append(shopCartData.getExpressPriceVO().getType()).append("|");
 
                 shopExpressPriceBuffer.append(shopCartData.getExpressPriceVO().getPrice()).append("|");
-            }else{
+            } else {
                 shopExpressTypeBuffer.append("").append("|");
 
                 shopExpressPriceBuffer.append("").append("|");
             }
 
             remarkBuffer.append(shopCartData.getRemark()).append("|");
-
 
 
             for (String ids : shopCartData.getProductVOHashMap().keySet()) {
@@ -382,12 +380,12 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
 
                         linkedList = expressModel.getList();
                         progressBar.setVisibility(View.GONE);
-                        if(linkedList != null && linkedList.size() == 0){// 免运费
+                        if (linkedList != null && linkedList.size() == 0) {// 免运费
                             linkedList.add(null);
                         }
 
                         if (expressAdapter[0] == null) {
-                            expressAdapter[0] = new ExpressAdapter(mContext,linkedList);
+                            expressAdapter[0] = new ExpressAdapter(mContext, linkedList);
                         }
 
                         listView.setAdapter(expressAdapter[0]);
@@ -443,12 +441,12 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(expressAdapter[0].dataList.get(0) == null){// 店铺包邮
+                if (expressAdapter[0].dataList.get(0) == null) {// 店铺包邮
                     shopCartProductData.setExpressPriceVO(null);
                     shopCartProductData.setIsFree(true);
                     popupWindowUtil.dismiss();
                     submitOrderAdapter.updateIndexCell(shopCartProductData, position, listView);
-                    setTotal();
+                    setTotalMoney((LinkedList<ShopCartProductData>) submitOrderAdapter.dataList);
                     return;
                 }
                 if (listView.getCheckedItemPosition() != -1) {
@@ -457,7 +455,8 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                     shopCartProductData.setIsFree(false);
                     popupWindowUtil.dismiss();
                     submitOrderAdapter.updateIndexCell(shopCartProductData, position, listView);
-                    setTotal();
+                    setTotalMoney((LinkedList<ShopCartProductData>) submitOrderAdapter.dataList);
+                    return;
                 }
             }
         });
@@ -479,6 +478,24 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
             }
         }
         price.setText(totalMoney + "元");
+    }
+
+    public void setTotalMoney(LinkedList<ShopCartProductData> dataList) {
+        String totalMoney = "0";
+        for (ShopCartProductData productData : dataList) {
+            for (int position = 0; position < productData.getProductVOHashMap().keySet().size(); position++) {
+                ProductCart productCart = productData.getProductVOHashMap().get(productData.getProductVOHashMap().keySet().toArray()[position]);
+                if (productCart.isSelect()) {
+                    BigDecimal total = new BigDecimal(totalMoney);
+                    BigDecimal price = new BigDecimal("" + productCart.getSalePrice());
+                    BigDecimal num = new BigDecimal("" + productCart.getNum());
+                    BigDecimal singleMoney = price.multiply(num);
+                    totalMoney = total.add(singleMoney).toString();
+                }
+            }
+        }
+        price.setText(totalMoney + "元");
+
     }
 
     /**
@@ -510,24 +527,5 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
         submitOrderAdapter.notifyDataSetChanged();
     }
 
-    public void setTotalMoney(LinkedList<ShopCartProductData> dataList) {
-        String totalMoney = "0";
-        for (ShopCartProductData productData : dataList) {
-            for (int position = 0; position < productData.getProductVOHashMap().keySet().size(); position++) {
-                ProductCart productCart = productData.getProductVOHashMap().get(productData.getProductVOHashMap().keySet().toArray()[position]);
-                if (productCart.isSelect()) {
-                    BigDecimal total = new BigDecimal(totalMoney);
-                    BigDecimal price = new BigDecimal("" + productCart.getSalePrice());
-                    BigDecimal num = new BigDecimal("" + productCart.getNum());
-                    BigDecimal singleMoney = price.multiply(num);
-                    totalMoney = total.add(singleMoney).toString();
-                }
-
-            }
-
-        }
-        price.setText(totalMoney + "元");
-
-    }
 
 }

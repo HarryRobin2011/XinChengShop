@@ -162,6 +162,7 @@
         <activity android:name=".ui.SellerOrderInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.UpdateOrderPriceActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.BindingLoginActivity" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.ApplyWithDrawHistoryActivity" android:screenOrientation="portrait"/>
 
         <!--   <activity
                 android:name="com.tencent.open.yyb.AppbarActivity"

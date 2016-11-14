@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,6 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
     public void initView(View view) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
-        shopCartSP = getActivity().getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
-
         searchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
         operation_layout = (LinearLayout) view.findViewById(R.id.operation_layout);
         nullPager = (FrameLayout) view.findViewById(R.id.null_pager);
@@ -79,7 +77,11 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
         title.setTextColor(getResources().getColor(R.color.text_black));
         searchLayout.setVisibility(View.GONE);
         bgImage.setBackgroundResource(R.color.white);
+        setShopCartDataList();
+    }
 
+    private void setShopCartDataList(){
+        shopCartSP = getActivity().getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
         shopCartDataMap = getShopProductData();
         shopCartDataList = new LinkedList();
         for (int position = 0; position < shopCartDataMap.keySet().size(); position++) {
@@ -101,6 +103,16 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
     @Override
     public void initOperation() {
         ok.setOnClickListener(this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+           if(resultCode == Activity.RESULT_OK){
+               setShopCartDataList();
+           }
+        }
     }
 
     @Override
@@ -160,9 +172,7 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
                     BigDecimal singleMoney = price.multiply(num);
                     totalMoney = total.add(singleMoney).toString();
                 }
-
             }
-
         }
         price.setText(totalMoney + "元");
 
