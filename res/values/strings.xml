@@ -769,5 +769,6 @@
     <string name="agree_dispatch">已发货，等待卖家收货</string>
     <string name="agree_no_dispatch">请发货</string>
     <string name="return_good_yes">退货已收到</string>
+    <string name="select_bank_title">选择银行</string>
 
 </resources>

@@ -596,4 +596,5 @@
     <item name="member_shop_name" type="id">member_shop_name</item>
     <item name="telPhone_shop" type="id">telPhone_shop</item>
     <item name="address_shop" type="id">address_shop</item>
+    <item name="bank_name_layout" type="id">bank_name_layout</item>
 </resources>

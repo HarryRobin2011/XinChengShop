@@ -1,13 +1,12 @@
 package com.banksoft.XinChengShop.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import com.banksoft.XinChengShop.R;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.dao.MyBankDao;
 import com.banksoft.XinChengShop.entity.Bank;
 import com.banksoft.XinChengShop.model.IsFlagData;
@@ -18,12 +17,13 @@ import com.banksoft.XinChengShop.widget.MyProgressDialog;
  * Created by Robin on 2016/7/26.
  */
 public class MyBankAddActivity extends XCBaseActivity implements View.OnClickListener {
-    private TextView title;
+    private TextView title,bankName;
     private Button save;
     private ImageView back;
-    private EditText name, bankName, cardNo, openCardAddress;
+    private EditText name, cardNo, openCardAddress;
     private MyBankDao myBankDao;
     private MyProgressDialog progressDialog;
+    private LinearLayout bankNameLayout;
 
     @Override
     protected void initContentView() {
@@ -36,9 +36,23 @@ public class MyBankAddActivity extends XCBaseActivity implements View.OnClickLis
         save = (Button) findViewById(R.id.titleRightButton);
         back = (ImageView) findViewById(R.id.title_back_button);
         name = (EditText) findViewById(R.id.name);
-        bankName = (EditText) findViewById(R.id.bank_name);
+        bankName = (TextView) findViewById(R.id.bank_name);
         cardNo = (EditText) findViewById(R.id.card_no);
         openCardAddress = (EditText) findViewById(R.id.open_card_address);
+        bankNameLayout = (LinearLayout) findViewById(R.id.bank_name_layout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                if(data == null){
+                    return;
+                }
+               bankName.setText(data.getStringExtra(IntentFlag.DATA));
+            }
+        }
     }
 
     @Override
@@ -52,6 +66,7 @@ public class MyBankAddActivity extends XCBaseActivity implements View.OnClickLis
     @Override
     protected void initOperate() {
          save.setOnClickListener(this);
+        bankNameLayout.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +80,10 @@ public class MyBankAddActivity extends XCBaseActivity implements View.OnClickLis
                     }
                     new MyTask(bank).execute(myBankDao);
                 }
+                break;
+            case R.id.bank_name_layout:
+                Intent intent = new Intent(mContext,BankListActivity.class);
+                startActivityForResult(intent,Activity.RESULT_FIRST_USER);
                 break;
         }
     }

@@ -317,6 +317,7 @@
                 <category android:name="com.banksoft.XinChengShop"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.BankListActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme"/>
         <!-- Required  SDK核心功能-->
         <service
                 android:name="cn.jpush.android.service.DownloadService"

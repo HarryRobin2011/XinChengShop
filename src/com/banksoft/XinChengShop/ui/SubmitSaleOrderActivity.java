@@ -115,13 +115,14 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
         if (submitOrderAdapter == null) {
             submitOrderAdapter = new SubmitSaleOrderAdapter(this, shopCartProductDataList);
         }
+        setTotalMoney((LinkedList<ShopCartProductData>) submitOrderAdapter.dataList);
         mListView.setAdapter(submitOrderAdapter);
         if (submitOrderDao == null) {
             submitOrderDao = new SubmitOrderDao(mContext);
         }
         detailAddressLayout.setOnClickListener(this);
         confrimBtn.setOnClickListener(this);
-        setTotal();
+       // setTotal();
         new MyThread().execute(submitOrderDao);
     }
 
@@ -446,7 +447,6 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                     shopCartProductData.setIsFree(true);
                     popupWindowUtil.dismiss();
                     submitOrderAdapter.updateIndexCell(shopCartProductData, position, listView);
-                    setTotalMoney((LinkedList<ShopCartProductData>) submitOrderAdapter.dataList);
                     return;
                 }
                 if (listView.getCheckedItemPosition() != -1) {
@@ -455,7 +455,6 @@ public class SubmitSaleOrderActivity extends XCBaseActivity implements View.OnCl
                     shopCartProductData.setIsFree(false);
                     popupWindowUtil.dismiss();
                     submitOrderAdapter.updateIndexCell(shopCartProductData, position, listView);
-                    setTotalMoney((LinkedList<ShopCartProductData>) submitOrderAdapter.dataList);
                     return;
                 }
             }
