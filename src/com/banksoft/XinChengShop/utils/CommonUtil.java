@@ -7,10 +7,13 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.config.SharedPreTag;
+import com.banksoft.XinChengShop.http.HttpUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -210,5 +213,27 @@ public class CommonUtil {
     public static void clearShopCart(Context context){
         SharedPreferences sharedPreferences  = context.getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
         sharedPreferences.edit().clear().commit();
+    }
+
+    public static void setmWebViewSettings(Context context, WebView webView) {
+        WebSettings webSettings = webView.getSettings();
+
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+
+        webSettings.setBlockNetworkImage(false);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setSupportZoom(false);
+        webSettings.setAllowFileAccess(true);
+        if (HttpUtils.isNetworkAvailable(context)) {
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
     }
 }
