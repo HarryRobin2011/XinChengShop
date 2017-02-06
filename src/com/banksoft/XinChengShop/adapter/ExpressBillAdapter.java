@@ -12,6 +12,9 @@ import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.entity.OrderProductVO;
 import com.banksoft.XinChengShop.entity.OrderVO;
+import com.banksoft.XinChengShop.type.DispatchStatus;
+import com.banksoft.XinChengShop.ui.ExpressBillListActivity;
+import com.banksoft.XinChengShop.utils.TimeUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -26,16 +29,16 @@ public class ExpressBillAdapter extends BaseMyAdapter {
     public ExpressBillAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageViewLoader = ImageLoader.getInstance();
-        mImageViewLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
 
     private class OrderSaleHolder extends BusinessHolder {
         private TextView shopName;
         private TextView total;
-        private TextView initAddress,destination,telphone;
+        private TextView initAddress,destination,telphone,orderStatus,commission;
+        private TextView time;
 
-        TextView myDispatch; // 我去送货
+        TextView myDispatch,goDispatch; // 我去送货
 
         private LinearLayout productContent;
         private LinearLayout toolLayout;
@@ -44,6 +47,7 @@ public class ExpressBillAdapter extends BaseMyAdapter {
         private OrderVO orderVO;
 
     }
+
 
     @Override
     protected View createCellView() {
@@ -62,6 +66,10 @@ public class ExpressBillAdapter extends BaseMyAdapter {
         orderSaleHolder.initAddress = (TextView) cellView.findViewById(R.id.init_address);
         orderSaleHolder.destination = (TextView) cellView.findViewById(R.id.destination);
         orderSaleHolder.telphone = (TextView) cellView.findViewById(R.id.telPhone);
+        orderSaleHolder.goDispatch = (TextView) cellView.findViewById(R.id.go_dispatch);
+        orderSaleHolder.orderStatus = (TextView) cellView.findViewById(R.id.order_status);
+        orderSaleHolder.commission = (TextView) cellView.findViewById(R.id.commission);
+        orderSaleHolder.time = (TextView) cellView.findViewById(R.id.time);
         return orderSaleHolder;
     }
 
@@ -72,6 +80,7 @@ public class ExpressBillAdapter extends BaseMyAdapter {
         holder.shopName.setText(orderVO.getShopName());
         holder.orderVO = orderVO;
         holder.productContent.removeAllViews();
+        holder.orderStatus.setText(DispatchStatus.valueOf(orderVO.getDispatchStatus()).getName());
 
         for (OrderProductVO productVO : orderVO.getList()) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_order_item_layout, null);
@@ -90,19 +99,39 @@ public class ExpressBillAdapter extends BaseMyAdapter {
 
             name.setText(productVO.getProductName());
             // num.setText(productVO.getNum()+"");
-            discountPrice.setText(productVO.getPrice() + "元");
+            discountPrice.setText(productVO.getPrice() + "元  X  "+productVO.getNum());
             realPrice.setVisibility(View.GONE);
             saleNum.setVisibility(View.GONE);
             holder.productContent.addView(view);
         }
         holder.total.setText("共"+orderVO.getList().size()+"件商品 "+"合计：" + orderVO.getTotalMoney() +"（含运费￥"+orderVO.getExpressMoney()+"）");
-        holder.telphone.setText("联系电话："+orderVO.getTelephone());
+       if(orderVO.getTelephone() != null){
+           String[] tels = orderVO.getTelephone().split("/");
+           if(tels.length >0){
+               holder.telphone.setText("联系电话："+tels[0]);
+           }
+        }
+
         holder.initAddress.setText("初始地："+orderVO.getShopAddress());
         holder.destination.setText("目的地："+orderVO.getAddress());
         holder.orderItemLayout.setOnClickListener(this);
         holder.myDispatch.setOnClickListener(this);
         holder.myDispatch.setTag(position);
         holder.orderItemLayout.setTag(position);
+        holder.commission.setText("佣金："+orderVO.getDispatchPrice()+"元");
+        holder.time.setText("下单时间："+TimeUtils.getTimeStr(orderVO.getCreateTime(),TimeUtils.TimeType.MINUTE));
+        if(DispatchStatus.CREATE.name().equals(orderVO.getDispatchStatus())){
+            holder.toolLayout.setVisibility(View.VISIBLE);
+            holder.goDispatch.setVisibility(View.GONE);
+            holder.myDispatch.setVisibility(View.VISIBLE);
+        }else if(DispatchStatus.DISPATCH.name().equals(orderVO.getDispatchStatus())){
+            holder.toolLayout.setVisibility(View.VISIBLE);
+            holder.goDispatch.setVisibility(View.VISIBLE);
+            holder.myDispatch.setVisibility(View.GONE);
+        }else{
+            holder.toolLayout.setVisibility(View.GONE);
+        }
+
         return cellView;
     }
 

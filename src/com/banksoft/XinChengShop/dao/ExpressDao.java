@@ -2,10 +2,13 @@ package com.banksoft.XinChengShop.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
+import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.dao.base.BaseDao;
 import com.banksoft.XinChengShop.entity.chinaLocation.City;
 import com.banksoft.XinChengShop.entity.chinaLocation.County;
 import com.banksoft.XinChengShop.entity.chinaLocation.Province;
+import com.banksoft.XinChengShop.model.IsFlagData;
+import com.banksoft.XinChengShop.utils.JSONHelper;
 
 import java.util.List;
 
@@ -66,5 +69,18 @@ public class ExpressDao extends BaseDao{
             return null;
         }
         return o;
+    }
+
+    /**
+     * 派送员工抢单
+     * @param memberId
+     * @param id
+     * @return
+     */
+    public IsFlagData getExpressBillOrder(String memberId,String id){
+        String url = ControlUrl.DISPATCH_ORDER_URL;
+        String params = "memberId="+memberId+"&id="+id;
+        IsFlagData data = (IsFlagData) postHttpRequest(mContext,url,params, JSONHelper.IS_FLAG_DATA,false);
+        return data;
     }
 }

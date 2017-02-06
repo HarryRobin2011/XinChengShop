@@ -24,25 +24,26 @@ public class ApplyWithDrawHistoryActivity extends XCBaseActivity implements View
 
     @Override
     protected void initView() {
-        title = (TextView) findViewById(R.id.title);
+        title = (TextView) findViewById(R.id.titleText);
         back = (ImageView) findViewById(R.id.title_back_button);
     }
 
     @Override
     protected void initData() {
-     title.setText(R.string.with_draw_record);
+        title.setText(R.string.with_draw_record);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
     }
 
     @Override
     protected void initOperate() {
-
+        applyWithDrawHistoryFragment = new ApplyWithDrawHistoryFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, applyWithDrawHistoryFragment).commit();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_back_button:
                 finish();
                 break;

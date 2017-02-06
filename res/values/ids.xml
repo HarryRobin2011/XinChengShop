@@ -590,4 +590,13 @@
     <item name="binding_account" type="id">binding_account</item>
     <item name="init_address" type="id">init_address</item>
     <item name="destination" type="id">destination</item>
+    <item name="go_dispatch" type="id">go_dispatch</item>
+    <item name="commission" type="id">commission</item>
+    <item name="initially" type="id">initially</item>
+    <item name="member_shop_name" type="id">member_shop_name</item>
+    <item name="telPhone_shop" type="id">telPhone_shop</item>
+    <item name="address_shop" type="id">address_shop</item>
+    <item name="bank_name_layout" type="id">bank_name_layout</item>
+    <item name="advertisement" type="id">advertisement</item>
+    <item name="advertisement_layout" type="id">advertisement_layout</item>
 </resources>

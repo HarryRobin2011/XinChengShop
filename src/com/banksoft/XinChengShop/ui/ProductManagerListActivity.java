@@ -44,7 +44,7 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
         title = (TextView) findViewById(R.id.titleText);
         back = (ImageView) findViewById(R.id.title_back_button);
         submitGood = (Button) findViewById(R.id.titleRightButton);
-        searchEdit = (EditText) findViewById(R.id.search_edit);
+        searchEdit = (EditText) findViewById(R.id.search_type);
         tabPageIndicator = (TabPageIndicator) findViewById(R.id.tab_page_indicator);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
     }
@@ -91,7 +91,6 @@ public class ProductManagerListActivity extends XCBaseActivity implements View.O
         mViewPager.setAdapter(viewPagerAdapter);
         tabPageIndicator.setViewPager(mViewPager);
         tabPageIndicator.setCurrentItem(0);
-
         searchEdit.setOnEditorActionListener(this);
     }
 

@@ -66,9 +66,6 @@ public class TakeOutMainActivity extends XCBaseActivity implements TakeOutShopLi
     }
 
     private void setMyFragment() {
-    }
-
-    {
         if (takeOutTabbarFragment != null && takeOutTabbarFragment.currentFragment != null) {
             if (takeOutTabbarFragment.currentFragment.getClass().equals(TakeOutShopListFragment.class)) {
                 finish();

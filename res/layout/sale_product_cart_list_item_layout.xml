@@ -39,6 +39,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_marginLeft="10.0dp"
+                      android:layout_weight="1"
                       android:orientation="vertical">
             <TextView android:id="@+id/name"
                       android:layout_width="match_parent"
@@ -57,7 +58,12 @@
                       android:gravity="center_vertical"/>
 
         </LinearLayout>
-
+        <ImageView android:id="@id/delete"
+                   android:layout_width="@dimen/height_20"
+                   android:layout_height="@dimen/height_20"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginRight="10.0dp"
+                   android:src="@drawable/delete"/>
     </LinearLayout>
     <View style="@style/line2"/>
 </LinearLayout>

@@ -88,7 +88,6 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
         disbursements = (TextView) findViewById(R.id.disbursements);
         createOrderTime = (TextView) findViewById(R.id.order_create_time);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 
     }
 
@@ -118,7 +117,7 @@ public class OrderInfoActivity extends XCBaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.contact_shop:
-                CommonUtil.callPhone(mContext, orderVO.getTelephone());
+                CommonUtil.callPhone(mContext, orderVO.getShopTelephone());
                 break;
         }
     }

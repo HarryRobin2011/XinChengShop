@@ -1,14 +1,21 @@
 package com.banksoft.XinChengShop.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
+import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.entity.ProductCart;
 import com.banksoft.XinChengShop.model.ShopCartProductData;
+import com.banksoft.XinChengShop.ui.ShopProductInfoActivity;
 import com.banksoft.XinChengShop.ui.fragment.XCShopCartFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -30,7 +37,6 @@ public class ShopCartAdapter extends BaseMyAdapter{
     @Override
     protected View createCellView() {
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         return LinearLayout.inflate(mContext,R.layout.sale_cart_list_item_layout,null);
     }
 
@@ -84,7 +90,9 @@ public class ShopCartAdapter extends BaseMyAdapter{
             TextView priceText = (TextView) view.findViewById(R.id.real_price);
             ImageButton cartReduce = (ImageButton) view.findViewById(R.id.cart_single_product_num_reduce);
             ImageButton cartAdd = (ImageButton) view.findViewById(R.id.cart_single_product_num_add);
-            final TextView num = (TextView) view.findViewById(R.id.cart_single_product_et_num);
+            ImageView delete = (ImageView) view.findViewById(R.id.delete);
+            LinearLayout groupBuyLayout = (LinearLayout) view.findViewById(R.id.group_buy_cell_layout);
+            final EditText num = (EditText) view.findViewById(R.id.cart_single_product_et_num);
             String imageUrl = "";
             if(!"".equals(productCart.getProductVO().getIcon()) && productCart.getProductVO().getIcon() != null){
                imageUrl = ControlUrl.BASE_URL + productCart.getProductVO().getIcon().split("\\|")[0];
@@ -95,6 +103,34 @@ public class ShopCartAdapter extends BaseMyAdapter{
             mImageLoader.displayImage(imageUrl,imageView, XCApplication.options);
             productName.setText(productCart.getProductVO().getName());
             num.setText(productCart.getNum()+"");
+            num.setTag(position);
+            num.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    productCart.setNum(Integer.valueOf(num.getText().toString()));
+                    xcShopCartFragment.setTotalMoney((LinkedList<ShopCartProductData>) dataList);
+                }
+            });
+            groupBuyLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ShopProductInfoActivity.class);
+                    intent.putExtra(IntentFlag.PRODUCT_ID,productCart.getProductVO().getId());
+                    xcShopCartFragment.startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                }
+            });
+            delete.setTag(position);
+            delete.setOnClickListener(this);
             priceText.setText(productCart.getSalePrice()+"元");
             holder.content.addView(view);
             checkBox.setChecked(productCart.isSelect());
@@ -166,4 +202,5 @@ public class ShopCartAdapter extends BaseMyAdapter{
         xcShopCartFragment.setTotalMoney((LinkedList<ShopCartProductData>) dataList);
 
     }
+
 }

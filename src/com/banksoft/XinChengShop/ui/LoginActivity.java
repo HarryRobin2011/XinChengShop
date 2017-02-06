@@ -305,6 +305,7 @@ public class LoginActivity extends XCBaseActivity implements View.OnClickListene
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";
+                    Log.i(TAG, logs);
                     break;
 
                 case 6002:

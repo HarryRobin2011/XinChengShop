@@ -65,6 +65,8 @@
                   style="@style/text_style_3"
                   android:gravity="center"
                   android:textColor="@color/red_normal"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:layout_margin="5.0dp"/>
         <TextView android:id="@id/comments"
                   android:layout_width="80.0dp"
@@ -74,6 +76,8 @@
                   android:background="@drawable/edit_text_red_bg"
                   android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:text="@string/comments"/>
         <TextView android:id="@id/cancel"
                   android:layout_width="80.0dp"
@@ -81,6 +85,8 @@
                   style="@style/text_style_3"
                   android:gravity="center"
                   android:background="@drawable/edit_text_bg_normal"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:layout_margin="5.0dp"
                   android:text="@string/order_cancel"/>
         <TextView android:id="@id/delete"
@@ -100,6 +106,8 @@
                   android:background="@drawable/edit_text_red_bg"
                   android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:text="@string/payment"/>
         <TextView android:id="@id/refund"
                   android:layout_width="80.0dp"
@@ -108,6 +116,8 @@
                   android:gravity="center"
                   android:background="@drawable/edit_text_bg_normal"
                   android:layout_margin="5.0dp"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:text="@string/refund"/>
 
         <TextView android:id="@id/return_the_goods"
@@ -127,6 +137,8 @@
                   android:background="@drawable/edit_text_red_bg"
                   android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:text="@string/confirm_goods"/>
         <TextView android:id="@id/delivery"
                   android:layout_width="80.0dp"
@@ -136,6 +148,8 @@
                   android:background="@drawable/edit_text_red_bg"
                   android:textColor="@color/red_normal"
                   android:layout_margin="5.0dp"
+                  android:lines="1"
+                  android:ellipsize="end"
                   android:text="@string/delivery"/>
 
 

@@ -23,7 +23,6 @@ public class CategoryGridAdapter extends BaseMyAdapter {
     public CategoryGridAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class CategoryGridHolder extends BusinessHolder{

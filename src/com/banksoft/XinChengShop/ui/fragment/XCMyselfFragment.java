@@ -62,6 +62,14 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            setMySelf();
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Activity.RESULT_FIRST_USER) {
@@ -91,16 +99,19 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                 mImageLoader.displayImage(ControlUrl.BASE_URL + activity.member.getMember().getImageFile().split("\\|")[0], login, XCApplication.options);
             }
             if (activity.member.getShop() != null) {// 开店了
-                if (activity.member.getShop().isStatus()) {//店铺开启了
-
-                } else {//店铺未开启
-
+                if (activity.member.getShop().isAuditStatus()) {//申请是否审核
+                    myShop.setVisibility(View.GONE);
+                    shop_layout.setVisibility(View.VISIBLE);//开店功能
+                    myProductManager.setVisibility(View.VISIBLE);
+                } else {//申请未审核
+                    myShop.setVisibility(View.GONE);
+                    shop_layout.setVisibility(View.GONE);
                 }
-                myShop.setVisibility(View.GONE);
-                shop_layout.setVisibility(View.VISIBLE);//开店功能
+
             } else {//没有开店了
                 myShop.setVisibility(View.VISIBLE);
                 shop_layout.setVisibility(View.GONE);
+                myProductManager.setVisibility(View.GONE);
             }
 
 
@@ -209,6 +220,18 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setMySelf();
+    }
+
+    @Override
     public Fragment getInstance() {
         return null;
     }
@@ -285,8 +308,13 @@ public class XCMyselfFragment extends XCBaseFragment implements View.OnClickList
                 break;
             case R.id.my_shop:
                 if (activity.isLogin()) {//申请店铺
-                    Intent intent = new Intent(mContext, ApplyOpenShopActivity.class);
-                    startActivity(intent);
+                    if(activity.member.getShop() == null){
+                        Intent intent = new Intent(mContext, ApplyOpenShopActivity.class);
+                        startActivity(intent);
+                    }else{
+                        alert(R.string.already_open_shop);
+                    }
+
                 } else {
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     startActivityForResult(intent, Activity.RESULT_FIRST_USER);

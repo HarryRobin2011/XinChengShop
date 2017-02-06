@@ -25,7 +25,6 @@ public class ScoreOrderListAdapter extends BaseMyAdapter {
     public ScoreOrderListAdapter(Context context, List dataList) {
         super(context, dataList);
         mImageViewLoader = ImageLoader.getInstance();
-        mImageViewLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
 

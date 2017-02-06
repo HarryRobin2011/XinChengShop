@@ -129,7 +129,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
             PushOrderData pushOrderData = JSONHelper.fromJSONObject(result, JSONHelper.PUSH_ORDER_DATA);
             PushOrder pushOrder = pushOrderData.getData();
             OrderStatus status = pushOrderData.getData().getOrderStatus();
-            if (PushType.member.equals(((PushOrderData) pushData).getData().getType())) {//买家订单
+            if (PushType.member.equals(pushOrder.getType())) {//买家订单
                 if (OrderStatus.DISPATCH.equals(status)) {// 已发货
                     Intent intent = new Intent(mContext, OrderListActivity.class);
                     intent.putExtra(IntentFlag.ORDER_ID,pushOrder.getOrderId());
@@ -137,7 +137,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
                     showNotification("您有新的订单信息~", "您的订单" + pushOrderData.getData().getOrderId() + "已发货",random.nextInt(NUM), OrderListActivity.class,intent);
                 }
 
-            } else if (PushType.shop.equals(((PushOrderData) pushData).getData().getType())) {//卖家订单
+            } else if (PushType.shop.equals(pushOrder.getType())) {//卖家订单
                 if (OrderStatus.PAY.equals(status)) {// 已发货
                     Intent intent = new Intent(mContext, OrderListActivity.class);
                     intent.putExtra(IntentFlag.ORDER_ID,pushOrder.getOrderId());
@@ -154,7 +154,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
                     intent.putExtra(IntentFlag.ORDER_STATUS,pushOrder.getOrderStatus());
                     showNotification("您有新的订单信息~", "订单" + pushOrderData.getData().getOrderId() + "已提交退货，请及时处理",random.nextInt(NUM), OrderListActivity.class,intent);
                 }
-            } else if (PushType.dispatch.equals(((PushOrderData) pushData).getData().getType())) {//派送订单
+            } else if (PushType.dispatch.equals(pushOrder.getType())) {//派送订单
                 if(OrderStatus.DISPATCH.equals(status)){
                     Intent intent = new Intent(mContext, ExpressBillListActivity.class);
                     intent.putExtra(IntentFlag.TYPE,ExpressBillListActivity.OperaType.NEW_DISPATCH_ORDER);

@@ -33,7 +33,6 @@ public class PublishCommentAdapter extends BaseMyAdapter{
         super(activity.getApplicationContext(), dataList);
         mImageLoader = ImageLoader.getInstance();
         this.activity = activity;
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     @Override

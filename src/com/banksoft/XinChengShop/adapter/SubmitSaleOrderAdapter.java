@@ -34,7 +34,6 @@ public class SubmitSaleOrderAdapter extends BaseMyAdapter {
         super(activity.getApplicationContext(), dataList);
         this.activity = (SubmitSaleOrderActivity) activity;
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class SubmitOrderHolder extends BusinessHolder {

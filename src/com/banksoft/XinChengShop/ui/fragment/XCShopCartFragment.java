@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.*;
 import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.adapter.ShopCartAdapter;
+import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.IntentFlag;
 import com.banksoft.XinChengShop.config.SharedPreTag;
 import com.banksoft.XinChengShop.entity.ProductCart;
@@ -29,7 +31,7 @@ import java.util.LinkedList;
 /**
  * Created by harry_robin on 15/11/4.
  */
-public class XCShopCartFragment extends XCBaseFragment implements View.OnClickListener {
+public class XCShopCartFragment extends XCBaseFragment implements View.OnClickListener,BaseMyAdapter.OnAdapterClickListener{
     private ListView listView;
     private TextView price;
     private Button ok;
@@ -39,7 +41,6 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
     private LinkedList shopCartDataList;
     private FrameLayout nullPager;
     private LinearLayout operation_layout;
-    private LinkedHashMap<String, ShopCartProductData> selectDataMap;
 
     private LinearLayout searchLayout;
     private TextView title;
@@ -52,9 +53,7 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
 
     @Override
     public void initView(View view) {
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        shopCartSP = getActivity().getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         searchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
         operation_layout = (LinearLayout) view.findViewById(R.id.operation_layout);
@@ -78,7 +77,11 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
         title.setTextColor(getResources().getColor(R.color.text_black));
         searchLayout.setVisibility(View.GONE);
         bgImage.setBackgroundResource(R.color.white);
+        setShopCartDataList();
+    }
 
+    private void setShopCartDataList(){
+        shopCartSP = getActivity().getSharedPreferences(SharedPreTag.SHOP_CART_PRODUCT, Context.MODE_PRIVATE);
         shopCartDataMap = getShopProductData();
         shopCartDataList = new LinkedList();
         for (int position = 0; position < shopCartDataMap.keySet().size(); position++) {
@@ -92,6 +95,7 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
         if (shopCartAdapter == null) {
             shopCartAdapter = new ShopCartAdapter(this, shopCartDataList);
         }
+        shopCartAdapter.setOnAdapterClickListener(this);
         setTotalMoney(shopCartDataList);
         listView.setAdapter(shopCartAdapter);
     }
@@ -99,6 +103,16 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
     @Override
     public void initOperation() {
         ok.setOnClickListener(this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+           if(resultCode == Activity.RESULT_OK){
+               setShopCartDataList();
+           }
+        }
     }
 
     @Override
@@ -158,13 +172,13 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
                     BigDecimal singleMoney = price.multiply(num);
                     totalMoney = total.add(singleMoney).toString();
                 }
-
             }
-
         }
         price.setText(totalMoney + "元");
 
     }
+
+
 
     /**
      * 获取购物车选中数据
@@ -193,5 +207,19 @@ public class XCShopCartFragment extends XCBaseFragment implements View.OnClickLi
             }
         }
         return shopCartProductDataHashMap;
+    }
+
+    @Override
+    public void onAdapterCLick(View view, int position) {
+       switch (view.getId()){
+           case R.id.delete:
+              shopCartAdapter.remove(position);
+               shopCartDataMap.remove(shopCartDataMap.keySet().toArray()[position]);
+               shopCartSP.edit().putString(SharedPreTag.SHOP_CART_PRODUCT,JSONHelper.toJSONString(shopCartDataMap)).commit();
+               break;
+           case R.id.num:
+
+               break;
+       }
     }
 }

@@ -1,6 +1,7 @@
 package com.banksoft.XinChengShop.adapter.base;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +18,16 @@ public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickL
     public List dataList;
     public Context mContext;
     public LayoutInflater mInflater;
-    public HashMap<Integer,View> dataMap;
     private OnAdapterClickListener onAdapterClickListener;
+    public SparseArray<View> dataMap;
+    private ViewHolder.Callback callback;
 
 
     public BaseMyAdapter(Context context, List dataList){
         this.dataList = dataList;
         this.mContext = context;
-        dataMap = new HashMap<Integer, View>();
         mInflater = LayoutInflater.from(mContext);
+        dataMap = new SparseArray<>();
     }
 
     public void setMoreDataList(List dataList) {
@@ -39,7 +41,7 @@ public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickL
     }
 
     public class BusinessHolder{
-        int position;
+       public int position;
     }
 
     protected abstract View createCellView();
@@ -92,5 +94,11 @@ public abstract class BaseMyAdapter extends BaseAdapter implements View.OnClickL
     public void onClick(View v) {
         int position = (int) v.getTag();
         onAdapterClickListener.onAdapterCLick(v,position);
+    }
+
+    public void remove(int position){
+        dataList.remove(position);
+        dataMap.clear();
+        notifyDataSetChanged();
     }
 }

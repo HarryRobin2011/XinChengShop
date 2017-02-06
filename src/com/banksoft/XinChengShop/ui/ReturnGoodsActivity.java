@@ -401,6 +401,7 @@ public class ReturnGoodsActivity extends XCBaseActivity implements View.OnClickL
             progressDialog.dismiss();
             if (isFlagData != null) {
                 if (isFlagData.isSuccess()) {
+                    alert(R.string.apply_success);
                     setResult(Activity.RESULT_OK);
                     finish();
                 } else {

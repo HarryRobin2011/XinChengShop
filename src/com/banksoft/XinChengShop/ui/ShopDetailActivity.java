@@ -1,5 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -16,6 +18,7 @@ import com.banksoft.XinChengShop.dao.ShopInfoDao;
 import com.banksoft.XinChengShop.entity.ShopProductListVO;
 import com.banksoft.XinChengShop.entity.ShopProductTypeBO;
 import com.banksoft.XinChengShop.entity.ShopVO;
+import com.banksoft.XinChengShop.model.IsFlagData;
 import com.banksoft.XinChengShop.model.ShopInfoData;
 import com.banksoft.XinChengShop.model.ShopProductListData;
 import com.banksoft.XinChengShop.ui.base.XCBaseActivity;
@@ -23,6 +26,7 @@ import com.banksoft.XinChengShop.utils.CommonUtil;
 import com.banksoft.XinChengShop.utils.ShareUmengUtil;
 import com.banksoft.XinChengShop.utils.ShareUtil;
 import com.banksoft.XinChengShop.widget.MyGridView;
+import com.banksoft.XinChengShop.widget.MyProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -56,10 +60,23 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
     private ImageLoader mImageLoadrer;
 
     private ShopVO shopVO;
+    private IsFlagData isCollect;// 是否收藏该店铺
+    private MyProgressDialog progressDialog;
 
     @Override
     protected void initContentView() {
         setContentView(R.layout.shop_detail_layout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Activity.RESULT_FIRST_USER){
+            if(resultCode == Activity.RESULT_OK){
+                isCollect();
+            }
+
+        }
     }
 
     @Override
@@ -79,29 +96,139 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
         collect = (Button) findViewById(R.id.collect_btn);
     }
 
+    private void isCollect(){
+        if(!isLogin()){
+            return;
+        }
+        new IsCollcetTask().execute(shopInfoDao);
+    }
+
+    /**
+     * 判断是否收藏
+     */
+    private class IsCollcetTask extends AsyncTask<ShopInfoDao,String,IsFlagData>{
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
+            isCollect = isFlagData;
+            if(isFlagData != null){
+                if(isFlagData.isSuccess()){
+                    collect.setText(R.string.already_collect);
+                }else{
+                    collect.setText(R.string.collect);
+                }
+            }else{
+                alert(R.string.net_error);
+            }
+        }
+
+        @Override
+        protected IsFlagData doInBackground(ShopInfoDao... params) {
+            return params[0].isCollect(shopId,member.getMember().getId());
+        }
+    }
+
+    /**
+     * 收藏店铺
+     */
+    private class CollectTask extends  AsyncTask<ShopInfoDao,String,IsFlagData>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(progressDialog == null){
+                progressDialog = new MyProgressDialog(ShopDetailActivity.this);
+            }
+
+            progressDialog.showDialog(R.string.please_wait);
+        }
+
+        @Override
+        protected IsFlagData doInBackground(ShopInfoDao... params) {
+            return params[0].collectShop(shopId,member.getMember().getId());
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
+            progressDialog.dismiss();
+            if(isFlagData != null){
+
+                if(isFlagData.isSuccess()){
+                    isCollect.setSuccess(true);
+                    alert(R.string.collect_success);
+                    collect.setText(R.string.already_collect);
+                }else{
+                    alert((String) isFlagData.getMsg());
+                }
+            }else{
+                alert(R.string.net_error);
+            }
+        }
+    }
+    /**
+     * 取消收藏店铺
+     */
+    private class CancelCollectTask extends  AsyncTask<ShopInfoDao,String,IsFlagData>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(progressDialog == null){
+                progressDialog = new MyProgressDialog(ShopDetailActivity.this);
+            }
+            progressDialog.showDialog(R.string.please_wait);
+        }
+
+        @Override
+        protected IsFlagData doInBackground(ShopInfoDao... params) {
+            return params[0].collectDelectShop(shopId,member.getMember().getId());
+        }
+
+        @Override
+        protected void onPostExecute(IsFlagData isFlagData) {
+            super.onPostExecute(isFlagData);
+            progressDialog.dismiss();
+            if(isFlagData != null){
+                if(isFlagData.isSuccess()){
+                    isCollect.setSuccess(false);
+                    alert(R.string.already_cancel);
+                    collect.setText(R.string.collect);
+                }else{
+                    alert((String) isFlagData.getMsg());
+                }
+            }else{
+                alert(R.string.net_error);
+            }
+        }
+    }
+
+
+
     @Override
     protected void initData() {
+        if(shopInfoDao == null){
+            shopInfoDao = new ShopInfoDao(mContext);
+        }
         share.setVisibility(View.VISIBLE);
         mImageLoadrer = ImageLoader.getInstance();
-        mImageLoadrer.init(ImageLoaderConfiguration.createDefault(mContext));
 
         shopId = getIntent().getStringExtra(IntentFlag.SHOP_ID);
         back.setVisibility(View.VISIBLE);
         back.setOnClickListener(this);
         title.setText(R.string.shop_info_title);
-        shopLinker.setOnClickListener(this);
-        shopIntroduction.setOnClickListener(this);
-        shopCategory.setOnClickListener(this);
-        share.setOnClickListener(this);
+
 
     }
 
     @Override
     protected void initOperate() {
-        if(shopInfoDao == null){
-            shopInfoDao = new ShopInfoDao(mContext);
-        }
+        shopLinker.setOnClickListener(this);
+        shopIntroduction.setOnClickListener(this);
+        shopCategory.setOnClickListener(this);
+        share.setOnClickListener(this);
+        collect.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
+        isCollect();
         new MyTask().execute(shopInfoDao);
     }
 
@@ -139,6 +266,20 @@ public class ShopDetailActivity extends XCBaseActivity implements View.OnClickLi
                 }
                 shareUmengUtil.setShareImage(imageUrl);
                 shareUmengUtil.show();
+                break;
+            case R.id.collect_btn:
+                if(!isLogin()){
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                }else{
+                    if(isCollect != null){
+                      if(isCollect.isSuccess()){// 取消收藏
+                          new CancelCollectTask().execute(shopInfoDao);
+                      }else{//收藏
+                          new CollectTask().execute(shopInfoDao);
+                      }
+                    }
+                }
                 break;
         }
     }

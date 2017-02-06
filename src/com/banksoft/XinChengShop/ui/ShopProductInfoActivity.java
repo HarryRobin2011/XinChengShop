@@ -1,6 +1,7 @@
 package com.banksoft.XinChengShop.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -807,5 +808,9 @@ public class ShopProductInfoActivity extends XCBaseActivity implements View.OnCl
         toolLayout.setVisibility(View.GONE);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_OK);
+        super.onBackPressed();
+    }
 }

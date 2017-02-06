@@ -71,10 +71,19 @@ public class OrderVO extends BaseEntity{
     private long orderTime;        //预定时间
     private String tableRemark; //桌号信息
     private String orderCode; //到店消费的券密码
+    private String dispatchPrice;// 派送佣金
 
 
     private List<OrderProductVO> list;      //订单包含普通商品
     private List<CartComboProductVO> groupList;//订单包含组合商品
+
+    public String getDispatchPrice() {
+        return dispatchPrice;
+    }
+
+    public void setDispatchPrice(String dispatchPrice) {
+        this.dispatchPrice = dispatchPrice;
+    }
 
     public String getDispatchNo() {
         return dispatchNo;

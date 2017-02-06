@@ -46,6 +46,9 @@ public class TakeMenuCategoryListAdapter extends BaseMyAdapter {
         MyCategoryListHolder holder = (MyCategoryListHolder) cellHolder;
         shopProductTypeBO = (ShopProductTypeBO) dataList.get(position);
         holder.name.setText(shopProductTypeBO.getName());
+        if (position == 0) {
+            holder.name.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        }
         return cellView;
     }
 

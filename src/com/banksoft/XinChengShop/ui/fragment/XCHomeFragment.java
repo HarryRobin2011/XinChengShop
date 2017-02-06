@@ -32,8 +32,7 @@ import com.banksoft.XinChengShop.widget.ClearEditText;
 import com.banksoft.XinChengShop.widget.XListView;
 import com.banksoft.XinChengShop.widget.rollviewpager.RollPagerView;
 import com.banksoft.XinChengShop.widget.rollviewpager.hintview.ColorPointHintView;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -74,7 +73,7 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
     private ImageView salesPromotionImage;
 
-    private ImageLoader mImageLoader;
+   // private ImageLoader mImageLoader;
 
     private XCMainActivity mainActivity;
 
@@ -153,15 +152,14 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
         searchText.setFocusable(false);
      //   leftBtn = (Button) view.findViewById(R.id.titleLeftButton);
 
-       new UpdateUtil(getActivity(),false).isUpdate();
+       //new UpdateUtil(getActivity(),false).isUpdate();
     }
 
 
     @Override
     public void initData() {
         mainActivity = (XCMainActivity) getActivity();
-        mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+      //  mImageLoader = ImageLoader.getInstance();
         // messageLayout.setVisibility(View.VISIBLE);
 
         mListView.addHeaderView(bannerView);
@@ -295,7 +293,8 @@ public class XCHomeFragment extends XCBaseFragment implements View.OnClickListen
 
             rollPagerView.setHintView(new ColorPointHintView(mContext, getResources().getColor(R.color.bg_red), getResources().getColor(R.color.white)));
             String imageUrl = ControlUrl.BASE_URL + bannersList.get(bannersList.size() - 1).getImageUrl();
-            mImageLoader.displayImage(imageUrl, salesPromotionImage, XCApplication.options);
+            //mImageLoader.displayImage(imageUrl, salesPromotionImage, XCApplication.options);
+            Glide.with(this).load(imageUrl).placeholder(R.drawable.list_thumbnail_loading_ss).centerCrop().crossFade().into(salesPromotionImage);
 
             if(dataList == null){
                dataList = new LinkedList();

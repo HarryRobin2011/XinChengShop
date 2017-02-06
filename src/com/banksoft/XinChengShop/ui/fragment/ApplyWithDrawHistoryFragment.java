@@ -8,6 +8,8 @@ import com.banksoft.XinChengShop.config.ControlUrl;
 import com.banksoft.XinChengShop.ui.base.XCBaseListFragment;
 import com.banksoft.XinChengShop.utils.JSONHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by Robin on 2016/9/12.
  */
@@ -17,7 +19,8 @@ public class ApplyWithDrawHistoryFragment extends XCBaseListFragment{
         url = ControlUrl.XC_APPLY_WITH_DRAW_HISTORY_LIST_URL;
         params = "memberId="+mActivity.member.getMember().getId();
         jsonType = JSONHelper.XC_APPLY_WITH_DRAW_HISTORY_LIST_DATA;
-      //  bailaAdapter = new ApplyWithDrawHistoryAdapter();
+        bailaAdapter = new ApplyWithDrawHistoryAdapter(mContext,new ArrayList());
+        setListDao();
     }
 
     @Override

@@ -86,7 +86,8 @@ public class WalletManagerActivity extends XCBaseActivity implements View.OnClic
                 new MyTask().execute(myBankDao);
                 break;
             case R.id.apply_with_draw_histroy:
-                Intent applyIntent = new Intent(mContext,ApplyWithDrawHistoryActivity.class);
+                Intent applyIntent = new Intent(mContext,MoneyBalanceActivity.class);
+                startActivity(applyIntent);
                 break;
         }
     }

@@ -26,7 +26,6 @@ public class MyCommonListAdapter extends BaseMyAdapter {
     public MyCommonListAdapter(Context mContext, ArrayList arrayList) {
         super(mContext,arrayList);
         mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     private class CommonListHolder extends BusinessHolder{

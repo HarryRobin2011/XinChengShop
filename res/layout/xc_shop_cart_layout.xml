@@ -24,7 +24,6 @@
         <include layout="@layout/null_pager"/>
     </FrameLayout>
 
-
     <View style="@style/line2"/>
     <LinearLayout android:id="@id/operation_layout"
                   android:layout_width="match_parent"

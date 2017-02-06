@@ -30,6 +30,8 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:splitMotionEvents">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="PopupWindowAnimation">

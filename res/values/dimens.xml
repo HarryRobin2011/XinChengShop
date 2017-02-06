@@ -797,4 +797,5 @@
     <dimen name="height_20">20.0dp</dimen>
     <dimen name="height_45">45.0dp</dimen>
     <dimen name="height_60">60.0dp</dimen>
+    <dimen name="height_10">10.0dp</dimen>
 </resources>
