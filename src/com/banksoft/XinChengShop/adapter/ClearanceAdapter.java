@@ -20,9 +20,11 @@ import java.util.List;
  */
 public class ClearanceAdapter extends BaseMyAdapter {
     private ImageLoader mImageLoader;
-    public ClearanceAdapter(Context context, List dataList) {
+    private int position;
+    public ClearanceAdapter(Context context, List dataList,int position) {
         super(context, dataList);
         mImageLoader = ImageLoader.getInstance();
+        this.position = position;
     }
 
     @Override
@@ -62,7 +64,18 @@ public class ClearanceAdapter extends BaseMyAdapter {
         holder.describe.setText(shopProductListVO.getName());
         holder.price.setText(" ¥ "+shopProductListVO.getPrice());
         holder.realPrice.setText(" ¥ "+shopProductListVO.getSalePrice());
-        holder.num.setText("已售："+(shopProductListVO.getGroupSale() + shopProductListVO.getVirtualGroup()));
+        switch (position){
+            case 1://团购产品
+                holder.num.setText("已售："+(shopProductListVO.getGroupSale() + shopProductListVO.getVirtualGroup()));
+                break;
+            case 2://清仓
+                holder.num.setText("已售："+(shopProductListVO.getClearSale() + shopProductListVO.getVirtualClear()));
+                break;
+            case 3://无活动
+                holder.num.setText("已售："+(shopProductListVO.getSales() + shopProductListVO.getVirtualSale()));
+                break;
+        }
+
         mImageLoader.displayImage(imageUrl,holder.imageView, XCApplication.options);
         return cellView;
     }

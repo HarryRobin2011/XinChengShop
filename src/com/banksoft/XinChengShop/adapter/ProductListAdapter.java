@@ -9,12 +9,10 @@ import com.banksoft.XinChengShop.R;
 import com.banksoft.XinChengShop.XCApplication;
 import com.banksoft.XinChengShop.adapter.base.BaseMyAdapter;
 import com.banksoft.XinChengShop.config.ControlUrl;
-import com.banksoft.XinChengShop.entity.ProductVO;
 import com.banksoft.XinChengShop.entity.ShopProductListVO;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,14 +28,14 @@ public class ProductListAdapter extends BaseMyAdapter {
         mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
-    private class ProductListHolder extends BusinessHolder{
-        private TextView name,describe,discountPrice,saleNum;
+    private class ProductListHolder extends BusinessHolder {
+        private TextView name, describe, discountPrice, saleNum;
         private ImageView img;
     }
 
     @Override
     protected View createCellView() {
-        return LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout,null);
+        return LayoutInflater.from(mContext).inflate(R.layout.product_list_item_layout, null);
     }
 
     @Override
@@ -56,15 +54,28 @@ public class ProductListAdapter extends BaseMyAdapter {
         ShopProductListVO shopProductListVO = (ShopProductListVO) dataList.get(position);
         ProductListHolder holder = (ProductListHolder) cellHolder;
         holder.name.setText(shopProductListVO.getName());
-        holder.saleNum.setText("已销售："+String.valueOf(shopProductListVO.getSales()));
+        holder.saleNum.setText("已销售：" + getSaleNum(shopProductListVO));
         holder.discountPrice.setText(shopProductListVO.getPrice() + "元");
         String imageFile;
-        if("".equals(shopProductListVO.getIcon()) || shopProductListVO == null){
+        if ("".equals(shopProductListVO.getIcon()) || shopProductListVO == null) {
             imageFile = "";
-        }else{
+        } else {
             imageFile = shopProductListVO.getIcon().split("\\|")[0];
         }
-        mImageLoader.displayImage(ControlUrl.BASE_URL+imageFile,holder.img, XCApplication.options);
+        mImageLoader.displayImage(ControlUrl.BASE_URL + imageFile, holder.img, XCApplication.options);
         return cellView;
+    }
+
+
+    private String getSaleNum(ShopProductListVO shopProductListVO) {
+        int salesNum = 0;
+        if ("0".equals(shopProductListVO.getActive())) {
+            salesNum = shopProductListVO.getSales() + shopProductListVO.getVirtualSale();
+        } else if ("1".equals(shopProductListVO.getActive())) {
+            salesNum = shopProductListVO.getClearSale() + shopProductListVO.getVirtualClear();
+        } else if ("2".equals(shopProductListVO.getActive())) {
+            salesNum = shopProductListVO.getGroupSale() + shopProductListVO.getVirtualGroup();
+        }
+        return ""+salesNum;
     }
 }

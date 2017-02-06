@@ -23,7 +23,6 @@ import com.banksoft.XinChengShop.ui.ShopDetailActivity;
 import com.banksoft.XinChengShop.ui.ShopProductInfoActivity;
 import com.banksoft.XinChengShop.widget.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -96,7 +95,7 @@ public class HomeDataListAdapter extends BaseAdapter {
             final MyGridView myGridView = (MyGridView) convertView.findViewById(R.id.gridView);
             final TextView title = (TextView) convertView.findViewById(R.id.title);
             final TextView more = (TextView) convertView.findViewById(R.id.more);
-            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList());
+            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList(),position);
             myGridView.setAdapter(clearanceAdapter);
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -124,7 +123,7 @@ public class HomeDataListAdapter extends BaseAdapter {
             final MyGridView myGridView = (MyGridView) convertView.findViewById(R.id.gridView);
             final TextView title = (TextView) convertView.findViewById(R.id.title);
             final TextView more = (TextView) convertView.findViewById(R.id.more);
-            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList());
+            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList(),position);
             myGridView.setAdapter(clearanceAdapter);
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -152,7 +151,7 @@ public class HomeDataListAdapter extends BaseAdapter {
             final MyGridView myGridView = (MyGridView) convertView.findViewById(R.id.gridView);
             final TextView title = (TextView) convertView.findViewById(R.id.title);
             final TextView more = (TextView) convertView.findViewById(R.id.more);
-            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList());
+            final ClearanceAdapter clearanceAdapter = new ClearanceAdapter(mContext, shopProductListData.getData().getList(),position);
             myGridView.setAdapter(clearanceAdapter);
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
